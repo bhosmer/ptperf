@@ -1,0 +1,3728 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="1200" height="2118" onload="init(evt)" viewBox="0 0 1200 2118" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<!-- Flame graph stack visualization. See https://github.com/brendangregg/FlameGraph for latest version, and http://www.brendangregg.com/flamegraphs.html for examples. -->
+<!-- NOTES:  -->
+<defs>
+	<linearGradient id="background" y1="0" y2="1" x1="0" x2="0" >
+		<stop stop-color="#eeeeee" offset="5%" />
+		<stop stop-color="#eeeeb0" offset="95%" />
+	</linearGradient>
+</defs>
+<style type="text/css">
+	text { font-family:Verdana; font-size:12px; fill:rgb(0,0,0); }
+	#search, #ignorecase { opacity:0.1; cursor:pointer; }
+	#search:hover, #search.show, #ignorecase:hover, #ignorecase.show { opacity:1; }
+	#subtitle { text-anchor:middle; font-color:rgb(160,160,160); }
+	#title { text-anchor:middle; font-size:17px}
+	#unzoom { cursor:pointer; }
+	#frames > *:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+	.hide { display:none; }
+	.parent { opacity:0.5; }
+</style>
+<script type="text/ecmascript">
+<![CDATA[
+	"use strict";
+	var details, searchbtn, unzoombtn, matchedtxt, svg, searching, currentSearchTerm, ignorecase, ignorecaseBtn;
+	function init(evt) {
+		details = document.getElementById("details").firstChild;
+		searchbtn = document.getElementById("search");
+		ignorecaseBtn = document.getElementById("ignorecase");
+		unzoombtn = document.getElementById("unzoom");
+		matchedtxt = document.getElementById("matched");
+		svg = document.getElementsByTagName("svg")[0];
+		searching = 0;
+		currentSearchTerm = null;
+	}
+
+	window.addEventListener("click", function(e) {
+		var target = find_group(e.target);
+		if (target) {
+			if (target.nodeName == "a") {
+				if (e.ctrlKey === false) return;
+				e.preventDefault();
+			}
+			if (target.classList.contains("parent")) unzoom();
+			zoom(target);
+		}
+		else if (e.target.id == "unzoom") unzoom();
+		else if (e.target.id == "search") search_prompt();
+		else if (e.target.id == "ignorecase") toggle_ignorecase();
+	}, false)
+
+	// mouse-over for info
+	// show
+	window.addEventListener("mouseover", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = "Function: " + g_to_text(target);
+	}, false)
+
+	// clear
+	window.addEventListener("mouseout", function(e) {
+		var target = find_group(e.target);
+		if (target) details.nodeValue = ' ';
+	}, false)
+
+	// ctrl-F for search
+	window.addEventListener("keydown",function (e) {
+		if (e.keyCode === 114 || (e.ctrlKey && e.keyCode === 70)) {
+			e.preventDefault();
+			search_prompt();
+		}
+	}, false)
+
+	// ctrl-I to toggle case-sensitive search
+	window.addEventListener("keydown",function (e) {
+		if (e.ctrlKey && e.keyCode === 73) {
+			e.preventDefault();
+			toggle_ignorecase();
+		}
+	}, false)
+
+	// functions
+	function find_child(node, selector) {
+		var children = node.querySelectorAll(selector);
+		if (children.length) return children[0];
+		return;
+	}
+	function find_group(node) {
+		var parent = node.parentElement;
+		if (!parent) return;
+		if (parent.id == "frames") return node;
+		return find_group(parent);
+	}
+	function orig_save(e, attr, val) {
+		if (e.attributes["_orig_" + attr] != undefined) return;
+		if (e.attributes[attr] == undefined) return;
+		if (val == undefined) val = e.attributes[attr].value;
+		e.setAttribute("_orig_" + attr, val);
+	}
+	function orig_load(e, attr) {
+		if (e.attributes["_orig_"+attr] == undefined) return;
+		e.attributes[attr].value = e.attributes["_orig_" + attr].value;
+		e.removeAttribute("_orig_"+attr);
+	}
+	function g_to_text(e) {
+		var text = find_child(e, "title").firstChild.nodeValue;
+		return (text)
+	}
+	function g_to_func(e) {
+		var func = g_to_text(e);
+		// if there's any manipulation we want to do to the function
+		// name before it's searched, do it here before returning.
+		return (func);
+	}
+	function update_text(e) {
+		var r = find_child(e, "rect");
+		var t = find_child(e, "text");
+		var w = parseFloat(r.attributes.width.value) -3;
+		var txt = find_child(e, "title").textContent.replace(/\([^(]*\)$/,"");
+		t.attributes.x.value = parseFloat(r.attributes.x.value) + 3;
+
+		// Smaller than this size won't fit anything
+		if (w < 2 * 12 * 0.59) {
+			t.textContent = "";
+			return;
+		}
+
+		t.textContent = txt;
+		// Fit in full text width
+		if (/^ *$/.test(txt) || t.getSubStringLength(0, txt.length) < w)
+			return;
+
+		for (var x = txt.length - 2; x > 0; x--) {
+			if (t.getSubStringLength(0, x + 2) <= w) {
+				t.textContent = txt.substring(0, x) + "..";
+				return;
+			}
+		}
+		t.textContent = "";
+	}
+
+	// zoom
+	function zoom_reset(e) {
+		if (e.attributes != undefined) {
+			orig_load(e, "x");
+			orig_load(e, "width");
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_reset(c[i]);
+		}
+	}
+	function zoom_child(e, x, ratio) {
+		if (e.attributes != undefined) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = (parseFloat(e.attributes.x.value) - x - 10) * ratio + 10;
+				if (e.tagName == "text")
+					e.attributes.x.value = find_child(e.parentNode, "rect[x]").attributes.x.value + 3;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseFloat(e.attributes.width.value) * ratio;
+			}
+		}
+
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_child(c[i], x - 10, ratio);
+		}
+	}
+	function zoom_parent(e) {
+		if (e.attributes) {
+			if (e.attributes.x != undefined) {
+				orig_save(e, "x");
+				e.attributes.x.value = 10;
+			}
+			if (e.attributes.width != undefined) {
+				orig_save(e, "width");
+				e.attributes.width.value = parseInt(svg.width.baseVal.value) - (10 * 2);
+			}
+		}
+		if (e.childNodes == undefined) return;
+		for (var i = 0, c = e.childNodes; i < c.length; i++) {
+			zoom_parent(c[i]);
+		}
+	}
+	function zoom(node) {
+		var attr = find_child(node, "rect").attributes;
+		var width = parseFloat(attr.width.value);
+		var xmin = parseFloat(attr.x.value);
+		var xmax = parseFloat(xmin + width);
+		var ymin = parseFloat(attr.y.value);
+		var ratio = (svg.width.baseVal.value - 2 * 10) / width;
+
+		// XXX: Workaround for JavaScript float issues (fix me)
+		var fudge = 0.0001;
+
+		unzoombtn.classList.remove("hide");
+
+		var el = document.getElementById("frames").children;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var a = find_child(e, "rect").attributes;
+			var ex = parseFloat(a.x.value);
+			var ew = parseFloat(a.width.value);
+			var upstack;
+			// Is it an ancestor
+			if (0 == 0) {
+				upstack = parseFloat(a.y.value) > ymin;
+			} else {
+				upstack = parseFloat(a.y.value) < ymin;
+			}
+			if (upstack) {
+				// Direct ancestor
+				if (ex <= xmin && (ex+ew+fudge) >= xmax) {
+					e.classList.add("parent");
+					zoom_parent(e);
+					update_text(e);
+				}
+				// not in current path
+				else
+					e.classList.add("hide");
+			}
+			// Children maybe
+			else {
+				// no common path
+				if (ex < xmin || ex + fudge >= xmax) {
+					e.classList.add("hide");
+				}
+				else {
+					zoom_child(e, xmin, ratio);
+					update_text(e);
+				}
+			}
+		}
+		search();
+	}
+	function unzoom() {
+		unzoombtn.classList.add("hide");
+		var el = document.getElementById("frames").children;
+		for(var i = 0; i < el.length; i++) {
+			el[i].classList.remove("parent");
+			el[i].classList.remove("hide");
+			zoom_reset(el[i]);
+			update_text(el[i]);
+		}
+		search();
+	}
+
+	// search
+	function toggle_ignorecase() {
+		ignorecase = !ignorecase;
+		if (ignorecase) {
+			ignorecaseBtn.classList.add("show");
+		} else {
+			ignorecaseBtn.classList.remove("show");
+		}
+		reset_search();
+		search();
+	}
+	function reset_search() {
+		var el = document.querySelectorAll("#frames rect");
+		for (var i = 0; i < el.length; i++) {
+			orig_load(el[i], "fill")
+		}
+	}
+	function search_prompt() {
+		if (!searching) {
+			var term = prompt("Enter a search term (regexp " +
+			    "allowed, eg: ^ext4_)"
+			    + (ignorecase ? ", ignoring case" : "")
+			    + "\nPress Ctrl-i to toggle case sensitivity", "");
+			if (term != null) {
+				currentSearchTerm = term;
+				search();
+			}
+		} else {
+			reset_search();
+			searching = 0;
+			currentSearchTerm = null;
+			searchbtn.classList.remove("show");
+			searchbtn.firstChild.nodeValue = "Search"
+			matchedtxt.classList.add("hide");
+			matchedtxt.firstChild.nodeValue = ""
+		}
+	}
+	function search(term) {
+		if (currentSearchTerm === null) return;
+		var term = currentSearchTerm;
+
+		var re = new RegExp(term, ignorecase ? 'i' : '');
+		var el = document.getElementById("frames").children;
+		var matches = new Object();
+		var maxwidth = 0;
+		for (var i = 0; i < el.length; i++) {
+			var e = el[i];
+			var func = g_to_func(e);
+			var rect = find_child(e, "rect");
+			if (func == null || rect == null)
+				continue;
+
+			// Save max width. Only works as we have a root frame
+			var w = parseFloat(rect.attributes.width.value);
+			if (w > maxwidth)
+				maxwidth = w;
+
+			if (func.match(re)) {
+				// highlight
+				var x = parseFloat(rect.attributes.x.value);
+				orig_save(rect, "fill");
+				rect.attributes.fill.value = "rgb(230,0,230)";
+
+				// remember matches
+				if (matches[x] == undefined) {
+					matches[x] = w;
+				} else {
+					if (w > matches[x]) {
+						// overwrite with parent
+						matches[x] = w;
+					}
+				}
+				searching = 1;
+			}
+		}
+		if (!searching)
+			return;
+
+		searchbtn.classList.add("show");
+		searchbtn.firstChild.nodeValue = "Reset Search";
+
+		// calculate percent matched, excluding vertical overlap
+		var count = 0;
+		var lastx = -1;
+		var lastw = 0;
+		var keys = Array();
+		for (k in matches) {
+			if (matches.hasOwnProperty(k))
+				keys.push(k);
+		}
+		// sort the matched frames by their x location
+		// ascending, then width descending
+		keys.sort(function(a, b){
+			return a - b;
+		});
+		// Step through frames saving only the biggest bottom-up frames
+		// thanks to the sort order. This relies on the tree property
+		// where children are always smaller than their parents.
+		var fudge = 0.0001;	// JavaScript floating point
+		for (var k in keys) {
+			var x = parseFloat(keys[k]);
+			var w = matches[keys[k]];
+			if (x >= lastx + lastw - fudge) {
+				count += w;
+				lastx = x;
+				lastw = w;
+			}
+		}
+		// display matched percent
+		matchedtxt.classList.remove("hide");
+		var pct = 100 * count / maxwidth;
+		if (pct != 100) pct = pct.toFixed(1)
+		matchedtxt.firstChild.nodeValue = "Matched: " + pct + "%";
+	}
+]]>
+</script>
+<rect x="0.0" y="0" width="1200.0" height="2118.0" fill="url(#background)"  />
+<text id="title" x="600.00" y="24" >Flame Graph</text>
+<text id="details" x="10.00" y="2101" > </text>
+<text id="unzoom" x="10.00" y="24" class="hide">Reset Zoom</text>
+<text id="search" x="1090.00" y="24" >Search</text>
+<text id="ignorecase" x="1174.00" y="24" >ic</text>
+<text id="matched" x="1090.00" y="2101" > </text>
+<g id="frames">
+<g >
+<title>at::TensorIterator::get_data_ptrs (37 samples, 0.05%)</title><rect x="67.3" y="1957" width="0.7" height="15.0" fill="rgb(219,171,7)" rx="2" ry="2" />
+<text  x="70.34" y="1967.5" ></text>
+</g>
+<g >
+<title>pybind11::gil_scoped_release::~gil_scoped_release (246 samples, 0.36%)</title><rect x="851.6" y="1989" width="4.2" height="15.0" fill="rgb(221,87,5)" rx="2" ry="2" />
+<text  x="854.60" y="1999.5" ></text>
+</g>
+<g >
+<title>collect (34 samples, 0.05%)</title><rect x="1173.3" y="2037" width="0.6" height="15.0" fill="rgb(239,36,12)" rx="2" ry="2" />
+<text  x="1176.34" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1685" width="0.2" height="15.0" fill="rgb(225,64,3)" rx="2" ry="2" />
+<text  x="39.51" y="1695.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1733" width="0.3" height="15.0" fill="rgb(254,174,15)" rx="2" ry="2" />
+<text  x="70.00" y="1743.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (6 samples, 0.01%)</title><rect x="1172.9" y="1989" width="0.1" height="15.0" fill="rgb(245,84,33)" rx="2" ry="2" />
+<text  x="1175.86" y="1999.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (28 samples, 0.04%)</title><rect x="1016.9" y="2021" width="0.4" height="15.0" fill="rgb(228,25,21)" rx="2" ry="2" />
+<text  x="1019.86" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;c10::Half&gt; (59 samples, 0.09%)</title><rect x="182.7" y="1989" width="1.0" height="15.0" fill="rgb(233,90,47)" rx="2" ry="2" />
+<text  x="185.68" y="1999.5" ></text>
+</g>
+<g >
+<title>type_new (13 samples, 0.02%)</title><rect x="901.5" y="2021" width="0.3" height="15.0" fill="rgb(216,157,20)" rx="2" ry="2" />
+<text  x="904.54" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::~TensorImpl (456 samples, 0.66%)</title><rect x="713.4" y="1989" width="7.8" height="15.0" fill="rgb(238,141,0)" rx="2" ry="2" />
+<text  x="716.36" y="1999.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (25 samples, 0.04%)</title><rect x="115.1" y="2005" width="0.5" height="15.0" fill="rgb(222,60,5)" rx="2" ry="2" />
+<text  x="118.13" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::DispatchKeySet::has (42 samples, 0.06%)</title><rect x="213.5" y="2005" width="0.7" height="15.0" fill="rgb(233,202,20)" rx="2" ry="2" />
+<text  x="216.48" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="917" width="0.1" height="15.0" fill="rgb(208,229,28)" rx="2" ry="2" />
+<text  x="39.51" y="927.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1269" width="0.1" height="15.0" fill="rgb(240,18,17)" rx="2" ry="2" />
+<text  x="39.51" y="1279.5" ></text>
+</g>
+<g >
+<title>c10::ProfiledCPUMemoryReporter::Delete (47 samples, 0.07%)</title><rect x="670.3" y="1989" width="0.8" height="15.0" fill="rgb(220,128,15)" rx="2" ry="2" />
+<text  x="673.29" y="1999.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;c10::Half&gt; (9 samples, 0.01%)</title><rect x="989.4" y="2021" width="0.2" height="15.0" fill="rgb(214,123,5)" rx="2" ry="2" />
+<text  x="992.43" y="2031.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (26 samples, 0.04%)</title><rect x="63.8" y="1717" width="0.5" height="15.0" fill="rgb(220,81,31)" rx="2" ry="2" />
+<text  x="66.82" y="1727.5" ></text>
+</g>
+<g >
+<title>at::AutoNonVariableTypeMode::AutoNonVariableTypeMode (76 samples, 0.11%)</title><rect x="649.0" y="1941" width="1.3" height="15.0" fill="rgb(234,144,33)" rx="2" ry="2" />
+<text  x="651.99" y="1951.5" ></text>
+</g>
+<g >
+<title>c10::impl::ExcludeDispatchKeyGuard::ExcludeDispatchKeyGuard (228 samples, 0.33%)</title><rect x="232.2" y="2005" width="3.9" height="15.0" fill="rgb(208,174,46)" rx="2" ry="2" />
+<text  x="235.16" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::TensorImpl (960 samples, 1.39%)</title><rect x="160.7" y="1989" width="16.4" height="15.0" fill="rgb(227,66,13)" rx="2" ry="2" />
+<text  x="163.70" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1061" width="0.1" height="15.0" fill="rgb(242,214,24)" rx="2" ry="2" />
+<text  x="39.51" y="1071.5" ></text>
+</g>
+<g >
+<title>PyCode_New (7 samples, 0.01%)</title><rect x="56.3" y="2005" width="0.2" height="15.0" fill="rgb(210,202,35)" rx="2" ry="2" />
+<text  x="59.34" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::is_contiguous (134 samples, 0.19%)</title><rect x="1000.8" y="2037" width="2.3" height="15.0" fill="rgb(240,87,13)" rx="2" ry="2" />
+<text  x="1003.85" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1525" width="0.3" height="15.0" fill="rgb(238,93,32)" rx="2" ry="2" />
+<text  x="70.02" y="1535.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="133" width="0.2" height="15.0" fill="rgb(248,68,10)" rx="2" ry="2" />
+<text  x="70.05" y="143.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="661" width="0.2" height="15.0" fill="rgb(229,40,38)" rx="2" ry="2" />
+<text  x="70.05" y="671.5" ></text>
+</g>
+<g >
+<title>torch::FunctionSignature::parse (736 samples, 1.07%)</title><rect x="799.5" y="2005" width="12.5" height="15.0" fill="rgb(231,24,29)" rx="2" ry="2" />
+<text  x="802.45" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::GetCPUAllocator (142 samples, 0.21%)</title><rect x="1095.1" y="2021" width="2.4" height="15.0" fill="rgb(221,113,46)" rx="2" ry="2" />
+<text  x="1098.09" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (47 samples, 0.07%)</title><rect x="1044.1" y="2021" width="0.8" height="15.0" fill="rgb(221,201,25)" rx="2" ry="2" />
+<text  x="1047.12" y="2031.5" ></text>
+</g>
+<g >
+<title>_PyObject_Free (183 samples, 0.27%)</title><rect x="909.5" y="2037" width="3.2" height="15.0" fill="rgb(219,204,1)" rx="2" ry="2" />
+<text  x="912.54" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1605" width="0.2" height="15.0" fill="rgb(230,165,48)" rx="2" ry="2" />
+<text  x="39.51" y="1615.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="149" width="0.2" height="15.0" fill="rgb(211,144,39)" rx="2" ry="2" />
+<text  x="70.05" y="159.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1525" width="0.2" height="15.0" fill="rgb(229,71,15)" rx="2" ry="2" />
+<text  x="39.51" y="1535.5" ></text>
+</g>
+<g >
+<title>_PyCFunction_FastCallKeywords (209 samples, 0.30%)</title><rect x="270.9" y="2021" width="3.6" height="15.0" fill="rgb(246,60,6)" rx="2" ry="2" />
+<text  x="273.91" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt; (14 samples, 0.02%)</title><rect x="989.8" y="2021" width="0.2" height="15.0" fill="rgb(230,0,29)" rx="2" ry="2" />
+<text  x="992.79" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::impl::OperatorEntry::assertSignatureIsCorrect&lt;at::Tensor&amp;  (88 samples, 0.13%)</title><rect x="747.1" y="2021" width="1.5" height="15.0" fill="rgb(222,76,44)" rx="2" ry="2" />
+<text  x="750.07" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr@plt (31 samples, 0.04%)</title><rect x="928.1" y="2037" width="0.5" height="15.0" fill="rgb(231,192,47)" rx="2" ry="2" />
+<text  x="931.10" y="2047.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::build (3,848 samples, 5.57%)</title><rect x="377.5" y="2005" width="65.8" height="15.0" fill="rgb(222,34,1)" rx="2" ry="2" />
+<text  x="380.49" y="2015.5" >at::Ten..</text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt;@plt (8 samples, 0.01%)</title><rect x="1106.6" y="2005" width="0.1" height="15.0" fill="rgb(249,120,42)" rx="2" ry="2" />
+<text  x="1109.59" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (10,970 samples, 15.89%)</title><rect x="481.3" y="1989" width="187.5" height="15.0" fill="rgb(249,225,54)" rx="2" ry="2" />
+<text  x="484.27" y="1999.5" >[unknown]</text>
+</g>
+<g >
+<title>[unknown] (23 samples, 0.03%)</title><rect x="746.2" y="1973" width="0.4" height="15.0" fill="rgb(237,137,39)" rx="2" ry="2" />
+<text  x="749.25" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::SmallVectorImpl&lt;long&gt;::operator= (112 samples, 0.16%)</title><rect x="471.5" y="2005" width="1.9" height="15.0" fill="rgb(221,12,52)" rx="2" ry="2" />
+<text  x="474.50" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (9 samples, 0.01%)</title><rect x="73.2" y="1973" width="0.2" height="15.0" fill="rgb(247,6,7)" rx="2" ry="2" />
+<text  x="76.22" y="1983.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (30 samples, 0.04%)</title><rect x="747.8" y="1989" width="0.5" height="15.0" fill="rgb(236,31,29)" rx="2" ry="2" />
+<text  x="750.78" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::autograd::VariableType::(anonymous namespace)::checked_cast_variable (249 samples, 0.36%)</title><rect x="637.8" y="1957" width="4.3" height="15.0" fill="rgb(236,180,18)" rx="2" ry="2" />
+<text  x="640.83" y="1967.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (17 samples, 0.02%)</title><rect x="887.3" y="1957" width="0.3" height="15.0" fill="rgb(240,48,39)" rx="2" ry="2" />
+<text  x="890.29" y="1967.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt; (8 samples, 0.01%)</title><rect x="1106.5" y="2005" width="0.1" height="15.0" fill="rgb(224,67,13)" rx="2" ry="2" />
+<text  x="1109.46" y="2015.5" ></text>
+</g>
+<g >
+<title>_PyDict_LoadGlobal (358 samples, 0.52%)</title><rect x="75.6" y="2005" width="6.1" height="15.0" fill="rgb(251,73,20)" rx="2" ry="2" />
+<text  x="78.62" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::mark_outputs (321 samples, 0.46%)</title><rect x="453.8" y="2005" width="5.4" height="15.0" fill="rgb(236,133,1)" rx="2" ry="2" />
+<text  x="456.75" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="821" width="0.2" height="15.0" fill="rgb(209,71,38)" rx="2" ry="2" />
+<text  x="70.05" y="831.5" ></text>
+</g>
+<g >
+<title>[unknown] (23 samples, 0.03%)</title><rect x="746.2" y="1957" width="0.4" height="15.0" fill="rgb(205,9,21)" rx="2" ry="2" />
+<text  x="749.25" y="1967.5" ></text>
+</g>
+<g >
+<title>at::OperandInfo::validate (64 samples, 0.09%)</title><rect x="116.2" y="2005" width="1.1" height="15.0" fill="rgb(254,94,45)" rx="2" ry="2" />
+<text  x="119.21" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1013" width="0.3" height="15.0" fill="rgb(225,30,28)" rx="2" ry="2" />
+<text  x="70.04" y="1023.5" ></text>
+</g>
+<g >
+<title>c10::GetCurrentNUMANode (31 samples, 0.04%)</title><rect x="1087.3" y="2005" width="0.6" height="15.0" fill="rgb(243,54,26)" rx="2" ry="2" />
+<text  x="1090.35" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1861" width="0.2" height="15.0" fill="rgb(208,122,26)" rx="2" ry="2" />
+<text  x="39.51" y="1871.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;signed char&gt; (179 samples, 0.26%)</title><rect x="192.3" y="1989" width="3.1" height="15.0" fill="rgb(254,85,17)" rx="2" ry="2" />
+<text  x="195.32" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="421" width="0.2" height="15.0" fill="rgb(240,3,6)" rx="2" ry="2" />
+<text  x="70.05" y="431.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (7 samples, 0.01%)</title><rect x="66.7" y="1925" width="0.1" height="15.0" fill="rgb(218,17,34)" rx="2" ry="2" />
+<text  x="69.69" y="1935.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::has_storage (61 samples, 0.09%)</title><rect x="473.4" y="2005" width="1.1" height="15.0" fill="rgb(217,126,17)" rx="2" ry="2" />
+<text  x="476.41" y="2015.5" ></text>
+</g>
+<g >
+<title>_PyDict_LoadGlobal (273 samples, 0.40%)</title><rect x="903.1" y="2037" width="4.7" height="15.0" fill="rgb(247,13,33)" rx="2" ry="2" />
+<text  x="906.15" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1397" width="0.2" height="15.0" fill="rgb(213,24,48)" rx="2" ry="2" />
+<text  x="39.51" y="1407.5" ></text>
+</g>
+<g >
+<title>at::Tensor::device@plt (8 samples, 0.01%)</title><rect x="119.1" y="2005" width="0.1" height="15.0" fill="rgb(247,88,35)" rx="2" ry="2" />
+<text  x="122.10" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::ProfiledCPUMemoryReporter::New (10 samples, 0.01%)</title><rect x="214.3" y="2005" width="0.2" height="15.0" fill="rgb(221,107,36)" rx="2" ry="2" />
+<text  x="217.30" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1989" width="0.2" height="15.0" fill="rgb(234,88,16)" rx="2" ry="2" />
+<text  x="39.51" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1461" width="0.2" height="15.0" fill="rgb(210,205,39)" rx="2" ry="2" />
+<text  x="39.51" y="1471.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::fast_set_up (54 samples, 0.08%)</title><rect x="452.7" y="2005" width="1.0" height="15.0" fill="rgb(236,105,21)" rx="2" ry="2" />
+<text  x="455.73" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::for_each@plt (17 samples, 0.02%)</title><rect x="531.1" y="1909" width="0.3" height="15.0" fill="rgb(245,154,31)" rx="2" ry="2" />
+<text  x="534.11" y="1919.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_types (32 samples, 0.05%)</title><rect x="452.1" y="2005" width="0.6" height="15.0" fill="rgb(242,180,30)" rx="2" ry="2" />
+<text  x="455.11" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (10 samples, 0.01%)</title><rect x="211.4" y="1989" width="0.2" height="15.0" fill="rgb(234,186,49)" rx="2" ry="2" />
+<text  x="214.41" y="1999.5" ></text>
+</g>
+<g >
+<title>THPVariable_dealloc (86 samples, 0.12%)</title><rect x="35.0" y="2037" width="1.5" height="15.0" fill="rgb(217,163,53)" rx="2" ry="2" />
+<text  x="37.99" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="373" width="0.2" height="15.0" fill="rgb(219,184,3)" rx="2" ry="2" />
+<text  x="70.05" y="383.5" ></text>
+</g>
+<g >
+<title>__dynamic_cast (7 samples, 0.01%)</title><rect x="98.4" y="2005" width="0.1" height="15.0" fill="rgb(231,33,49)" rx="2" ry="2" />
+<text  x="101.38" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::ProfiledCPUMemoryReporter::New (30 samples, 0.04%)</title><rect x="480.6" y="2021" width="0.5" height="15.0" fill="rgb(234,121,29)" rx="2" ry="2" />
+<text  x="483.61" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (8 samples, 0.01%)</title><rect x="67.2" y="37" width="0.1" height="15.0" fill="rgb(205,229,3)" rx="2" ry="2" />
+<text  x="70.15" y="47.5" ></text>
+</g>
+<g >
+<title>c10::typeMetaToScalarType (316 samples, 0.46%)</title><rect x="177.3" y="1989" width="5.4" height="15.0" fill="rgb(214,37,16)" rx="2" ry="2" />
+<text  x="180.28" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::set_pyobj (93 samples, 0.13%)</title><rect x="741.7" y="1989" width="1.6" height="15.0" fill="rgb(238,81,10)" rx="2" ry="2" />
+<text  x="744.70" y="1999.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (9 samples, 0.01%)</title><rect x="838.4" y="1973" width="0.1" height="15.0" fill="rgb(219,199,40)" rx="2" ry="2" />
+<text  x="841.37" y="1983.5" ></text>
+</g>
+<g >
+<title>at::native::DispatchStub&lt;void  (68 samples, 0.10%)</title><rect x="499.0" y="1957" width="1.2" height="15.0" fill="rgb(205,19,31)" rx="2" ry="2" />
+<text  x="502.03" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1605" width="0.3" height="15.0" fill="rgb(254,25,39)" rx="2" ry="2" />
+<text  x="70.02" y="1615.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_mem_overlaps@plt (15 samples, 0.02%)</title><rect x="444.4" y="2005" width="0.3" height="15.0" fill="rgb(224,151,4)" rx="2" ry="2" />
+<text  x="447.40" y="2015.5" ></text>
+</g>
+<g >
+<title>torch::PythonArgParser::raw_parse (110 samples, 0.16%)</title><rect x="860.3" y="1989" width="1.9" height="15.0" fill="rgb(237,133,0)" rx="2" ry="2" />
+<text  x="863.32" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1909" width="0.2" height="15.0" fill="rgb(221,123,19)" rx="2" ry="2" />
+<text  x="39.51" y="1919.5" ></text>
+</g>
+<g >
+<title>c10::GetAllocator (60 samples, 0.09%)</title><rect x="1093.6" y="2021" width="1.0" height="15.0" fill="rgb(207,75,2)" rx="2" ry="2" />
+<text  x="1096.57" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (98 samples, 0.14%)</title><rect x="884.2" y="1973" width="1.7" height="15.0" fill="rgb(239,51,34)" rx="2" ry="2" />
+<text  x="887.19" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (13 samples, 0.02%)</title><rect x="486.0" y="1957" width="0.2" height="15.0" fill="rgb(236,51,49)" rx="2" ry="2" />
+<text  x="489.01" y="1967.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (6 samples, 0.01%)</title><rect x="746.6" y="1973" width="0.1" height="15.0" fill="rgb(211,62,33)" rx="2" ry="2" />
+<text  x="749.64" y="1983.5" ></text>
+</g>
+<g >
+<title>_int_memalign (799 samples, 1.16%)</title><rect x="932.3" y="2037" width="13.6" height="15.0" fill="rgb(220,97,12)" rx="2" ry="2" />
+<text  x="935.29" y="2047.5" ></text>
+</g>
+<g >
+<title>c10::memoryProfilingEnabled (107 samples, 0.15%)</title><rect x="1165.7" y="2037" width="1.9" height="15.0" fill="rgb(244,208,35)" rx="2" ry="2" />
+<text  x="1168.73" y="2047.5" ></text>
+</g>
+<g >
+<title>c10::typeMetaToScalarType (461 samples, 0.67%)</title><rect x="1125.6" y="2021" width="7.9" height="15.0" fill="rgb(232,25,49)" rx="2" ry="2" />
+<text  x="1128.65" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::binary_op (70 samples, 0.10%)</title><rect x="705.0" y="1973" width="1.2" height="15.0" fill="rgb(246,62,16)" rx="2" ry="2" />
+<text  x="707.97" y="1983.5" ></text>
+</g>
+<g >
+<title>dl_open_worker (77 samples, 0.11%)</title><rect x="752.3" y="1989" width="1.3" height="15.0" fill="rgb(250,83,18)" rx="2" ry="2" />
+<text  x="755.30" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (10 samples, 0.01%)</title><rect x="64.8" y="1829" width="0.2" height="15.0" fill="rgb(229,165,4)" rx="2" ry="2" />
+<text  x="67.83" y="1839.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_fast_setup_type@plt (16 samples, 0.02%)</title><rect x="392.4" y="1989" width="0.3" height="15.0" fill="rgb(242,34,51)" rx="2" ry="2" />
+<text  x="395.43" y="1999.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::fast_set_up (1,004 samples, 1.45%)</title><rect x="409.4" y="1989" width="17.2" height="15.0" fill="rgb(213,131,15)" rx="2" ry="2" />
+<text  x="412.44" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (10 samples, 0.01%)</title><rect x="1172.7" y="2005" width="0.1" height="15.0" fill="rgb(223,123,1)" rx="2" ry="2" />
+<text  x="1175.67" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;caffe2::detail::_Uninitialized&gt; (78 samples, 0.11%)</title><rect x="424.3" y="1973" width="1.4" height="15.0" fill="rgb(211,167,14)" rx="2" ry="2" />
+<text  x="427.34" y="1983.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (55 samples, 0.08%)</title><rect x="63.8" y="1765" width="1.0" height="15.0" fill="rgb(207,134,16)" rx="2" ry="2" />
+<text  x="66.82" y="1775.5" ></text>
+</g>
+<g >
+<title>at::OperandInfo::options (29 samples, 0.04%)</title><rect x="386.4" y="1989" width="0.5" height="15.0" fill="rgb(254,53,30)" rx="2" ry="2" />
+<text  x="389.41" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::Dispatcher::singleton@plt (36 samples, 0.05%)</title><rect x="997.8" y="2037" width="0.6" height="15.0" fill="rgb(232,10,18)" rx="2" ry="2" />
+<text  x="1000.82" y="2047.5" ></text>
+</g>
+<g >
+<title>malloc (446 samples, 0.65%)</title><rect x="1176.1" y="2037" width="7.7" height="15.0" fill="rgb(240,149,48)" rx="2" ry="2" />
+<text  x="1179.14" y="2047.5" ></text>
+</g>
+<g >
+<title>_PyType_Lookup (229 samples, 0.33%)</title><rect x="304.5" y="2021" width="3.9" height="15.0" fill="rgb(250,139,39)" rx="2" ry="2" />
+<text  x="307.53" y="2031.5" ></text>
+</g>
+<g >
+<title>_PyObject_GC_Malloc (79 samples, 0.11%)</title><rect x="913.8" y="2037" width="1.4" height="15.0" fill="rgb(244,131,16)" rx="2" ry="2" />
+<text  x="916.85" y="2047.5" ></text>
+</g>
+<g >
+<title>PyEval_SaveThread@plt (7 samples, 0.01%)</title><rect x="58.4" y="2005" width="0.1" height="15.0" fill="rgb(252,77,25)" rx="2" ry="2" />
+<text  x="61.39" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::cast_outputs (61 samples, 0.09%)</title><rect x="522.4" y="1909" width="1.1" height="15.0" fill="rgb(241,120,35)" rx="2" ry="2" />
+<text  x="525.43" y="1919.5" ></text>
+</g>
+<g >
+<title>c10::intrusive_ptr&lt;c10::StorageImpl, c10::detail::intrusive_target_default_null_type&lt;c10::StorageImpl&gt; &gt;::reset_ (63 samples, 0.09%)</title><rect x="1124.6" y="2021" width="1.0" height="15.0" fill="rgb(221,106,20)" rx="2" ry="2" />
+<text  x="1127.57" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1637" width="0.3" height="15.0" fill="rgb(206,134,14)" rx="2" ry="2" />
+<text  x="70.02" y="1647.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1125" width="0.1" height="15.0" fill="rgb(228,73,6)" rx="2" ry="2" />
+<text  x="39.51" y="1135.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1797" width="0.3" height="15.0" fill="rgb(223,93,21)" rx="2" ry="2" />
+<text  x="70.00" y="1807.5" ></text>
+</g>
+<g >
+<title>update_get_addr (112 samples, 0.16%)</title><rect x="690.7" y="2005" width="1.9" height="15.0" fill="rgb(221,20,32)" rx="2" ry="2" />
+<text  x="693.70" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;signed char&gt; (50 samples, 0.07%)</title><rect x="991.0" y="2021" width="0.9" height="15.0" fill="rgb(236,165,50)" rx="2" ry="2" />
+<text  x="994.00" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::scalarTypeToTypeMeta (116 samples, 0.17%)</title><rect x="952.4" y="2021" width="2.0" height="15.0" fill="rgb(244,92,52)" rx="2" ry="2" />
+<text  x="955.41" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1637" width="0.2" height="15.0" fill="rgb(228,197,53)" rx="2" ry="2" />
+<text  x="39.51" y="1647.5" ></text>
+</g>
+<g >
+<title>c10::TensorOptions::dtype (397 samples, 0.58%)</title><rect x="1108.4" y="2021" width="6.8" height="15.0" fill="rgb(250,69,47)" rx="2" ry="2" />
+<text  x="1111.37" y="2031.5" ></text>
+</g>
+<g >
+<title>at::AutoNonVariableTypeMode::AutoNonVariableTypeMode (137 samples, 0.20%)</title><rect x="626.5" y="1957" width="2.3" height="15.0" fill="rgb(248,149,24)" rx="2" ry="2" />
+<text  x="629.50" y="1967.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (86 samples, 0.12%)</title><rect x="478.1" y="2021" width="1.4" height="15.0" fill="rgb(212,129,42)" rx="2" ry="2" />
+<text  x="481.08" y="2031.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1845" width="0.1" height="15.0" fill="rgb(246,0,1)" rx="2" ry="2" />
+<text  x="488.08" y="1855.5" ></text>
+</g>
+<g >
+<title>free (128 samples, 0.19%)</title><rect x="680.4" y="1989" width="2.2" height="15.0" fill="rgb(250,129,5)" rx="2" ry="2" />
+<text  x="683.43" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::ProfiledCPUMemoryReporter::New (46 samples, 0.07%)</title><rect x="998.4" y="2037" width="0.8" height="15.0" fill="rgb(218,213,34)" rx="2" ry="2" />
+<text  x="1001.44" y="2047.5" ></text>
+</g>
+<g >
+<title>pthread_mutex_unlock (200 samples, 0.29%)</title><rect x="254.2" y="2005" width="3.4" height="15.0" fill="rgb(206,186,0)" rx="2" ry="2" />
+<text  x="257.19" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::typeMetaToScalarType (63 samples, 0.09%)</title><rect x="236.5" y="2005" width="1.1" height="15.0" fill="rgb(240,95,27)" rx="2" ry="2" />
+<text  x="239.52" y="2015.5" ></text>
+</g>
+<g >
+<title>malloc_consolidate (6 samples, 0.01%)</title><rect x="658.4" y="1973" width="0.1" height="15.0" fill="rgb(207,105,12)" rx="2" ry="2" />
+<text  x="661.45" y="1983.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::serial_for_each (80 samples, 0.12%)</title><rect x="529.6" y="1893" width="1.3" height="15.0" fill="rgb(244,3,15)" rx="2" ry="2" />
+<text  x="532.56" y="1903.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1813" width="0.2" height="15.0" fill="rgb(239,11,28)" rx="2" ry="2" />
+<text  x="69.52" y="1823.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;signed char&gt; (8 samples, 0.01%)</title><rect x="1137.1" y="2021" width="0.1" height="15.0" fill="rgb(212,122,54)" rx="2" ry="2" />
+<text  x="1140.10" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::binary_op (11 samples, 0.02%)</title><rect x="954.7" y="2037" width="0.2" height="15.0" fill="rgb(218,125,45)" rx="2" ry="2" />
+<text  x="957.66" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="629" width="0.2" height="15.0" fill="rgb(229,166,21)" rx="2" ry="2" />
+<text  x="70.05" y="639.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="949" width="0.1" height="15.0" fill="rgb(245,224,38)" rx="2" ry="2" />
+<text  x="39.51" y="959.5" ></text>
+</g>
+<g >
+<title>c10::impl::wrap_kernel_functor_unboxed_&lt;c10::impl::detail::WrapFunctionIntoRuntimeFunctor_&lt;at::Tensor  (2,361 samples, 3.42%)</title><rect x="618.1" y="1973" width="40.3" height="15.0" fill="rgb(230,174,11)" rx="2" ry="2" />
+<text  x="621.09" y="1983.5" >c10..</text>
+</g>
+<g >
+<title>c10::Warning::set_warning_handler@plt (8 samples, 0.01%)</title><rect x="890.6" y="1973" width="0.1" height="15.0" fill="rgb(221,50,40)" rx="2" ry="2" />
+<text  x="893.60" y="1983.5" ></text>
+</g>
+<g >
+<title>pybind11::gil_scoped_release::gil_scoped_release (14 samples, 0.02%)</title><rect x="262.8" y="2005" width="0.3" height="15.0" fill="rgb(246,188,20)" rx="2" ry="2" />
+<text  x="265.84" y="2015.5" ></text>
+</g>
+<g >
+<title>visit_decref (18 samples, 0.03%)</title><rect x="1189.6" y="2037" width="0.3" height="15.0" fill="rgb(228,19,52)" rx="2" ry="2" />
+<text  x="1192.61" y="2047.5" ></text>
+</g>
+<g >
+<title>c10::impl::process_memory_format (14 samples, 0.02%)</title><rect x="1147.0" y="2037" width="0.2" height="15.0" fill="rgb(250,105,7)" rx="2" ry="2" />
+<text  x="1149.98" y="2047.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_shape@plt (9 samples, 0.01%)</title><rect x="452.0" y="2005" width="0.1" height="15.0" fill="rgb(224,62,51)" rx="2" ry="2" />
+<text  x="454.96" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;c10::Half&gt;@plt (31 samples, 0.04%)</title><rect x="1133.7" y="2021" width="0.5" height="15.0" fill="rgb(222,17,37)" rx="2" ry="2" />
+<text  x="1136.70" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt;@plt (51 samples, 0.07%)</title><rect x="1134.8" y="2021" width="0.8" height="15.0" fill="rgb(233,11,47)" rx="2" ry="2" />
+<text  x="1137.78" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;short&gt;@plt (8 samples, 0.01%)</title><rect x="990.9" y="2021" width="0.1" height="15.0" fill="rgb(245,111,49)" rx="2" ry="2" />
+<text  x="993.86" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1221" width="0.1" height="15.0" fill="rgb(243,178,53)" rx="2" ry="2" />
+<text  x="39.51" y="1231.5" ></text>
+</g>
+<g >
+<title>c10::scalarTypeToTypeMeta (8 samples, 0.01%)</title><rect x="1167.8" y="2037" width="0.2" height="15.0" fill="rgb(224,205,25)" rx="2" ry="2" />
+<text  x="1170.85" y="2047.5" ></text>
+</g>
+<g >
+<title>malloc_consolidate (43 samples, 0.06%)</title><rect x="74.6" y="1989" width="0.8" height="15.0" fill="rgb(220,40,53)" rx="2" ry="2" />
+<text  x="77.64" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1173" width="0.1" height="15.0" fill="rgb(205,197,36)" rx="2" ry="2" />
+<text  x="39.51" y="1183.5" ></text>
+</g>
+<g >
+<title>torch::PyWarningHandler::~PyWarningHandler@plt (11 samples, 0.02%)</title><rect x="860.1" y="1989" width="0.2" height="15.0" fill="rgb(236,188,32)" rx="2" ry="2" />
+<text  x="863.13" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::PythonArgParser::check_deprecated@plt (9 samples, 0.01%)</title><rect x="796.7" y="2021" width="0.2" height="15.0" fill="rgb(220,157,51)" rx="2" ry="2" />
+<text  x="799.74" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::populate_operands (407 samples, 0.59%)</title><rect x="459.5" y="2005" width="7.0" height="15.0" fill="rgb(211,23,28)" rx="2" ry="2" />
+<text  x="462.51" y="2015.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (25 samples, 0.04%)</title><rect x="1017.3" y="2021" width="0.5" height="15.0" fill="rgb(236,221,27)" rx="2" ry="2" />
+<text  x="1020.34" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::DispatchKeySet::has (176 samples, 0.25%)</title><rect x="157.7" y="1989" width="3.0" height="15.0" fill="rgb(246,126,18)" rx="2" ry="2" />
+<text  x="160.69" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::intrusive_ptr&lt;c10::TensorImpl, c10::UndefinedTensorImpl&gt;::reset_ (117 samples, 0.17%)</title><rect x="441.3" y="1989" width="2.0" height="15.0" fill="rgb(246,70,14)" rx="2" ry="2" />
+<text  x="444.26" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::Library::impl&lt;torch::CppFunction&gt; (10 samples, 0.01%)</title><rect x="270.4" y="2005" width="0.2" height="15.0" fill="rgb(222,82,14)" rx="2" ry="2" />
+<text  x="273.41" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="229" width="0.2" height="15.0" fill="rgb(223,107,16)" rx="2" ry="2" />
+<text  x="70.05" y="239.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::serial_for_each (17 samples, 0.02%)</title><rect x="202.7" y="2005" width="0.3" height="15.0" fill="rgb(212,85,51)" rx="2" ry="2" />
+<text  x="205.68" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (15 samples, 0.02%)</title><rect x="1173.0" y="2005" width="0.2" height="15.0" fill="rgb(253,36,40)" rx="2" ry="2" />
+<text  x="1175.96" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1269" width="0.3" height="15.0" fill="rgb(229,228,51)" rx="2" ry="2" />
+<text  x="70.02" y="1279.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (26 samples, 0.04%)</title><rect x="63.8" y="1701" width="0.5" height="15.0" fill="rgb(252,170,38)" rx="2" ry="2" />
+<text  x="66.82" y="1711.5" ></text>
+</g>
+<g >
+<title>c10::intrusive_ptr&lt;c10::TensorImpl, c10::UndefinedTensorImpl&gt;::reset_ (10 samples, 0.01%)</title><rect x="637.7" y="1957" width="0.1" height="15.0" fill="rgb(236,138,47)" rx="2" ry="2" />
+<text  x="640.66" y="1967.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (144 samples, 0.21%)</title><rect x="63.8" y="1989" width="2.5" height="15.0" fill="rgb(223,181,29)" rx="2" ry="2" />
+<text  x="66.82" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::impl::tls_local_dispatch_key_set (269 samples, 0.39%)</title><rect x="1120.0" y="2021" width="4.6" height="15.0" fill="rgb(222,138,48)" rx="2" ry="2" />
+<text  x="1122.97" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1253" width="0.3" height="15.0" fill="rgb(210,155,30)" rx="2" ry="2" />
+<text  x="70.02" y="1263.5" ></text>
+</g>
+<g >
+<title>pthread_mutex_lock (551 samples, 0.80%)</title><rect x="771.4" y="2021" width="9.4" height="15.0" fill="rgb(236,15,42)" rx="2" ry="2" />
+<text  x="774.37" y="2031.5" ></text>
+</g>
+<g >
+<title>torch::PythonArgs::tensor (396 samples, 0.57%)</title><rect x="865.9" y="1989" width="6.8" height="15.0" fill="rgb(219,98,23)" rx="2" ry="2" />
+<text  x="868.89" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1669" width="0.3" height="15.0" fill="rgb(213,138,24)" rx="2" ry="2" />
+<text  x="70.00" y="1679.5" ></text>
+</g>
+<g >
+<title>c10::ThreadLocalDebugInfo::get (561 samples, 0.81%)</title><rect x="1013.2" y="2037" width="9.6" height="15.0" fill="rgb(235,221,4)" rx="2" ry="2" />
+<text  x="1016.19" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (9 samples, 0.01%)</title><rect x="67.1" y="53" width="0.2" height="15.0" fill="rgb(206,46,8)" rx="2" ry="2" />
+<text  x="70.14" y="63.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::get_autograd_meta (153 samples, 0.22%)</title><rect x="659.1" y="1973" width="2.6" height="15.0" fill="rgb(243,96,25)" rx="2" ry="2" />
+<text  x="662.08" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="533" width="0.2" height="15.0" fill="rgb(250,19,27)" rx="2" ry="2" />
+<text  x="70.05" y="543.5" ></text>
+</g>
+<g >
+<title>pthread_mutex_unlock (372 samples, 0.54%)</title><rect x="780.8" y="2021" width="6.3" height="15.0" fill="rgb(248,29,36)" rx="2" ry="2" />
+<text  x="783.79" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="869" width="0.2" height="15.0" fill="rgb(210,195,22)" rx="2" ry="2" />
+<text  x="70.05" y="879.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;c10::Half&gt;@plt (12 samples, 0.02%)</title><rect x="989.6" y="2021" width="0.2" height="15.0" fill="rgb(207,131,4)" rx="2" ry="2" />
+<text  x="992.58" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="981" width="0.3" height="15.0" fill="rgb(220,112,21)" rx="2" ry="2" />
+<text  x="70.04" y="991.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::propagate_names_to_outputs (80 samples, 0.12%)</title><rect x="466.8" y="2005" width="1.4" height="15.0" fill="rgb(222,170,24)" rx="2" ry="2" />
+<text  x="469.83" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt; (33 samples, 0.05%)</title><rect x="1171.4" y="2037" width="0.6" height="15.0" fill="rgb(243,83,11)" rx="2" ry="2" />
+<text  x="1174.44" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1765" width="0.2" height="15.0" fill="rgb(244,31,11)" rx="2" ry="2" />
+<text  x="39.51" y="1775.5" ></text>
+</g>
+<g >
+<title>[unknown] (11,830 samples, 17.14%)</title><rect x="481.2" y="2005" width="202.2" height="15.0" fill="rgb(214,155,4)" rx="2" ry="2" />
+<text  x="484.19" y="2015.5" >[unknown]</text>
+</g>
+<g >
+<title>__tls_get_addr_slow (52 samples, 0.08%)</title><rect x="687.2" y="2005" width="0.9" height="15.0" fill="rgb(229,103,51)" rx="2" ry="2" />
+<text  x="690.18" y="2015.5" ></text>
+</g>
+<g >
+<title>at::detail::make_tensor&lt;c10::TensorImpl, c10::intrusive_ptr&lt;c10::StorageImpl, c10::detail::intrusive_target_default_null_type&lt;c10::StorageImpl&gt; &gt;, c10::DispatchKey, caffe2::TypeMeta&amp;&gt; (10 samples, 0.01%)</title><rect x="669.2" y="1973" width="0.2" height="15.0" fill="rgb(233,53,45)" rx="2" ry="2" />
+<text  x="672.25" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (6 samples, 0.01%)</title><rect x="485.1" y="1781" width="0.1" height="15.0" fill="rgb(239,69,21)" rx="2" ry="2" />
+<text  x="488.08" y="1791.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::pyobj (119 samples, 0.17%)</title><rect x="739.5" y="1989" width="2.1" height="15.0" fill="rgb(211,211,38)" rx="2" ry="2" />
+<text  x="742.55" y="1999.5" ></text>
+</g>
+<g >
+<title>THPVariable_Wrap (131 samples, 0.19%)</title><rect x="696.5" y="1989" width="2.2" height="15.0" fill="rgb(253,80,5)" rx="2" ry="2" />
+<text  x="699.47" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::TensorOptions::dtype (70 samples, 0.10%)</title><rect x="1004.4" y="2037" width="1.2" height="15.0" fill="rgb(244,210,4)" rx="2" ry="2" />
+<text  x="1007.42" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1653" width="0.3" height="15.0" fill="rgb(234,173,39)" rx="2" ry="2" />
+<text  x="70.00" y="1663.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1925" width="0.1" height="15.0" fill="rgb(208,194,23)" rx="2" ry="2" />
+<text  x="488.08" y="1935.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1141" width="0.1" height="15.0" fill="rgb(206,207,30)" rx="2" ry="2" />
+<text  x="39.51" y="1151.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr@plt (17 samples, 0.02%)</title><rect x="1044.9" y="2021" width="0.3" height="15.0" fill="rgb(254,80,44)" rx="2" ry="2" />
+<text  x="1047.92" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1797" width="0.2" height="15.0" fill="rgb(240,98,7)" rx="2" ry="2" />
+<text  x="39.51" y="1807.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::numel (20 samples, 0.03%)</title><rect x="529.1" y="1893" width="0.4" height="15.0" fill="rgb(246,111,40)" rx="2" ry="2" />
+<text  x="532.11" y="1903.5" ></text>
+</g>
+<g >
+<title>do_lookup_x (68 samples, 0.10%)</title><rect x="1173.9" y="2037" width="1.2" height="15.0" fill="rgb(233,82,45)" rx="2" ry="2" />
+<text  x="1176.93" y="2047.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;int&gt;@plt (22 samples, 0.03%)</title><rect x="185.8" y="1989" width="0.3" height="15.0" fill="rgb(218,211,1)" rx="2" ry="2" />
+<text  x="188.77" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (20 samples, 0.03%)</title><rect x="994.5" y="2037" width="0.3" height="15.0" fill="rgb(206,102,23)" rx="2" ry="2" />
+<text  x="997.49" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1317" width="0.3" height="15.0" fill="rgb(251,173,3)" rx="2" ry="2" />
+<text  x="70.02" y="1327.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::propagate_names_to_outputs@plt (10 samples, 0.01%)</title><rect x="468.2" y="2005" width="0.2" height="15.0" fill="rgb(222,78,38)" rx="2" ry="2" />
+<text  x="471.20" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;caffe2::detail::_Uninitialized&gt; (23 samples, 0.03%)</title><rect x="474.5" y="2005" width="0.3" height="15.0" fill="rgb(206,157,2)" rx="2" ry="2" />
+<text  x="477.45" y="2015.5" ></text>
+</g>
+<g >
+<title>_PyObject_GenericGetAttrWithDict (23 samples, 0.03%)</title><rect x="915.2" y="2037" width="0.4" height="15.0" fill="rgb(211,186,35)" rx="2" ry="2" />
+<text  x="918.22" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="757" width="0.2" height="15.0" fill="rgb(220,59,23)" rx="2" ry="2" />
+<text  x="70.05" y="767.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::build@plt (6 samples, 0.01%)</title><rect x="477.0" y="2021" width="0.1" height="15.0" fill="rgb(207,134,4)" rx="2" ry="2" />
+<text  x="480.03" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::resize_outputs (173 samples, 0.25%)</title><rect x="468.4" y="2005" width="2.9" height="15.0" fill="rgb(207,80,1)" rx="2" ry="2" />
+<text  x="471.37" y="2015.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1941" width="0.1" height="15.0" fill="rgb(237,17,53)" rx="2" ry="2" />
+<text  x="488.08" y="1951.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (27 samples, 0.04%)</title><rect x="63.8" y="1749" width="0.5" height="15.0" fill="rgb(220,3,24)" rx="2" ry="2" />
+<text  x="66.82" y="1759.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="517" width="0.2" height="15.0" fill="rgb(222,165,33)" rx="2" ry="2" />
+<text  x="70.05" y="527.5" ></text>
+</g>
+<g >
+<title>PyObject_GC_Del (97 samples, 0.14%)</title><rect x="14.2" y="2037" width="1.6" height="15.0" fill="rgb(244,156,37)" rx="2" ry="2" />
+<text  x="17.19" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1749" width="0.2" height="15.0" fill="rgb(236,150,47)" rx="2" ry="2" />
+<text  x="39.51" y="1759.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1861" width="0.3" height="15.0" fill="rgb(254,210,20)" rx="2" ry="2" />
+<text  x="70.00" y="1871.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1701" width="0.3" height="15.0" fill="rgb(242,115,7)" rx="2" ry="2" />
+<text  x="70.00" y="1711.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (27 samples, 0.04%)</title><rect x="66.5" y="1973" width="0.5" height="15.0" fill="rgb(210,150,7)" rx="2" ry="2" />
+<text  x="69.52" y="1983.5" ></text>
+</g>
+<g >
+<title>at::native::(anonymous namespace)::add_kernel (74 samples, 0.11%)</title><rect x="512.7" y="1941" width="1.2" height="15.0" fill="rgb(224,30,46)" rx="2" ry="2" />
+<text  x="515.67" y="1951.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (154 samples, 0.22%)</title><rect x="688.1" y="2005" width="2.6" height="15.0" fill="rgb(217,35,40)" rx="2" ry="2" />
+<text  x="691.07" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::detail::_New&lt;float&gt; (38 samples, 0.06%)</title><rect x="1172.7" y="2037" width="0.6" height="15.0" fill="rgb(218,176,51)" rx="2" ry="2" />
+<text  x="1175.67" y="2047.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (25 samples, 0.04%)</title><rect x="1149.1" y="2021" width="0.5" height="15.0" fill="rgb(218,199,46)" rx="2" ry="2" />
+<text  x="1152.13" y="2031.5" ></text>
+</g>
+<g >
+<title>PyDict_SetDefault (11 samples, 0.02%)</title><rect x="10.1" y="2037" width="0.1" height="15.0" fill="rgb(214,64,47)" rx="2" ry="2" />
+<text  x="13.05" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="261" width="0.2" height="15.0" fill="rgb(251,118,32)" rx="2" ry="2" />
+<text  x="70.05" y="271.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (156 samples, 0.23%)</title><rect x="1120.9" y="2005" width="2.7" height="15.0" fill="rgb(247,52,45)" rx="2" ry="2" />
+<text  x="1123.93" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (7 samples, 0.01%)</title><rect x="1172.8" y="2005" width="0.2" height="15.0" fill="rgb(225,95,42)" rx="2" ry="2" />
+<text  x="1175.84" y="2015.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (880 samples, 1.27%)</title><rect x="81.7" y="2005" width="15.1" height="15.0" fill="rgb(223,161,11)" rx="2" ry="2" />
+<text  x="84.73" y="2015.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1877" width="0.2" height="15.0" fill="rgb(233,89,33)" rx="2" ry="2" />
+<text  x="69.52" y="1887.5" ></text>
+</g>
+<g >
+<title>PyObject_ClearWeakRefs (220 samples, 0.32%)</title><rect x="46.5" y="2021" width="3.8" height="15.0" fill="rgb(220,206,54)" rx="2" ry="2" />
+<text  x="49.49" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;short&gt; (12 samples, 0.02%)</title><rect x="1107.5" y="2005" width="0.3" height="15.0" fill="rgb(235,121,26)" rx="2" ry="2" />
+<text  x="1110.55" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="565" width="0.2" height="15.0" fill="rgb(224,19,15)" rx="2" ry="2" />
+<text  x="70.05" y="575.5" ></text>
+</g>
+<g >
+<title>c10::memoryProfilingEnabled@plt (16 samples, 0.02%)</title><rect x="750.5" y="2021" width="0.3" height="15.0" fill="rgb(254,91,39)" rx="2" ry="2" />
+<text  x="753.50" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1109" width="0.3" height="15.0" fill="rgb(229,192,2)" rx="2" ry="2" />
+<text  x="70.04" y="1119.5" ></text>
+</g>
+<g >
+<title>_dl_catch_error (77 samples, 0.11%)</title><rect x="752.3" y="2005" width="1.3" height="15.0" fill="rgb(233,85,26)" rx="2" ry="2" />
+<text  x="755.30" y="2015.5" ></text>
+</g>
+<g >
+<title>_int_free (49 samples, 0.07%)</title><rect x="928.7" y="2037" width="0.9" height="15.0" fill="rgb(239,84,11)" rx="2" ry="2" />
+<text  x="931.73" y="2047.5" ></text>
+</g>
+<g >
+<title>_PyObject_GenericGetAttrWithDict (368 samples, 0.53%)</title><rect x="292.2" y="2021" width="6.3" height="15.0" fill="rgb(231,212,37)" rx="2" ry="2" />
+<text  x="295.24" y="2031.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1893" width="0.2" height="15.0" fill="rgb(253,136,23)" rx="2" ry="2" />
+<text  x="69.52" y="1903.5" ></text>
+</g>
+<g >
+<title>PyUnicode_DecodeUTF8Stateful (6 samples, 0.01%)</title><rect x="33.9" y="2037" width="0.1" height="15.0" fill="rgb(205,143,40)" rx="2" ry="2" />
+<text  x="36.93" y="2047.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (22 samples, 0.03%)</title><rect x="1149.6" y="2021" width="0.3" height="15.0" fill="rgb(232,221,45)" rx="2" ry="2" />
+<text  x="1152.56" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::impl::OperatorEntry::computeDispatchTableEntryWithDebug (11 samples, 0.02%)</title><rect x="236.1" y="1989" width="0.2" height="15.0" fill="rgb(224,171,7)" rx="2" ry="2" />
+<text  x="239.07" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::jit::SchemaTypeParser::parseType (8 samples, 0.01%)</title><rect x="270.6" y="2005" width="0.1" height="15.0" fill="rgb(217,148,37)" rx="2" ry="2" />
+<text  x="273.60" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (19 samples, 0.03%)</title><rect x="67.0" y="1941" width="0.3" height="15.0" fill="rgb(209,50,35)" rx="2" ry="2" />
+<text  x="69.98" y="1951.5" ></text>
+</g>
+<g >
+<title>torch::autograd::THPVariable_add (10 samples, 0.01%)</title><rect x="895.1" y="2005" width="0.2" height="15.0" fill="rgb(242,219,31)" rx="2" ry="2" />
+<text  x="898.12" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (20 samples, 0.03%)</title><rect x="477.7" y="2005" width="0.4" height="15.0" fill="rgb(247,104,53)" rx="2" ry="2" />
+<text  x="480.73" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1093" width="0.3" height="15.0" fill="rgb(211,121,19)" rx="2" ry="2" />
+<text  x="70.04" y="1103.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (16 samples, 0.02%)</title><rect x="211.3" y="2005" width="0.3" height="15.0" fill="rgb(246,141,6)" rx="2" ry="2" />
+<text  x="214.31" y="2015.5" ></text>
+</g>
+<g >
+<title>torch::jit::Lexer::next (7 samples, 0.01%)</title><rect x="897.1" y="2021" width="0.1" height="15.0" fill="rgb(227,1,11)" rx="2" ry="2" />
+<text  x="900.08" y="2031.5" ></text>
+</g>
+<g >
+<title>torch::autograd::utils::wrap (10 samples, 0.01%)</title><rect x="486.3" y="1957" width="0.2" height="15.0" fill="rgb(244,213,42)" rx="2" ry="2" />
+<text  x="489.35" y="1967.5" ></text>
+</g>
+<g >
+<title>malloc_consolidate (6 samples, 0.01%)</title><rect x="1173.2" y="2005" width="0.1" height="15.0" fill="rgb(221,141,36)" rx="2" ry="2" />
+<text  x="1176.22" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="949" width="0.3" height="15.0" fill="rgb(238,225,30)" rx="2" ry="2" />
+<text  x="70.04" y="959.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::set_pyobj@plt (13 samples, 0.02%)</title><rect x="743.3" y="1989" width="0.2" height="15.0" fill="rgb(241,121,2)" rx="2" ry="2" />
+<text  x="746.29" y="1999.5" ></text>
+</g>
+<g >
+<title>pthread_mutex_lock (274 samples, 0.40%)</title><rect x="249.5" y="2005" width="4.7" height="15.0" fill="rgb(212,222,17)" rx="2" ry="2" />
+<text  x="252.51" y="2015.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1829" width="0.2" height="15.0" fill="rgb(237,151,14)" rx="2" ry="2" />
+<text  x="69.52" y="1839.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::itemsize (257 samples, 0.37%)</title><rect x="419.9" y="1973" width="4.4" height="15.0" fill="rgb(213,7,11)" rx="2" ry="2" />
+<text  x="422.95" y="1983.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1861" width="0.2" height="15.0" fill="rgb(223,63,43)" rx="2" ry="2" />
+<text  x="69.52" y="1871.5" ></text>
+</g>
+<g >
+<title>torch::autograd::utils::wrap (152 samples, 0.22%)</title><rect x="891.5" y="1989" width="2.6" height="15.0" fill="rgb(207,4,52)" rx="2" ry="2" />
+<text  x="894.49" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1845" width="0.2" height="15.0" fill="rgb(233,133,27)" rx="2" ry="2" />
+<text  x="39.51" y="1855.5" ></text>
+</g>
+<g >
+<title>visit_reachable (29 samples, 0.04%)</title><rect x="902.6" y="2021" width="0.5" height="15.0" fill="rgb(210,81,3)" rx="2" ry="2" />
+<text  x="905.62" y="2031.5" ></text>
+</g>
+<g >
+<title>PyObject_GetAttr (46 samples, 0.07%)</title><rect x="52.2" y="2021" width="0.8" height="15.0" fill="rgb(228,78,31)" rx="2" ry="2" />
+<text  x="55.17" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_base_ptrs (306 samples, 0.44%)</title><rect x="958.5" y="2037" width="5.2" height="15.0" fill="rgb(237,135,49)" rx="2" ry="2" />
+<text  x="961.51" y="2047.5" ></text>
+</g>
+<g >
+<title>torch::Library::def&lt;char const  (10 samples, 0.01%)</title><rect x="270.2" y="2005" width="0.2" height="15.0" fill="rgb(231,37,38)" rx="2" ry="2" />
+<text  x="273.24" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::impl::ExcludeDispatchKeyGuard::ExcludeDispatchKeyGuard@plt (17 samples, 0.02%)</title><rect x="653.1" y="1941" width="0.3" height="15.0" fill="rgb(232,176,15)" rx="2" ry="2" />
+<text  x="656.13" y="1951.5" ></text>
+</g>
+<g >
+<title>PyUnicode_FromKindAndData (13 samples, 0.02%)</title><rect x="34.0" y="2037" width="0.3" height="15.0" fill="rgb(226,7,42)" rx="2" ry="2" />
+<text  x="37.05" y="2047.5" ></text>
+</g>
+<g >
+<title>PyLong_FromLong (21 samples, 0.03%)</title><rect x="46.0" y="2021" width="0.4" height="15.0" fill="rgb(211,38,8)" rx="2" ry="2" />
+<text  x="49.00" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;long&gt;@plt (15 samples, 0.02%)</title><rect x="1107.3" y="2005" width="0.2" height="15.0" fill="rgb(211,23,34)" rx="2" ry="2" />
+<text  x="1110.29" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::serial_for_each (25 samples, 0.04%)</title><rect x="72.6" y="1989" width="0.5" height="15.0" fill="rgb(242,78,54)" rx="2" ry="2" />
+<text  x="75.64" y="1999.5" ></text>
+</g>
+<g >
+<title>PyObject_GC_UnTrack (57 samples, 0.08%)</title><rect x="15.8" y="2037" width="1.0" height="15.0" fill="rgb(244,27,16)" rx="2" ry="2" />
+<text  x="18.85" y="2047.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (10 samples, 0.01%)</title><rect x="66.5" y="1765" width="0.2" height="15.0" fill="rgb(209,85,22)" rx="2" ry="2" />
+<text  x="69.52" y="1775.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1813" width="0.1" height="15.0" fill="rgb(218,161,27)" rx="2" ry="2" />
+<text  x="488.08" y="1823.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::TensorIterator (106 samples, 0.15%)</title><rect x="570.8" y="1973" width="1.8" height="15.0" fill="rgb(215,215,19)" rx="2" ry="2" />
+<text  x="573.80" y="1983.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1077" width="0.1" height="15.0" fill="rgb(238,8,26)" rx="2" ry="2" />
+<text  x="39.51" y="1087.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1669" width="0.2" height="15.0" fill="rgb(205,192,47)" rx="2" ry="2" />
+<text  x="39.51" y="1679.5" ></text>
+</g>
+<g >
+<title>visit_decref (28 samples, 0.04%)</title><rect x="902.1" y="2021" width="0.5" height="15.0" fill="rgb(209,29,1)" rx="2" ry="2" />
+<text  x="905.14" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::function_ref&lt;void  (7 samples, 0.01%)</title><rect x="68.7" y="1973" width="0.1" height="15.0" fill="rgb(228,94,6)" rx="2" ry="2" />
+<text  x="71.68" y="1983.5" ></text>
+</g>
+<g >
+<title>_Py_HashBytes (14 samples, 0.02%)</title><rect x="917.5" y="2037" width="0.2" height="15.0" fill="rgb(219,111,6)" rx="2" ry="2" />
+<text  x="920.47" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="933" width="0.1" height="15.0" fill="rgb(240,131,45)" rx="2" ry="2" />
+<text  x="39.51" y="943.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (72 samples, 0.10%)</title><rect x="63.8" y="1909" width="1.3" height="15.0" fill="rgb(244,1,34)" rx="2" ry="2" />
+<text  x="66.82" y="1919.5" ></text>
+</g>
+<g >
+<title>c10::NUMAMove@plt (14 samples, 0.02%)</title><rect x="1088.1" y="2005" width="0.3" height="15.0" fill="rgb(244,157,41)" rx="2" ry="2" />
+<text  x="1091.12" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;caffe2::detail::_Uninitialized&gt;@plt (13 samples, 0.02%)</title><rect x="474.8" y="2005" width="0.3" height="15.0" fill="rgb(245,65,10)" rx="2" ry="2" />
+<text  x="477.85" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (8 samples, 0.01%)</title><rect x="485.5" y="1925" width="0.1" height="15.0" fill="rgb(209,21,42)" rx="2" ry="2" />
+<text  x="488.48" y="1935.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_shape (280 samples, 0.41%)</title><rect x="120.4" y="2005" width="4.8" height="15.0" fill="rgb(236,70,32)" rx="2" ry="2" />
+<text  x="123.45" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt; (9 samples, 0.01%)</title><rect x="954.4" y="2021" width="0.1" height="15.0" fill="rgb(208,181,43)" rx="2" ry="2" />
+<text  x="957.39" y="2031.5" ></text>
+</g>
+<g >
+<title>_PyFrame_New_NoTrack (7 samples, 0.01%)</title><rect x="288.6" y="2021" width="0.2" height="15.0" fill="rgb(219,60,52)" rx="2" ry="2" />
+<text  x="291.65" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;unsigned char&gt; (7 samples, 0.01%)</title><rect x="1137.4" y="2021" width="0.1" height="15.0" fill="rgb(224,14,41)" rx="2" ry="2" />
+<text  x="1140.41" y="2031.5" ></text>
+</g>
+<g >
+<title>at::Tensor::device (93 samples, 0.13%)</title><rect x="386.9" y="1989" width="1.6" height="15.0" fill="rgb(205,201,42)" rx="2" ry="2" />
+<text  x="389.91" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::typeMetaToScalarType (199 samples, 0.29%)</title><rect x="986.0" y="2021" width="3.4" height="15.0" fill="rgb(254,105,45)" rx="2" ry="2" />
+<text  x="989.03" y="2031.5" ></text>
+</g>
+<g >
+<title>all (69,039 samples, 100%)</title><rect x="10.0" y="2069" width="1180.0" height="15.0" fill="rgb(254,213,33)" rx="2" ry="2" />
+<text  x="13.00" y="2079.5" ></text>
+</g>
+<g >
+<title>at::empty (184 samples, 0.27%)</title><rect x="431.6" y="1989" width="3.1" height="15.0" fill="rgb(254,110,48)" rx="2" ry="2" />
+<text  x="434.57" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1781" width="0.3" height="15.0" fill="rgb(232,219,16)" rx="2" ry="2" />
+<text  x="70.00" y="1791.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (32 samples, 0.05%)</title><rect x="838.5" y="1973" width="0.6" height="15.0" fill="rgb(206,221,2)" rx="2" ry="2" />
+<text  x="841.52" y="1983.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1573" width="0.2" height="15.0" fill="rgb(226,0,28)" rx="2" ry="2" />
+<text  x="39.51" y="1583.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1237" width="0.3" height="15.0" fill="rgb(221,37,16)" rx="2" ry="2" />
+<text  x="70.02" y="1247.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (143 samples, 0.21%)</title><rect x="63.8" y="1957" width="2.5" height="15.0" fill="rgb(240,217,36)" rx="2" ry="2" />
+<text  x="66.82" y="1967.5" ></text>
+</g>
+<g >
+<title>_PyStack_AsTuple (60 samples, 0.09%)</title><rect x="894.1" y="2005" width="1.0" height="15.0" fill="rgb(249,93,34)" rx="2" ry="2" />
+<text  x="897.09" y="2015.5" ></text>
+</g>
+<g >
+<title>PyEval_RestoreThread (107 samples, 0.15%)</title><rect x="44.1" y="2021" width="1.9" height="15.0" fill="rgb(221,46,6)" rx="2" ry="2" />
+<text  x="47.13" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::for_each (433 samples, 0.63%)</title><rect x="523.7" y="1909" width="7.4" height="15.0" fill="rgb(238,227,27)" rx="2" ry="2" />
+<text  x="526.71" y="1919.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (13 samples, 0.02%)</title><rect x="746.7" y="1973" width="0.3" height="15.0" fill="rgb(249,220,25)" rx="2" ry="2" />
+<text  x="749.74" y="1983.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (27 samples, 0.04%)</title><rect x="68.2" y="1973" width="0.5" height="15.0" fill="rgb(208,31,40)" rx="2" ry="2" />
+<text  x="71.20" y="1983.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1829" width="0.1" height="15.0" fill="rgb(238,26,2)" rx="2" ry="2" />
+<text  x="488.08" y="1839.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::~TensorImpl (11,830 samples, 17.14%)</title><rect x="481.2" y="2021" width="202.2" height="15.0" fill="rgb(210,15,5)" rx="2" ry="2" />
+<text  x="484.19" y="2031.5" >c10::TensorImpl::~TensorImpl</text>
+</g>
+<g >
+<title>rangeiter_next (142 samples, 0.21%)</title><rect x="263.2" y="2005" width="2.4" height="15.0" fill="rgb(249,104,17)" rx="2" ry="2" />
+<text  x="266.21" y="2015.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1941" width="0.2" height="15.0" fill="rgb(230,38,5)" rx="2" ry="2" />
+<text  x="69.52" y="1951.5" ></text>
+</g>
+<g >
+<title>c10::checked_convert&lt;float, long&gt; (118 samples, 0.17%)</title><rect x="539.5" y="1909" width="2.0" height="15.0" fill="rgb(240,127,42)" rx="2" ry="2" />
+<text  x="542.49" y="1919.5" ></text>
+</g>
+<g >
+<title>posix_memalign@plt (8 samples, 0.01%)</title><rect x="1091.7" y="2005" width="0.2" height="15.0" fill="rgb(243,1,31)" rx="2" ry="2" />
+<text  x="1094.72" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::serial_for_each (204 samples, 0.30%)</title><rect x="969.4" y="2037" width="3.5" height="15.0" fill="rgb(207,188,20)" rx="2" ry="2" />
+<text  x="972.40" y="2047.5" ></text>
+</g>
+<g >
+<title>dict_traverse (16 samples, 0.02%)</title><rect x="752.0" y="2021" width="0.2" height="15.0" fill="rgb(211,87,36)" rx="2" ry="2" />
+<text  x="754.97" y="2031.5" ></text>
+</g>
+<g >
+<title>_dl_lookup_symbol_x (52 samples, 0.08%)</title><rect x="752.7" y="1957" width="0.9" height="15.0" fill="rgb(241,200,43)" rx="2" ry="2" />
+<text  x="755.71" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (21 samples, 0.03%)</title><rect x="65.1" y="1909" width="0.3" height="15.0" fill="rgb(222,170,50)" rx="2" ry="2" />
+<text  x="68.05" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1045" width="0.3" height="15.0" fill="rgb(213,14,15)" rx="2" ry="2" />
+<text  x="70.04" y="1055.5" ></text>
+</g>
+<g >
+<title>c10::impl::OperatorEntry::updateDispatchTable_ (9 samples, 0.01%)</title><rect x="236.3" y="2005" width="0.1" height="15.0" fill="rgb(211,151,42)" rx="2" ry="2" />
+<text  x="239.30" y="2015.5" ></text>
+</g>
+<g >
+<title>at::add (1,042 samples, 1.51%)</title><rect x="584.9" y="1973" width="17.8" height="15.0" fill="rgb(227,128,12)" rx="2" ry="2" />
+<text  x="587.90" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (38 samples, 0.06%)</title><rect x="1172.7" y="2021" width="0.6" height="15.0" fill="rgb(242,26,0)" rx="2" ry="2" />
+<text  x="1175.67" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (525 samples, 0.76%)</title><rect x="66.5" y="2005" width="9.0" height="15.0" fill="rgb(230,209,15)" rx="2" ry="2" />
+<text  x="69.52" y="2015.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1909" width="0.1" height="15.0" fill="rgb(241,60,54)" rx="2" ry="2" />
+<text  x="488.08" y="1919.5" ></text>
+</g>
+<g >
+<title>c10::memoryProfilingEnabled (113 samples, 0.16%)</title><rect x="748.6" y="2021" width="1.9" height="15.0" fill="rgb(217,184,18)" rx="2" ry="2" />
+<text  x="751.57" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1429" width="0.3" height="15.0" fill="rgb(233,4,34)" rx="2" ry="2" />
+<text  x="70.02" y="1439.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (38 samples, 0.06%)</title><rect x="73.4" y="1989" width="0.6" height="15.0" fill="rgb(218,93,38)" rx="2" ry="2" />
+<text  x="76.38" y="1999.5" ></text>
+</g>
+<g >
+<title>at::TensorIteratorConfig::add_output (70 samples, 0.10%)</title><rect x="582.7" y="1957" width="1.2" height="15.0" fill="rgb(246,181,21)" rx="2" ry="2" />
+<text  x="585.73" y="1967.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1589" width="0.2" height="15.0" fill="rgb(233,184,21)" rx="2" ry="2" />
+<text  x="39.51" y="1599.5" ></text>
+</g>
+<g >
+<title>operator new (103 samples, 0.15%)</title><rect x="1145.0" y="2021" width="1.8" height="15.0" fill="rgb(205,163,6)" rx="2" ry="2" />
+<text  x="1148.03" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (14 samples, 0.02%)</title><rect x="551.9" y="1957" width="0.2" height="15.0" fill="rgb(242,168,42)" rx="2" ry="2" />
+<text  x="554.90" y="1967.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::serial_for_each@plt (11 samples, 0.02%)</title><rect x="530.9" y="1893" width="0.2" height="15.0" fill="rgb(209,55,41)" rx="2" ry="2" />
+<text  x="533.92" y="1903.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="997" width="0.3" height="15.0" fill="rgb(248,210,5)" rx="2" ry="2" />
+<text  x="70.04" y="1007.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="389" width="0.2" height="15.0" fill="rgb(236,29,48)" rx="2" ry="2" />
+<text  x="70.05" y="399.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1429" width="0.2" height="15.0" fill="rgb(244,129,19)" rx="2" ry="2" />
+<text  x="39.51" y="1439.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt;@plt (18 samples, 0.03%)</title><rect x="990.0" y="2021" width="0.3" height="15.0" fill="rgb(226,150,6)" rx="2" ry="2" />
+<text  x="993.03" y="2031.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (87 samples, 0.13%)</title><rect x="552.5" y="1957" width="1.5" height="15.0" fill="rgb(242,84,1)" rx="2" ry="2" />
+<text  x="555.49" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="693" width="0.2" height="15.0" fill="rgb(241,126,54)" rx="2" ry="2" />
+<text  x="70.05" y="703.5" ></text>
+</g>
+<g >
+<title>torch::jit::parseSchema (7 samples, 0.01%)</title><rect x="270.3" y="1989" width="0.1" height="15.0" fill="rgb(205,101,16)" rx="2" ry="2" />
+<text  x="273.27" y="1999.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (23 samples, 0.03%)</title><rect x="485.1" y="1973" width="0.4" height="15.0" fill="rgb(212,126,50)" rx="2" ry="2" />
+<text  x="488.08" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1877" width="0.3" height="15.0" fill="rgb(254,177,25)" rx="2" ry="2" />
+<text  x="70.00" y="1887.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1285" width="0.3" height="15.0" fill="rgb(222,172,21)" rx="2" ry="2" />
+<text  x="70.02" y="1295.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (16 samples, 0.02%)</title><rect x="670.0" y="1989" width="0.3" height="15.0" fill="rgb(240,211,14)" rx="2" ry="2" />
+<text  x="673.02" y="1999.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1957" width="0.1" height="15.0" fill="rgb(254,119,8)" rx="2" ry="2" />
+<text  x="488.08" y="1967.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (117 samples, 0.17%)</title><rect x="233.5" y="1989" width="2.0" height="15.0" fill="rgb(218,89,44)" rx="2" ry="2" />
+<text  x="236.53" y="1999.5" ></text>
+</g>
+<g >
+<title>_PyObject_GetMethod (39 samples, 0.06%)</title><rect x="96.9" y="2005" width="0.6" height="15.0" fill="rgb(221,63,21)" rx="2" ry="2" />
+<text  x="99.86" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1205" width="0.1" height="15.0" fill="rgb(214,74,45)" rx="2" ry="2" />
+<text  x="39.51" y="1215.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="709" width="0.2" height="15.0" fill="rgb(228,47,31)" rx="2" ry="2" />
+<text  x="70.05" y="719.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="245" width="0.2" height="15.0" fill="rgb(221,116,46)" rx="2" ry="2" />
+<text  x="70.05" y="255.5" ></text>
+</g>
+<g >
+<title>torch::PythonArgs::scalar (212 samples, 0.31%)</title><rect x="862.3" y="1989" width="3.6" height="15.0" fill="rgb(231,44,36)" rx="2" ry="2" />
+<text  x="865.26" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::autograd::VariableType::(anonymous namespace)::checked_cast_variable (178 samples, 0.26%)</title><rect x="653.4" y="1941" width="3.1" height="15.0" fill="rgb(233,40,32)" rx="2" ry="2" />
+<text  x="656.42" y="1951.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1877" width="0.1" height="15.0" fill="rgb(240,12,32)" rx="2" ry="2" />
+<text  x="488.08" y="1887.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (48 samples, 0.07%)</title><rect x="608.5" y="1957" width="0.8" height="15.0" fill="rgb(217,198,1)" rx="2" ry="2" />
+<text  x="611.47" y="1967.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;short&gt; (66 samples, 0.10%)</title><rect x="190.9" y="1989" width="1.1" height="15.0" fill="rgb(226,228,52)" rx="2" ry="2" />
+<text  x="193.92" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="293" width="0.2" height="15.0" fill="rgb(221,34,9)" rx="2" ry="2" />
+<text  x="70.05" y="303.5" ></text>
+</g>
+<g >
+<title>PyLong_FromLong (154 samples, 0.22%)</title><rect x="58.5" y="2005" width="2.7" height="15.0" fill="rgb(221,173,29)" rx="2" ry="2" />
+<text  x="61.52" y="2015.5" ></text>
+</g>
+<g >
+<title>at::Tensor::add (900 samples, 1.30%)</title><rect x="555.4" y="1973" width="15.4" height="15.0" fill="rgb(248,139,38)" rx="2" ry="2" />
+<text  x="558.42" y="1983.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::cast_outputs@plt (14 samples, 0.02%)</title><rect x="523.5" y="1909" width="0.2" height="15.0" fill="rgb(213,3,41)" rx="2" ry="2" />
+<text  x="526.47" y="1919.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (18 samples, 0.03%)</title><rect x="65.4" y="1909" width="0.3" height="15.0" fill="rgb(230,16,4)" rx="2" ry="2" />
+<text  x="68.41" y="1919.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (157 samples, 0.23%)</title><rect x="63.8" y="2005" width="2.7" height="15.0" fill="rgb(250,84,46)" rx="2" ry="2" />
+<text  x="66.82" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1813" width="0.2" height="15.0" fill="rgb(233,182,41)" rx="2" ry="2" />
+<text  x="39.51" y="1823.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1781" width="0.2" height="15.0" fill="rgb(206,227,9)" rx="2" ry="2" />
+<text  x="39.51" y="1791.5" ></text>
+</g>
+<g >
+<title>THPVariable_clear (366 samples, 0.53%)</title><rect x="698.7" y="1989" width="6.3" height="15.0" fill="rgb(227,60,18)" rx="2" ry="2" />
+<text  x="701.71" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (3,131 samples, 4.54%)</title><rect x="692.7" y="2005" width="53.5" height="15.0" fill="rgb(225,130,3)" rx="2" ry="2" />
+<text  x="695.73" y="2015.5" >[unkn..</text>
+</g>
+<g >
+<title>c10::TensorOptions::computeDispatchKey (75 samples, 0.11%)</title><rect x="1003.1" y="2037" width="1.3" height="15.0" fill="rgb(215,140,46)" rx="2" ry="2" />
+<text  x="1006.14" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (29 samples, 0.04%)</title><rect x="55.7" y="2021" width="0.5" height="15.0" fill="rgb(240,187,44)" rx="2" ry="2" />
+<text  x="58.67" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (18 samples, 0.03%)</title><rect x="73.1" y="1989" width="0.3" height="15.0" fill="rgb(228,116,31)" rx="2" ry="2" />
+<text  x="76.07" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (13 samples, 0.02%)</title><rect x="64.4" y="1749" width="0.3" height="15.0" fill="rgb(222,18,44)" rx="2" ry="2" />
+<text  x="67.44" y="1759.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1301" width="0.1" height="15.0" fill="rgb(205,171,38)" rx="2" ry="2" />
+<text  x="39.51" y="1311.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::compute_contiguous (75 samples, 0.11%)</title><rect x="1068.6" y="2005" width="1.3" height="15.0" fill="rgb(219,122,5)" rx="2" ry="2" />
+<text  x="1071.63" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (19 samples, 0.03%)</title><rect x="746.3" y="1941" width="0.3" height="15.0" fill="rgb(235,91,48)" rx="2" ry="2" />
+<text  x="749.26" y="1951.5" ></text>
+</g>
+<g >
+<title>PyObject_ClearWeakRefs (50 samples, 0.07%)</title><rect x="10.4" y="2037" width="0.8" height="15.0" fill="rgb(237,19,17)" rx="2" ry="2" />
+<text  x="13.38" y="2047.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;long&gt; (250 samples, 0.36%)</title><rect x="186.1" y="1989" width="4.3" height="15.0" fill="rgb(233,160,17)" rx="2" ry="2" />
+<text  x="189.15" y="1999.5" ></text>
+</g>
+<g >
+<title>memcpy@plt (6 samples, 0.01%)</title><rect x="232.1" y="1989" width="0.1" height="15.0" fill="rgb(234,166,29)" rx="2" ry="2" />
+<text  x="235.06" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="965" width="0.1" height="15.0" fill="rgb(241,49,1)" rx="2" ry="2" />
+<text  x="39.51" y="975.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (308 samples, 0.45%)</title><rect x="486.5" y="1973" width="5.3" height="15.0" fill="rgb(219,26,24)" rx="2" ry="2" />
+<text  x="489.52" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::sizes (15 samples, 0.02%)</title><rect x="1081.0" y="2005" width="0.2" height="15.0" fill="rgb(239,220,49)" rx="2" ry="2" />
+<text  x="1083.97" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="581" width="0.2" height="15.0" fill="rgb(250,153,26)" rx="2" ry="2" />
+<text  x="70.05" y="591.5" ></text>
+</g>
+<g >
+<title>at::native::add (2,518 samples, 3.65%)</title><rect x="500.2" y="1957" width="43.0" height="15.0" fill="rgb(213,168,9)" rx="2" ry="2" />
+<text  x="503.19" y="1967.5" >at::..</text>
+</g>
+<g >
+<title>at::TensorIterator::fast_set_up@plt (6 samples, 0.01%)</title><rect x="453.7" y="2005" width="0.1" height="15.0" fill="rgb(229,206,28)" rx="2" ry="2" />
+<text  x="456.65" y="2015.5" ></text>
+</g>
+<g >
+<title>malloc_consolidate (7 samples, 0.01%)</title><rect x="68.1" y="1957" width="0.1" height="15.0" fill="rgb(234,170,45)" rx="2" ry="2" />
+<text  x="71.08" y="1967.5" ></text>
+</g>
+<g >
+<title>getTHDefaultAllocator (211 samples, 0.31%)</title><rect x="1137.5" y="2021" width="3.6" height="15.0" fill="rgb(221,63,49)" rx="2" ry="2" />
+<text  x="1140.53" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::Warning::set_warning_handler (267 samples, 0.39%)</title><rect x="886.0" y="1973" width="4.6" height="15.0" fill="rgb(236,203,21)" rx="2" ry="2" />
+<text  x="889.04" y="1983.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;unsigned char&gt; (364 samples, 0.53%)</title><rect x="195.6" y="1989" width="6.3" height="15.0" fill="rgb(231,13,41)" rx="2" ry="2" />
+<text  x="198.63" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="469" width="0.2" height="15.0" fill="rgb(217,61,5)" rx="2" ry="2" />
+<text  x="70.05" y="479.5" ></text>
+</g>
+<g >
+<title>tupledealloc (247 samples, 0.36%)</title><rect x="897.2" y="2021" width="4.3" height="15.0" fill="rgb(237,166,49)" rx="2" ry="2" />
+<text  x="900.23" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::for_each (67 samples, 0.10%)</title><rect x="528.0" y="1893" width="1.1" height="15.0" fill="rgb(247,105,46)" rx="2" ry="2" />
+<text  x="530.97" y="1903.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="501" width="0.2" height="15.0" fill="rgb(233,142,3)" rx="2" ry="2" />
+<text  x="70.05" y="511.5" ></text>
+</g>
+<g >
+<title>at::add (241 samples, 0.35%)</title><rect x="628.8" y="1957" width="4.2" height="15.0" fill="rgb(254,87,19)" rx="2" ry="2" />
+<text  x="631.84" y="1967.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;signed char&gt;@plt (8 samples, 0.01%)</title><rect x="991.9" y="2021" width="0.1" height="15.0" fill="rgb(221,63,27)" rx="2" ry="2" />
+<text  x="994.85" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;c10::Half&gt;@plt (32 samples, 0.05%)</title><rect x="183.7" y="1989" width="0.5" height="15.0" fill="rgb(233,187,52)" rx="2" ry="2" />
+<text  x="186.69" y="1999.5" ></text>
+</g>
+<g >
+<title>_Py_CheckFunctionResult (238 samples, 0.34%)</title><rect x="308.5" y="2021" width="4.1" height="15.0" fill="rgb(221,184,51)" rx="2" ry="2" />
+<text  x="311.54" y="2031.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::get_autograd_meta@plt (22 samples, 0.03%)</title><rect x="661.7" y="1973" width="0.4" height="15.0" fill="rgb(222,107,12)" rx="2" ry="2" />
+<text  x="664.69" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="597" width="0.2" height="15.0" fill="rgb(246,46,18)" rx="2" ry="2" />
+<text  x="70.05" y="607.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;c10::Half&gt; (10 samples, 0.01%)</title><rect x="1133.5" y="2021" width="0.2" height="15.0" fill="rgb(217,96,19)" rx="2" ry="2" />
+<text  x="1136.53" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (18 samples, 0.03%)</title><rect x="65.1" y="1877" width="0.3" height="15.0" fill="rgb(253,118,35)" rx="2" ry="2" />
+<text  x="68.07" y="1887.5" ></text>
+</g>
+<g >
+<title>subtype_dealloc (156 samples, 0.23%)</title><rect x="788.6" y="2021" width="2.7" height="15.0" fill="rgb(205,107,44)" rx="2" ry="2" />
+<text  x="791.63" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1829" width="0.2" height="15.0" fill="rgb(237,54,23)" rx="2" ry="2" />
+<text  x="39.51" y="1839.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::set_sizes_contiguous (431 samples, 0.62%)</title><rect x="1073.6" y="2005" width="7.4" height="15.0" fill="rgb(222,153,44)" rx="2" ry="2" />
+<text  x="1076.60" y="2015.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr@plt (10 samples, 0.01%)</title><rect x="885.9" y="1973" width="0.1" height="15.0" fill="rgb(245,192,8)" rx="2" ry="2" />
+<text  x="888.87" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="645" width="0.2" height="15.0" fill="rgb(208,219,33)" rx="2" ry="2" />
+<text  x="70.05" y="655.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;long&gt;@plt (8 samples, 0.01%)</title><rect x="990.7" y="2021" width="0.1" height="15.0" fill="rgb(247,88,27)" rx="2" ry="2" />
+<text  x="993.68" y="2031.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (204 samples, 0.30%)</title><rect x="1017.8" y="2021" width="3.5" height="15.0" fill="rgb(245,207,40)" rx="2" ry="2" />
+<text  x="1020.77" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (30 samples, 0.04%)</title><rect x="834.3" y="1989" width="0.5" height="15.0" fill="rgb(245,59,10)" rx="2" ry="2" />
+<text  x="837.30" y="1999.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (55 samples, 0.08%)</title><rect x="63.8" y="1781" width="1.0" height="15.0" fill="rgb(206,82,10)" rx="2" ry="2" />
+<text  x="66.82" y="1791.5" ></text>
+</g>
+<g >
+<title>update_get_addr (166 samples, 0.24%)</title><rect x="615.3" y="1957" width="2.8" height="15.0" fill="rgb(221,188,31)" rx="2" ry="2" />
+<text  x="618.25" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (48 samples, 0.07%)</title><rect x="746.2" y="2005" width="0.9" height="15.0" fill="rgb(235,166,27)" rx="2" ry="2" />
+<text  x="749.25" y="2015.5" ></text>
+</g>
+<g >
+<title>update_get_addr (117 samples, 0.17%)</title><rect x="1152.7" y="2021" width="2.0" height="15.0" fill="rgb(236,180,28)" rx="2" ry="2" />
+<text  x="1155.67" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="677" width="0.2" height="15.0" fill="rgb(245,18,7)" rx="2" ry="2" />
+<text  x="70.05" y="687.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_names (98 samples, 0.14%)</title><rect x="710.9" y="1989" width="1.7" height="15.0" fill="rgb(211,201,34)" rx="2" ry="2" />
+<text  x="713.93" y="1999.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_fast_setup_type (225 samples, 0.33%)</title><rect x="388.6" y="1989" width="3.8" height="15.0" fill="rgb(233,98,9)" rx="2" ry="2" />
+<text  x="391.58" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1077" width="0.3" height="15.0" fill="rgb(231,145,23)" rx="2" ry="2" />
+<text  x="70.04" y="1087.5" ></text>
+</g>
+<g >
+<title>torch::FunctionParameter::check (192 samples, 0.28%)</title><rect x="808.8" y="1989" width="3.2" height="15.0" fill="rgb(248,126,26)" rx="2" ry="2" />
+<text  x="811.75" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1493" width="0.3" height="15.0" fill="rgb(251,180,35)" rx="2" ry="2" />
+<text  x="70.02" y="1503.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1109" width="0.1" height="15.0" fill="rgb(216,24,36)" rx="2" ry="2" />
+<text  x="39.51" y="1119.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="965" width="0.3" height="15.0" fill="rgb(253,204,13)" rx="2" ry="2" />
+<text  x="70.04" y="975.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt; (26 samples, 0.04%)</title><rect x="184.2" y="1989" width="0.5" height="15.0" fill="rgb(238,6,36)" rx="2" ry="2" />
+<text  x="187.23" y="1999.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (119 samples, 0.17%)</title><rect x="839.1" y="1973" width="2.0" height="15.0" fill="rgb(236,5,4)" rx="2" ry="2" />
+<text  x="842.07" y="1983.5" ></text>
+</g>
+<g >
+<title>torch::FunctionSignature::parse (147 samples, 0.21%)</title><rect x="791.5" y="2021" width="2.5" height="15.0" fill="rgb(222,188,21)" rx="2" ry="2" />
+<text  x="794.52" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;unsigned char&gt; (33 samples, 0.05%)</title><rect x="992.0" y="2021" width="0.6" height="15.0" fill="rgb(229,206,32)" rx="2" ry="2" />
+<text  x="994.99" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (48 samples, 0.07%)</title><rect x="746.2" y="1989" width="0.9" height="15.0" fill="rgb(221,126,14)" rx="2" ry="2" />
+<text  x="749.25" y="1999.5" ></text>
+</g>
+<g >
+<title>PyErr_Occurred (105 samples, 0.15%)</title><rect x="42.3" y="2021" width="1.8" height="15.0" fill="rgb(213,115,23)" rx="2" ry="2" />
+<text  x="45.30" y="2031.5" ></text>
+</g>
+<g >
+<title>at::Tensor::add (87 samples, 0.13%)</title><rect x="835.0" y="1989" width="1.5" height="15.0" fill="rgb(253,50,40)" rx="2" ry="2" />
+<text  x="837.97" y="1999.5" ></text>
+</g>
+<g >
+<title>at::native::DispatchStub&lt;void  (1,613 samples, 2.34%)</title><rect x="513.9" y="1941" width="27.6" height="15.0" fill="rgb(226,196,37)" rx="2" ry="2" />
+<text  x="516.93" y="1951.5" >a..</text>
+</g>
+<g >
+<title>at::TensorIterator::binary_op (158 samples, 0.23%)</title><rect x="496.1" y="1957" width="2.7" height="15.0" fill="rgb(221,191,49)" rx="2" ry="2" />
+<text  x="499.09" y="1967.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::itemsize (20 samples, 0.03%)</title><rect x="439.7" y="1989" width="0.3" height="15.0" fill="rgb(213,196,3)" rx="2" ry="2" />
+<text  x="442.69" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="485" width="0.2" height="15.0" fill="rgb(232,18,16)" rx="2" ry="2" />
+<text  x="70.05" y="495.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1813" width="0.3" height="15.0" fill="rgb(231,100,11)" rx="2" ry="2" />
+<text  x="70.00" y="1823.5" ></text>
+</g>
+<g >
+<title>__memcmp_sse4_1 (345 samples, 0.50%)</title><rect x="98.5" y="2005" width="5.9" height="15.0" fill="rgb(223,197,16)" rx="2" ry="2" />
+<text  x="101.50" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="549" width="0.2" height="15.0" fill="rgb(252,61,7)" rx="2" ry="2" />
+<text  x="70.05" y="559.5" ></text>
+</g>
+<g >
+<title>update_get_addr (68 samples, 0.10%)</title><rect x="554.0" y="1957" width="1.1" height="15.0" fill="rgb(251,32,44)" rx="2" ry="2" />
+<text  x="556.98" y="1967.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (47 samples, 0.07%)</title><rect x="314.3" y="2021" width="0.8" height="15.0" fill="rgb(253,7,5)" rx="2" ry="2" />
+<text  x="317.34" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_types (979 samples, 1.42%)</title><rect x="392.7" y="1989" width="16.7" height="15.0" fill="rgb(210,172,12)" rx="2" ry="2" />
+<text  x="395.70" y="1999.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1909" width="0.2" height="15.0" fill="rgb(233,192,38)" rx="2" ry="2" />
+<text  x="69.52" y="1919.5" ></text>
+</g>
+<g >
+<title>malloc_consolidate (58 samples, 0.08%)</title><rect x="241.6" y="2005" width="1.0" height="15.0" fill="rgb(212,211,9)" rx="2" ry="2" />
+<text  x="244.61" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::set_sizes_contiguous (13 samples, 0.02%)</title><rect x="1098.5" y="2021" width="0.3" height="15.0" fill="rgb(229,120,53)" rx="2" ry="2" />
+<text  x="1101.54" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::Dispatcher::singleton (101 samples, 0.15%)</title><rect x="603.8" y="1973" width="1.7" height="15.0" fill="rgb(246,168,51)" rx="2" ry="2" />
+<text  x="606.75" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="885" width="0.2" height="15.0" fill="rgb(228,26,46)" rx="2" ry="2" />
+<text  x="70.05" y="895.5" ></text>
+</g>
+<g >
+<title>malloc (7 samples, 0.01%)</title><rect x="176.3" y="1973" width="0.1" height="15.0" fill="rgb(230,62,36)" rx="2" ry="2" />
+<text  x="179.25" y="1983.5" ></text>
+</g>
+<g >
+<title>PyObject_GC_UnTrack (63 samples, 0.09%)</title><rect x="50.3" y="2021" width="1.0" height="15.0" fill="rgb(224,209,49)" rx="2" ry="2" />
+<text  x="53.27" y="2031.5" ></text>
+</g>
+<g >
+<title>check_match.9525 (9 samples, 0.01%)</title><rect x="750.9" y="2021" width="0.1" height="15.0" fill="rgb(213,13,40)" rx="2" ry="2" />
+<text  x="753.89" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;short&gt;@plt (9 samples, 0.01%)</title><rect x="1107.8" y="2005" width="0.1" height="15.0" fill="rgb(221,118,54)" rx="2" ry="2" />
+<text  x="1110.75" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::data_ptr (50 samples, 0.07%)</title><rect x="957.6" y="2037" width="0.8" height="15.0" fill="rgb(253,136,38)" rx="2" ry="2" />
+<text  x="960.57" y="2047.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (10 samples, 0.01%)</title><rect x="1120.8" y="2005" width="0.1" height="15.0" fill="rgb(232,118,37)" rx="2" ry="2" />
+<text  x="1123.76" y="2015.5" ></text>
+</g>
+<g >
+<title>at::Tensor::has_names (154 samples, 0.22%)</title><rect x="708.1" y="1989" width="2.7" height="15.0" fill="rgb(246,131,3)" rx="2" ry="2" />
+<text  x="711.13" y="1999.5" ></text>
+</g>
+<g >
+<title>THPVariable_clear (37 samples, 0.05%)</title><rect x="34.4" y="2037" width="0.6" height="15.0" fill="rgb(217,199,19)" rx="2" ry="2" />
+<text  x="37.36" y="2047.5" ></text>
+</g>
+<g >
+<title>PyDict_SetItem (10 samples, 0.01%)</title><rect x="42.1" y="2021" width="0.2" height="15.0" fill="rgb(241,188,51)" rx="2" ry="2" />
+<text  x="45.13" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1717" width="0.3" height="15.0" fill="rgb(232,15,43)" rx="2" ry="2" />
+<text  x="70.00" y="1727.5" ></text>
+</g>
+<g >
+<title>lookdict_unicode_nodummy (40 samples, 0.06%)</title><rect x="1175.5" y="2037" width="0.6" height="15.0" fill="rgb(233,74,9)" rx="2" ry="2" />
+<text  x="1178.45" y="2047.5" ></text>
+</g>
+<g >
+<title>PyObject_GC_UnTrack (95 samples, 0.14%)</title><rect x="61.2" y="2005" width="1.6" height="15.0" fill="rgb(250,128,19)" rx="2" ry="2" />
+<text  x="64.17" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1925" width="0.2" height="15.0" fill="rgb(228,150,38)" rx="2" ry="2" />
+<text  x="39.51" y="1935.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1493" width="0.2" height="15.0" fill="rgb(250,82,11)" rx="2" ry="2" />
+<text  x="39.51" y="1503.5" ></text>
+</g>
+<g >
+<title>_int_free (1,271 samples, 1.84%)</title><rect x="315.5" y="2021" width="21.7" height="15.0" fill="rgb(245,117,1)" rx="2" ry="2" />
+<text  x="318.48" y="2031.5" >_..</text>
+</g>
+<g >
+<title>at::TensorIteratorConfig::add_output (57 samples, 0.08%)</title><rect x="583.9" y="1973" width="1.0" height="15.0" fill="rgb(253,155,40)" rx="2" ry="2" />
+<text  x="586.93" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="197" width="0.2" height="15.0" fill="rgb(244,178,27)" rx="2" ry="2" />
+<text  x="70.05" y="207.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (56 samples, 0.08%)</title><rect x="63.8" y="1829" width="1.0" height="15.0" fill="rgb(218,31,2)" rx="2" ry="2" />
+<text  x="66.82" y="1839.5" ></text>
+</g>
+<g >
+<title>__errno_location (207 samples, 0.30%)</title><rect x="830.8" y="1989" width="3.5" height="15.0" fill="rgb(215,19,27)" rx="2" ry="2" />
+<text  x="833.76" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="789" width="0.2" height="15.0" fill="rgb(226,110,36)" rx="2" ry="2" />
+<text  x="70.05" y="799.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="453" width="0.2" height="15.0" fill="rgb(214,227,51)" rx="2" ry="2" />
+<text  x="70.05" y="463.5" ></text>
+</g>
+<g >
+<title>lookdict_unicode_nodummy (21 samples, 0.03%)</title><rect x="758.7" y="2021" width="0.4" height="15.0" fill="rgb(245,61,54)" rx="2" ry="2" />
+<text  x="761.71" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::SmallVectorImpl&lt;long&gt;::operator= (92 samples, 0.13%)</title><rect x="214.5" y="2005" width="1.6" height="15.0" fill="rgb(243,101,25)" rx="2" ry="2" />
+<text  x="217.49" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1397" width="0.3" height="15.0" fill="rgb(233,36,23)" rx="2" ry="2" />
+<text  x="70.02" y="1407.5" ></text>
+</g>
+<g >
+<title>c10::TensorOptions::merge_in (134 samples, 0.19%)</title><rect x="1115.2" y="2021" width="2.2" height="15.0" fill="rgb(235,32,44)" rx="2" ry="2" />
+<text  x="1118.16" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1061" width="0.3" height="15.0" fill="rgb(206,181,48)" rx="2" ry="2" />
+<text  x="70.04" y="1071.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1189" width="0.3" height="15.0" fill="rgb(221,20,15)" rx="2" ry="2" />
+<text  x="70.04" y="1199.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1765" width="0.3" height="15.0" fill="rgb(253,170,12)" rx="2" ry="2" />
+<text  x="70.00" y="1775.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;int&gt;@plt (7 samples, 0.01%)</title><rect x="990.4" y="2021" width="0.1" height="15.0" fill="rgb(217,183,36)" rx="2" ry="2" />
+<text  x="993.40" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (111 samples, 0.16%)</title><rect x="211.6" y="2005" width="1.9" height="15.0" fill="rgb(207,75,17)" rx="2" ry="2" />
+<text  x="214.58" y="2015.5" ></text>
+</g>
+<g >
+<title>at::detail::make_tensor&lt;c10::TensorImpl, c10::intrusive_ptr&lt;c10::StorageImpl, c10::detail::intrusive_target_default_null_type&lt;c10::StorageImpl&gt; &gt;, c10::DispatchKey, caffe2::TypeMeta&amp;&gt; (480 samples, 0.70%)</title><rect x="146.4" y="1989" width="8.2" height="15.0" fill="rgb(226,124,2)" rx="2" ry="2" />
+<text  x="149.41" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (7 samples, 0.01%)</title><rect x="485.2" y="1941" width="0.1" height="15.0" fill="rgb(251,184,42)" rx="2" ry="2" />
+<text  x="488.19" y="1951.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (11 samples, 0.02%)</title><rect x="1120.6" y="2005" width="0.2" height="15.0" fill="rgb(217,192,0)" rx="2" ry="2" />
+<text  x="1123.57" y="2015.5" ></text>
+</g>
+<g >
+<title>torch::autograd::THPVariable_add (1,102 samples, 1.60%)</title><rect x="872.7" y="1989" width="18.8" height="15.0" fill="rgb(223,187,25)" rx="2" ry="2" />
+<text  x="875.66" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::release_resources (44 samples, 0.06%)</title><rect x="712.6" y="1989" width="0.8" height="15.0" fill="rgb(229,97,50)" rx="2" ry="2" />
+<text  x="715.61" y="1999.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (8 samples, 0.01%)</title><rect x="1172.7" y="1973" width="0.1" height="15.0" fill="rgb(220,128,39)" rx="2" ry="2" />
+<text  x="1175.69" y="1983.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;signed char&gt;@plt (15 samples, 0.02%)</title><rect x="195.4" y="1989" width="0.2" height="15.0" fill="rgb(220,192,24)" rx="2" ry="2" />
+<text  x="198.38" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::jit::SharedParserData::match (11 samples, 0.02%)</title><rect x="1188.8" y="2037" width="0.2" height="15.0" fill="rgb(246,75,0)" rx="2" ry="2" />
+<text  x="1191.80" y="2047.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;int&gt;@plt (21 samples, 0.03%)</title><rect x="1136.0" y="2021" width="0.4" height="15.0" fill="rgb(211,2,15)" rx="2" ry="2" />
+<text  x="1139.01" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1413" width="0.3" height="15.0" fill="rgb(232,11,5)" rx="2" ry="2" />
+<text  x="70.02" y="1423.5" ></text>
+</g>
+<g >
+<title>__memcpy_ssse3_back (87 samples, 0.13%)</title><rect x="218.0" y="1989" width="1.5" height="15.0" fill="rgb(226,131,8)" rx="2" ry="2" />
+<text  x="221.04" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1349" width="0.3" height="15.0" fill="rgb(211,30,23)" rx="2" ry="2" />
+<text  x="70.02" y="1359.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1333" width="0.3" height="15.0" fill="rgb(211,9,4)" rx="2" ry="2" />
+<text  x="70.02" y="1343.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::build (115 samples, 0.17%)</title><rect x="475.1" y="2021" width="1.9" height="15.0" fill="rgb(249,44,12)" rx="2" ry="2" />
+<text  x="478.07" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::typeMetaToScalarType (145 samples, 0.21%)</title><rect x="1103.6" y="2005" width="2.5" height="15.0" fill="rgb(209,58,2)" rx="2" ry="2" />
+<text  x="1106.64" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="277" width="0.2" height="15.0" fill="rgb(239,95,49)" rx="2" ry="2" />
+<text  x="70.05" y="287.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (55 samples, 0.08%)</title><rect x="63.8" y="1797" width="1.0" height="15.0" fill="rgb(234,25,30)" rx="2" ry="2" />
+<text  x="66.82" y="1807.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="56.2" y="2021" width="0.1" height="15.0" fill="rgb(248,215,1)" rx="2" ry="2" />
+<text  x="59.16" y="2031.5" ></text>
+</g>
+<g >
+<title>at::Tensor::layout (249 samples, 0.36%)</title><rect x="142.1" y="1989" width="4.2" height="15.0" fill="rgb(246,73,24)" rx="2" ry="2" />
+<text  x="145.07" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::Warning::set_warning_handler (251 samples, 0.36%)</title><rect x="841.8" y="1989" width="4.3" height="15.0" fill="rgb(233,15,23)" rx="2" ry="2" />
+<text  x="844.81" y="1999.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (13 samples, 0.02%)</title><rect x="843.6" y="1973" width="0.3" height="15.0" fill="rgb(224,169,41)" rx="2" ry="2" />
+<text  x="846.63" y="1983.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (14 samples, 0.02%)</title><rect x="233.1" y="1989" width="0.2" height="15.0" fill="rgb(210,218,9)" rx="2" ry="2" />
+<text  x="236.06" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::ProfiledCPUMemoryReporter::New (10 samples, 0.01%)</title><rect x="66.1" y="1909" width="0.1" height="15.0" fill="rgb(229,128,21)" rx="2" ry="2" />
+<text  x="69.06" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="853" width="0.2" height="15.0" fill="rgb(206,17,26)" rx="2" ry="2" />
+<text  x="70.05" y="863.5" ></text>
+</g>
+<g >
+<title>c10::UndefinedTensorImpl::~UndefinedTensorImpl (3,131 samples, 4.54%)</title><rect x="692.7" y="2021" width="53.5" height="15.0" fill="rgb(209,21,38)" rx="2" ry="2" />
+<text  x="695.73" y="2031.5" >c10::..</text>
+</g>
+<g >
+<title>PyObject_Free (173 samples, 0.25%)</title><rect x="11.2" y="2037" width="3.0" height="15.0" fill="rgb(229,209,30)" rx="2" ry="2" />
+<text  x="14.23" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (18 samples, 0.03%)</title><rect x="67.0" y="1909" width="0.3" height="15.0" fill="rgb(243,115,48)" rx="2" ry="2" />
+<text  x="69.98" y="1919.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1733" width="0.2" height="15.0" fill="rgb(241,107,49)" rx="2" ry="2" />
+<text  x="39.51" y="1743.5" ></text>
+</g>
+<g >
+<title>THPVariable_Wrap (215 samples, 0.31%)</title><rect x="481.3" y="1973" width="3.6" height="15.0" fill="rgb(227,5,54)" rx="2" ry="2" />
+<text  x="484.27" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::ThreadLocalDebugInfo::get@plt (18 samples, 0.03%)</title><rect x="1022.8" y="2037" width="0.3" height="15.0" fill="rgb(223,142,34)" rx="2" ry="2" />
+<text  x="1025.77" y="2047.5" ></text>
+</g>
+<g >
+<title>PyEval_SaveThread (113 samples, 0.16%)</title><rect x="56.5" y="2005" width="1.9" height="15.0" fill="rgb(225,225,20)" rx="2" ry="2" />
+<text  x="59.46" y="2015.5" ></text>
+</g>
+<g >
+<title>_PyMethodDef_RawFastCallKeywords (44 samples, 0.06%)</title><rect x="291.3" y="2021" width="0.7" height="15.0" fill="rgb(232,172,6)" rx="2" ry="2" />
+<text  x="294.28" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1221" width="0.3" height="15.0" fill="rgb(235,86,32)" rx="2" ry="2" />
+<text  x="70.04" y="1231.5" ></text>
+</g>
+<g >
+<title>malloc_consolidate (371 samples, 0.54%)</title><rect x="759.1" y="2021" width="6.3" height="15.0" fill="rgb(229,189,53)" rx="2" ry="2" />
+<text  x="762.08" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (12 samples, 0.02%)</title><rect x="36.5" y="2021" width="0.2" height="15.0" fill="rgb(252,36,51)" rx="2" ry="2" />
+<text  x="39.51" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::ThreadLocalDebugInfo::get (540 samples, 0.78%)</title><rect x="683.4" y="2021" width="9.2" height="15.0" fill="rgb(221,51,23)" rx="2" ry="2" />
+<text  x="686.38" y="2031.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (806 samples, 1.17%)</title><rect x="274.9" y="2021" width="13.7" height="15.0" fill="rgb(224,202,27)" rx="2" ry="2" />
+<text  x="277.85" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (21 samples, 0.03%)</title><rect x="552.1" y="1957" width="0.4" height="15.0" fill="rgb(231,90,43)" rx="2" ry="2" />
+<text  x="555.13" y="1967.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (6 samples, 0.01%)</title><rect x="485.3" y="1957" width="0.1" height="15.0" fill="rgb(221,118,27)" rx="2" ry="2" />
+<text  x="488.31" y="1967.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1317" width="0.1" height="15.0" fill="rgb(223,173,33)" rx="2" ry="2" />
+<text  x="39.51" y="1327.5" ></text>
+</g>
+<g >
+<title>_PyMethodDef_RawFastCallKeywords (4,798 samples, 6.95%)</title><rect x="812.1" y="2005" width="82.0" height="15.0" fill="rgb(254,218,41)" rx="2" ry="2" />
+<text  x="815.08" y="2015.5" >_PyMethod..</text>
+</g>
+<g >
+<title>[unknown] (10 samples, 0.01%)</title><rect x="66.5" y="1797" width="0.2" height="15.0" fill="rgb(243,179,13)" rx="2" ry="2" />
+<text  x="69.52" y="1807.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1957" width="0.2" height="15.0" fill="rgb(221,85,24)" rx="2" ry="2" />
+<text  x="39.51" y="1967.5" ></text>
+</g>
+<g >
+<title>c10::DispatchKeySet::has (8 samples, 0.01%)</title><rect x="747.3" y="2005" width="0.1" height="15.0" fill="rgb(225,59,7)" rx="2" ry="2" />
+<text  x="750.25" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::TensorIterator (5,809 samples, 8.41%)</title><rect x="375.8" y="2021" width="99.3" height="15.0" fill="rgb(245,24,24)" rx="2" ry="2" />
+<text  x="378.78" y="2031.5" >at::TensorIt..</text>
+</g>
+<g >
+<title>memcmp@plt (18 samples, 0.03%)</title><rect x="242.6" y="2005" width="0.3" height="15.0" fill="rgb(252,175,8)" rx="2" ry="2" />
+<text  x="245.60" y="2015.5" ></text>
+</g>
+<g >
+<title>__libc_memalign (29 samples, 0.04%)</title><rect x="1083.1" y="2005" width="0.5" height="15.0" fill="rgb(211,51,22)" rx="2" ry="2" />
+<text  x="1086.09" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (6 samples, 0.01%)</title><rect x="485.1" y="1765" width="0.1" height="15.0" fill="rgb(250,90,51)" rx="2" ry="2" />
+<text  x="488.08" y="1775.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::compute_contiguous (83 samples, 0.12%)</title><rect x="1076.0" y="1989" width="1.4" height="15.0" fill="rgb(217,210,51)" rx="2" ry="2" />
+<text  x="1079.00" y="1999.5" ></text>
+</g>
+<g >
+<title>__memmove_ssse3_back (10 samples, 0.01%)</title><rect x="314.0" y="2021" width="0.1" height="15.0" fill="rgb(242,182,53)" rx="2" ry="2" />
+<text  x="316.98" y="2031.5" ></text>
+</g>
+<g >
+<title>at::Tensor::device (105 samples, 0.15%)</title><rect x="117.3" y="2005" width="1.8" height="15.0" fill="rgb(242,55,8)" rx="2" ry="2" />
+<text  x="120.30" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;caffe2::detail::_Uninitialized&gt;@plt (54 samples, 0.08%)</title><rect x="425.7" y="1973" width="0.9" height="15.0" fill="rgb(249,153,25)" rx="2" ry="2" />
+<text  x="428.67" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::sizes (116 samples, 0.17%)</title><rect x="216.1" y="2005" width="1.9" height="15.0" fill="rgb(221,175,12)" rx="2" ry="2" />
+<text  x="219.06" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::ReportAndDelete (33 samples, 0.05%)</title><rect x="669.4" y="1989" width="0.6" height="15.0" fill="rgb(245,37,24)" rx="2" ry="2" />
+<text  x="672.42" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::empty_tensor_restride (203 samples, 0.29%)</title><rect x="1077.5" y="1989" width="3.5" height="15.0" fill="rgb(232,12,3)" rx="2" ry="2" />
+<text  x="1080.50" y="1999.5" ></text>
+</g>
+<g >
+<title>PyObject_Malloc (534 samples, 0.77%)</title><rect x="17.2" y="2037" width="9.1" height="15.0" fill="rgb(231,194,13)" rx="2" ry="2" />
+<text  x="20.20" y="2047.5" ></text>
+</g>
+<g >
+<title>torch::PyWarningHandler::PyWarningHandler@plt (8 samples, 0.01%)</title><rect x="858.0" y="1989" width="0.1" height="15.0" fill="rgb(251,214,48)" rx="2" ry="2" />
+<text  x="861.01" y="1999.5" ></text>
+</g>
+<g >
+<title>lookdict_unicode (163 samples, 0.24%)</title><rect x="36.8" y="2021" width="2.8" height="15.0" fill="rgb(209,211,25)" rx="2" ry="2" />
+<text  x="39.78" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1893" width="0.2" height="15.0" fill="rgb(247,67,47)" rx="2" ry="2" />
+<text  x="39.51" y="1903.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1237" width="0.1" height="15.0" fill="rgb(237,134,14)" rx="2" ry="2" />
+<text  x="39.51" y="1247.5" ></text>
+</g>
+<g >
+<title>c10::Warning::get_warning_handler (304 samples, 0.44%)</title><rect x="836.6" y="1989" width="5.2" height="15.0" fill="rgb(232,208,45)" rx="2" ry="2" />
+<text  x="839.56" y="1999.5" ></text>
+</g>
+<g >
+<title>at::GradMode::is_enabled@plt (16 samples, 0.02%)</title><rect x="555.1" y="1973" width="0.3" height="15.0" fill="rgb(234,119,44)" rx="2" ry="2" />
+<text  x="558.14" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (74 samples, 0.11%)</title><rect x="951.1" y="2021" width="1.3" height="15.0" fill="rgb(241,131,22)" rx="2" ry="2" />
+<text  x="954.14" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="725" width="0.2" height="15.0" fill="rgb(205,63,36)" rx="2" ry="2" />
+<text  x="70.05" y="735.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (23 samples, 0.03%)</title><rect x="686.8" y="2005" width="0.4" height="15.0" fill="rgb(247,99,43)" rx="2" ry="2" />
+<text  x="689.78" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (22 samples, 0.03%)</title><rect x="706.2" y="1989" width="0.3" height="15.0" fill="rgb(216,152,43)" rx="2" ry="2" />
+<text  x="709.17" y="1999.5" ></text>
+</g>
+<g >
+<title>subtype_dealloc (235 samples, 0.34%)</title><rect x="1184.8" y="2037" width="4.0" height="15.0" fill="rgb(252,196,43)" rx="2" ry="2" />
+<text  x="1187.75" y="2047.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (26 samples, 0.04%)</title><rect x="63.8" y="1685" width="0.5" height="15.0" fill="rgb(235,56,18)" rx="2" ry="2" />
+<text  x="66.82" y="1695.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;long&gt; (13 samples, 0.02%)</title><rect x="1107.1" y="2005" width="0.2" height="15.0" fill="rgb(244,219,50)" rx="2" ry="2" />
+<text  x="1110.07" y="2015.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::pyobj@plt (7 samples, 0.01%)</title><rect x="741.6" y="1989" width="0.1" height="15.0" fill="rgb(236,7,34)" rx="2" ry="2" />
+<text  x="744.58" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::Dispatcher::deregisterImpl_ (7 samples, 0.01%)</title><rect x="787.3" y="2005" width="0.2" height="15.0" fill="rgb(247,45,27)" rx="2" ry="2" />
+<text  x="790.33" y="2015.5" ></text>
+</g>
+<g >
+<title>operator delete@plt (75 samples, 0.11%)</title><rect x="738.3" y="1989" width="1.2" height="15.0" fill="rgb(236,138,52)" rx="2" ry="2" />
+<text  x="741.26" y="1999.5" ></text>
+</g>
+<g >
+<title>__memset_sse2 (137 samples, 0.20%)</title><rect x="924.2" y="2037" width="2.3" height="15.0" fill="rgb(253,119,5)" rx="2" ry="2" />
+<text  x="927.21" y="2047.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (30 samples, 0.04%)</title><rect x="609.3" y="1957" width="0.5" height="15.0" fill="rgb(245,27,50)" rx="2" ry="2" />
+<text  x="612.29" y="1967.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1941" width="0.2" height="15.0" fill="rgb(207,85,8)" rx="2" ry="2" />
+<text  x="39.51" y="1951.5" ></text>
+</g>
+<g >
+<title>c10::profiledCPUMemoryReporter@plt (8 samples, 0.01%)</title><rect x="680.3" y="1989" width="0.1" height="15.0" fill="rgb(216,72,42)" rx="2" ry="2" />
+<text  x="683.29" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (622 samples, 0.90%)</title><rect x="1081.2" y="2021" width="10.7" height="15.0" fill="rgb(214,218,36)" rx="2" ry="2" />
+<text  x="1084.23" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (88 samples, 0.13%)</title><rect x="926.6" y="2037" width="1.5" height="15.0" fill="rgb(240,201,19)" rx="2" ry="2" />
+<text  x="929.60" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="309" width="0.2" height="15.0" fill="rgb(220,107,17)" rx="2" ry="2" />
+<text  x="70.05" y="319.5" ></text>
+</g>
+<g >
+<title>c10::typeMetaToScalarType (199 samples, 0.29%)</title><rect x="1168.0" y="2037" width="3.4" height="15.0" fill="rgb(245,154,20)" rx="2" ry="2" />
+<text  x="1170.99" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1717" width="0.2" height="15.0" fill="rgb(239,163,49)" rx="2" ry="2" />
+<text  x="39.51" y="1727.5" ></text>
+</g>
+<g >
+<title>pybind11::detail::get_internals (305 samples, 0.44%)</title><rect x="257.6" y="2005" width="5.2" height="15.0" fill="rgb(218,93,7)" rx="2" ry="2" />
+<text  x="260.63" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (180 samples, 0.26%)</title><rect x="36.5" y="2037" width="3.1" height="15.0" fill="rgb(229,206,6)" rx="2" ry="2" />
+<text  x="39.49" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="933" width="0.3" height="15.0" fill="rgb(219,151,31)" rx="2" ry="2" />
+<text  x="70.04" y="943.5" ></text>
+</g>
+<g >
+<title>module_getattro (53 samples, 0.08%)</title><rect x="765.5" y="2021" width="0.9" height="15.0" fill="rgb(212,27,18)" rx="2" ry="2" />
+<text  x="768.47" y="2031.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (143 samples, 0.21%)</title><rect x="63.8" y="1973" width="2.5" height="15.0" fill="rgb(253,150,35)" rx="2" ry="2" />
+<text  x="66.82" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="613" width="0.2" height="15.0" fill="rgb(254,166,46)" rx="2" ry="2" />
+<text  x="70.05" y="623.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::~TensorIterator (487 samples, 0.71%)</title><rect x="203.0" y="2005" width="8.3" height="15.0" fill="rgb(251,2,11)" rx="2" ry="2" />
+<text  x="205.97" y="2015.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1893" width="0.1" height="15.0" fill="rgb(219,5,12)" rx="2" ry="2" />
+<text  x="488.08" y="1903.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (35 samples, 0.05%)</title><rect x="477.5" y="2021" width="0.6" height="15.0" fill="rgb(254,122,23)" rx="2" ry="2" />
+<text  x="480.48" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::autograd_meta (251 samples, 0.36%)</title><rect x="663.1" y="1957" width="4.3" height="15.0" fill="rgb(216,3,33)" rx="2" ry="2" />
+<text  x="666.15" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (18 samples, 0.03%)</title><rect x="485.5" y="1957" width="0.3" height="15.0" fill="rgb(217,200,35)" rx="2" ry="2" />
+<text  x="488.48" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1829" width="0.3" height="15.0" fill="rgb(232,87,7)" rx="2" ry="2" />
+<text  x="70.00" y="1839.5" ></text>
+</g>
+<g >
+<title>torch::PythonArgParser::check_deprecated (147 samples, 0.21%)</title><rect x="794.2" y="2021" width="2.5" height="15.0" fill="rgb(223,145,19)" rx="2" ry="2" />
+<text  x="797.22" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (20 samples, 0.03%)</title><rect x="65.7" y="1909" width="0.4" height="15.0" fill="rgb(212,33,51)" rx="2" ry="2" />
+<text  x="68.72" y="1919.5" ></text>
+</g>
+<g >
+<title>[unknown] (61 samples, 0.09%)</title><rect x="485.5" y="1973" width="1.0" height="15.0" fill="rgb(249,41,43)" rx="2" ry="2" />
+<text  x="488.48" y="1983.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1045" width="0.1" height="15.0" fill="rgb(206,42,18)" rx="2" ry="2" />
+<text  x="39.51" y="1055.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt;@plt (25 samples, 0.04%)</title><rect x="184.7" y="1989" width="0.4" height="15.0" fill="rgb(223,201,49)" rx="2" ry="2" />
+<text  x="187.68" y="1999.5" ></text>
+</g>
+<g >
+<title>_PyType_Lookup (105 samples, 0.15%)</title><rect x="915.6" y="2037" width="1.8" height="15.0" fill="rgb(212,119,38)" rx="2" ry="2" />
+<text  x="918.61" y="2047.5" ></text>
+</g>
+<g >
+<title>c10::impl::ExcludeDispatchKeyGuard::~ExcludeDispatchKeyGuard (224 samples, 0.32%)</title><rect x="633.1" y="1957" width="3.9" height="15.0" fill="rgb(243,98,29)" rx="2" ry="2" />
+<text  x="636.15" y="1967.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;c10::Half&gt; (8 samples, 0.01%)</title><rect x="1106.1" y="2005" width="0.2" height="15.0" fill="rgb(214,188,7)" rx="2" ry="2" />
+<text  x="1109.11" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::TensorImpl@plt (10 samples, 0.01%)</title><rect x="177.1" y="1989" width="0.2" height="15.0" fill="rgb(230,223,45)" rx="2" ry="2" />
+<text  x="180.11" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1365" width="0.2" height="15.0" fill="rgb(224,179,31)" rx="2" ry="2" />
+<text  x="39.51" y="1375.5" ></text>
+</g>
+<g >
+<title>_PyObject_Free.cold.382 (69 samples, 0.10%)</title><rect x="912.7" y="2037" width="1.1" height="15.0" fill="rgb(246,115,50)" rx="2" ry="2" />
+<text  x="915.67" y="2047.5" ></text>
+</g>
+<g >
+<title>__posix_memalign (220 samples, 0.32%)</title><rect x="1083.6" y="2005" width="3.7" height="15.0" fill="rgb(232,100,21)" rx="2" ry="2" />
+<text  x="1086.59" y="2015.5" ></text>
+</g>
+<g >
+<title>at::add@plt (11 samples, 0.02%)</title><rect x="633.0" y="1957" width="0.1" height="15.0" fill="rgb(242,222,3)" rx="2" ry="2" />
+<text  x="635.96" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="101" width="0.2" height="15.0" fill="rgb(212,222,54)" rx="2" ry="2" />
+<text  x="70.05" y="111.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::TensorImpl (631 samples, 0.91%)</title><rect x="165.5" y="1973" width="10.8" height="15.0" fill="rgb(250,196,54)" rx="2" ry="2" />
+<text  x="168.47" y="1983.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1157" width="0.1" height="15.0" fill="rgb(224,104,0)" rx="2" ry="2" />
+<text  x="39.51" y="1167.5" ></text>
+</g>
+<g >
+<title>[unknown] (21 samples, 0.03%)</title><rect x="65.1" y="1893" width="0.3" height="15.0" fill="rgb(235,52,54)" rx="2" ry="2" />
+<text  x="68.05" y="1903.5" ></text>
+</g>
+<g >
+<title>unicode_eq.lto_priv.287 (10 samples, 0.01%)</title><rect x="901.8" y="2021" width="0.2" height="15.0" fill="rgb(245,52,18)" rx="2" ry="2" />
+<text  x="904.82" y="2031.5" ></text>
+</g>
+<g >
+<title>torch::PyWarningHandler::~PyWarningHandler (44 samples, 0.06%)</title><rect x="890.7" y="1973" width="0.8" height="15.0" fill="rgb(249,39,12)" rx="2" ry="2" />
+<text  x="893.74" y="1983.5" ></text>
+</g>
+<g >
+<title>PyObject_Malloc (124 samples, 0.18%)</title><rect x="53.0" y="2021" width="2.1" height="15.0" fill="rgb(209,171,32)" rx="2" ry="2" />
+<text  x="55.99" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::Dispatcher::singleton (175 samples, 0.25%)</title><rect x="994.8" y="2037" width="3.0" height="15.0" fill="rgb(213,52,43)" rx="2" ry="2" />
+<text  x="997.83" y="2047.5" ></text>
+</g>
+<g >
+<title>c10::function_ref&lt;void  (733 samples, 1.06%)</title><rect x="219.5" y="1989" width="12.6" height="15.0" fill="rgb(236,170,0)" rx="2" ry="2" />
+<text  x="222.53" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (136 samples, 0.20%)</title><rect x="66.5" y="1989" width="2.3" height="15.0" fill="rgb(211,75,42)" rx="2" ry="2" />
+<text  x="69.52" y="1999.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::resize_outputs@plt (10 samples, 0.01%)</title><rect x="471.3" y="2005" width="0.2" height="15.0" fill="rgb(217,54,1)" rx="2" ry="2" />
+<text  x="474.32" y="2015.5" ></text>
+</g>
+<g >
+<title>at::native::(anonymous namespace)::add_kernel (1,368 samples, 1.98%)</title><rect x="518.1" y="1925" width="23.4" height="15.0" fill="rgb(219,132,44)" rx="2" ry="2" />
+<text  x="521.12" y="1935.5" >a..</text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1557" width="0.2" height="15.0" fill="rgb(244,66,45)" rx="2" ry="2" />
+<text  x="39.51" y="1567.5" ></text>
+</g>
+<g >
+<title>[libc10.so] (70 samples, 0.10%)</title><rect x="705.0" y="1989" width="1.2" height="15.0" fill="rgb(215,47,45)" rx="2" ry="2" />
+<text  x="707.97" y="1999.5" ></text>
+</g>
+<g >
+<title>PyEval_RestoreThread (388 samples, 0.56%)</title><rect x="823.4" y="1989" width="6.6" height="15.0" fill="rgb(227,34,15)" rx="2" ry="2" />
+<text  x="826.38" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::impl::process_memory_format (72 samples, 0.10%)</title><rect x="440.0" y="1989" width="1.3" height="15.0" fill="rgb(231,197,41)" rx="2" ry="2" />
+<text  x="443.03" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::impl::ExcludeDispatchKeyGuard::ExcludeDispatchKeyGuard (166 samples, 0.24%)</title><rect x="650.3" y="1941" width="2.8" height="15.0" fill="rgb(231,206,36)" rx="2" ry="2" />
+<text  x="653.29" y="1951.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="741" width="0.2" height="15.0" fill="rgb(235,13,32)" rx="2" ry="2" />
+<text  x="70.05" y="751.5" ></text>
+</g>
+<g >
+<title>at::native::empty_cpu (1,928 samples, 2.79%)</title><rect x="1048.3" y="2021" width="32.9" height="15.0" fill="rgb(248,172,23)" rx="2" ry="2" />
+<text  x="1051.27" y="2031.5" >at..</text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1365" width="0.3" height="15.0" fill="rgb(224,40,8)" rx="2" ry="2" />
+<text  x="70.02" y="1375.5" ></text>
+</g>
+<g >
+<title>at::native::add@plt (7 samples, 0.01%)</title><rect x="603.5" y="1973" width="0.2" height="15.0" fill="rgb(250,82,53)" rx="2" ry="2" />
+<text  x="606.55" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::VariableVersion::VersionCounter::~VersionCounter (65 samples, 0.09%)</title><rect x="721.2" y="1989" width="1.1" height="15.0" fill="rgb(233,6,20)" rx="2" ry="2" />
+<text  x="724.16" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1333" width="0.1" height="15.0" fill="rgb(212,134,23)" rx="2" ry="2" />
+<text  x="39.51" y="1343.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="85" width="0.2" height="15.0" fill="rgb(242,187,29)" rx="2" ry="2" />
+<text  x="70.05" y="95.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (7 samples, 0.01%)</title><rect x="747.1" y="2005" width="0.1" height="15.0" fill="rgb(245,64,13)" rx="2" ry="2" />
+<text  x="750.07" y="2015.5" ></text>
+</g>
+<g >
+<title>torch::autograd::compute_requires_grad&lt;at::Tensor const&amp;, at::Tensor const&amp;&gt; (114 samples, 0.17%)</title><rect x="656.5" y="1957" width="1.9" height="15.0" fill="rgb(223,82,40)" rx="2" ry="2" />
+<text  x="659.50" y="1967.5" ></text>
+</g>
+<g >
+<title>update_get_addr (89 samples, 0.13%)</title><rect x="1021.3" y="2021" width="1.5" height="15.0" fill="rgb(240,188,49)" rx="2" ry="2" />
+<text  x="1024.25" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1749" width="0.3" height="15.0" fill="rgb(240,42,49)" rx="2" ry="2" />
+<text  x="70.00" y="1759.5" ></text>
+</g>
+<g >
+<title>[unknown] (10 samples, 0.01%)</title><rect x="1172.7" y="1989" width="0.1" height="15.0" fill="rgb(238,179,49)" rx="2" ry="2" />
+<text  x="1175.67" y="1999.5" ></text>
+</g>
+<g >
+<title>_PyLong_New (141 samples, 0.20%)</title><rect x="288.9" y="2021" width="2.4" height="15.0" fill="rgb(249,137,27)" rx="2" ry="2" />
+<text  x="291.87" y="2031.5" ></text>
+</g>
+<g >
+<title>operator delete (141 samples, 0.20%)</title><rect x="735.9" y="1989" width="2.4" height="15.0" fill="rgb(254,107,23)" rx="2" ry="2" />
+<text  x="738.85" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::PyWarningHandler::PyWarningHandler (129 samples, 0.19%)</title><rect x="855.8" y="1989" width="2.2" height="15.0" fill="rgb(238,90,23)" rx="2" ry="2" />
+<text  x="858.80" y="1999.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;int&gt; (39 samples, 0.06%)</title><rect x="185.1" y="1989" width="0.7" height="15.0" fill="rgb(230,157,16)" rx="2" ry="2" />
+<text  x="188.11" y="1999.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (72 samples, 0.10%)</title><rect x="63.8" y="1845" width="1.3" height="15.0" fill="rgb(225,120,25)" rx="2" ry="2" />
+<text  x="66.82" y="1855.5" ></text>
+</g>
+<g >
+<title>__memcpy_ssse3_back (33 samples, 0.05%)</title><rect x="68.8" y="1989" width="0.6" height="15.0" fill="rgb(228,5,20)" rx="2" ry="2" />
+<text  x="71.85" y="1999.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1925" width="0.2" height="15.0" fill="rgb(247,210,30)" rx="2" ry="2" />
+<text  x="69.52" y="1935.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (43 samples, 0.06%)</title><rect x="1067.9" y="2005" width="0.7" height="15.0" fill="rgb(252,148,2)" rx="2" ry="2" />
+<text  x="1070.90" y="2015.5" ></text>
+</g>
+<g >
+<title>at::getCPUAllocator (69 samples, 0.10%)</title><rect x="1046.2" y="2021" width="1.2" height="15.0" fill="rgb(234,172,28)" rx="2" ry="2" />
+<text  x="1049.22" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (18 samples, 0.03%)</title><rect x="67.0" y="1893" width="0.3" height="15.0" fill="rgb(235,58,49)" rx="2" ry="2" />
+<text  x="69.98" y="1903.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1013" width="0.1" height="15.0" fill="rgb(253,157,47)" rx="2" ry="2" />
+<text  x="39.51" y="1023.5" ></text>
+</g>
+<g >
+<title>update_get_addr (16 samples, 0.02%)</title><rect x="748.3" y="1989" width="0.3" height="15.0" fill="rgb(212,156,14)" rx="2" ry="2" />
+<text  x="751.30" y="1999.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::~TensorIterator (13 samples, 0.02%)</title><rect x="498.8" y="1957" width="0.2" height="15.0" fill="rgb(224,166,18)" rx="2" ry="2" />
+<text  x="501.81" y="1967.5" ></text>
+</g>
+<g >
+<title>PyTuple_New (36 samples, 0.05%)</title><rect x="63.0" y="2005" width="0.7" height="15.0" fill="rgb(206,220,25)" rx="2" ry="2" />
+<text  x="66.04" y="2015.5" ></text>
+</g>
+<g >
+<title>_Py_IsFinalizing (66 samples, 0.10%)</title><rect x="312.6" y="2021" width="1.1" height="15.0" fill="rgb(250,134,48)" rx="2" ry="2" />
+<text  x="315.61" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (50,521 samples, 73.18%)</title><rect x="39.6" y="2037" width="863.5" height="15.0" fill="rgb(239,92,23)" rx="2" ry="2" />
+<text  x="42.62" y="2047.5" >[unknown]</text>
+</g>
+<g >
+<title>[unknown] (19 samples, 0.03%)</title><rect x="67.0" y="1957" width="0.3" height="15.0" fill="rgb(230,178,47)" rx="2" ry="2" />
+<text  x="69.98" y="1967.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_strides (311 samples, 0.45%)</title><rect x="963.7" y="2037" width="5.4" height="15.0" fill="rgb(212,64,13)" rx="2" ry="2" />
+<text  x="966.74" y="2047.5" ></text>
+</g>
+<g >
+<title>free@plt (82 samples, 0.12%)</title><rect x="734.5" y="1989" width="1.4" height="15.0" fill="rgb(249,110,19)" rx="2" ry="2" />
+<text  x="737.45" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::PyWarningHandler::~PyWarningHandler (116 samples, 0.17%)</title><rect x="858.1" y="1989" width="2.0" height="15.0" fill="rgb(226,185,16)" rx="2" ry="2" />
+<text  x="861.15" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::get_autograd_meta (76 samples, 0.11%)</title><rect x="667.5" y="1957" width="1.3" height="15.0" fill="rgb(241,181,4)" rx="2" ry="2" />
+<text  x="670.47" y="1967.5" ></text>
+</g>
+<g >
+<title>c10::ProfiledCPUMemoryReporter::Delete (57 samples, 0.08%)</title><rect x="479.6" y="2021" width="1.0" height="15.0" fill="rgb(249,21,27)" rx="2" ry="2" />
+<text  x="482.63" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (7 samples, 0.01%)</title><rect x="747.6" y="1989" width="0.1" height="15.0" fill="rgb(239,10,46)" rx="2" ry="2" />
+<text  x="750.61" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1125" width="0.3" height="15.0" fill="rgb(251,188,19)" rx="2" ry="2" />
+<text  x="70.04" y="1135.5" ></text>
+</g>
+<g >
+<title>c10::GetAllocator@plt (29 samples, 0.04%)</title><rect x="1094.6" y="2021" width="0.5" height="15.0" fill="rgb(217,174,33)" rx="2" ry="2" />
+<text  x="1097.59" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="117" width="0.2" height="15.0" fill="rgb(222,58,16)" rx="2" ry="2" />
+<text  x="70.05" y="127.5" ></text>
+</g>
+<g >
+<title>malloc (9 samples, 0.01%)</title><rect x="201.9" y="1989" width="0.2" height="15.0" fill="rgb(232,13,42)" rx="2" ry="2" />
+<text  x="204.94" y="1999.5" ></text>
+</g>
+<g >
+<title>at::native::add (49 samples, 0.07%)</title><rect x="602.7" y="1973" width="0.8" height="15.0" fill="rgb(230,75,43)" rx="2" ry="2" />
+<text  x="605.71" y="1983.5" ></text>
+</g>
+<g >
+<title>__libc_memalign (362 samples, 0.52%)</title><rect x="917.8" y="2037" width="6.2" height="15.0" fill="rgb(241,70,5)" rx="2" ry="2" />
+<text  x="920.83" y="2047.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::mark_outputs@plt (16 samples, 0.02%)</title><rect x="459.2" y="2005" width="0.3" height="15.0" fill="rgb(219,39,41)" rx="2" ry="2" />
+<text  x="462.24" y="2015.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1957" width="0.2" height="15.0" fill="rgb(222,177,54)" rx="2" ry="2" />
+<text  x="69.52" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="405" width="0.2" height="15.0" fill="rgb(218,65,4)" rx="2" ry="2" />
+<text  x="70.05" y="415.5" ></text>
+</g>
+<g >
+<title>c10::ProfiledCPUMemoryReporter::Delete@plt (9 samples, 0.01%)</title><rect x="671.1" y="1989" width="0.1" height="15.0" fill="rgb(239,172,45)" rx="2" ry="2" />
+<text  x="674.09" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::impl::detail::with_scattered_tensor_options_&lt;c10::CompileTimeFunctionPointer&lt;at::Tensor  (7,249 samples, 10.50%)</title><rect x="1023.1" y="2037" width="123.9" height="15.0" fill="rgb(254,47,17)" rx="2" ry="2" />
+<text  x="1026.08" y="2047.5" >c10::impl::deta..</text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1621" width="0.3" height="15.0" fill="rgb(236,127,50)" rx="2" ry="2" />
+<text  x="70.02" y="1631.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;short&gt;@plt (6 samples, 0.01%)</title><rect x="1137.0" y="2021" width="0.1" height="15.0" fill="rgb(215,103,30)" rx="2" ry="2" />
+<text  x="1140.00" y="2031.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (19 samples, 0.03%)</title><rect x="55.7" y="2005" width="0.4" height="15.0" fill="rgb(239,88,7)" rx="2" ry="2" />
+<text  x="58.74" y="2015.5" ></text>
+</g>
+<g >
+<title>at::OperandInfo::validate (119 samples, 0.17%)</title><rect x="140.0" y="1989" width="2.1" height="15.0" fill="rgb(218,47,42)" rx="2" ry="2" />
+<text  x="143.03" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::TensorOptions::merge_in (443 samples, 0.64%)</title><rect x="1005.6" y="2037" width="7.6" height="15.0" fill="rgb(236,70,49)" rx="2" ry="2" />
+<text  x="1008.61" y="2047.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;int&gt; (21 samples, 0.03%)</title><rect x="1135.6" y="2021" width="0.4" height="15.0" fill="rgb(236,77,37)" rx="2" ry="2" />
+<text  x="1138.65" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1093" width="0.1" height="15.0" fill="rgb(213,203,14)" rx="2" ry="2" />
+<text  x="39.51" y="1103.5" ></text>
+</g>
+<g >
+<title>PyObject_GenericGetAttr (48 samples, 0.07%)</title><rect x="51.3" y="2021" width="0.9" height="15.0" fill="rgb(214,167,1)" rx="2" ry="2" />
+<text  x="54.35" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::impl::tls_local_dispatch_key_set (732 samples, 1.06%)</title><rect x="605.6" y="1973" width="12.5" height="15.0" fill="rgb(233,58,49)" rx="2" ry="2" />
+<text  x="608.58" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::VariableVersion::VersionCounter::~VersionCounter (48 samples, 0.07%)</title><rect x="746.2" y="2021" width="0.9" height="15.0" fill="rgb(252,35,25)" rx="2" ry="2" />
+<text  x="749.25" y="2031.5" ></text>
+</g>
+<g >
+<title>free (192 samples, 0.28%)</title><rect x="731.2" y="1989" width="3.3" height="15.0" fill="rgb(209,147,39)" rx="2" ry="2" />
+<text  x="734.17" y="1999.5" ></text>
+</g>
+<g >
+<title>code_dealloc (19 samples, 0.03%)</title><rect x="751.0" y="2021" width="0.4" height="15.0" fill="rgb(240,92,21)" rx="2" ry="2" />
+<text  x="754.05" y="2031.5" ></text>
+</g>
+<g >
+<title>at::GradMode::is_enabled (539 samples, 0.78%)</title><rect x="545.9" y="1973" width="9.2" height="15.0" fill="rgb(205,26,38)" rx="2" ry="2" />
+<text  x="548.93" y="1983.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::binary_op (659 samples, 0.95%)</title><rect x="572.7" y="1973" width="11.2" height="15.0" fill="rgb(241,107,4)" rx="2" ry="2" />
+<text  x="575.66" y="1983.5" ></text>
+</g>
+<g >
+<title>c10::ThreadLocalDebugInfo::get@plt (7 samples, 0.01%)</title><rect x="692.6" y="2021" width="0.1" height="15.0" fill="rgb(239,117,1)" rx="2" ry="2" />
+<text  x="695.61" y="2031.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr@plt (15 samples, 0.02%)</title><rect x="315.1" y="2021" width="0.3" height="15.0" fill="rgb(213,24,36)" rx="2" ry="2" />
+<text  x="318.14" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="2005" width="0.2" height="15.0" fill="rgb(248,99,20)" rx="2" ry="2" />
+<text  x="39.51" y="2015.5" ></text>
+</g>
+<g >
+<title>r_object (20 samples, 0.03%)</title><rect x="1184.0" y="2037" width="0.3" height="15.0" fill="rgb(250,53,0)" rx="2" ry="2" />
+<text  x="1186.97" y="2047.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::resize_outputs (86 samples, 0.12%)</title><rect x="430.1" y="1989" width="1.5" height="15.0" fill="rgb(246,56,44)" rx="2" ry="2" />
+<text  x="433.10" y="1999.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (72 samples, 0.10%)</title><rect x="63.8" y="1877" width="1.3" height="15.0" fill="rgb(235,174,8)" rx="2" ry="2" />
+<text  x="66.82" y="1887.5" ></text>
+</g>
+<g >
+<title>lookdict_unicode (270 samples, 0.39%)</title><rect x="754.1" y="2021" width="4.6" height="15.0" fill="rgb(240,170,45)" rx="2" ry="2" />
+<text  x="757.09" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;int&gt; (11 samples, 0.02%)</title><rect x="1106.7" y="2005" width="0.2" height="15.0" fill="rgb(239,184,7)" rx="2" ry="2" />
+<text  x="1109.73" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1589" width="0.3" height="15.0" fill="rgb(233,213,38)" rx="2" ry="2" />
+<text  x="70.02" y="1599.5" ></text>
+</g>
+<g >
+<title>malloc (76 samples, 0.11%)</title><rect x="1143.7" y="2021" width="1.3" height="15.0" fill="rgb(249,48,37)" rx="2" ry="2" />
+<text  x="1146.73" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::numel (201 samples, 0.29%)</title><rect x="426.6" y="1989" width="3.4" height="15.0" fill="rgb(248,13,14)" rx="2" ry="2" />
+<text  x="429.60" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (18 samples, 0.03%)</title><rect x="67.0" y="1925" width="0.3" height="15.0" fill="rgb(247,211,36)" rx="2" ry="2" />
+<text  x="69.98" y="1935.5" ></text>
+</g>
+<g >
+<title>at::Tensor::has_names@plt (10 samples, 0.01%)</title><rect x="710.8" y="1989" width="0.1" height="15.0" fill="rgb(249,96,21)" rx="2" ry="2" />
+<text  x="713.76" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (100 samples, 0.14%)</title><rect x="1091.9" y="2021" width="1.7" height="15.0" fill="rgb(213,90,34)" rx="2" ry="2" />
+<text  x="1094.86" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1413" width="0.2" height="15.0" fill="rgb(223,171,30)" rx="2" ry="2" />
+<text  x="39.51" y="1423.5" ></text>
+</g>
+<g >
+<title>[unknown] (10 samples, 0.01%)</title><rect x="66.5" y="1781" width="0.2" height="15.0" fill="rgb(218,13,10)" rx="2" ry="2" />
+<text  x="69.52" y="1791.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::empty_tensor_restride (12 samples, 0.02%)</title><rect x="1098.3" y="2021" width="0.2" height="15.0" fill="rgb(210,158,52)" rx="2" ry="2" />
+<text  x="1101.34" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;long&gt;@plt (29 samples, 0.04%)</title><rect x="190.4" y="1989" width="0.5" height="15.0" fill="rgb(236,181,41)" rx="2" ry="2" />
+<text  x="193.42" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::autograd::utils::wrap (14 samples, 0.02%)</title><rect x="706.3" y="1973" width="0.2" height="15.0" fill="rgb(221,152,51)" rx="2" ry="2" />
+<text  x="709.30" y="1983.5" ></text>
+</g>
+<g >
+<title>torch::Library::_impl (6 samples, 0.01%)</title><rect x="270.5" y="1989" width="0.1" height="15.0" fill="rgb(224,160,50)" rx="2" ry="2" />
+<text  x="273.48" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::function_ref&lt;void  (534 samples, 0.77%)</title><rect x="222.9" y="1973" width="9.2" height="15.0" fill="rgb(241,155,48)" rx="2" ry="2" />
+<text  x="225.93" y="1983.5" ></text>
+</g>
+<g >
+<title>PyType_GenericAlloc (314 samples, 0.45%)</title><rect x="28.5" y="2037" width="5.4" height="15.0" fill="rgb(217,85,4)" rx="2" ry="2" />
+<text  x="31.53" y="2047.5" ></text>
+</g>
+<g >
+<title>pybind11::gil_scoped_release::gil_scoped_release (269 samples, 0.39%)</title><rect x="847.0" y="1989" width="4.6" height="15.0" fill="rgb(232,206,23)" rx="2" ry="2" />
+<text  x="850.00" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (12,548 samples, 18.18%)</title><rect x="56.3" y="2021" width="214.5" height="15.0" fill="rgb(206,126,15)" rx="2" ry="2" />
+<text  x="59.34" y="2031.5" >[unknown]</text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;long&gt; (9 samples, 0.01%)</title><rect x="990.5" y="2021" width="0.2" height="15.0" fill="rgb(216,68,11)" rx="2" ry="2" />
+<text  x="993.52" y="2031.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (6 samples, 0.01%)</title><rect x="485.1" y="1861" width="0.1" height="15.0" fill="rgb(211,96,39)" rx="2" ry="2" />
+<text  x="488.08" y="1871.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1189" width="0.1" height="15.0" fill="rgb(230,118,7)" rx="2" ry="2" />
+<text  x="39.51" y="1199.5" ></text>
+</g>
+<g >
+<title>_int_free (93 samples, 0.13%)</title><rect x="706.5" y="1989" width="1.6" height="15.0" fill="rgb(253,105,46)" rx="2" ry="2" />
+<text  x="709.54" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1973" width="0.2" height="15.0" fill="rgb(223,210,12)" rx="2" ry="2" />
+<text  x="39.51" y="1983.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1509" width="0.2" height="15.0" fill="rgb(224,65,32)" rx="2" ry="2" />
+<text  x="39.51" y="1519.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::cast_outputs (71 samples, 0.10%)</title><rect x="119.2" y="2005" width="1.2" height="15.0" fill="rgb(227,128,30)" rx="2" ry="2" />
+<text  x="122.23" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;long&gt;@plt (12 samples, 0.02%)</title><rect x="1136.7" y="2021" width="0.2" height="15.0" fill="rgb(214,91,8)" rx="2" ry="2" />
+<text  x="1139.67" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1301" width="0.3" height="15.0" fill="rgb(235,28,7)" rx="2" ry="2" />
+<text  x="70.02" y="1311.5" ></text>
+</g>
+<g >
+<title>c10::profiledCPUMemoryReporter (66 samples, 0.10%)</title><rect x="679.2" y="1989" width="1.1" height="15.0" fill="rgb(250,59,19)" rx="2" ry="2" />
+<text  x="682.16" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (10 samples, 0.01%)</title><rect x="64.0" y="1669" width="0.2" height="15.0" fill="rgb(209,18,29)" rx="2" ry="2" />
+<text  x="67.01" y="1679.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1573" width="0.3" height="15.0" fill="rgb(213,206,11)" rx="2" ry="2" />
+<text  x="70.02" y="1583.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1541" width="0.2" height="15.0" fill="rgb(205,210,27)" rx="2" ry="2" />
+<text  x="39.51" y="1551.5" ></text>
+</g>
+<g >
+<title>_int_free (28 samples, 0.04%)</title><rect x="668.8" y="1989" width="0.4" height="15.0" fill="rgb(254,144,43)" rx="2" ry="2" />
+<text  x="671.77" y="1999.5" ></text>
+</g>
+<g >
+<title>at::native::empty_cpu (111 samples, 0.16%)</title><rect x="992.6" y="2037" width="1.9" height="15.0" fill="rgb(253,12,53)" rx="2" ry="2" />
+<text  x="995.57" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1349" width="0.1" height="15.0" fill="rgb(207,39,5)" rx="2" ry="2" />
+<text  x="39.51" y="1359.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1029" width="0.1" height="15.0" fill="rgb(250,125,18)" rx="2" ry="2" />
+<text  x="39.51" y="1039.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1461" width="0.3" height="15.0" fill="rgb(233,126,36)" rx="2" ry="2" />
+<text  x="70.02" y="1471.5" ></text>
+</g>
+<g >
+<title>pthread_cond_signal@@GLIBC_2.3.2 (285 samples, 0.41%)</title><rect x="766.5" y="2021" width="4.9" height="15.0" fill="rgb(221,113,15)" rx="2" ry="2" />
+<text  x="769.50" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1173" width="0.3" height="15.0" fill="rgb(206,81,4)" rx="2" ry="2" />
+<text  x="70.04" y="1183.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;signed char&gt;@plt (10 samples, 0.01%)</title><rect x="1137.2" y="2021" width="0.2" height="15.0" fill="rgb(239,227,31)" rx="2" ry="2" />
+<text  x="1140.24" y="2031.5" ></text>
+</g>
+<g >
+<title>torch::PythonArgParser::raw_parse (886 samples, 1.28%)</title><rect x="796.9" y="2021" width="15.1" height="15.0" fill="rgb(250,200,4)" rx="2" ry="2" />
+<text  x="799.89" y="2031.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (109 samples, 0.16%)</title><rect x="843.9" y="1973" width="1.8" height="15.0" fill="rgb(218,106,11)" rx="2" ry="2" />
+<text  x="846.86" y="1983.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (72 samples, 0.10%)</title><rect x="63.8" y="1861" width="1.3" height="15.0" fill="rgb(213,70,23)" rx="2" ry="2" />
+<text  x="66.82" y="1871.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_names (225 samples, 0.33%)</title><rect x="444.7" y="2005" width="3.8" height="15.0" fill="rgb(218,155,41)" rx="2" ry="2" />
+<text  x="447.66" y="2015.5" ></text>
+</g>
+<g >
+<title>at::native::check_size_nonnegative (56 samples, 0.08%)</title><rect x="1066.9" y="2005" width="1.0" height="15.0" fill="rgb(209,216,40)" rx="2" ry="2" />
+<text  x="1069.94" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="437" width="0.2" height="15.0" fill="rgb(244,133,5)" rx="2" ry="2" />
+<text  x="70.05" y="447.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1477" width="0.2" height="15.0" fill="rgb(237,188,49)" rx="2" ry="2" />
+<text  x="39.51" y="1487.5" ></text>
+</g>
+<g >
+<title>at::native::(anonymous namespace)::add_kernel (473 samples, 0.69%)</title><rect x="531.4" y="1909" width="8.1" height="15.0" fill="rgb(241,117,51)" rx="2" ry="2" />
+<text  x="534.40" y="1919.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::populate_operands (10 samples, 0.01%)</title><rect x="669.2" y="1989" width="0.2" height="15.0" fill="rgb(245,226,25)" rx="2" ry="2" />
+<text  x="672.25" y="1999.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (13 samples, 0.02%)</title><rect x="233.3" y="1989" width="0.2" height="15.0" fill="rgb(233,167,42)" rx="2" ry="2" />
+<text  x="236.30" y="1999.5" ></text>
+</g>
+<g >
+<title>tupledealloc (92 samples, 0.13%)</title><rect x="895.3" y="2005" width="1.6" height="15.0" fill="rgb(249,73,31)" rx="2" ry="2" />
+<text  x="898.29" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;long&gt; (18 samples, 0.03%)</title><rect x="1136.4" y="2021" width="0.3" height="15.0" fill="rgb(221,204,20)" rx="2" ry="2" />
+<text  x="1139.37" y="2031.5" ></text>
+</g>
+<g >
+<title>std::_Function_handler&lt;void  (12 samples, 0.02%)</title><rect x="787.2" y="2021" width="0.3" height="15.0" fill="rgb(236,141,34)" rx="2" ry="2" />
+<text  x="790.25" y="2031.5" ></text>
+</g>
+<g >
+<title>THPVariable_NewWithVar (86 samples, 0.12%)</title><rect x="695.0" y="1989" width="1.5" height="15.0" fill="rgb(207,158,33)" rx="2" ry="2" />
+<text  x="698.00" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1205" width="0.3" height="15.0" fill="rgb(248,172,40)" rx="2" ry="2" />
+<text  x="70.04" y="1215.5" ></text>
+</g>
+<g >
+<title>dlopen_doit (77 samples, 0.11%)</title><rect x="752.3" y="2021" width="1.3" height="15.0" fill="rgb(230,115,0)" rx="2" ry="2" />
+<text  x="755.30" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::alloc_cpu@plt (24 samples, 0.03%)</title><rect x="1119.6" y="2021" width="0.4" height="15.0" fill="rgb(247,37,53)" rx="2" ry="2" />
+<text  x="1122.56" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::~TensorIterator (9 samples, 0.01%)</title><rect x="477.1" y="2021" width="0.2" height="15.0" fill="rgb(238,189,44)" rx="2" ry="2" />
+<text  x="480.14" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::impl::ExcludeDispatchKeyGuard::ExcludeDispatchKeyGuard (69 samples, 0.10%)</title><rect x="747.4" y="2005" width="1.2" height="15.0" fill="rgb(244,176,37)" rx="2" ry="2" />
+<text  x="750.39" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (10 samples, 0.01%)</title><rect x="65.5" y="1893" width="0.2" height="15.0" fill="rgb(222,225,13)" rx="2" ry="2" />
+<text  x="68.55" y="1903.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;c10::Half&gt;@plt (12 samples, 0.02%)</title><rect x="1106.3" y="2005" width="0.2" height="15.0" fill="rgb(238,138,32)" rx="2" ry="2" />
+<text  x="1109.25" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="357" width="0.2" height="15.0" fill="rgb(211,61,43)" rx="2" ry="2" />
+<text  x="70.05" y="367.5" ></text>
+</g>
+<g >
+<title>PyType_GenericAlloc (133 samples, 0.19%)</title><rect x="692.7" y="1989" width="2.3" height="15.0" fill="rgb(245,96,37)" rx="2" ry="2" />
+<text  x="695.73" y="1999.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr_slow (42 samples, 0.06%)</title><rect x="887.6" y="1957" width="0.7" height="15.0" fill="rgb(252,13,53)" rx="2" ry="2" />
+<text  x="890.58" y="1967.5" ></text>
+</g>
+<g >
+<title>tupledealloc (17 samples, 0.02%)</title><rect x="1189.0" y="2037" width="0.3" height="15.0" fill="rgb(237,165,38)" rx="2" ry="2" />
+<text  x="1192.03" y="2047.5" ></text>
+</g>
+<g >
+<title>PyObject_GC_UnTrack@plt (18 samples, 0.03%)</title><rect x="16.8" y="2037" width="0.3" height="15.0" fill="rgb(209,11,41)" rx="2" ry="2" />
+<text  x="19.82" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (6 samples, 0.01%)</title><rect x="485.1" y="1797" width="0.1" height="15.0" fill="rgb(226,34,54)" rx="2" ry="2" />
+<text  x="488.08" y="1807.5" ></text>
+</g>
+<g >
+<title>malloc_consolidate (45 samples, 0.07%)</title><rect x="682.6" y="1989" width="0.8" height="15.0" fill="rgb(218,229,28)" rx="2" ry="2" />
+<text  x="685.61" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::autograd::VariableType::add_Tensor (19 samples, 0.03%)</title><rect x="658.5" y="1973" width="0.4" height="15.0" fill="rgb(251,158,27)" rx="2" ry="2" />
+<text  x="661.55" y="1983.5" ></text>
+</g>
+<g >
+<title>update_get_addr (38 samples, 0.06%)</title><rect x="841.1" y="1973" width="0.7" height="15.0" fill="rgb(236,185,3)" rx="2" ry="2" />
+<text  x="844.11" y="1983.5" ></text>
+</g>
+<g >
+<title>at::OperandInfo::options (510 samples, 0.74%)</title><rect x="945.9" y="2037" width="8.8" height="15.0" fill="rgb(222,97,44)" rx="2" ry="2" />
+<text  x="948.95" y="2047.5" ></text>
+</g>
+<g >
+<title>c10::DefaultCPUAllocator::allocate (9 samples, 0.01%)</title><rect x="64.3" y="1749" width="0.1" height="15.0" fill="rgb(236,57,28)" rx="2" ry="2" />
+<text  x="67.28" y="1759.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (143 samples, 0.21%)</title><rect x="63.8" y="1925" width="2.5" height="15.0" fill="rgb(237,39,1)" rx="2" ry="2" />
+<text  x="66.82" y="1935.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (8 samples, 0.01%)</title><rect x="485.6" y="1941" width="0.1" height="15.0" fill="rgb(215,45,16)" rx="2" ry="2" />
+<text  x="488.61" y="1951.5" ></text>
+</g>
+<g >
+<title>__memmove_ssse3_back (8 samples, 0.01%)</title><rect x="924.1" y="2037" width="0.1" height="15.0" fill="rgb(227,136,35)" rx="2" ry="2" />
+<text  x="927.07" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1877" width="0.2" height="15.0" fill="rgb(233,35,32)" rx="2" ry="2" />
+<text  x="39.51" y="1887.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt;@plt (7 samples, 0.01%)</title><rect x="954.5" y="2021" width="0.2" height="15.0" fill="rgb(238,219,53)" rx="2" ry="2" />
+<text  x="957.54" y="2031.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1381" width="0.2" height="15.0" fill="rgb(234,105,5)" rx="2" ry="2" />
+<text  x="39.51" y="1391.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::empty_tensor_restride (216 samples, 0.31%)</title><rect x="1069.9" y="2005" width="3.7" height="15.0" fill="rgb(224,109,18)" rx="2" ry="2" />
+<text  x="1072.91" y="2015.5" ></text>
+</g>
+<g >
+<title>PyTuple_New (125 samples, 0.18%)</title><rect x="26.4" y="2037" width="2.1" height="15.0" fill="rgb(213,224,46)" rx="2" ry="2" />
+<text  x="29.39" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (13 samples, 0.02%)</title><rect x="67.1" y="69" width="0.2" height="15.0" fill="rgb(232,204,7)" rx="2" ry="2" />
+<text  x="70.07" y="79.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1845" width="0.3" height="15.0" fill="rgb(252,172,46)" rx="2" ry="2" />
+<text  x="70.00" y="1855.5" ></text>
+</g>
+<g >
+<title>c10::function_ref&lt;void  (19 samples, 0.03%)</title><rect x="74.3" y="1989" width="0.3" height="15.0" fill="rgb(205,37,7)" rx="2" ry="2" />
+<text  x="77.28" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="773" width="0.2" height="15.0" fill="rgb(217,132,38)" rx="2" ry="2" />
+<text  x="70.05" y="783.5" ></text>
+</g>
+<g >
+<title>[unknown] (7 samples, 0.01%)</title><rect x="66.7" y="1957" width="0.1" height="15.0" fill="rgb(214,42,23)" rx="2" ry="2" />
+<text  x="69.69" y="1967.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (180 samples, 0.26%)</title><rect x="154.6" y="1989" width="3.1" height="15.0" fill="rgb(247,20,17)" rx="2" ry="2" />
+<text  x="157.61" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="165" width="0.2" height="15.0" fill="rgb(228,66,10)" rx="2" ry="2" />
+<text  x="70.05" y="175.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::numel@plt (6 samples, 0.01%)</title><rect x="529.5" y="1893" width="0.1" height="15.0" fill="rgb(240,198,47)" rx="2" ry="2" />
+<text  x="532.45" y="1903.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_shape (198 samples, 0.29%)</title><rect x="448.6" y="2005" width="3.4" height="15.0" fill="rgb(249,29,40)" rx="2" ry="2" />
+<text  x="451.58" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1509" width="0.3" height="15.0" fill="rgb(240,185,44)" rx="2" ry="2" />
+<text  x="70.02" y="1519.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (75 samples, 0.11%)</title><rect x="434.8" y="1989" width="1.3" height="15.0" fill="rgb(219,204,8)" rx="2" ry="2" />
+<text  x="437.78" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::NUMAMove (12 samples, 0.02%)</title><rect x="1087.9" y="2005" width="0.2" height="15.0" fill="rgb(253,120,14)" rx="2" ry="2" />
+<text  x="1090.91" y="2015.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (72 samples, 0.10%)</title><rect x="63.8" y="1893" width="1.3" height="15.0" fill="rgb(243,46,41)" rx="2" ry="2" />
+<text  x="66.82" y="1903.5" ></text>
+</g>
+<g >
+<title>c10::impl::OperatorEntry::computeDispatchTableEntry (11 samples, 0.02%)</title><rect x="236.1" y="2005" width="0.2" height="15.0" fill="rgb(250,74,24)" rx="2" ry="2" />
+<text  x="239.07" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1477" width="0.3" height="15.0" fill="rgb(243,145,2)" rx="2" ry="2" />
+<text  x="70.02" y="1487.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="213" width="0.2" height="15.0" fill="rgb(254,82,20)" rx="2" ry="2" />
+<text  x="70.05" y="223.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="981" width="0.1" height="15.0" fill="rgb(208,140,1)" rx="2" ry="2" />
+<text  x="39.51" y="991.5" ></text>
+</g>
+<g >
+<title>operator new (37 samples, 0.05%)</title><rect x="176.4" y="1973" width="0.6" height="15.0" fill="rgb(238,177,18)" rx="2" ry="2" />
+<text  x="179.39" y="1983.5" ></text>
+</g>
+<g >
+<title>torch::autograd::compute_requires_grad&lt;at::Tensor const&amp;, at::Tensor const&amp;&gt; (12 samples, 0.02%)</title><rect x="658.9" y="1973" width="0.2" height="15.0" fill="rgb(205,78,35)" rx="2" ry="2" />
+<text  x="661.87" y="1983.5" ></text>
+</g>
+<g >
+<title>at::detail::make_tensor&lt;c10::TensorImpl, c10::intrusive_ptr&lt;c10::StorageImpl, c10::detail::intrusive_target_default_null_type&lt;c10::StorageImpl&gt; &gt;, c10::DispatchKey, caffe2::TypeMeta&amp;&gt; (59 samples, 0.09%)</title><rect x="1045.2" y="2021" width="1.0" height="15.0" fill="rgb(245,146,17)" rx="2" ry="2" />
+<text  x="1048.22" y="2031.5" ></text>
+</g>
+<g >
+<title>r_long (8 samples, 0.01%)</title><rect x="1183.8" y="2037" width="0.2" height="15.0" fill="rgb(211,125,48)" rx="2" ry="2" />
+<text  x="1186.83" y="2047.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_fast_setup_type (159 samples, 0.23%)</title><rect x="954.9" y="2037" width="2.7" height="15.0" fill="rgb(214,111,21)" rx="2" ry="2" />
+<text  x="957.85" y="2047.5" ></text>
+</g>
+<g >
+<title>memcpy@plt (26 samples, 0.04%)</title><rect x="242.9" y="2005" width="0.5" height="15.0" fill="rgb(236,196,41)" rx="2" ry="2" />
+<text  x="245.91" y="2015.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalCodeWithName (8 samples, 0.01%)</title><rect x="274.7" y="2021" width="0.2" height="15.0" fill="rgb(220,47,15)" rx="2" ry="2" />
+<text  x="277.72" y="2031.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::populate_operands (4,531 samples, 6.56%)</title><rect x="125.2" y="2005" width="77.5" height="15.0" fill="rgb(234,114,17)" rx="2" ry="2" />
+<text  x="128.23" y="2015.5" >at::Tens..</text>
+</g>
+<g >
+<title>__tls_get_addr@plt (9 samples, 0.01%)</title><rect x="834.8" y="1989" width="0.2" height="15.0" fill="rgb(239,85,42)" rx="2" ry="2" />
+<text  x="837.82" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1141" width="0.3" height="15.0" fill="rgb(243,102,25)" rx="2" ry="2" />
+<text  x="70.04" y="1151.5" ></text>
+</g>
+<g >
+<title>__memcpy_ssse3_back (621 samples, 0.90%)</title><rect x="104.4" y="2005" width="10.6" height="15.0" fill="rgb(209,205,13)" rx="2" ry="2" />
+<text  x="107.42" y="2015.5" ></text>
+</g>
+<g >
+<title>subtype_dealloc (228 samples, 0.33%)</title><rect x="266.3" y="2005" width="3.9" height="15.0" fill="rgb(231,225,38)" rx="2" ry="2" />
+<text  x="269.34" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::populate_operands@plt (21 samples, 0.03%)</title><rect x="466.5" y="2005" width="0.3" height="15.0" fill="rgb(224,225,36)" rx="2" ry="2" />
+<text  x="469.47" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.01%)</title><rect x="36.5" y="1445" width="0.2" height="15.0" fill="rgb(240,55,18)" rx="2" ry="2" />
+<text  x="39.51" y="1455.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1653" width="0.2" height="15.0" fill="rgb(250,39,19)" rx="2" ry="2" />
+<text  x="39.51" y="1663.5" ></text>
+</g>
+<g >
+<title>PyThreadState_Swap (8 samples, 0.01%)</title><rect x="55.2" y="2021" width="0.1" height="15.0" fill="rgb(252,53,44)" rx="2" ry="2" />
+<text  x="58.17" y="2031.5" ></text>
+</g>
+<g >
+<title>PyDict_GetItem (137 samples, 0.20%)</title><rect x="39.8" y="2021" width="2.3" height="15.0" fill="rgb(245,184,11)" rx="2" ry="2" />
+<text  x="42.77" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::intrusive_ptr&lt;c10::TensorImpl, c10::UndefinedTensorImpl&gt;::reset_ (475 samples, 0.69%)</title><rect x="722.3" y="1989" width="8.1" height="15.0" fill="rgb(231,189,29)" rx="2" ry="2" />
+<text  x="725.27" y="1999.5" ></text>
+</g>
+<g >
+<title>_int_malloc (159 samples, 0.23%)</title><rect x="929.6" y="2037" width="2.7" height="15.0" fill="rgb(230,100,7)" rx="2" ry="2" />
+<text  x="932.57" y="2047.5" ></text>
+</g>
+<g >
+<title>_PyEval_EvalFrameDefault (93 samples, 0.13%)</title><rect x="907.8" y="2037" width="1.6" height="15.0" fill="rgb(206,193,3)" rx="2" ry="2" />
+<text  x="910.85" y="2047.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::compute_mem_overlaps (67 samples, 0.10%)</title><rect x="443.3" y="2005" width="1.1" height="15.0" fill="rgb(236,13,28)" rx="2" ry="2" />
+<text  x="446.26" y="2015.5" ></text>
+</g>
+<g >
+<title>_PyStack_AsTuple (45 samples, 0.07%)</title><rect x="97.5" y="2005" width="0.8" height="15.0" fill="rgb(239,102,20)" rx="2" ry="2" />
+<text  x="100.53" y="2015.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::mark_outputs (19 samples, 0.03%)</title><rect x="969.1" y="2037" width="0.3" height="15.0" fill="rgb(242,41,12)" rx="2" ry="2" />
+<text  x="972.07" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="341" width="0.2" height="15.0" fill="rgb(226,107,11)" rx="2" ry="2" />
+<text  x="70.05" y="351.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;int&gt;@plt (9 samples, 0.01%)</title><rect x="1106.9" y="2005" width="0.2" height="15.0" fill="rgb(230,55,4)" rx="2" ry="2" />
+<text  x="1109.92" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;unsigned char&gt; (10 samples, 0.01%)</title><rect x="1108.1" y="2005" width="0.2" height="15.0" fill="rgb(219,68,6)" rx="2" ry="2" />
+<text  x="1111.11" y="2015.5" ></text>
+</g>
+<g >
+<title>torch::FunctionParameter::check (18 samples, 0.03%)</title><rect x="799.1" y="2005" width="0.4" height="15.0" fill="rgb(215,229,26)" rx="2" ry="2" />
+<text  x="802.14" y="2015.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::try_get_grad_accumulator (160 samples, 0.23%)</title><rect x="743.5" y="1989" width="2.7" height="15.0" fill="rgb(225,92,3)" rx="2" ry="2" />
+<text  x="746.51" y="1999.5" ></text>
+</g>
+<g >
+<title>torch::autograd::VariableType::add_Tensor (841 samples, 1.22%)</title><rect x="642.1" y="1957" width="14.4" height="15.0" fill="rgb(252,98,36)" rx="2" ry="2" />
+<text  x="645.09" y="1967.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (143 samples, 0.21%)</title><rect x="63.8" y="1941" width="2.5" height="15.0" fill="rgb(234,218,49)" rx="2" ry="2" />
+<text  x="66.82" y="1951.5" ></text>
+</g>
+<g >
+<title>strcmp (14 samples, 0.02%)</title><rect x="788.4" y="2021" width="0.2" height="15.0" fill="rgb(219,49,53)" rx="2" ry="2" />
+<text  x="791.36" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::function_ref&lt;void  (826 samples, 1.20%)</title><rect x="218.0" y="2005" width="14.2" height="15.0" fill="rgb(214,36,29)" rx="2" ry="2" />
+<text  x="221.04" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (8 samples, 0.01%)</title><rect x="485.5" y="1941" width="0.1" height="15.0" fill="rgb(219,60,54)" rx="2" ry="2" />
+<text  x="488.48" y="1951.5" ></text>
+</g>
+<g >
+<title>update_get_addr (57 samples, 0.08%)</title><rect x="1123.6" y="2005" width="1.0" height="15.0" fill="rgb(221,126,40)" rx="2" ry="2" />
+<text  x="1126.60" y="2015.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;short&gt; (7 samples, 0.01%)</title><rect x="1136.9" y="2021" width="0.1" height="15.0" fill="rgb(209,100,51)" rx="2" ry="2" />
+<text  x="1139.88" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::Device::validate (265 samples, 0.38%)</title><rect x="404.9" y="1973" width="4.5" height="15.0" fill="rgb(224,67,1)" rx="2" ry="2" />
+<text  x="407.91" y="1983.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1253" width="0.1" height="15.0" fill="rgb(238,118,39)" rx="2" ry="2" />
+<text  x="39.51" y="1263.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="837" width="0.2" height="15.0" fill="rgb(222,37,53)" rx="2" ry="2" />
+<text  x="70.05" y="847.5" ></text>
+</g>
+<g >
+<title>collect (23 samples, 0.03%)</title><rect x="751.4" y="2021" width="0.4" height="15.0" fill="rgb(224,17,15)" rx="2" ry="2" />
+<text  x="754.39" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (7 samples, 0.01%)</title><rect x="66.7" y="1941" width="0.1" height="15.0" fill="rgb(212,202,34)" rx="2" ry="2" />
+<text  x="69.69" y="1951.5" ></text>
+</g>
+<g >
+<title>at::Tensor::add@plt (6 samples, 0.01%)</title><rect x="836.5" y="1989" width="0.1" height="15.0" fill="rgb(223,211,47)" rx="2" ry="2" />
+<text  x="839.46" y="1999.5" ></text>
+</g>
+<g >
+<title>at::native::alpha_check (101 samples, 0.15%)</title><rect x="541.5" y="1941" width="1.7" height="15.0" fill="rgb(239,22,5)" rx="2" ry="2" />
+<text  x="544.50" y="1951.5" ></text>
+</g>
+<g >
+<title>operator new@plt (11 samples, 0.02%)</title><rect x="1146.8" y="2021" width="0.2" height="15.0" fill="rgb(233,21,29)" rx="2" ry="2" />
+<text  x="1149.79" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::memoryProfilingEnabled@plt (17 samples, 0.02%)</title><rect x="1167.6" y="2037" width="0.2" height="15.0" fill="rgb(247,60,10)" rx="2" ry="2" />
+<text  x="1170.56" y="2047.5" ></text>
+</g>
+<g >
+<title>PyEval_RestoreThread@plt (44 samples, 0.06%)</title><rect x="830.0" y="1989" width="0.8" height="15.0" fill="rgb(254,153,46)" rx="2" ry="2" />
+<text  x="833.01" y="1999.5" ></text>
+</g>
+<g >
+<title>pthread_cond_signal@@GLIBC_2.3.2 (356 samples, 0.52%)</title><rect x="243.4" y="2005" width="6.1" height="15.0" fill="rgb(219,21,28)" rx="2" ry="2" />
+<text  x="246.42" y="2015.5" ></text>
+</g>
+<g >
+<title>torch::autograd::THPVariable_add (4,960 samples, 7.18%)</title><rect x="812.1" y="2021" width="84.8" height="15.0" fill="rgb(207,155,37)" rx="2" ry="2" />
+<text  x="815.08" y="2031.5" >torch::au..</text>
+</g>
+<g >
+<title>at::empty (1,151 samples, 1.67%)</title><rect x="972.9" y="2037" width="19.7" height="15.0" fill="rgb(216,89,17)" rx="2" ry="2" />
+<text  x="975.88" y="2047.5" ></text>
+</g>
+<g >
+<title>PyType_Ready (7 samples, 0.01%)</title><rect x="55.4" y="2021" width="0.1" height="15.0" fill="rgb(244,120,49)" rx="2" ry="2" />
+<text  x="58.43" y="2031.5" ></text>
+</g>
+<g >
+<title>update_get_addr (31 samples, 0.04%)</title><rect x="235.5" y="1989" width="0.6" height="15.0" fill="rgb(216,126,38)" rx="2" ry="2" />
+<text  x="238.53" y="1999.5" ></text>
+</g>
+<g >
+<title>at::CPUType::add_Tensor (3,073 samples, 4.45%)</title><rect x="493.4" y="1973" width="52.5" height="15.0" fill="rgb(223,182,1)" rx="2" ry="2" />
+<text  x="496.41" y="1983.5" >at::C..</text>
+</g>
+<g >
+<title>_dl_update_slotinfo (319 samples, 0.46%)</title><rect x="609.8" y="1957" width="5.5" height="15.0" fill="rgb(218,155,38)" rx="2" ry="2" />
+<text  x="612.80" y="1967.5" ></text>
+</g>
+<g >
+<title>torch::autograd::impl::try_get_grad_accumulator (392 samples, 0.57%)</title><rect x="662.1" y="1973" width="6.7" height="15.0" fill="rgb(214,195,1)" rx="2" ry="2" />
+<text  x="665.07" y="1983.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (10 samples, 0.01%)</title><rect x="66.5" y="1845" width="0.2" height="15.0" fill="rgb(213,195,14)" rx="2" ry="2" />
+<text  x="69.52" y="1855.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="917" width="0.2" height="15.0" fill="rgb(224,186,2)" rx="2" ry="2" />
+<text  x="70.05" y="927.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="325" width="0.2" height="15.0" fill="rgb(249,162,41)" rx="2" ry="2" />
+<text  x="70.05" y="335.5" ></text>
+</g>
+<g >
+<title>at::TensorIterator::get_data_ptrs (189 samples, 0.27%)</title><rect x="69.4" y="1989" width="3.2" height="15.0" fill="rgb(211,104,42)" rx="2" ry="2" />
+<text  x="72.41" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="901" width="0.2" height="15.0" fill="rgb(231,26,52)" rx="2" ry="2" />
+<text  x="70.05" y="911.5" ></text>
+</g>
+<g >
+<title>c10::ProfiledCPUMemoryReporter::New (15 samples, 0.02%)</title><rect x="74.0" y="1989" width="0.3" height="15.0" fill="rgb(250,197,34)" rx="2" ry="2" />
+<text  x="77.03" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::intrusive_ptr_target::release_resources (46 samples, 0.07%)</title><rect x="730.4" y="1989" width="0.8" height="15.0" fill="rgb(220,121,44)" rx="2" ry="2" />
+<text  x="733.38" y="1999.5" ></text>
+</g>
+<g >
+<title>[unknown] (17 samples, 0.02%)</title><rect x="67.0" y="1685" width="0.3" height="15.0" fill="rgb(214,174,32)" rx="2" ry="2" />
+<text  x="70.00" y="1695.5" ></text>
+</g>
+<g >
+<title>operator new (27 samples, 0.04%)</title><rect x="202.2" y="1989" width="0.4" height="15.0" fill="rgb(218,81,4)" rx="2" ry="2" />
+<text  x="205.16" y="1999.5" ></text>
+</g>
+<g >
+<title>at::native::alpha_check (158 samples, 0.23%)</title><rect x="543.2" y="1957" width="2.7" height="15.0" fill="rgb(219,53,13)" rx="2" ry="2" />
+<text  x="546.23" y="1967.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1621" width="0.2" height="15.0" fill="rgb(241,12,8)" rx="2" ry="2" />
+<text  x="39.51" y="1631.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="181" width="0.2" height="15.0" fill="rgb(232,77,16)" rx="2" ry="2" />
+<text  x="70.05" y="191.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (160 samples, 0.23%)</title><rect x="1149.9" y="2021" width="2.8" height="15.0" fill="rgb(250,203,44)" rx="2" ry="2" />
+<text  x="1152.94" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1541" width="0.3" height="15.0" fill="rgb(246,64,28)" rx="2" ry="2" />
+<text  x="70.02" y="1551.5" ></text>
+</g>
+<g >
+<title>update_get_addr (22 samples, 0.03%)</title><rect x="845.7" y="1973" width="0.4" height="15.0" fill="rgb(210,13,13)" rx="2" ry="2" />
+<text  x="848.72" y="1983.5" ></text>
+</g>
+<g >
+<title>at::native::check_size_nonnegative (48 samples, 0.07%)</title><rect x="1047.5" y="2021" width="0.8" height="15.0" fill="rgb(229,131,12)" rx="2" ry="2" />
+<text  x="1050.45" y="2031.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt;@plt (38 samples, 0.06%)</title><rect x="1172.0" y="2037" width="0.7" height="15.0" fill="rgb(252,129,50)" rx="2" ry="2" />
+<text  x="1175.00" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1029" width="0.3" height="15.0" fill="rgb(212,161,9)" rx="2" ry="2" />
+<text  x="70.04" y="1039.5" ></text>
+</g>
+<g >
+<title>c10::TensorImpl::release_resources (438 samples, 0.63%)</title><rect x="671.3" y="1989" width="7.5" height="15.0" fill="rgb(211,120,12)" rx="2" ry="2" />
+<text  x="674.33" y="1999.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (11 samples, 0.02%)</title><rect x="36.5" y="1701" width="0.2" height="15.0" fill="rgb(239,65,46)" rx="2" ry="2" />
+<text  x="39.51" y="1711.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (96 samples, 0.14%)</title><rect x="888.3" y="1957" width="1.6" height="15.0" fill="rgb(246,204,1)" rx="2" ry="2" />
+<text  x="891.30" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (15 samples, 0.02%)</title><rect x="67.0" y="1157" width="0.3" height="15.0" fill="rgb(249,4,6)" rx="2" ry="2" />
+<text  x="70.04" y="1167.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;short&gt;@plt (16 samples, 0.02%)</title><rect x="192.0" y="1989" width="0.3" height="15.0" fill="rgb(238,161,35)" rx="2" ry="2" />
+<text  x="195.04" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::TensorOptions::computeDispatchKey (562 samples, 0.81%)</title><rect x="1098.8" y="2021" width="9.6" height="15.0" fill="rgb(224,184,23)" rx="2" ry="2" />
+<text  x="1101.76" y="2031.5" ></text>
+</g>
+<g >
+<title>_int_malloc (2,250 samples, 3.26%)</title><rect x="337.2" y="2021" width="38.5" height="15.0" fill="rgb(246,62,8)" rx="2" ry="2" />
+<text  x="340.21" y="2031.5" >_in..</text>
+</g>
+<g >
+<title>c10::impl::tls_local_dispatch_key_set (436 samples, 0.63%)</title><rect x="1147.2" y="2037" width="7.5" height="15.0" fill="rgb(209,215,30)" rx="2" ry="2" />
+<text  x="1150.22" y="2047.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr@plt (30 samples, 0.04%)</title><rect x="115.6" y="2005" width="0.5" height="15.0" fill="rgb(225,114,3)" rx="2" ry="2" />
+<text  x="118.56" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::intrusive_ptr&lt;c10::TensorImpl, c10::UndefinedTensorImpl&gt;::reset_ (53 samples, 0.08%)</title><rect x="846.1" y="1989" width="0.9" height="15.0" fill="rgb(206,194,31)" rx="2" ry="2" />
+<text  x="849.10" y="1999.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr (15 samples, 0.02%)</title><rect x="843.4" y="1973" width="0.2" height="15.0" fill="rgb(242,87,7)" rx="2" ry="2" />
+<text  x="846.38" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1557" width="0.3" height="15.0" fill="rgb(209,134,49)" rx="2" ry="2" />
+<text  x="70.02" y="1567.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="997" width="0.1" height="15.0" fill="rgb(213,104,41)" rx="2" ry="2" />
+<text  x="39.51" y="1007.5" ></text>
+</g>
+<g >
+<title>long_dealloc (227 samples, 0.33%)</title><rect x="237.7" y="2005" width="3.9" height="15.0" fill="rgb(238,223,30)" rx="2" ry="2" />
+<text  x="240.73" y="2015.5" ></text>
+</g>
+<g >
+<title>c10::alloc_cpu (124 samples, 0.18%)</title><rect x="1117.4" y="2021" width="2.2" height="15.0" fill="rgb(234,79,8)" rx="2" ry="2" />
+<text  x="1120.45" y="2031.5" ></text>
+</g>
+<g >
+<title>python (69,036 samples, 100.00%)</title><rect x="10.0" y="2053" width="1179.9" height="15.0" fill="rgb(245,140,52)" rx="2" ry="2" />
+<text  x="13.00" y="2063.5" >python</text>
+</g>
+<g >
+<title>_PyObject_GetMethod (87 samples, 0.13%)</title><rect x="302.9" y="2021" width="1.5" height="15.0" fill="rgb(234,150,15)" rx="2" ry="2" />
+<text  x="305.94" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1381" width="0.3" height="15.0" fill="rgb(232,115,15)" rx="2" ry="2" />
+<text  x="70.02" y="1391.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;float&gt; (32 samples, 0.05%)</title><rect x="1134.2" y="2021" width="0.6" height="15.0" fill="rgb(216,205,17)" rx="2" ry="2" />
+<text  x="1137.23" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::GetCPUAllocator@plt (48 samples, 0.07%)</title><rect x="1097.5" y="2021" width="0.8" height="15.0" fill="rgb(214,103,53)" rx="2" ry="2" />
+<text  x="1100.52" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (71 samples, 0.10%)</title><rect x="67.0" y="1973" width="1.2" height="15.0" fill="rgb(211,164,41)" rx="2" ry="2" />
+<text  x="69.98" y="1983.5" ></text>
+</g>
+<g >
+<title>_PyObject_GetDictPtr (257 samples, 0.37%)</title><rect x="298.5" y="2021" width="4.4" height="15.0" fill="rgb(221,1,40)" rx="2" ry="2" />
+<text  x="301.54" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::impl::wrap_kernel_functor_unboxed_&lt;c10::impl::detail::WrapFunctionIntoRuntimeFunctor_&lt;at::Tensor  (647 samples, 0.94%)</title><rect x="1154.7" y="2037" width="11.0" height="15.0" fill="rgb(233,114,37)" rx="2" ry="2" />
+<text  x="1157.67" y="2047.5" ></text>
+</g>
+<g >
+<title>update_get_addr (39 samples, 0.06%)</title><rect x="889.9" y="1957" width="0.7" height="15.0" fill="rgb(216,93,27)" rx="2" ry="2" />
+<text  x="892.94" y="1967.5" ></text>
+</g>
+<g >
+<title>[unknown] (7 samples, 0.01%)</title><rect x="485.2" y="1957" width="0.1" height="15.0" fill="rgb(233,158,5)" rx="2" ry="2" />
+<text  x="488.19" y="1967.5" ></text>
+</g>
+<g >
+<title>_dl_relocate_object (77 samples, 0.11%)</title><rect x="752.3" y="1973" width="1.3" height="15.0" fill="rgb(218,138,52)" rx="2" ry="2" />
+<text  x="755.30" y="1983.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (27 samples, 0.04%)</title><rect x="63.8" y="1733" width="0.5" height="15.0" fill="rgb(213,147,31)" rx="2" ry="2" />
+<text  x="66.82" y="1743.5" ></text>
+</g>
+<g >
+<title>c10::SmallVectorImpl&lt;long&gt;::resize (212 samples, 0.31%)</title><rect x="436.1" y="1989" width="3.6" height="15.0" fill="rgb(231,87,25)" rx="2" ry="2" />
+<text  x="439.06" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::free_cpu@plt (9 samples, 0.01%)</title><rect x="679.0" y="1989" width="0.2" height="15.0" fill="rgb(245,40,31)" rx="2" ry="2" />
+<text  x="682.01" y="1999.5" ></text>
+</g>
+<g >
+<title>__tls_get_addr@plt (95 samples, 0.14%)</title><rect x="491.8" y="1973" width="1.6" height="15.0" fill="rgb(227,89,38)" rx="2" ry="2" />
+<text  x="494.78" y="1983.5" ></text>
+</g>
+<g >
+<title>[libc-2.17.so] (56 samples, 0.08%)</title><rect x="63.8" y="1813" width="1.0" height="15.0" fill="rgb(234,65,2)" rx="2" ry="2" />
+<text  x="66.82" y="1823.5" ></text>
+</g>
+<g >
+<title>getTHDefaultAllocator@plt (152 samples, 0.22%)</title><rect x="1141.1" y="2021" width="2.6" height="15.0" fill="rgb(240,138,31)" rx="2" ry="2" />
+<text  x="1144.13" y="2031.5" ></text>
+</g>
+<g >
+<title>c10::impl::ExcludeDispatchKeyGuard::~ExcludeDispatchKeyGuard@plt (40 samples, 0.06%)</title><rect x="637.0" y="1957" width="0.7" height="15.0" fill="rgb(226,199,11)" rx="2" ry="2" />
+<text  x="639.98" y="1967.5" ></text>
+</g>
+<g >
+<title>caffe2::TypeMeta::_typeMetaDataInstance&lt;signed char&gt; (7 samples, 0.01%)</title><rect x="1107.9" y="2005" width="0.1" height="15.0" fill="rgb(232,137,42)" rx="2" ry="2" />
+<text  x="1110.91" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (16 samples, 0.02%)</title><rect x="67.0" y="1445" width="0.3" height="15.0" fill="rgb(251,191,6)" rx="2" ry="2" />
+<text  x="70.02" y="1455.5" ></text>
+</g>
+<g >
+<title>c10::free_cpu (11 samples, 0.02%)</title><rect x="678.8" y="1989" width="0.2" height="15.0" fill="rgb(210,135,6)" rx="2" ry="2" />
+<text  x="681.82" y="1999.5" ></text>
+</g>
+<g >
+<title>c10::SmallVectorImpl&lt;long&gt;::resize (95 samples, 0.14%)</title><rect x="999.2" y="2037" width="1.6" height="15.0" fill="rgb(253,78,44)" rx="2" ry="2" />
+<text  x="1002.22" y="2047.5" ></text>
+</g>
+<g >
+<title>THPVariable_Wrap@plt (8 samples, 0.01%)</title><rect x="484.9" y="1973" width="0.2" height="15.0" fill="rgb(238,87,25)" rx="2" ry="2" />
+<text  x="487.95" y="1983.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (7 samples, 0.01%)</title><rect x="36.5" y="1285" width="0.1" height="15.0" fill="rgb(225,223,46)" rx="2" ry="2" />
+<text  x="39.51" y="1295.5" ></text>
+</g>
+<g >
+<title>c10::alloc_cpu (197 samples, 0.29%)</title><rect x="1088.4" y="2005" width="3.3" height="15.0" fill="rgb(233,16,52)" rx="2" ry="2" />
+<text  x="1091.36" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (14 samples, 0.02%)</title><rect x="67.1" y="805" width="0.2" height="15.0" fill="rgb(232,7,42)" rx="2" ry="2" />
+<text  x="70.05" y="815.5" ></text>
+</g>
+</g>
+</svg>
