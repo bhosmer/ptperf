@@ -373,1880 +373,1784 @@
 <text id="matched" x="1090.00" y="2117" > </text>
 <g id="frames">
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="421" width="0.1" height="15.0" fill="rgb(247,111,29)" rx="2" ry="2" />
-<text  x="57.53" y="431.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1605" width="0.3" height="15.0" fill="rgb(205,25,9)" rx="2" ry="2" />
+<text  x="70.72" y="1615.5" ></text>
 </g>
 <g >
-<title>PyUnicode_FromFormatV (4 samples, 0.01%)</title><rect x="100.4" y="2021" width="0.1" height="15.0" fill="rgb(216,193,1)" rx="2" ry="2" />
-<text  x="103.40" y="2031.5" ></text>
+<title>torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd (4 samples, 0.01%)</title><rect x="565.6" y="2037" width="0.2" height="15.0" fill="rgb(209,213,7)" rx="2" ry="2" />
+<text  x="568.63" y="2047.5" ></text>
 </g>
 <g >
-<title>PyTuple_New (352 samples, 0.85%)</title><rect x="77.2" y="2037" width="10.0" height="15.0" fill="rgb(206,54,31)" rx="2" ry="2" />
-<text  x="80.15" y="2047.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1429" width="0.3" height="15.0" fill="rgb(248,78,33)" rx="2" ry="2" />
+<text  x="70.72" y="1439.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1045" width="0.5" height="15.0" fill="rgb(212,125,22)" rx="2" ry="2" />
-<text  x="103.75" y="1055.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="389" width="0.8" height="15.0" fill="rgb(254,87,9)" rx="2" ry="2" />
+<text  x="119.65" y="399.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="421" width="0.4" height="15.0" fill="rgb(207,120,49)" rx="2" ry="2" />
-<text  x="103.78" y="431.5" ></text>
+<title>_int_free (17 samples, 0.04%)</title><rect x="456.1" y="2037" width="0.5" height="15.0" fill="rgb(206,76,23)" rx="2" ry="2" />
+<text  x="459.10" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="805" width="0.1" height="15.0" fill="rgb(213,98,49)" rx="2" ry="2" />
-<text  x="57.53" y="815.5" ></text>
+<title>c10::impl::OperatorEntry::computeDispatchTableEntryWithDebug (5 samples, 0.01%)</title><rect x="294.8" y="2005" width="0.1" height="15.0" fill="rgb(211,199,4)" rx="2" ry="2" />
+<text  x="297.76" y="2015.5" ></text>
 </g>
 <g >
-<title>PyObject_GC_UnTrack (4 samples, 0.01%)</title><rect x="66.1" y="2037" width="0.1" height="15.0" fill="rgb(216,157,39)" rx="2" ry="2" />
-<text  x="69.07" y="2047.5" ></text>
+<title>std::_Sp_counted_ptr&lt;c10::TensorType*,  (7 samples, 0.02%)</title><rect x="467.0" y="2037" width="0.2" height="15.0" fill="rgb(225,215,12)" rx="2" ry="2" />
+<text  x="469.97" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="645" width="0.4" height="15.0" fill="rgb(207,78,16)" rx="2" ry="2" />
-<text  x="103.78" y="655.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1237" width="0.8" height="15.0" fill="rgb(230,220,5)" rx="2" ry="2" />
+<text  x="119.62" y="1247.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="949" width="0.3" height="15.0" fill="rgb(235,174,17)" rx="2" ry="2" />
-<text  x="57.33" y="959.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="949" width="0.8" height="15.0" fill="rgb(235,143,15)" rx="2" ry="2" />
+<text  x="119.62" y="959.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1765" width="0.3" height="15.0" fill="rgb(216,51,33)" rx="2" ry="2" />
-<text  x="57.33" y="1775.5" ></text>
+<title>std::_Sp_counted_ptr_inplace&lt;torch::jit::Operator, std::allocator&lt;torch::jit::Operator&gt;,  (4 samples, 0.01%)</title><rect x="467.2" y="2037" width="0.1" height="15.0" fill="rgb(214,214,11)" rx="2" ry="2" />
+<text  x="470.21" y="2047.5" ></text>
 </g>
 <g >
-<title>update_get_addr (967 samples, 2.35%)</title><rect x="1060.3" y="1989" width="27.6" height="15.0" fill="rgb(215,143,24)" rx="2" ry="2" />
-<text  x="1063.25" y="1999.5" >u..</text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1221" width="0.3" height="15.0" fill="rgb(218,120,12)" rx="2" ry="2" />
+<text  x="70.72" y="1231.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="693" width="0.1" height="15.0" fill="rgb(246,175,40)" rx="2" ry="2" />
-<text  x="57.53" y="703.5" ></text>
+<title>builtin_isinstance (4 samples, 0.01%)</title><rect x="458.7" y="2037" width="0.2" height="15.0" fill="rgb(208,76,20)" rx="2" ry="2" />
+<text  x="461.74" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="421" width="0.1" height="15.0" fill="rgb(242,189,19)" rx="2" ry="2" />
-<text  x="57.33" y="431.5" ></text>
+<title>PyUnicode_DecodeUTF8Stateful (5 samples, 0.01%)</title><rect x="67.0" y="2053" width="0.1" height="15.0" fill="rgb(215,76,54)" rx="2" ry="2" />
+<text  x="69.97" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="469" width="0.1" height="15.0" fill="rgb(220,94,52)" rx="2" ry="2" />
-<text  x="57.53" y="479.5" ></text>
+<title>collect (4 samples, 0.01%)</title><rect x="67.9" y="37" width="0.1" height="15.0" fill="rgb(228,35,51)" rx="2" ry="2" />
+<text  x="70.90" y="47.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1157" width="0.3" height="15.0" fill="rgb(243,191,20)" rx="2" ry="2" />
-<text  x="57.33" y="1167.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="661" width="0.8" height="15.0" fill="rgb(205,203,2)" rx="2" ry="2" />
+<text  x="119.62" y="671.5" ></text>
 </g>
 <g >
-<title>__memmove_ssse3_back (18 samples, 0.04%)</title><rect x="493.9" y="2037" width="0.6" height="15.0" fill="rgb(208,54,5)" rx="2" ry="2" />
-<text  x="496.95" y="2047.5" ></text>
+<title>[unknown] (22 samples, 0.06%)</title><rect x="116.7" y="85" width="0.7" height="15.0" fill="rgb(224,163,7)" rx="2" ry="2" />
+<text  x="119.74" y="95.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="965" width="0.3" height="15.0" fill="rgb(235,108,43)" rx="2" ry="2" />
-<text  x="57.33" y="975.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1237" width="0.3" height="15.0" fill="rgb(250,152,15)" rx="2" ry="2" />
+<text  x="70.72" y="1247.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="853" width="0.1" height="15.0" fill="rgb(219,57,45)" rx="2" ry="2" />
-<text  x="57.53" y="863.5" ></text>
+<title>torch::PyWarningHandler::~PyWarningHandler (600 samples, 1.53%)</title><rect x="872.2" y="2005" width="18.0" height="15.0" fill="rgb(230,57,24)" rx="2" ry="2" />
+<text  x="875.16" y="2015.5" ></text>
 </g>
 <g >
-<title>torch::Library::def&lt;char const  (9 samples, 0.02%)</title><rect x="329.8" y="2021" width="0.3" height="15.0" fill="rgb(227,224,24)" rx="2" ry="2" />
-<text  x="332.81" y="2031.5" ></text>
+<title>malloc (18 samples, 0.05%)</title><rect x="1185.7" y="2053" width="0.6" height="15.0" fill="rgb(216,222,45)" rx="2" ry="2" />
+<text  x="1188.74" y="2063.5" ></text>
 </g>
 <g >
-<title>malloc_consolidate (22 samples, 0.05%)</title><rect x="503.7" y="2037" width="0.6" height="15.0" fill="rgb(253,95,20)" rx="2" ry="2" />
-<text  x="506.68" y="2047.5" ></text>
+<title>c10::findSchemaDifferences (4 samples, 0.01%)</title><rect x="467.0" y="2005" width="0.1" height="15.0" fill="rgb(212,26,3)" rx="2" ry="2" />
+<text  x="469.97" y="2015.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="789" width="0.1" height="15.0" fill="rgb(250,106,41)" rx="2" ry="2" />
-<text  x="57.33" y="799.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1557" width="0.8" height="15.0" fill="rgb(249,53,42)" rx="2" ry="2" />
+<text  x="119.59" y="1567.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="485" width="0.1" height="15.0" fill="rgb(231,103,54)" rx="2" ry="2" />
-<text  x="57.53" y="495.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1413" width="0.3" height="15.0" fill="rgb(231,20,28)" rx="2" ry="2" />
+<text  x="70.72" y="1423.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1381" width="0.3" height="15.0" fill="rgb(209,51,48)" rx="2" ry="2" />
-<text  x="57.33" y="1391.5" ></text>
+<title>torch::jit::SchemaTypeParser::parseType (7 samples, 0.02%)</title><rect x="334.9" y="2021" width="0.2" height="15.0" fill="rgb(248,193,34)" rx="2" ry="2" />
+<text  x="337.87" y="2031.5" ></text>
 </g>
 <g >
-<title>_PyObject_GetMethod (945 samples, 2.29%)</title><rect x="403.1" y="2037" width="27.1" height="15.0" fill="rgb(205,199,16)" rx="2" ry="2" />
-<text  x="406.14" y="2047.5" >_..</text>
+<title>_PyMethodDescr_FastCallKeywords (380 samples, 0.97%)</title><rect x="372.7" y="2037" width="11.4" height="15.0" fill="rgb(246,124,40)" rx="2" ry="2" />
+<text  x="375.72" y="2047.5" ></text>
 </g>
 <g >
-<title>__memcmp_sse4_1 (5 samples, 0.01%)</title><rect x="493.6" y="2037" width="0.1" height="15.0" fill="rgb(223,16,17)" rx="2" ry="2" />
-<text  x="496.60" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="117" width="0.1" height="15.0" fill="rgb(253,73,54)" rx="2" ry="2" />
+<text  x="70.90" y="127.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1141" width="0.5" height="15.0" fill="rgb(247,40,24)" rx="2" ry="2" />
-<text  x="103.75" y="1151.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="261" width="0.8" height="15.0" fill="rgb(250,125,48)" rx="2" ry="2" />
+<text  x="119.65" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="277" width="0.1" height="15.0" fill="rgb(246,202,6)" rx="2" ry="2" />
-<text  x="57.53" y="287.5" ></text>
+<title>c10::Warning::get_warning_handler@plt (6 samples, 0.02%)</title><rect x="720.5" y="2005" width="0.1" height="15.0" fill="rgb(243,196,47)" rx="2" ry="2" />
+<text  x="723.46" y="2015.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="2021" width="0.3" height="15.0" fill="rgb(234,129,14)" rx="2" ry="2" />
-<text  x="57.33" y="2031.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1189" width="0.8" height="15.0" fill="rgb(210,67,29)" rx="2" ry="2" />
+<text  x="119.62" y="1199.5" ></text>
 </g>
 <g >
-<title>r_object (4 samples, 0.01%)</title><rect x="298.7" y="2021" width="0.1" height="15.0" fill="rgb(220,181,53)" rx="2" ry="2" />
-<text  x="301.68" y="2031.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1125" width="0.3" height="15.0" fill="rgb(217,176,20)" rx="2" ry="2" />
+<text  x="70.72" y="1135.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1477" width="0.5" height="15.0" fill="rgb(251,137,1)" rx="2" ry="2" />
-<text  x="103.69" y="1487.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="741" width="0.8" height="15.0" fill="rgb(247,228,54)" rx="2" ry="2" />
+<text  x="119.62" y="751.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="405" width="0.1" height="15.0" fill="rgb(205,228,3)" rx="2" ry="2" />
-<text  x="57.33" y="415.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="453" width="0.8" height="15.0" fill="rgb(242,63,5)" rx="2" ry="2" />
+<text  x="119.62" y="463.5" ></text>
 </g>
 <g >
-<title>rangeiter_next (1,037 samples, 2.52%)</title><rect x="298.8" y="2021" width="29.7" height="15.0" fill="rgb(211,170,49)" rx="2" ry="2" />
-<text  x="301.79" y="2031.5" >ra..</text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="549" width="0.1" height="15.0" fill="rgb(215,91,39)" rx="2" ry="2" />
+<text  x="70.90" y="559.5" ></text>
 </g>
 <g >
-<title>c10::Dispatcher::deregisterImpl_ (7 samples, 0.02%)</title><rect x="504.9" y="2021" width="0.2" height="15.0" fill="rgb(230,35,20)" rx="2" ry="2" />
-<text  x="507.89" y="2031.5" ></text>
+<title>[unknown] (27 samples, 0.07%)</title><rect x="116.6" y="1269" width="0.8" height="15.0" fill="rgb(246,113,49)" rx="2" ry="2" />
+<text  x="119.59" y="1279.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="389" width="0.1" height="15.0" fill="rgb(220,4,20)" rx="2" ry="2" />
-<text  x="57.33" y="399.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1397" width="0.3" height="15.0" fill="rgb(212,151,17)" rx="2" ry="2" />
+<text  x="70.72" y="1407.5" ></text>
 </g>
 <g >
-<title>[unknown] (8 samples, 0.02%)</title><rect x="505.9" y="2021" width="0.3" height="15.0" fill="rgb(221,140,14)" rx="2" ry="2" />
-<text  x="508.95" y="2031.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="69" width="0.1" height="15.0" fill="rgb(217,80,35)" rx="2" ry="2" />
+<text  x="70.90" y="79.5" ></text>
 </g>
 <g >
-<title>c10::impl::OperatorEntry::updateDispatchTable_ (11 samples, 0.03%)</title><rect x="258.2" y="2021" width="0.3" height="15.0" fill="rgb(221,46,5)" rx="2" ry="2" />
-<text  x="261.16" y="2031.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="997" width="0.3" height="15.0" fill="rgb(254,79,11)" rx="2" ry="2" />
+<text  x="70.72" y="1007.5" ></text>
 </g>
 <g >
-<title>PyType_IsSubtype (183 samples, 0.44%)</title><rect x="48.4" y="2053" width="5.3" height="15.0" fill="rgb(227,70,47)" rx="2" ry="2" />
-<text  x="51.43" y="2063.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="853" width="0.1" height="15.0" fill="rgb(224,162,12)" rx="2" ry="2" />
+<text  x="70.90" y="863.5" ></text>
 </g>
 <g >
-<title>torch::jit::tracer::getTracingState (3,462 samples, 8.40%)</title><rect x="988.8" y="2005" width="99.1" height="15.0" fill="rgb(244,191,46)" rx="2" ry="2" />
-<text  x="991.80" y="2015.5" >torch::jit::..</text>
+<title>std::__ostream_insert&lt;char, std::char_traits&lt;char&gt; &gt; (5 samples, 0.01%)</title><rect x="333.3" y="2021" width="0.1" height="15.0" fill="rgb(224,73,24)" rx="2" ry="2" />
+<text  x="336.28" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1525" width="0.5" height="15.0" fill="rgb(220,124,20)" rx="2" ry="2" />
-<text  x="103.69" y="1535.5" ></text>
+<title>lookdict_unicode (12 samples, 0.03%)</title><rect x="464.3" y="2037" width="0.3" height="15.0" fill="rgb(228,182,48)" rx="2" ry="2" />
+<text  x="467.27" y="2047.5" ></text>
 </g>
 <g >
-<title>c10::impl::OperatorEntry::computeDispatchTableEntryWithDebug (7 samples, 0.02%)</title><rect x="258.0" y="2005" width="0.2" height="15.0" fill="rgb(246,224,42)" rx="2" ry="2" />
-<text  x="260.96" y="2015.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1013" width="0.8" height="15.0" fill="rgb(246,96,0)" rx="2" ry="2" />
+<text  x="119.62" y="1023.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="245" width="0.1" height="15.0" fill="rgb(248,205,40)" rx="2" ry="2" />
-<text  x="57.53" y="255.5" ></text>
+<title>do_lookup_x (77 samples, 0.20%)</title><rect x="1182.0" y="2053" width="2.3" height="15.0" fill="rgb(214,113,27)" rx="2" ry="2" />
+<text  x="1184.96" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="581" width="0.1" height="15.0" fill="rgb(236,91,10)" rx="2" ry="2" />
-<text  x="57.53" y="591.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1541" width="0.3" height="15.0" fill="rgb(252,175,30)" rx="2" ry="2" />
+<text  x="70.72" y="1551.5" ></text>
 </g>
 <g >
-<title>_dl_lookup_symbol_x (32 samples, 0.08%)</title><rect x="501.0" y="1973" width="1.0" height="15.0" fill="rgb(231,116,0)" rx="2" ry="2" />
-<text  x="504.05" y="1983.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1157" width="0.8" height="15.0" fill="rgb(211,210,15)" rx="2" ry="2" />
+<text  x="119.62" y="1167.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="597" width="0.4" height="15.0" fill="rgb(243,13,30)" rx="2" ry="2" />
-<text  x="103.78" y="607.5" ></text>
+<title>dlopen_doit (72 samples, 0.18%)</title><rect x="461.5" y="2037" width="2.2" height="15.0" fill="rgb(230,108,18)" rx="2" ry="2" />
+<text  x="464.53" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="325" width="0.1" height="15.0" fill="rgb(236,134,43)" rx="2" ry="2" />
-<text  x="57.33" y="335.5" ></text>
+<title>__dynamic_cast (9 samples, 0.02%)</title><rect x="293.8" y="2021" width="0.3" height="15.0" fill="rgb(228,97,30)" rx="2" ry="2" />
+<text  x="296.83" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="133" width="0.1" height="15.0" fill="rgb(234,115,13)" rx="2" ry="2" />
-<text  x="57.53" y="143.5" ></text>
+<title>collect (17 samples, 0.04%)</title><rect x="460.1" y="2037" width="0.5" height="15.0" fill="rgb(236,195,12)" rx="2" ry="2" />
+<text  x="463.06" y="2047.5" ></text>
 </g>
 <g >
-<title>collect (32 samples, 0.08%)</title><rect x="1180.5" y="2053" width="0.9" height="15.0" fill="rgb(232,103,11)" rx="2" ry="2" />
-<text  x="1183.46" y="2063.5" ></text>
+<title>_PyEval_EvalCodeWithName (7 samples, 0.02%)</title><rect x="335.8" y="2037" width="0.2" height="15.0" fill="rgb(225,104,11)" rx="2" ry="2" />
+<text  x="338.83" y="2047.5" ></text>
 </g>
 <g >
-<title>lookdict_unicode (15 samples, 0.04%)</title><rect x="502.8" y="2037" width="0.4" height="15.0" fill="rgb(206,50,24)" rx="2" ry="2" />
-<text  x="505.80" y="2047.5" ></text>
+<title>[ld-2.17.so] (19 samples, 0.05%)</title><rect x="67.7" y="2053" width="0.6" height="15.0" fill="rgb(212,103,17)" rx="2" ry="2" />
+<text  x="70.72" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="533" width="0.1" height="15.0" fill="rgb(205,214,48)" rx="2" ry="2" />
-<text  x="57.53" y="543.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="661" width="0.1" height="15.0" fill="rgb(212,20,35)" rx="2" ry="2" />
+<text  x="70.90" y="671.5" ></text>
 </g>
 <g >
-<title>__tls_get_addr_slow (236 samples, 0.57%)</title><rect x="768.8" y="1989" width="6.8" height="15.0" fill="rgb(244,169,33)" rx="2" ry="2" />
-<text  x="771.82" y="1999.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="949" width="0.3" height="15.0" fill="rgb(212,188,27)" rx="2" ry="2" />
+<text  x="70.72" y="959.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="341" width="0.4" height="15.0" fill="rgb(225,204,10)" rx="2" ry="2" />
-<text  x="103.78" y="351.5" ></text>
+<title>_IO_vsscanf (6 samples, 0.02%)</title><rect x="117.6" y="2021" width="0.2" height="15.0" fill="rgb(253,20,36)" rx="2" ry="2" />
+<text  x="120.61" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (15 samples, 0.04%)</title><rect x="100.8" y="181" width="0.4" height="15.0" fill="rgb(210,38,19)" rx="2" ry="2" />
-<text  x="103.80" y="191.5" ></text>
+<title>check_match.9525 (6 samples, 0.02%)</title><rect x="459.3" y="2037" width="0.2" height="15.0" fill="rgb(211,51,25)" rx="2" ry="2" />
+<text  x="462.28" y="2047.5" ></text>
 </g>
 <g >
-<title>torch::PythonArgs::memoryformat (193 samples, 0.47%)</title><rect x="922.1" y="2005" width="5.6" height="15.0" fill="rgb(242,49,35)" rx="2" ry="2" />
-<text  x="925.14" y="2015.5" ></text>
+<title>__tls_get_addr (1,723 samples, 4.38%)</title><rect x="611.0" y="2005" width="51.7" height="15.0" fill="rgb(220,112,50)" rx="2" ry="2" />
+<text  x="613.96" y="2015.5" >__tls..</text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="357" width="0.1" height="15.0" fill="rgb(237,8,20)" rx="2" ry="2" />
-<text  x="57.33" y="367.5" ></text>
+<title>visit_decref (13 samples, 0.03%)</title><rect x="1189.3" y="2053" width="0.4" height="15.0" fill="rgb(223,55,26)" rx="2" ry="2" />
+<text  x="1192.28" y="2063.5" ></text>
 </g>
 <g >
-<title>_dl_catch_error (63 samples, 0.15%)</title><rect x="500.2" y="2021" width="1.8" height="15.0" fill="rgb(212,175,18)" rx="2" ry="2" />
-<text  x="503.16" y="2031.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="773" width="0.1" height="15.0" fill="rgb(211,116,47)" rx="2" ry="2" />
+<text  x="70.90" y="783.5" ></text>
 </g>
 <g >
-<title>__xstat64 (4 samples, 0.01%)</title><rect x="494.8" y="2037" width="0.1" height="15.0" fill="rgb(219,61,1)" rx="2" ry="2" />
-<text  x="497.78" y="2047.5" ></text>
+<title>Xbyak::util::Cpu::Cpu (4 samples, 0.01%)</title><rect x="67.6" y="2053" width="0.1" height="15.0" fill="rgb(235,29,0)" rx="2" ry="2" />
+<text  x="70.60" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="505.3" y="2021" width="0.1" height="15.0" fill="rgb(226,80,11)" rx="2" ry="2" />
-<text  x="508.29" y="2031.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="789" width="0.1" height="15.0" fill="rgb(249,139,46)" rx="2" ry="2" />
+<text  x="70.90" y="799.5" ></text>
 </g>
 <g >
-<title>_IO_vsnprintf (4 samples, 0.01%)</title><rect x="330.8" y="2037" width="0.2" height="15.0" fill="rgb(235,93,36)" rx="2" ry="2" />
-<text  x="333.84" y="2047.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1797" width="0.8" height="15.0" fill="rgb(247,4,52)" rx="2" ry="2" />
+<text  x="119.56" y="1807.5" ></text>
 </g>
 <g >
-<title>torch::PyWarningHandler::~PyWarningHandler (643 samples, 1.56%)</title><rect x="887.4" y="2005" width="18.4" height="15.0" fill="rgb(231,161,26)" rx="2" ry="2" />
-<text  x="890.43" y="2015.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1221" width="0.8" height="15.0" fill="rgb(245,15,27)" rx="2" ry="2" />
+<text  x="119.62" y="1231.5" ></text>
 </g>
 <g >
-<title>func_traverse (4 samples, 0.01%)</title><rect x="502.2" y="2037" width="0.1" height="15.0" fill="rgb(245,178,32)" rx="2" ry="2" />
-<text  x="505.17" y="2047.5" ></text>
+<title>visit_decref (26 samples, 0.07%)</title><rect x="1089.2" y="2037" width="0.8" height="15.0" fill="rgb(254,99,5)" rx="2" ry="2" />
+<text  x="1092.24" y="2047.5" ></text>
 </g>
 <g >
-<title>_PyEval_EvalFrameDefault (1,588 samples, 3.85%)</title><rect x="332.0" y="2037" width="45.4" height="15.0" fill="rgb(243,88,1)" rx="2" ry="2" />
-<text  x="334.95" y="2047.5" >_PyE..</text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="837" width="0.8" height="15.0" fill="rgb(241,209,52)" rx="2" ry="2" />
+<text  x="119.62" y="847.5" ></text>
 </g>
 <g >
-<title>torch::jit::tracer::getTracingState@plt (65 samples, 0.16%)</title><rect x="1087.9" y="2005" width="1.9" height="15.0" fill="rgb(211,151,40)" rx="2" ry="2" />
-<text  x="1090.94" y="2015.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1413" width="0.8" height="15.0" fill="rgb(232,103,12)" rx="2" ry="2" />
+<text  x="119.59" y="1423.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="469" width="0.1" height="15.0" fill="rgb(227,91,43)" rx="2" ry="2" />
-<text  x="57.33" y="479.5" ></text>
+<title>torch::jit::parseSchema (10 samples, 0.03%)</title><rect x="334.5" y="2005" width="0.3" height="15.0" fill="rgb(217,31,22)" rx="2" ry="2" />
+<text  x="337.48" y="2015.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1893" width="0.5" height="15.0" fill="rgb(227,52,31)" rx="2" ry="2" />
-<text  x="103.69" y="1903.5" ></text>
+<title>PyObject_Malloc (443 samples, 1.13%)</title><rect x="80.0" y="2037" width="13.3" height="15.0" fill="rgb(254,146,19)" rx="2" ry="2" />
+<text  x="83.03" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="293" width="0.1" height="15.0" fill="rgb(221,18,33)" rx="2" ry="2" />
-<text  x="57.33" y="303.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="197" width="0.1" height="15.0" fill="rgb(205,126,46)" rx="2" ry="2" />
+<text  x="70.90" y="207.5" ></text>
 </g>
 <g >
-<title>_Py_HashBytes (9 samples, 0.02%)</title><rect x="1178.8" y="2053" width="0.2" height="15.0" fill="rgb(250,167,11)" rx="2" ry="2" />
-<text  x="1181.77" y="2063.5" ></text>
+<title>c10::Dispatcher::registerDef (5 samples, 0.01%)</title><rect x="294.4" y="2021" width="0.2" height="15.0" fill="rgb(214,16,47)" rx="2" ry="2" />
+<text  x="297.43" y="2031.5" ></text>
 </g>
 <g >
-<title>__dynamic_cast (6 samples, 0.01%)</title><rect x="256.8" y="2021" width="0.2" height="15.0" fill="rgb(215,105,2)" rx="2" ry="2" />
-<text  x="259.84" y="2031.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="821" width="0.1" height="15.0" fill="rgb(225,123,39)" rx="2" ry="2" />
+<text  x="70.90" y="831.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="709" width="0.1" height="15.0" fill="rgb(234,40,21)" rx="2" ry="2" />
-<text  x="57.33" y="719.5" ></text>
+<title>vfprintf (5 samples, 0.01%)</title><rect x="335.1" y="2021" width="0.2" height="15.0" fill="rgb(209,14,46)" rx="2" ry="2" />
+<text  x="338.11" y="2031.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1285" width="0.3" height="15.0" fill="rgb(244,195,23)" rx="2" ry="2" />
-<text  x="57.33" y="1295.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1317" width="0.3" height="15.0" fill="rgb(237,177,5)" rx="2" ry="2" />
+<text  x="70.72" y="1327.5" ></text>
 </g>
 <g >
-<title>[libc-2.17.so] (4 samples, 0.01%)</title><rect x="88.8" y="2037" width="0.1" height="15.0" fill="rgb(238,97,35)" rx="2" ry="2" />
-<text  x="91.78" y="2047.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="197" width="0.8" height="15.0" fill="rgb(211,140,4)" rx="2" ry="2" />
+<text  x="119.65" y="207.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1685" width="0.5" height="15.0" fill="rgb(224,53,51)" rx="2" ry="2" />
-<text  x="103.69" y="1695.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="149" width="0.8" height="15.0" fill="rgb(238,7,22)" rx="2" ry="2" />
+<text  x="119.65" y="159.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1173" width="0.5" height="15.0" fill="rgb(219,194,30)" rx="2" ry="2" />
-<text  x="103.75" y="1183.5" ></text>
+<title>torch::jit::tracer::getTracingState@plt (78 samples, 0.20%)</title><rect x="1075.8" y="2005" width="2.4" height="15.0" fill="rgb(206,117,49)" rx="2" ry="2" />
+<text  x="1078.82" y="2015.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="2037" width="0.3" height="15.0" fill="rgb(254,85,26)" rx="2" ry="2" />
-<text  x="57.33" y="2047.5" ></text>
+<title>update_get_addr (250 samples, 0.64%)</title><rect x="713.0" y="1989" width="7.5" height="15.0" fill="rgb(254,36,40)" rx="2" ry="2" />
+<text  x="715.95" y="1999.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="505.6" y="2021" width="0.1" height="15.0" fill="rgb(236,81,7)" rx="2" ry="2" />
-<text  x="508.57" y="2031.5" ></text>
+<title>c10::Dispatcher::deregisterDef_ (6 samples, 0.02%)</title><rect x="1087.3" y="2021" width="0.2" height="15.0" fill="rgb(209,190,10)" rx="2" ry="2" />
+<text  x="1090.28" y="2031.5" ></text>
 </g>
 <g >
-<title>r_object (23 samples, 0.06%)</title><rect x="1186.2" y="2053" width="0.6" height="15.0" fill="rgb(212,9,48)" rx="2" ry="2" />
-<text  x="1189.16" y="2063.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1253" width="0.3" height="15.0" fill="rgb(211,91,34)" rx="2" ry="2" />
+<text  x="70.72" y="1263.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1621" width="0.5" height="15.0" fill="rgb(205,21,49)" rx="2" ry="2" />
-<text  x="103.69" y="1631.5" ></text>
+<title>[unknown] (15 samples, 0.04%)</title><rect x="116.9" y="53" width="0.5" height="15.0" fill="rgb(215,148,40)" rx="2" ry="2" />
+<text  x="119.95" y="63.5" ></text>
 </g>
 <g >
-<title>PyUnicode_New (6 samples, 0.01%)</title><rect x="54.1" y="2053" width="0.1" height="15.0" fill="rgb(239,71,40)" rx="2" ry="2" />
-<text  x="57.07" y="2063.5" ></text>
+<title>c10::impl::OperatorEntry::updateDispatchTable_ (5 samples, 0.01%)</title><rect x="295.0" y="2021" width="0.1" height="15.0" fill="rgb(233,58,35)" rx="2" ry="2" />
+<text  x="297.97" y="2031.5" ></text>
 </g>
 <g >
-<title>PyObject_Malloc (374 samples, 0.91%)</title><rect x="66.3" y="2037" width="10.7" height="15.0" fill="rgb(235,221,5)" rx="2" ry="2" />
-<text  x="69.30" y="2047.5" ></text>
+<title>[ld-2.17.so] (6 samples, 0.02%)</title><rect x="67.7" y="917" width="0.2" height="15.0" fill="rgb(212,122,12)" rx="2" ry="2" />
+<text  x="70.72" y="927.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="85" width="0.1" height="15.0" fill="rgb(240,153,27)" rx="2" ry="2" />
-<text  x="57.53" y="95.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1349" width="0.8" height="15.0" fill="rgb(228,66,47)" rx="2" ry="2" />
+<text  x="119.59" y="1359.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1349" width="0.3" height="15.0" fill="rgb(222,45,29)" rx="2" ry="2" />
-<text  x="57.33" y="1359.5" ></text>
+<title>at::is_custom_op (4 samples, 0.01%)</title><rect x="458.5" y="2037" width="0.1" height="15.0" fill="rgb(245,207,3)" rx="2" ry="2" />
+<text  x="461.50" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="677" width="0.4" height="15.0" fill="rgb(216,190,14)" rx="2" ry="2" />
-<text  x="103.78" y="687.5" ></text>
+<title>[unknown] (27 samples, 0.07%)</title><rect x="116.6" y="1285" width="0.8" height="15.0" fill="rgb(221,152,20)" rx="2" ry="2" />
+<text  x="119.59" y="1295.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="501" width="0.4" height="15.0" fill="rgb(209,188,1)" rx="2" ry="2" />
-<text  x="103.78" y="511.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="581" width="0.8" height="15.0" fill="rgb(251,37,3)" rx="2" ry="2" />
+<text  x="119.62" y="591.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="197" width="0.1" height="15.0" fill="rgb(249,26,8)" rx="2" ry="2" />
-<text  x="57.53" y="207.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1925" width="0.3" height="15.0" fill="rgb(227,14,51)" rx="2" ry="2" />
+<text  x="70.72" y="1935.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1365" width="0.3" height="15.0" fill="rgb(254,55,36)" rx="2" ry="2" />
-<text  x="57.33" y="1375.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1701" width="0.3" height="15.0" fill="rgb(239,199,5)" rx="2" ry="2" />
+<text  x="70.72" y="1711.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1493" width="0.3" height="15.0" fill="rgb(237,147,23)" rx="2" ry="2" />
-<text  x="57.33" y="1503.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1989" width="0.3" height="15.0" fill="rgb(253,120,18)" rx="2" ry="2" />
+<text  x="70.72" y="1999.5" ></text>
 </g>
 <g >
-<title>dict_traverse (16 samples, 0.04%)</title><rect x="499.5" y="2037" width="0.5" height="15.0" fill="rgb(223,37,51)" rx="2" ry="2" />
-<text  x="502.53" y="2047.5" ></text>
+<title>torch::PythonArgs::memoryformat (157 samples, 0.40%)</title><rect x="907.5" y="2005" width="4.7" height="15.0" fill="rgb(220,37,36)" rx="2" ry="2" />
+<text  x="910.46" y="2015.5" ></text>
 </g>
 <g >
-<title>visit_decref (22 samples, 0.05%)</title><rect x="1098.6" y="2037" width="0.7" height="15.0" fill="rgb(223,16,30)" rx="2" ry="2" />
-<text  x="1101.62" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="213" width="0.1" height="15.0" fill="rgb(254,71,23)" rx="2" ry="2" />
+<text  x="70.90" y="223.5" ></text>
 </g>
 <g >
-<title>torch::autograd::THPVariable_contiguous (79 samples, 0.19%)</title><rect x="1094.5" y="2021" width="2.3" height="15.0" fill="rgb(249,62,31)" rx="2" ry="2" />
-<text  x="1097.50" y="2031.5" ></text>
+<title>torch::FunctionSignature::parse@plt (16 samples, 0.04%)</title><rect x="472.9" y="2037" width="0.5" height="15.0" fill="rgb(242,152,23)" rx="2" ry="2" />
+<text  x="475.94" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="453" width="0.1" height="15.0" fill="rgb(237,77,21)" rx="2" ry="2" />
-<text  x="57.53" y="463.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="997" width="0.8" height="15.0" fill="rgb(208,75,27)" rx="2" ry="2" />
+<text  x="119.62" y="1007.5" ></text>
 </g>
 <g >
-<title>torch::FunctionSignature::parse@plt (13 samples, 0.03%)</title><rect x="511.9" y="2037" width="0.3" height="15.0" fill="rgb(220,18,37)" rx="2" ry="2" />
-<text  x="514.87" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="805" width="0.1" height="15.0" fill="rgb(226,178,9)" rx="2" ry="2" />
+<text  x="70.90" y="815.5" ></text>
 </g>
 <g >
-<title>_PyMethodDescr_FastCallKeywords (362 samples, 0.88%)</title><rect x="389.1" y="2037" width="10.3" height="15.0" fill="rgb(222,167,50)" rx="2" ry="2" />
-<text  x="392.05" y="2047.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1045" width="0.3" height="15.0" fill="rgb(243,225,18)" rx="2" ry="2" />
+<text  x="70.72" y="1055.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="661" width="0.1" height="15.0" fill="rgb(214,46,29)" rx="2" ry="2" />
-<text  x="57.53" y="671.5" ></text>
+<title>_PyMethodDef_RawFastCallKeywords (83 samples, 0.21%)</title><rect x="370.2" y="2037" width="2.5" height="15.0" fill="rgb(212,103,44)" rx="2" ry="2" />
+<text  x="373.23" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1717" width="0.3" height="15.0" fill="rgb(242,20,31)" rx="2" ry="2" />
-<text  x="57.33" y="1727.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="677" width="0.1" height="15.0" fill="rgb(247,132,3)" rx="2" ry="2" />
+<text  x="70.90" y="687.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1525" width="0.3" height="15.0" fill="rgb(250,39,10)" rx="2" ry="2" />
-<text  x="57.33" y="1535.5" ></text>
+<title>[unknown] (27 samples, 0.07%)</title><rect x="116.6" y="1253" width="0.8" height="15.0" fill="rgb(222,88,51)" rx="2" ry="2" />
+<text  x="119.59" y="1263.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="885" width="0.5" height="15.0" fill="rgb(235,169,45)" rx="2" ry="2" />
-<text  x="103.75" y="895.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1349" width="0.3" height="15.0" fill="rgb(231,29,0)" rx="2" ry="2" />
+<text  x="70.72" y="1359.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1781" width="0.3" height="15.0" fill="rgb(222,83,54)" rx="2" ry="2" />
-<text  x="57.33" y="1791.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1317" width="0.8" height="15.0" fill="rgb(234,65,24)" rx="2" ry="2" />
+<text  x="119.59" y="1327.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="949" width="0.5" height="15.0" fill="rgb(213,138,21)" rx="2" ry="2" />
-<text  x="103.75" y="959.5" ></text>
+<title>torch::autograd::THPVariable_contiguous (2,269 samples, 5.77%)</title><rect x="912.2" y="2005" width="68.1" height="15.0" fill="rgb(244,38,47)" rx="2" ry="2" />
+<text  x="915.17" y="2015.5" >torch::..</text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="341" width="0.1" height="15.0" fill="rgb(238,58,2)" rx="2" ry="2" />
-<text  x="57.33" y="351.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="693" width="0.8" height="15.0" fill="rgb(244,45,14)" rx="2" ry="2" />
+<text  x="119.62" y="703.5" ></text>
 </g>
 <g >
-<title>[unknown] (14 samples, 0.03%)</title><rect x="100.8" y="85" width="0.4" height="15.0" fill="rgb(217,4,26)" rx="2" ry="2" />
-<text  x="103.83" y="95.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="101" width="0.1" height="15.0" fill="rgb(247,56,36)" rx="2" ry="2" />
+<text  x="70.90" y="111.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1925" width="0.3" height="15.0" fill="rgb(242,91,41)" rx="2" ry="2" />
-<text  x="57.33" y="1935.5" ></text>
+<title>_PyObject_GenericGetAttrWithDict (5 samples, 0.01%)</title><rect x="384.5" y="2037" width="0.2" height="15.0" fill="rgb(228,47,43)" rx="2" ry="2" />
+<text  x="387.54" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1253" width="0.3" height="15.0" fill="rgb(227,134,4)" rx="2" ry="2" />
-<text  x="57.33" y="1263.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="149" width="0.1" height="15.0" fill="rgb(211,54,30)" rx="2" ry="2" />
+<text  x="70.90" y="159.5" ></text>
 </g>
 <g >
-<title>_PyEval_EvalFrameDefault (22 samples, 0.05%)</title><rect x="87.9" y="2021" width="0.6" height="15.0" fill="rgb(208,55,37)" rx="2" ry="2" />
-<text  x="90.89" y="2031.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="373" width="0.1" height="15.0" fill="rgb(225,144,30)" rx="2" ry="2" />
+<text  x="70.90" y="383.5" ></text>
 </g>
 <g >
-<title>[unknown] (15 samples, 0.04%)</title><rect x="100.8" y="165" width="0.4" height="15.0" fill="rgb(228,133,31)" rx="2" ry="2" />
-<text  x="103.80" y="175.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1461" width="0.3" height="15.0" fill="rgb(231,127,46)" rx="2" ry="2" />
+<text  x="70.72" y="1471.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="261" width="0.4" height="15.0" fill="rgb(238,16,5)" rx="2" ry="2" />
-<text  x="103.78" y="271.5" ></text>
+<title>[ld-2.17.so] (6 samples, 0.02%)</title><rect x="67.7" y="885" width="0.2" height="15.0" fill="rgb(240,100,0)" rx="2" ry="2" />
+<text  x="70.72" y="895.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="485" width="0.1" height="15.0" fill="rgb(239,21,38)" rx="2" ry="2" />
-<text  x="57.33" y="495.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1941" width="0.3" height="15.0" fill="rgb(234,2,52)" rx="2" ry="2" />
+<text  x="70.72" y="1951.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="629" width="0.1" height="15.0" fill="rgb(251,196,37)" rx="2" ry="2" />
-<text  x="57.33" y="639.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1109" width="0.8" height="15.0" fill="rgb(225,74,9)" rx="2" ry="2" />
+<text  x="119.62" y="1119.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="389" width="0.1" height="15.0" fill="rgb(254,123,25)" rx="2" ry="2" />
-<text  x="57.53" y="399.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1061" width="0.8" height="15.0" fill="rgb(206,188,35)" rx="2" ry="2" />
+<text  x="119.62" y="1071.5" ></text>
 </g>
 <g >
-<title>torch::PyWarningHandler::PyWarningHandler (345 samples, 0.84%)</title><rect x="875.7" y="2005" width="9.9" height="15.0" fill="rgb(253,89,47)" rx="2" ry="2" />
-<text  x="878.72" y="2015.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="613" width="0.1" height="15.0" fill="rgb(236,71,18)" rx="2" ry="2" />
+<text  x="70.90" y="623.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1397" width="0.5" height="15.0" fill="rgb(235,64,37)" rx="2" ry="2" />
-<text  x="103.69" y="1407.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="549" width="0.8" height="15.0" fill="rgb(232,74,52)" rx="2" ry="2" />
+<text  x="119.62" y="559.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1013" width="0.5" height="15.0" fill="rgb(237,40,40)" rx="2" ry="2" />
-<text  x="103.75" y="1023.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="965" width="0.3" height="15.0" fill="rgb(219,22,11)" rx="2" ry="2" />
+<text  x="70.72" y="975.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="613" width="0.1" height="15.0" fill="rgb(253,200,54)" rx="2" ry="2" />
-<text  x="57.33" y="623.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="533" width="0.1" height="15.0" fill="rgb(226,64,20)" rx="2" ry="2" />
+<text  x="70.90" y="543.5" ></text>
 </g>
 <g >
-<title>_PyLong_New (290 samples, 0.70%)</title><rect x="377.9" y="2037" width="8.3" height="15.0" fill="rgb(217,218,43)" rx="2" ry="2" />
-<text  x="380.86" y="2047.5" ></text>
+<title>std::string::_Rep::_M_dispose (5 samples, 0.01%)</title><rect x="333.8" y="2021" width="0.2" height="15.0" fill="rgb(238,26,1)" rx="2" ry="2" />
+<text  x="336.82" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (18 samples, 0.04%)</title><rect x="100.7" y="1269" width="0.5" height="15.0" fill="rgb(218,38,34)" rx="2" ry="2" />
-<text  x="103.72" y="1279.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="869" width="0.8" height="15.0" fill="rgb(245,193,9)" rx="2" ry="2" />
+<text  x="119.62" y="879.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="309" width="0.1" height="15.0" fill="rgb(231,129,11)" rx="2" ry="2" />
-<text  x="57.53" y="319.5" ></text>
+<title>tupledealloc (7 samples, 0.02%)</title><rect x="1087.7" y="2037" width="0.2" height="15.0" fill="rgb(231,108,6)" rx="2" ry="2" />
+<text  x="1090.73" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="293" width="0.1" height="15.0" fill="rgb(221,10,3)" rx="2" ry="2" />
-<text  x="57.53" y="303.5" ></text>
+<title>_dl_update_slotinfo (1,451 samples, 3.69%)</title><rect x="1017.4" y="1989" width="43.6" height="15.0" fill="rgb(247,57,2)" rx="2" ry="2" />
+<text  x="1020.44" y="1999.5" >_dl_..</text>
 </g>
 <g >
-<title>[ld-2.17.so] (19 samples, 0.05%)</title><rect x="54.3" y="2053" width="0.6" height="15.0" fill="rgb(218,186,13)" rx="2" ry="2" />
-<text  x="57.33" y="2063.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="213" width="0.8" height="15.0" fill="rgb(215,75,2)" rx="2" ry="2" />
+<text  x="119.65" y="223.5" ></text>
 </g>
 <g >
-<title>update_get_addr (237 samples, 0.58%)</title><rect x="720.3" y="1989" width="6.7" height="15.0" fill="rgb(245,218,16)" rx="2" ry="2" />
-<text  x="723.26" y="1999.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="485" width="0.1" height="15.0" fill="rgb(249,159,33)" rx="2" ry="2" />
+<text  x="70.90" y="495.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1413" width="0.3" height="15.0" fill="rgb(241,114,33)" rx="2" ry="2" />
-<text  x="57.33" y="1423.5" ></text>
+<title>PyType_Ready (10 samples, 0.03%)</title><rect x="103.7" y="2037" width="0.3" height="15.0" fill="rgb(235,172,4)" rx="2" ry="2" />
+<text  x="106.71" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1093" width="0.3" height="15.0" fill="rgb(223,217,40)" rx="2" ry="2" />
-<text  x="57.33" y="1103.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="693" width="0.1" height="15.0" fill="rgb(230,229,43)" rx="2" ry="2" />
+<text  x="70.90" y="703.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="581" width="0.4" height="15.0" fill="rgb(234,55,17)" rx="2" ry="2" />
-<text  x="103.78" y="591.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="325" width="0.8" height="15.0" fill="rgb(245,219,1)" rx="2" ry="2" />
+<text  x="119.65" y="335.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="549" width="0.4" height="15.0" fill="rgb(241,147,4)" rx="2" ry="2" />
-<text  x="103.78" y="559.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1477" width="0.8" height="15.0" fill="rgb(252,108,22)" rx="2" ry="2" />
+<text  x="119.59" y="1487.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="629" width="0.1" height="15.0" fill="rgb(223,184,34)" rx="2" ry="2" />
-<text  x="57.53" y="639.5" ></text>
+<title>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt; &gt;::xsputn (4 samples, 0.01%)</title><rect x="467.4" y="2005" width="0.1" height="15.0" fill="rgb(234,49,26)" rx="2" ry="2" />
+<text  x="470.42" y="2015.5" ></text>
 </g>
 <g >
-<title>_PyEval_EvalFrameDefault (4,150 samples, 10.07%)</title><rect x="126.1" y="2021" width="118.9" height="15.0" fill="rgb(208,49,24)" rx="2" ry="2" />
-<text  x="129.15" y="2031.5" >_PyEval_EvalFr..</text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="981" width="0.3" height="15.0" fill="rgb(209,59,41)" rx="2" ry="2" />
+<text  x="70.72" y="991.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1749" width="0.5" height="15.0" fill="rgb(211,119,20)" rx="2" ry="2" />
-<text  x="103.69" y="1759.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="789" width="0.8" height="15.0" fill="rgb(225,75,28)" rx="2" ry="2" />
+<text  x="119.62" y="799.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="2005" width="0.3" height="15.0" fill="rgb(251,51,52)" rx="2" ry="2" />
-<text  x="57.33" y="2015.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="117.7" y="1989" width="0.1" height="15.0" fill="rgb(231,41,33)" rx="2" ry="2" />
+<text  x="120.67" y="1999.5" ></text>
 </g>
 <g >
-<title>__tls_get_addr (1,317 samples, 3.20%)</title><rect x="629.4" y="2005" width="37.7" height="15.0" fill="rgb(242,225,51)" rx="2" ry="2" />
-<text  x="632.42" y="2015.5" >__t..</text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="469" width="0.1" height="15.0" fill="rgb(206,127,32)" rx="2" ry="2" />
+<text  x="70.90" y="479.5" ></text>
 </g>
 <g >
-<title>PyUnicode_FromKindAndData (8 samples, 0.02%)</title><rect x="53.8" y="2053" width="0.2" height="15.0" fill="rgb(213,149,11)" rx="2" ry="2" />
-<text  x="56.78" y="2063.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1141" width="0.8" height="15.0" fill="rgb(239,63,48)" rx="2" ry="2" />
+<text  x="119.62" y="1151.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1189" width="0.5" height="15.0" fill="rgb(210,41,30)" rx="2" ry="2" />
-<text  x="103.75" y="1199.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1285" width="0.3" height="15.0" fill="rgb(242,4,24)" rx="2" ry="2" />
+<text  x="70.72" y="1295.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1125" width="0.5" height="15.0" fill="rgb(212,107,44)" rx="2" ry="2" />
-<text  x="103.75" y="1135.5" ></text>
+<title>[libtorch_cpu.so] (7 samples, 0.02%)</title><rect x="116.7" y="69" width="0.2" height="15.0" fill="rgb(230,93,22)" rx="2" ry="2" />
+<text  x="119.74" y="79.5" ></text>
 </g>
 <g >
-<title>torch::Library::impl&lt;char const*, torch::CppFunction&gt; (7 samples, 0.02%)</title><rect x="330.1" y="2021" width="0.2" height="15.0" fill="rgb(241,62,11)" rx="2" ry="2" />
-<text  x="333.12" y="2031.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1093" width="0.8" height="15.0" fill="rgb(246,49,28)" rx="2" ry="2" />
+<text  x="119.62" y="1103.5" ></text>
 </g>
 <g >
-<title>[unknown] (21 samples, 0.05%)</title><rect x="100.7" y="1989" width="0.6" height="15.0" fill="rgb(230,183,39)" rx="2" ry="2" />
-<text  x="103.66" y="1999.5" ></text>
+<title>PyType_IsSubtype (189 samples, 0.48%)</title><rect x="61.3" y="2053" width="5.6" height="15.0" fill="rgb(216,189,35)" rx="2" ry="2" />
+<text  x="64.27" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="549" width="0.1" height="15.0" fill="rgb(236,60,34)" rx="2" ry="2" />
-<text  x="57.33" y="559.5" ></text>
+<title>tupletraverse (5 samples, 0.01%)</title><rect x="1188.7" y="2053" width="0.2" height="15.0" fill="rgb(252,149,28)" rx="2" ry="2" />
+<text  x="1191.74" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (18 samples, 0.04%)</title><rect x="100.7" y="1317" width="0.5" height="15.0" fill="rgb(214,172,29)" rx="2" ry="2" />
-<text  x="103.72" y="1327.5" ></text>
+<title>strcmp (12 samples, 0.03%)</title><rect x="468.1" y="2037" width="0.3" height="15.0" fill="rgb(215,86,3)" rx="2" ry="2" />
+<text  x="471.08" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1093" width="0.5" height="15.0" fill="rgb(220,130,44)" rx="2" ry="2" />
-<text  x="103.75" y="1103.5" ></text>
+<title>__tls_get_addr_slow (172 samples, 0.44%)</title><rect x="1012.3" y="1989" width="5.1" height="15.0" fill="rgb(209,56,35)" rx="2" ry="2" />
+<text  x="1015.27" y="1999.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="405" width="0.4" height="15.0" fill="rgb(232,31,24)" rx="2" ry="2" />
-<text  x="103.78" y="415.5" ></text>
+<title>PyErr_Occurred (82 samples, 0.21%)</title><rect x="69.4" y="2037" width="2.5" height="15.0" fill="rgb(226,170,0)" rx="2" ry="2" />
+<text  x="72.43" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="917" width="0.5" height="15.0" fill="rgb(237,102,34)" rx="2" ry="2" />
-<text  x="103.75" y="927.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="885" width="0.1" height="15.0" fill="rgb(241,186,0)" rx="2" ry="2" />
+<text  x="70.90" y="895.5" ></text>
 </g>
 <g >
-<title>[unknown] (15 samples, 0.04%)</title><rect x="100.8" y="133" width="0.4" height="15.0" fill="rgb(231,5,35)" rx="2" ry="2" />
-<text  x="103.80" y="143.5" ></text>
+<title>[unknown] (7 samples, 0.02%)</title><rect x="116.7" y="53" width="0.2" height="15.0" fill="rgb(216,61,4)" rx="2" ry="2" />
+<text  x="119.74" y="63.5" ></text>
 </g>
 <g >
-<title>_dl_relocate_object (63 samples, 0.15%)</title><rect x="500.2" y="1989" width="1.8" height="15.0" fill="rgb(241,6,37)" rx="2" ry="2" />
-<text  x="503.16" y="1999.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1445" width="0.3" height="15.0" fill="rgb(206,133,4)" rx="2" ry="2" />
+<text  x="70.72" y="1455.5" ></text>
 </g>
 <g >
-<title>_PyObject_RealIsSubclass (169 samples, 0.41%)</title><rect x="1173.8" y="2053" width="4.9" height="15.0" fill="rgb(212,118,27)" rx="2" ry="2" />
-<text  x="1176.82" y="2063.5" ></text>
+<title>torch::jit::Lexer::lex (7 samples, 0.02%)</title><rect x="1087.5" y="2037" width="0.2" height="15.0" fill="rgb(226,228,44)" rx="2" ry="2" />
+<text  x="1090.46" y="2047.5" ></text>
 </g>
 <g >
-<title>_PyObject_GenericGetAttrWithDict (7 samples, 0.02%)</title><rect x="1173.6" y="2053" width="0.2" height="15.0" fill="rgb(219,27,3)" rx="2" ry="2" />
-<text  x="1176.62" y="2063.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1301" width="0.3" height="15.0" fill="rgb(211,71,11)" rx="2" ry="2" />
+<text  x="70.72" y="1311.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="933" width="0.5" height="15.0" fill="rgb(251,226,52)" rx="2" ry="2" />
-<text  x="103.75" y="943.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="277" width="0.8" height="15.0" fill="rgb(205,16,42)" rx="2" ry="2" />
+<text  x="119.65" y="287.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="469" width="0.4" height="15.0" fill="rgb(234,116,13)" rx="2" ry="2" />
-<text  x="103.78" y="479.5" ></text>
+<title>std::vector&lt;c10::Argument, std::allocator&lt;c10::Argument&gt; &gt;::_M_realloc_insert&lt;c10::Argument&gt; (4 samples, 0.01%)</title><rect x="334.3" y="2021" width="0.1" height="15.0" fill="rgb(236,48,8)" rx="2" ry="2" />
+<text  x="337.33" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="517" width="0.1" height="15.0" fill="rgb(227,39,12)" rx="2" ry="2" />
-<text  x="57.53" y="527.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="421" width="0.1" height="15.0" fill="rgb(238,182,28)" rx="2" ry="2" />
+<text  x="70.90" y="431.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="597" width="0.1" height="15.0" fill="rgb(253,211,29)" rx="2" ry="2" />
-<text  x="57.53" y="607.5" ></text>
+<title>torch::PythonArgParser::raw_parse@plt (92 samples, 0.23%)</title><rect x="904.7" y="2005" width="2.8" height="15.0" fill="rgb(243,127,21)" rx="2" ry="2" />
+<text  x="907.70" y="2015.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1701" width="0.3" height="15.0" fill="rgb(218,122,51)" rx="2" ry="2" />
-<text  x="57.33" y="1711.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="469" width="0.8" height="15.0" fill="rgb(246,87,47)" rx="2" ry="2" />
+<text  x="119.62" y="479.5" ></text>
 </g>
 <g >
-<title>_dl_update_slotinfo (2,438 samples, 5.92%)</title><rect x="775.6" y="1989" width="69.8" height="15.0" fill="rgb(254,182,16)" rx="2" ry="2" />
-<text  x="778.58" y="1999.5" >_dl_upd..</text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1093" width="0.3" height="15.0" fill="rgb(249,104,21)" rx="2" ry="2" />
+<text  x="70.72" y="1103.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="533" width="0.1" height="15.0" fill="rgb(254,214,44)" rx="2" ry="2" />
-<text  x="57.33" y="543.5" ></text>
+<title>[unknown] (23 samples, 0.06%)</title><rect x="116.7" y="101" width="0.7" height="15.0" fill="rgb(249,145,15)" rx="2" ry="2" />
+<text  x="119.71" y="111.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="149" width="0.1" height="15.0" fill="rgb(243,97,3)" rx="2" ry="2" />
-<text  x="57.53" y="159.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1909" width="0.3" height="15.0" fill="rgb(251,3,7)" rx="2" ry="2" />
+<text  x="70.72" y="1919.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="677" width="0.1" height="15.0" fill="rgb(205,205,33)" rx="2" ry="2" />
-<text  x="57.53" y="687.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1893" width="0.3" height="15.0" fill="rgb(224,149,12)" rx="2" ry="2" />
+<text  x="70.72" y="1903.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1157" width="0.5" height="15.0" fill="rgb(226,34,37)" rx="2" ry="2" />
-<text  x="103.75" y="1167.5" ></text>
+<title>torch::autograd::THPVariable_contiguous (17,373 samples, 44.19%)</title><rect x="565.8" y="2037" width="521.4" height="15.0" fill="rgb(247,16,41)" rx="2" ry="2" />
+<text  x="568.75" y="2047.5" >torch::autograd::THPVariable_contiguous</text>
 </g>
 <g >
-<title>[ld-2.17.so] (7 samples, 0.02%)</title><rect x="54.3" y="917" width="0.2" height="15.0" fill="rgb(209,208,4)" rx="2" ry="2" />
-<text  x="57.33" y="927.5" ></text>
+<title>_int_malloc (57 samples, 0.14%)</title><rect x="456.6" y="2037" width="1.7" height="15.0" fill="rgb(248,182,6)" rx="2" ry="2" />
+<text  x="459.61" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="181" width="0.1" height="15.0" fill="rgb(215,206,42)" rx="2" ry="2" />
-<text  x="57.53" y="191.5" ></text>
+<title>std::basic_stringbuf&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;::~basic_stringbuf (5 samples, 0.01%)</title><rect x="467.4" y="2037" width="0.2" height="15.0" fill="rgb(211,215,35)" rx="2" ry="2" />
+<text  x="470.42" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="725" width="0.5" height="15.0" fill="rgb(223,60,31)" rx="2" ry="2" />
-<text  x="103.75" y="735.5" ></text>
+<title>_PyObject_RealIsSubclass (201 samples, 0.51%)</title><rect x="1172.8" y="2053" width="6.0" height="15.0" fill="rgb(241,33,46)" rx="2" ry="2" />
+<text  x="1175.77" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1109" width="0.3" height="15.0" fill="rgb(238,189,44)" rx="2" ry="2" />
-<text  x="57.33" y="1119.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1205" width="0.8" height="15.0" fill="rgb(232,38,38)" rx="2" ry="2" />
+<text  x="119.62" y="1215.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="453" width="0.1" height="15.0" fill="rgb(246,20,36)" rx="2" ry="2" />
-<text  x="57.33" y="463.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1717" width="0.3" height="15.0" fill="rgb(221,228,24)" rx="2" ry="2" />
+<text  x="70.72" y="1727.5" ></text>
 </g>
 <g >
-<title>_dl_init_internal (8 samples, 0.02%)</title><rect x="257.2" y="2021" width="0.2" height="15.0" fill="rgb(250,109,5)" rx="2" ry="2" />
-<text  x="260.16" y="2031.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1381" width="0.8" height="15.0" fill="rgb(212,199,27)" rx="2" ry="2" />
+<text  x="119.59" y="1391.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="885" width="0.1" height="15.0" fill="rgb(252,5,23)" rx="2" ry="2" />
-<text  x="57.53" y="895.5" ></text>
+<title>[unknown] (15 samples, 0.04%)</title><rect x="116.9" y="69" width="0.5" height="15.0" fill="rgb(221,181,10)" rx="2" ry="2" />
+<text  x="119.95" y="79.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="565" width="0.1" height="15.0" fill="rgb(217,159,4)" rx="2" ry="2" />
-<text  x="57.53" y="575.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1589" width="0.3" height="15.0" fill="rgb(223,51,5)" rx="2" ry="2" />
+<text  x="70.72" y="1599.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="821" width="0.1" height="15.0" fill="rgb(239,164,17)" rx="2" ry="2" />
-<text  x="57.53" y="831.5" ></text>
+<title>torch::jit::SharedParserData::match (12 samples, 0.03%)</title><rect x="1188.2" y="2053" width="0.3" height="15.0" fill="rgb(225,67,6)" rx="2" ry="2" />
+<text  x="1191.17" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1653" width="0.3" height="15.0" fill="rgb(233,9,7)" rx="2" ry="2" />
-<text  x="57.33" y="1663.5" ></text>
+<title>code_dealloc (20 samples, 0.05%)</title><rect x="459.5" y="2037" width="0.6" height="15.0" fill="rgb(231,136,0)" rx="2" ry="2" />
+<text  x="462.46" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (10 samples, 0.02%)</title><rect x="100.9" y="53" width="0.3" height="15.0" fill="rgb(236,159,6)" rx="2" ry="2" />
-<text  x="103.95" y="63.5" ></text>
+<title>[ld-2.17.so] (6 samples, 0.02%)</title><rect x="67.7" y="821" width="0.2" height="15.0" fill="rgb(229,77,53)" rx="2" ry="2" />
+<text  x="70.72" y="831.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1125" width="0.3" height="15.0" fill="rgb(252,198,29)" rx="2" ry="2" />
-<text  x="57.33" y="1135.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1653" width="0.8" height="15.0" fill="rgb(234,106,51)" rx="2" ry="2" />
+<text  x="119.56" y="1663.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1077" width="0.3" height="15.0" fill="rgb(220,188,10)" rx="2" ry="2" />
-<text  x="57.33" y="1087.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1653" width="0.3" height="15.0" fill="rgb(216,209,49)" rx="2" ry="2" />
+<text  x="70.72" y="1663.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="437" width="0.1" height="15.0" fill="rgb(222,113,39)" rx="2" ry="2" />
-<text  x="57.53" y="447.5" ></text>
+<title>collect (24 samples, 0.06%)</title><rect x="1181.0" y="2053" width="0.7" height="15.0" fill="rgb(230,81,25)" rx="2" ry="2" />
+<text  x="1184.00" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="533" width="0.4" height="15.0" fill="rgb(254,65,39)" rx="2" ry="2" />
-<text  x="103.78" y="543.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="467.2" y="2021" width="0.1" height="15.0" fill="rgb(221,203,3)" rx="2" ry="2" />
+<text  x="470.21" y="2031.5" ></text>
 </g>
 <g >
-<title>torch::FunctionSignature::parse (2,178 samples, 5.29%)</title><rect x="535.4" y="2021" width="62.3" height="15.0" fill="rgb(225,26,51)" rx="2" ry="2" />
-<text  x="538.35" y="2031.5" >torch:..</text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="181" width="0.8" height="15.0" fill="rgb(230,121,51)" rx="2" ry="2" />
+<text  x="119.65" y="191.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="741" width="0.5" height="15.0" fill="rgb(245,61,30)" rx="2" ry="2" />
-<text  x="103.75" y="751.5" ></text>
+<title>torch::PythonArgParser::check_deprecated (66 samples, 0.17%)</title><rect x="473.5" y="2037" width="2.0" height="15.0" fill="rgb(236,120,14)" rx="2" ry="2" />
+<text  x="476.54" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (18 samples, 0.04%)</title><rect x="100.7" y="1349" width="0.5" height="15.0" fill="rgb(238,9,39)" rx="2" ry="2" />
-<text  x="103.72" y="1359.5" ></text>
+<title>PyTuple_New (332 samples, 0.84%)</title><rect x="93.5" y="2037" width="9.9" height="15.0" fill="rgb(226,67,39)" rx="2" ry="2" />
+<text  x="96.48" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1589" width="0.3" height="15.0" fill="rgb(215,80,37)" rx="2" ry="2" />
-<text  x="57.33" y="1599.5" ></text>
+<title>dl_open_worker (72 samples, 0.18%)</title><rect x="461.5" y="2005" width="2.2" height="15.0" fill="rgb(252,21,44)" rx="2" ry="2" />
+<text  x="464.53" y="2015.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="453" width="0.4" height="15.0" fill="rgb(252,133,19)" rx="2" ry="2" />
-<text  x="103.78" y="463.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="917" width="0.8" height="15.0" fill="rgb(228,54,26)" rx="2" ry="2" />
+<text  x="119.62" y="927.5" ></text>
 </g>
 <g >
-<title>[unknown] (15 samples, 0.04%)</title><rect x="100.8" y="213" width="0.4" height="15.0" fill="rgb(217,216,0)" rx="2" ry="2" />
-<text  x="103.80" y="223.5" ></text>
+<title>[unknown] (7 samples, 0.02%)</title><rect x="454.7" y="1989" width="0.2" height="15.0" fill="rgb(220,213,32)" rx="2" ry="2" />
+<text  x="457.66" y="1999.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="261" width="0.1" height="15.0" fill="rgb(229,128,45)" rx="2" ry="2" />
-<text  x="57.53" y="271.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1749" width="0.8" height="15.0" fill="rgb(242,78,47)" rx="2" ry="2" />
+<text  x="119.56" y="1759.5" ></text>
 </g>
 <g >
-<title>_dl_update_slotinfo (777 samples, 1.89%)</title><rect x="698.0" y="1989" width="22.3" height="15.0" fill="rgb(242,90,5)" rx="2" ry="2" />
-<text  x="701.01" y="1999.5" >_..</text>
+<title>[unknown] (30 samples, 0.08%)</title><rect x="116.6" y="2005" width="0.9" height="15.0" fill="rgb(253,44,19)" rx="2" ry="2" />
+<text  x="119.56" y="2015.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1621" width="0.3" height="15.0" fill="rgb(216,118,51)" rx="2" ry="2" />
-<text  x="57.33" y="1631.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1541" width="0.8" height="15.0" fill="rgb(229,104,54)" rx="2" ry="2" />
+<text  x="119.59" y="1551.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1317" width="0.3" height="15.0" fill="rgb(241,147,48)" rx="2" ry="2" />
-<text  x="57.33" y="1327.5" ></text>
+<title>__tls_get_addr_slow (84 samples, 0.21%)</title><rect x="687.0" y="1989" width="2.5" height="15.0" fill="rgb(245,211,6)" rx="2" ry="2" />
+<text  x="690.02" y="1999.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="757" width="0.5" height="15.0" fill="rgb(243,190,15)" rx="2" ry="2" />
-<text  x="103.75" y="767.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1477" width="0.3" height="15.0" fill="rgb(206,162,19)" rx="2" ry="2" />
+<text  x="70.72" y="1487.5" ></text>
 </g>
 <g >
-<title>_int_malloc (56 samples, 0.14%)</title><rect x="495.6" y="2037" width="1.6" height="15.0" fill="rgb(227,222,4)" rx="2" ry="2" />
-<text  x="498.61" y="2047.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1365" width="0.8" height="15.0" fill="rgb(225,58,46)" rx="2" ry="2" />
+<text  x="119.59" y="1375.5" ></text>
 </g>
 <g >
-<title>[unknown] (15 samples, 0.04%)</title><rect x="100.8" y="229" width="0.4" height="15.0" fill="rgb(229,82,44)" rx="2" ry="2" />
-<text  x="103.80" y="239.5" ></text>
+<title>__memcmp_sse4_1 (5 samples, 0.01%)</title><rect x="1179.9" y="2053" width="0.2" height="15.0" fill="rgb(247,133,40)" rx="2" ry="2" />
+<text  x="1182.91" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="277" width="0.1" height="15.0" fill="rgb(207,167,52)" rx="2" ry="2" />
-<text  x="57.33" y="287.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="821" width="0.8" height="15.0" fill="rgb(205,149,20)" rx="2" ry="2" />
+<text  x="119.62" y="831.5" ></text>
 </g>
 <g >
-<title>collect (26 samples, 0.06%)</title><rect x="498.6" y="2037" width="0.8" height="15.0" fill="rgb(234,33,6)" rx="2" ry="2" />
-<text  x="501.61" y="2047.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="805" width="0.8" height="15.0" fill="rgb(210,140,2)" rx="2" ry="2" />
+<text  x="119.62" y="815.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="69" width="0.1" height="15.0" fill="rgb(205,93,14)" rx="2" ry="2" />
-<text  x="57.53" y="79.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1813" width="0.3" height="15.0" fill="rgb(230,226,0)" rx="2" ry="2" />
+<text  x="70.72" y="1823.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="789" width="0.1" height="15.0" fill="rgb(243,41,2)" rx="2" ry="2" />
-<text  x="57.53" y="799.5" ></text>
+<title>unicode_dealloc (4 samples, 0.01%)</title><rect x="1189.0" y="2053" width="0.1" height="15.0" fill="rgb(207,212,11)" rx="2" ry="2" />
+<text  x="1192.01" y="2063.5" ></text>
 </g>
 <g >
-<title>torch::PythonArgParser::raw_parse@plt (64 samples, 0.16%)</title><rect x="920.3" y="2005" width="1.8" height="15.0" fill="rgb(206,201,43)" rx="2" ry="2" />
-<text  x="923.31" y="2015.5" ></text>
+<title>_PyStack_AsTuple (227 samples, 0.58%)</title><rect x="417.5" y="2037" width="6.8" height="15.0" fill="rgb(229,14,22)" rx="2" ry="2" />
+<text  x="420.50" y="2047.5" ></text>
 </g>
 <g >
-<title>do_lookup_x (83 samples, 0.20%)</title><rect x="1181.4" y="2053" width="2.4" height="15.0" fill="rgb(247,126,19)" rx="2" ry="2" />
-<text  x="1184.44" y="2063.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="965" width="0.8" height="15.0" fill="rgb(210,200,43)" rx="2" ry="2" />
+<text  x="119.62" y="975.5" ></text>
 </g>
 <g >
-<title>PyDict_SetDefault (29 samples, 0.07%)</title><rect x="10.3" y="2053" width="0.8" height="15.0" fill="rgb(252,160,25)" rx="2" ry="2" />
-<text  x="13.26" y="2063.5" ></text>
+<title>r_long (4 samples, 0.01%)</title><rect x="1186.5" y="2053" width="0.1" height="15.0" fill="rgb(207,165,10)" rx="2" ry="2" />
+<text  x="1189.46" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="437" width="0.4" height="15.0" fill="rgb(224,50,33)" rx="2" ry="2" />
-<text  x="103.78" y="447.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="466.8" y="2021" width="0.1" height="15.0" fill="rgb(226,1,25)" rx="2" ry="2" />
+<text  x="469.76" y="2031.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1637" width="0.3" height="15.0" fill="rgb(235,47,11)" rx="2" ry="2" />
-<text  x="57.33" y="1647.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1365" width="0.3" height="15.0" fill="rgb(239,221,48)" rx="2" ry="2" />
+<text  x="70.72" y="1375.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="837" width="0.5" height="15.0" fill="rgb(252,176,31)" rx="2" ry="2" />
-<text  x="103.75" y="847.5" ></text>
+<title>_PyMethodDef_RawFastCallKeywords (17,071 samples, 43.42%)</title><rect x="565.8" y="2021" width="512.4" height="15.0" fill="rgb(237,127,41)" rx="2" ry="2" />
+<text  x="568.75" y="2031.5" >_PyMethodDef_RawFastCallKeywords</text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1269" width="0.3" height="15.0" fill="rgb(248,140,13)" rx="2" ry="2" />
-<text  x="57.33" y="1279.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1973" width="0.3" height="15.0" fill="rgb(209,24,7)" rx="2" ry="2" />
+<text  x="70.72" y="1983.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="741" width="0.1" height="15.0" fill="rgb(206,205,17)" rx="2" ry="2" />
-<text  x="57.53" y="751.5" ></text>
+<title>visit_reachable (20 samples, 0.05%)</title><rect x="1090.0" y="2037" width="0.6" height="15.0" fill="rgb(245,88,34)" rx="2" ry="2" />
+<text  x="1093.02" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1877" width="0.5" height="15.0" fill="rgb(246,172,25)" rx="2" ry="2" />
-<text  x="103.69" y="1887.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="565" width="0.8" height="15.0" fill="rgb(219,201,25)" rx="2" ry="2" />
+<text  x="119.62" y="575.5" ></text>
 </g>
 <g >
-<title>torch::autograd::THPVariable_contiguous (2,135 samples, 5.18%)</title><rect x="927.7" y="2005" width="61.1" height="15.0" fill="rgb(246,0,6)" rx="2" ry="2" />
-<text  x="930.67" y="2015.5" >torch:..</text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1845" width="0.3" height="15.0" fill="rgb(253,46,3)" rx="2" ry="2" />
+<text  x="70.72" y="1855.5" ></text>
 </g>
 <g >
-<title>[unknown] (8,443 samples, 20.49%)</title><rect x="89.0" y="2037" width="241.8" height="15.0" fill="rgb(253,90,1)" rx="2" ry="2" />
-<text  x="92.04" y="2047.5" >[unknown]</text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1845" width="0.8" height="15.0" fill="rgb(243,202,7)" rx="2" ry="2" />
+<text  x="119.56" y="1855.5" ></text>
 </g>
 <g >
-<title>c10::TensorImpl::is_contiguous (360 samples, 0.87%)</title><rect x="674.9" y="2005" width="10.3" height="15.0" fill="rgb(220,92,6)" rx="2" ry="2" />
-<text  x="677.87" y="2015.5" ></text>
+<title>_PyFunction_FastCallKeywords (4 samples, 0.01%)</title><rect x="363.7" y="2037" width="0.1" height="15.0" fill="rgb(217,71,47)" rx="2" ry="2" />
+<text  x="366.65" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (18 samples, 0.04%)</title><rect x="100.7" y="1285" width="0.5" height="15.0" fill="rgb(244,224,16)" rx="2" ry="2" />
-<text  x="103.72" y="1295.5" ></text>
+<title>_PyDict_GetItem_KnownHash (8 samples, 0.02%)</title><rect x="335.4" y="2037" width="0.2" height="15.0" fill="rgb(212,171,19)" rx="2" ry="2" />
+<text  x="338.38" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1941" width="0.3" height="15.0" fill="rgb(238,205,32)" rx="2" ry="2" />
-<text  x="57.33" y="1951.5" ></text>
+<title>PyCode_New (5 samples, 0.01%)</title><rect x="68.7" y="2037" width="0.1" height="15.0" fill="rgb(228,26,41)" rx="2" ry="2" />
+<text  x="71.65" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1797" width="0.3" height="15.0" fill="rgb(246,19,3)" rx="2" ry="2" />
-<text  x="57.33" y="1807.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1189" width="0.3" height="15.0" fill="rgb(235,45,14)" rx="2" ry="2" />
+<text  x="70.72" y="1199.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (7 samples, 0.02%)</title><rect x="54.3" y="901" width="0.2" height="15.0" fill="rgb(249,69,51)" rx="2" ry="2" />
-<text  x="57.33" y="911.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1509" width="0.3" height="15.0" fill="rgb(217,226,40)" rx="2" ry="2" />
+<text  x="70.72" y="1519.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1301" width="0.3" height="15.0" fill="rgb(243,54,23)" rx="2" ry="2" />
-<text  x="57.33" y="1311.5" ></text>
+<title>collect (8 samples, 0.02%)</title><rect x="117.0" y="37" width="0.3" height="15.0" fill="rgb(229,112,13)" rx="2" ry="2" />
+<text  x="120.04" y="47.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1045" width="0.3" height="15.0" fill="rgb(224,80,8)" rx="2" ry="2" />
-<text  x="57.33" y="1055.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1797" width="0.3" height="15.0" fill="rgb(212,162,49)" rx="2" ry="2" />
+<text  x="70.72" y="1807.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1077" width="0.5" height="15.0" fill="rgb(231,107,13)" rx="2" ry="2" />
-<text  x="103.75" y="1087.5" ></text>
+<title>_PyObject_Free.cold.382 (4 samples, 0.01%)</title><rect x="384.4" y="2037" width="0.1" height="15.0" fill="rgb(240,147,36)" rx="2" ry="2" />
+<text  x="387.39" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1941" width="0.5" height="15.0" fill="rgb(248,62,23)" rx="2" ry="2" />
-<text  x="103.69" y="1951.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="181" width="0.1" height="15.0" fill="rgb(226,170,14)" rx="2" ry="2" />
+<text  x="70.90" y="191.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="565" width="0.4" height="15.0" fill="rgb(220,85,26)" rx="2" ry="2" />
-<text  x="103.78" y="575.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="341" width="0.1" height="15.0" fill="rgb(241,222,39)" rx="2" ry="2" />
+<text  x="70.90" y="351.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="357" width="0.1" height="15.0" fill="rgb(215,176,21)" rx="2" ry="2" />
-<text  x="57.53" y="367.5" ></text>
+<title>PyUnicode_New (5 samples, 0.01%)</title><rect x="67.4" y="2053" width="0.2" height="15.0" fill="rgb(224,147,27)" rx="2" ry="2" />
+<text  x="70.42" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="229" width="0.1" height="15.0" fill="rgb(217,126,7)" rx="2" ry="2" />
-<text  x="57.33" y="239.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="325" width="0.1" height="15.0" fill="rgb(212,43,9)" rx="2" ry="2" />
+<text  x="70.90" y="335.5" ></text>
 </g>
 <g >
-<title>_PyDict_LoadGlobal (1,220 samples, 2.96%)</title><rect x="1100.0" y="2053" width="34.9" height="15.0" fill="rgb(206,134,34)" rx="2" ry="2" />
-<text  x="1102.97" y="2063.5" >_P..</text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="357" width="0.1" height="15.0" fill="rgb(231,229,50)" rx="2" ry="2" />
+<text  x="70.90" y="367.5" ></text>
 </g>
 <g >
-<title>collect (6 samples, 0.01%)</title><rect x="101.0" y="37" width="0.2" height="15.0" fill="rgb(206,112,48)" rx="2" ry="2" />
-<text  x="104.00" y="47.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1061" width="0.3" height="15.0" fill="rgb(248,143,47)" rx="2" ry="2" />
+<text  x="70.72" y="1071.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1701" width="0.5" height="15.0" fill="rgb(236,39,15)" rx="2" ry="2" />
-<text  x="103.69" y="1711.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1749" width="0.3" height="15.0" fill="rgb(243,132,33)" rx="2" ry="2" />
+<text  x="70.72" y="1759.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1541" width="0.5" height="15.0" fill="rgb(230,143,46)" rx="2" ry="2" />
-<text  x="103.69" y="1551.5" ></text>
+<title>[unknown] (7 samples, 0.02%)</title><rect x="454.7" y="2005" width="0.2" height="15.0" fill="rgb(246,69,11)" rx="2" ry="2" />
+<text  x="457.66" y="2015.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1205" width="0.3" height="15.0" fill="rgb(248,3,23)" rx="2" ry="2" />
-<text  x="57.33" y="1215.5" ></text>
+<title>std::_Function_handler&lt;void  (10 samples, 0.03%)</title><rect x="466.4" y="2037" width="0.3" height="15.0" fill="rgb(248,226,50)" rx="2" ry="2" />
+<text  x="469.37" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="389" width="0.4" height="15.0" fill="rgb(223,185,49)" rx="2" ry="2" />
-<text  x="103.78" y="399.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="229" width="0.1" height="15.0" fill="rgb(208,206,34)" rx="2" ry="2" />
+<text  x="70.90" y="239.5" ></text>
 </g>
 <g >
-<title>unicode_dealloc (5 samples, 0.01%)</title><rect x="1098.0" y="2037" width="0.2" height="15.0" fill="rgb(250,61,38)" rx="2" ry="2" />
-<text  x="1101.02" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="245" width="0.1" height="15.0" fill="rgb(250,175,21)" rx="2" ry="2" />
+<text  x="70.90" y="255.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="997" width="0.3" height="15.0" fill="rgb(218,100,24)" rx="2" ry="2" />
-<text  x="57.33" y="1007.5" ></text>
+<title>PyDict_SetItem (15 samples, 0.04%)</title><rect x="69.0" y="2037" width="0.4" height="15.0" fill="rgb(242,9,42)" rx="2" ry="2" />
+<text  x="71.98" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="341" width="0.1" height="15.0" fill="rgb(229,224,34)" rx="2" ry="2" />
-<text  x="57.53" y="351.5" ></text>
+<title>c10::DispatchKeyExtractor::makeBitsetForDispatchArgs (4 samples, 0.01%)</title><rect x="294.5" y="1989" width="0.1" height="15.0" fill="rgb(221,35,33)" rx="2" ry="2" />
+<text  x="297.46" y="1999.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="357" width="0.4" height="15.0" fill="rgb(213,131,8)" rx="2" ry="2" />
-<text  x="103.78" y="367.5" ></text>
+<title>c10::TensorImpl::is_contiguous (117 samples, 0.30%)</title><rect x="671.3" y="2005" width="3.6" height="15.0" fill="rgb(211,166,22)" rx="2" ry="2" />
+<text  x="674.35" y="2015.5" ></text>
 </g>
 <g >
-<title>_PyMethodDef_RawFastCallKeywords (101 samples, 0.25%)</title><rect x="386.2" y="2037" width="2.9" height="15.0" fill="rgb(251,122,14)" rx="2" ry="2" />
-<text  x="389.16" y="2047.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1077" width="0.3" height="15.0" fill="rgb(214,183,30)" rx="2" ry="2" />
+<text  x="70.72" y="1087.5" ></text>
 </g>
 <g >
-<title>c10::Warning::set_warning_handler (5,163 samples, 12.53%)</title><rect x="727.2" y="2005" width="147.8" height="15.0" fill="rgb(238,164,50)" rx="2" ry="2" />
-<text  x="730.16" y="2015.5" >c10::Warning::set_..</text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1157" width="0.3" height="15.0" fill="rgb(211,134,0)" rx="2" ry="2" />
+<text  x="70.72" y="1167.5" ></text>
 </g>
 <g >
-<title>torch::Library::_impl (4 samples, 0.01%)</title><rect x="257.5" y="2005" width="0.1" height="15.0" fill="rgb(206,2,54)" rx="2" ry="2" />
-<text  x="260.50" y="2015.5" ></text>
+<title>_PyObject_GetMethod (377 samples, 0.96%)</title><rect x="282.4" y="2021" width="11.3" height="15.0" fill="rgb(231,192,42)" rx="2" ry="2" />
+<text  x="285.37" y="2031.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (7 samples, 0.02%)</title><rect x="54.3" y="869" width="0.2" height="15.0" fill="rgb(219,67,8)" rx="2" ry="2" />
-<text  x="57.33" y="879.5" ></text>
+<title>_dl_update_slotinfo (780 samples, 1.98%)</title><rect x="689.5" y="1989" width="23.5" height="15.0" fill="rgb(252,126,39)" rx="2" ry="2" />
+<text  x="692.54" y="1999.5" >_..</text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1461" width="0.5" height="15.0" fill="rgb(212,209,49)" rx="2" ry="2" />
-<text  x="103.69" y="1471.5" ></text>
+<title>PyDict_GetItem (5 samples, 0.01%)</title><rect x="68.8" y="2037" width="0.2" height="15.0" fill="rgb(228,105,8)" rx="2" ry="2" />
+<text  x="71.80" y="2047.5" ></text>
 </g>
 <g >
-<title>_PyMethodDef_RawFastCallKeywords (17,182 samples, 41.70%)</title><rect x="597.8" y="2021" width="492.0" height="15.0" fill="rgb(221,9,21)" rx="2" ry="2" />
-<text  x="600.78" y="2031.5" >_PyMethodDef_RawFastCallKeywords</text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1717" width="0.8" height="15.0" fill="rgb(250,122,15)" rx="2" ry="2" />
+<text  x="119.56" y="1727.5" ></text>
 </g>
 <g >
-<title>type_new (4 samples, 0.01%)</title><rect x="1188.9" y="2053" width="0.1" height="15.0" fill="rgb(240,129,29)" rx="2" ry="2" />
-<text  x="1191.91" y="2063.5" ></text>
+<title>_PyObject_GetMethod (1,015 samples, 2.58%)</title><rect x="387.0" y="2037" width="30.5" height="15.0" fill="rgb(234,40,16)" rx="2" ry="2" />
+<text  x="390.03" y="2047.5" >_P..</text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="741" width="0.1" height="15.0" fill="rgb(218,155,38)" rx="2" ry="2" />
-<text  x="57.33" y="751.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="501" width="0.8" height="15.0" fill="rgb(236,135,7)" rx="2" ry="2" />
+<text  x="119.62" y="511.5" ></text>
 </g>
 <g >
-<title>[unknown] (29 samples, 0.07%)</title><rect x="100.7" y="2021" width="0.8" height="15.0" fill="rgb(209,190,16)" rx="2" ry="2" />
-<text  x="103.66" y="2031.5" ></text>
+<title>_PyObject_GetDictPtr (78 samples, 0.20%)</title><rect x="384.7" y="2037" width="2.3" height="15.0" fill="rgb(206,116,38)" rx="2" ry="2" />
+<text  x="387.69" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1013" width="0.3" height="15.0" fill="rgb(232,24,49)" rx="2" ry="2" />
-<text  x="57.33" y="1023.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1765" width="0.3" height="15.0" fill="rgb(214,32,53)" rx="2" ry="2" />
+<text  x="70.72" y="1775.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="213" width="0.1" height="15.0" fill="rgb(211,186,13)" rx="2" ry="2" />
-<text  x="57.53" y="223.5" ></text>
+<title>c10::impl::OperatorEntry::deregisterKernel_ (6 samples, 0.02%)</title><rect x="466.4" y="2005" width="0.2" height="15.0" fill="rgb(211,100,27)" rx="2" ry="2" />
+<text  x="469.43" y="2015.5" ></text>
 </g>
 <g >
-<title>PyErr_Occurred (140 samples, 0.34%)</title><rect x="56.2" y="2037" width="4.0" height="15.0" fill="rgb(231,216,26)" rx="2" ry="2" />
-<text  x="59.22" y="2047.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="773" width="0.8" height="15.0" fill="rgb(223,26,38)" rx="2" ry="2" />
+<text  x="119.62" y="783.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="725" width="0.1" height="15.0" fill="rgb(247,99,19)" rx="2" ry="2" />
-<text  x="57.33" y="735.5" ></text>
+<title>rangeiter_next (131 samples, 0.33%)</title><rect x="328.8" y="2021" width="4.0" height="15.0" fill="rgb(224,145,38)" rx="2" ry="2" />
+<text  x="331.83" y="2031.5" ></text>
 </g>
 <g >
-<title>std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;::basic_string (4 samples, 0.01%)</title><rect x="328.9" y="2021" width="0.2" height="15.0" fill="rgb(228,63,50)" rx="2" ry="2" />
-<text  x="331.95" y="2031.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1877" width="0.8" height="15.0" fill="rgb(242,163,0)" rx="2" ry="2" />
+<text  x="119.56" y="1887.5" ></text>
 </g>
 <g >
-<title>_PyObject_GenericGetAttrWithDict (10 samples, 0.02%)</title><rect x="399.9" y="2037" width="0.3" height="15.0" fill="rgb(251,15,17)" rx="2" ry="2" />
-<text  x="402.94" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="261" width="0.1" height="15.0" fill="rgb(215,92,40)" rx="2" ry="2" />
+<text  x="70.90" y="271.5" ></text>
 </g>
 <g >
-<title>[unknown] (15 samples, 0.04%)</title><rect x="100.8" y="197" width="0.4" height="15.0" fill="rgb(208,192,36)" rx="2" ry="2" />
-<text  x="103.80" y="207.5" ></text>
+<title>torch::Library::def&lt;char const  (10 samples, 0.03%)</title><rect x="334.5" y="2021" width="0.3" height="15.0" fill="rgb(215,116,24)" rx="2" ry="2" />
+<text  x="337.48" y="2031.5" ></text>
 </g>
 <g >
-<title>visit_reachable (20 samples, 0.05%)</title><rect x="1099.3" y="2037" width="0.5" height="15.0" fill="rgb(246,106,42)" rx="2" ry="2" />
-<text  x="1102.25" y="2047.5" ></text>
+<title>_PyEval_EvalFrameDefault (732 samples, 1.86%)</title><rect x="1132.9" y="2053" width="22.0" height="15.0" fill="rgb(219,50,5)" rx="2" ry="2" />
+<text  x="1135.91" y="2063.5" >_..</text>
 </g>
 <g >
-<title>visit_decref (19 samples, 0.05%)</title><rect x="1189.2" y="2053" width="0.6" height="15.0" fill="rgb(231,81,25)" rx="2" ry="2" />
-<text  x="1192.23" y="2063.5" ></text>
+<title>c10::impl::OperatorEntry::computeDispatchTableEntry (6 samples, 0.02%)</title><rect x="294.7" y="2021" width="0.2" height="15.0" fill="rgb(227,87,36)" rx="2" ry="2" />
+<text  x="297.73" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1365" width="0.5" height="15.0" fill="rgb(208,26,32)" rx="2" ry="2" />
-<text  x="103.69" y="1375.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="53" width="0.1" height="15.0" fill="rgb(237,124,2)" rx="2" ry="2" />
+<text  x="70.90" y="63.5" ></text>
 </g>
 <g >
-<title>torch::PyWarningHandler::PyWarningHandler@plt (64 samples, 0.16%)</title><rect x="885.6" y="2005" width="1.8" height="15.0" fill="rgb(233,129,53)" rx="2" ry="2" />
-<text  x="888.60" y="2015.5" ></text>
+<title>_PyEval_EvalFrameDefault (22 samples, 0.06%)</title><rect x="104.4" y="2021" width="0.7" height="15.0" fill="rgb(240,94,10)" rx="2" ry="2" />
+<text  x="107.43" y="2031.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1813" width="0.3" height="15.0" fill="rgb(219,4,4)" rx="2" ry="2" />
-<text  x="57.33" y="1823.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1429" width="0.8" height="15.0" fill="rgb(249,91,8)" rx="2" ry="2" />
+<text  x="119.59" y="1439.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="549" width="0.1" height="15.0" fill="rgb(254,214,1)" rx="2" ry="2" />
-<text  x="57.53" y="559.5" ></text>
+<title>PyType_IsSubtype (8 samples, 0.02%)</title><rect x="103.5" y="2037" width="0.2" height="15.0" fill="rgb(229,173,22)" rx="2" ry="2" />
+<text  x="106.47" y="2047.5" ></text>
 </g>
 <g >
-<title>structseq_dealloc (4 samples, 0.01%)</title><rect x="507.0" y="2037" width="0.1" height="15.0" fill="rgb(231,110,39)" rx="2" ry="2" />
-<text  x="509.98" y="2047.5" ></text>
+<title>torch::PythonArgParser::raw_parse (407 samples, 1.04%)</title><rect x="892.5" y="2005" width="12.2" height="15.0" fill="rgb(222,33,24)" rx="2" ry="2" />
+<text  x="895.48" y="2015.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="789" width="0.5" height="15.0" fill="rgb(241,134,16)" rx="2" ry="2" />
-<text  x="103.75" y="799.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="741" width="0.1" height="15.0" fill="rgb(241,64,22)" rx="2" ry="2" />
+<text  x="70.90" y="751.5" ></text>
 </g>
 <g >
-<title>PyTuple_New (6 samples, 0.01%)</title><rect x="48.2" y="2053" width="0.2" height="15.0" fill="rgb(251,31,47)" rx="2" ry="2" />
-<text  x="51.20" y="2063.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="421" width="0.8" height="15.0" fill="rgb(225,145,32)" rx="2" ry="2" />
+<text  x="119.62" y="431.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="325" width="0.1" height="15.0" fill="rgb(212,146,51)" rx="2" ry="2" />
-<text  x="57.53" y="335.5" ></text>
+<title>__cxxabiv1::__si_class_type_info::__do_dyncast (5 samples, 0.01%)</title><rect x="1179.6" y="2053" width="0.2" height="15.0" fill="rgb(209,20,39)" rx="2" ry="2" />
+<text  x="1182.64" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1909" width="0.3" height="15.0" fill="rgb(252,99,51)" rx="2" ry="2" />
-<text  x="57.33" y="1919.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1605" width="0.8" height="15.0" fill="rgb(209,106,31)" rx="2" ry="2" />
+<text  x="119.56" y="1615.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1333" width="0.3" height="15.0" fill="rgb(250,225,16)" rx="2" ry="2" />
-<text  x="57.33" y="1343.5" ></text>
+<title>_PyFrame_New_NoTrack (7 samples, 0.02%)</title><rect x="363.4" y="2037" width="0.2" height="15.0" fill="rgb(243,37,18)" rx="2" ry="2" />
+<text  x="366.41" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1461" width="0.3" height="15.0" fill="rgb(217,33,7)" rx="2" ry="2" />
-<text  x="57.33" y="1471.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="581" width="0.1" height="15.0" fill="rgb(230,216,37)" rx="2" ry="2" />
+<text  x="70.90" y="591.5" ></text>
 </g>
 <g >
-<title>lookdict_unicode (5 samples, 0.01%)</title><rect x="54.7" y="2037" width="0.2" height="15.0" fill="rgb(243,100,48)" rx="2" ry="2" />
-<text  x="57.73" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="293" width="0.1" height="15.0" fill="rgb(250,96,33)" rx="2" ry="2" />
+<text  x="70.90" y="303.5" ></text>
 </g>
 <g >
-<title>PyDict_GetItem (5 samples, 0.01%)</title><rect x="55.4" y="2037" width="0.2" height="15.0" fill="rgb(239,209,5)" rx="2" ry="2" />
-<text  x="58.42" y="2047.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1669" width="0.3" height="15.0" fill="rgb(254,81,39)" rx="2" ry="2" />
+<text  x="70.72" y="1679.5" ></text>
 </g>
 <g >
-<title>std::_Sp_counted_ptr&lt;c10::TensorType*,  (4 samples, 0.01%)</title><rect x="505.6" y="2037" width="0.1" height="15.0" fill="rgb(226,48,44)" rx="2" ry="2" />
-<text  x="508.57" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="645" width="0.1" height="15.0" fill="rgb(211,214,1)" rx="2" ry="2" />
+<text  x="70.90" y="655.5" ></text>
 </g>
 <g >
-<title>dl_open_worker (63 samples, 0.15%)</title><rect x="500.2" y="2005" width="1.8" height="15.0" fill="rgb(244,106,1)" rx="2" ry="2" />
-<text  x="503.16" y="2015.5" ></text>
+<title>update_get_addr (494 samples, 1.26%)</title><rect x="1061.0" y="1989" width="14.8" height="15.0" fill="rgb(230,181,1)" rx="2" ry="2" />
+<text  x="1063.99" y="1999.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="309" width="0.1" height="15.0" fill="rgb(232,47,54)" rx="2" ry="2" />
-<text  x="57.33" y="319.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1573" width="0.3" height="15.0" fill="rgb(243,229,36)" rx="2" ry="2" />
+<text  x="70.72" y="1583.5" ></text>
 </g>
 <g >
-<title>_PyObject_Free (7 samples, 0.02%)</title><rect x="399.6" y="2037" width="0.2" height="15.0" fill="rgb(230,197,38)" rx="2" ry="2" />
-<text  x="402.56" y="2047.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="853" width="0.8" height="15.0" fill="rgb(220,27,10)" rx="2" ry="2" />
+<text  x="119.62" y="863.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="965" width="0.5" height="15.0" fill="rgb(212,23,1)" rx="2" ry="2" />
-<text  x="103.75" y="975.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1621" width="0.3" height="15.0" fill="rgb(208,215,47)" rx="2" ry="2" />
+<text  x="70.72" y="1631.5" ></text>
 </g>
 <g >
-<title>torch::Library::impl&lt;char const*, torch::CppFunction&gt; (8 samples, 0.02%)</title><rect x="512.3" y="2037" width="0.3" height="15.0" fill="rgb(212,126,11)" rx="2" ry="2" />
-<text  x="515.33" y="2047.5" ></text>
+<title>_PyMethodDef_RawFastCallKeywords (377 samples, 0.96%)</title><rect x="1154.9" y="2053" width="11.3" height="15.0" fill="rgb(235,120,22)" rx="2" ry="2" />
+<text  x="1157.88" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (21 samples, 0.05%)</title><rect x="100.7" y="1973" width="0.6" height="15.0" fill="rgb(214,205,14)" rx="2" ry="2" />
-<text  x="103.66" y="1983.5" ></text>
+<title>[ld-2.17.so] (13 samples, 0.03%)</title><rect x="67.7" y="2037" width="0.4" height="15.0" fill="rgb(250,170,31)" rx="2" ry="2" />
+<text  x="70.72" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (36 samples, 0.09%)</title><rect x="87.7" y="2037" width="1.1" height="15.0" fill="rgb(220,42,0)" rx="2" ry="2" />
-<text  x="90.75" y="2047.5" ></text>
+<title>update_get_addr (1,404 samples, 3.57%)</title><rect x="818.1" y="1989" width="42.1" height="15.0" fill="rgb(210,229,22)" rx="2" ry="2" />
+<text  x="821.07" y="1999.5" >upd..</text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="725" width="0.1" height="15.0" fill="rgb(240,141,16)" rx="2" ry="2" />
-<text  x="57.53" y="735.5" ></text>
+<title>[ld-2.17.so] (6 samples, 0.02%)</title><rect x="67.7" y="869" width="0.2" height="15.0" fill="rgb(231,215,21)" rx="2" ry="2" />
+<text  x="70.72" y="879.5" ></text>
 </g>
 <g >
-<title>__tls_get_addr_slow (172 samples, 0.42%)</title><rect x="1012.1" y="1989" width="4.9" height="15.0" fill="rgb(231,42,20)" rx="2" ry="2" />
-<text  x="1015.06" y="1999.5" ></text>
+<title>c10::Warning::set_warning_handler@plt (11 samples, 0.03%)</title><rect x="860.2" y="2005" width="0.3" height="15.0" fill="rgb(222,187,35)" rx="2" ry="2" />
+<text  x="863.21" y="2015.5" ></text>
 </g>
 <g >
-<title>[unknown] (18 samples, 0.04%)</title><rect x="100.7" y="1253" width="0.5" height="15.0" fill="rgb(230,25,47)" rx="2" ry="2" />
-<text  x="103.72" y="1263.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="629" width="0.8" height="15.0" fill="rgb(208,158,1)" rx="2" ry="2" />
+<text  x="119.62" y="639.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="869" width="0.1" height="15.0" fill="rgb(239,164,4)" rx="2" ry="2" />
-<text  x="57.53" y="879.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="229" width="0.8" height="15.0" fill="rgb(212,222,41)" rx="2" ry="2" />
+<text  x="119.65" y="239.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1605" width="0.3" height="15.0" fill="rgb(241,44,12)" rx="2" ry="2" />
-<text  x="57.33" y="1615.5" ></text>
+<title>d_append_buffer (4 samples, 0.01%)</title><rect x="460.6" y="2037" width="0.1" height="15.0" fill="rgb(243,77,28)" rx="2" ry="2" />
+<text  x="463.57" y="2047.5" ></text>
 </g>
 <g >
-<title>PyLong_FromLong (187 samples, 0.45%)</title><rect x="60.6" y="2037" width="5.3" height="15.0" fill="rgb(224,42,32)" rx="2" ry="2" />
-<text  x="63.57" y="2047.5" ></text>
+<title>_IO_vfscanf (6 samples, 0.02%)</title><rect x="117.6" y="2005" width="0.2" height="15.0" fill="rgb(247,107,50)" rx="2" ry="2" />
+<text  x="120.61" y="2015.5" ></text>
 </g>
 <g >
-<title>_dl_addr (7 samples, 0.02%)</title><rect x="1179.9" y="2053" width="0.2" height="15.0" fill="rgb(205,188,6)" rx="2" ry="2" />
-<text  x="1182.95" y="2063.5" ></text>
+<title>[ld-2.17.so] (6 samples, 0.02%)</title><rect x="67.7" y="901" width="0.2" height="15.0" fill="rgb(228,95,51)" rx="2" ry="2" />
+<text  x="70.72" y="911.5" ></text>
 </g>
 <g >
-<title>_PyDict_GetItem_KnownHash (9 samples, 0.02%)</title><rect x="331.0" y="2037" width="0.3" height="15.0" fill="rgb(227,172,3)" rx="2" ry="2" />
-<text  x="334.04" y="2047.5" ></text>
+<title>[unknown] (7 samples, 0.02%)</title><rect x="454.7" y="2021" width="0.2" height="15.0" fill="rgb(253,164,47)" rx="2" ry="2" />
+<text  x="457.66" y="2031.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="581" width="0.1" height="15.0" fill="rgb(210,3,31)" rx="2" ry="2" />
-<text  x="57.33" y="591.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1077" width="0.8" height="15.0" fill="rgb(234,78,45)" rx="2" ry="2" />
+<text  x="119.62" y="1087.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1765" width="0.5" height="15.0" fill="rgb(238,178,24)" rx="2" ry="2" />
-<text  x="103.69" y="1775.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1461" width="0.8" height="15.0" fill="rgb(241,12,38)" rx="2" ry="2" />
+<text  x="119.59" y="1471.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1189" width="0.3" height="15.0" fill="rgb(218,186,52)" rx="2" ry="2" />
-<text  x="57.33" y="1199.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="85" width="0.1" height="15.0" fill="rgb(247,82,1)" rx="2" ry="2" />
+<text  x="70.90" y="95.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="613" width="0.4" height="15.0" fill="rgb(207,195,38)" rx="2" ry="2" />
-<text  x="103.78" y="623.5" ></text>
+<title>[unknown] (7,650 samples, 19.46%)</title><rect x="105.5" y="2037" width="229.6" height="15.0" fill="rgb(229,133,15)" rx="2" ry="2" />
+<text  x="108.48" y="2047.5" >[unknown]</text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="517" width="0.1" height="15.0" fill="rgb(240,12,27)" rx="2" ry="2" />
-<text  x="57.33" y="527.5" ></text>
+<title>std::string::compare (8 samples, 0.02%)</title><rect x="334.1" y="2021" width="0.2" height="15.0" fill="rgb(231,20,42)" rx="2" ry="2" />
+<text  x="337.06" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1589" width="0.5" height="15.0" fill="rgb(212,91,36)" rx="2" ry="2" />
-<text  x="103.69" y="1599.5" ></text>
+<title>torch::FunctionSignature::parse (144 samples, 0.37%)</title><rect x="468.6" y="2037" width="4.3" height="15.0" fill="rgb(224,87,1)" rx="2" ry="2" />
+<text  x="471.62" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="773" width="0.5" height="15.0" fill="rgb(207,33,53)" rx="2" ry="2" />
-<text  x="103.75" y="783.5" ></text>
+<title>lookdict_split (4 samples, 0.01%)</title><rect x="1184.5" y="2053" width="0.1" height="15.0" fill="rgb(214,103,10)" rx="2" ry="2" />
+<text  x="1187.48" y="2063.5" ></text>
 </g>
 <g >
-<title>PyObject_Malloc (1,275 samples, 3.09%)</title><rect x="11.6" y="2053" width="36.5" height="15.0" fill="rgb(225,91,13)" rx="2" ry="2" />
-<text  x="14.57" y="2063.5" >PyO..</text>
+<title>torch::detail::TorchLibraryInit::~TorchLibraryInit (6 samples, 0.02%)</title><rect x="1087.3" y="2037" width="0.2" height="15.0" fill="rgb(219,84,26)" rx="2" ry="2" />
+<text  x="1090.28" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="53" width="0.1" height="15.0" fill="rgb(245,209,49)" rx="2" ry="2" />
-<text  x="57.53" y="63.5" ></text>
+<title>c10::Warning::set_warning_handler (4,650 samples, 11.83%)</title><rect x="720.6" y="2005" width="139.6" height="15.0" fill="rgb(237,31,45)" rx="2" ry="2" />
+<text  x="723.64" y="2015.5" >c10::Warning::set..</text>
 </g>
 <g >
-<title>check_match.9525 (9 samples, 0.02%)</title><rect x="497.9" y="2037" width="0.3" height="15.0" fill="rgb(235,100,40)" rx="2" ry="2" />
-<text  x="500.93" y="2047.5" ></text>
+<title>malloc_consolidate (16 samples, 0.04%)</title><rect x="464.9" y="2037" width="0.5" height="15.0" fill="rgb(244,136,0)" rx="2" ry="2" />
+<text  x="467.93" y="2047.5" ></text>
 </g>
 <g >
-<title>PyCode_New (6 samples, 0.01%)</title><rect x="89.1" y="2021" width="0.1" height="15.0" fill="rgb(251,174,25)" rx="2" ry="2" />
-<text  x="92.06" y="2031.5" ></text>
+<title>torch::FunctionSignature::parse (2,250 samples, 5.72%)</title><rect x="498.1" y="2021" width="67.5" height="15.0" fill="rgb(247,124,16)" rx="2" ry="2" />
+<text  x="501.09" y="2031.5" >torch::..</text>
 </g>
 <g >
-<title>__tls_get_addr_slow (156 samples, 0.38%)</title><rect x="693.5" y="1989" width="4.5" height="15.0" fill="rgb(244,196,37)" rx="2" ry="2" />
-<text  x="696.54" y="1999.5" ></text>
+<title>[ld-2.17.so] (6 samples, 0.02%)</title><rect x="67.7" y="805" width="0.2" height="15.0" fill="rgb(236,31,33)" rx="2" ry="2" />
+<text  x="70.72" y="815.5" ></text>
 </g>
 <g >
-<title>[unknown] (14 samples, 0.03%)</title><rect x="100.8" y="101" width="0.4" height="15.0" fill="rgb(236,79,3)" rx="2" ry="2" />
-<text  x="103.83" y="111.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1877" width="0.3" height="15.0" fill="rgb(232,63,46)" rx="2" ry="2" />
+<text  x="70.72" y="1887.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1221" width="0.3" height="15.0" fill="rgb(217,142,49)" rx="2" ry="2" />
-<text  x="57.33" y="1231.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="597" width="0.8" height="15.0" fill="rgb(206,194,13)" rx="2" ry="2" />
+<text  x="119.62" y="607.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1797" width="0.5" height="15.0" fill="rgb(218,11,15)" rx="2" ry="2" />
-<text  x="103.69" y="1807.5" ></text>
+<title>__cxxabiv1::__class_type_info::~__class_type_info (7 samples, 0.02%)</title><rect x="454.7" y="2037" width="0.2" height="15.0" fill="rgb(216,153,23)" rx="2" ry="2" />
+<text  x="457.66" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1813" width="0.5" height="15.0" fill="rgb(233,187,42)" rx="2" ry="2" />
-<text  x="103.69" y="1823.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="901" width="0.8" height="15.0" fill="rgb(212,77,36)" rx="2" ry="2" />
+<text  x="119.62" y="911.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1477" width="0.3" height="15.0" fill="rgb(237,220,2)" rx="2" ry="2" />
-<text  x="57.33" y="1487.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1925" width="0.8" height="15.0" fill="rgb(231,128,29)" rx="2" ry="2" />
+<text  x="119.56" y="1935.5" ></text>
 </g>
 <g >
-<title>_PyDict_LoadGlobal (858 samples, 2.08%)</title><rect x="101.5" y="2021" width="24.6" height="15.0" fill="rgb(213,183,52)" rx="2" ry="2" />
-<text  x="104.55" y="2031.5" >_..</text>
+<title>torch::autograd::THPVariable_contiguous (130 samples, 0.33%)</title><rect x="1083.3" y="2021" width="3.9" height="15.0" fill="rgb(221,116,49)" rx="2" ry="2" />
+<text  x="1086.32" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (18 samples, 0.04%)</title><rect x="100.7" y="1333" width="0.5" height="15.0" fill="rgb(249,152,4)" rx="2" ry="2" />
-<text  x="103.72" y="1343.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="357" width="0.8" height="15.0" fill="rgb(241,130,28)" rx="2" ry="2" />
+<text  x="119.65" y="367.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1861" width="0.5" height="15.0" fill="rgb(239,160,11)" rx="2" ry="2" />
-<text  x="103.69" y="1871.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1957" width="0.3" height="15.0" fill="rgb(246,82,35)" rx="2" ry="2" />
+<text  x="70.72" y="1967.5" ></text>
 </g>
 <g >
-<title>__memcpy_ssse3_back (6 samples, 0.01%)</title><rect x="493.8" y="2037" width="0.1" height="15.0" fill="rgb(244,66,54)" rx="2" ry="2" />
-<text  x="496.78" y="2047.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1301" width="0.8" height="15.0" fill="rgb(210,215,30)" rx="2" ry="2" />
+<text  x="119.59" y="1311.5" ></text>
 </g>
 <g >
-<title>std::_Sp_counted_base&lt; (4 samples, 0.01%)</title><rect x="505.2" y="2037" width="0.1" height="15.0" fill="rgb(220,183,19)" rx="2" ry="2" />
-<text  x="508.17" y="2047.5" ></text>
+<title>c10::Warning::get_warning_handler (1,519 samples, 3.86%)</title><rect x="674.9" y="2005" width="45.6" height="15.0" fill="rgb(232,208,39)" rx="2" ry="2" />
+<text  x="677.86" y="2015.5" >c10:..</text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1781" width="0.5" height="15.0" fill="rgb(245,212,47)" rx="2" ry="2" />
-<text  x="103.69" y="1791.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1557" width="0.3" height="15.0" fill="rgb(224,72,19)" rx="2" ry="2" />
+<text  x="70.72" y="1567.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1669" width="0.3" height="15.0" fill="rgb(254,11,19)" rx="2" ry="2" />
-<text  x="57.33" y="1679.5" ></text>
+<title>PyDict_SetDefault (17 samples, 0.04%)</title><rect x="10.2" y="2053" width="0.5" height="15.0" fill="rgb(236,180,16)" rx="2" ry="2" />
+<text  x="13.21" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="661" width="0.1" height="15.0" fill="rgb(236,129,35)" rx="2" ry="2" />
-<text  x="57.33" y="671.5" ></text>
+<title>torch::PyWarningHandler::PyWarningHandler@plt (75 samples, 0.19%)</title><rect x="869.9" y="2005" width="2.3" height="15.0" fill="rgb(238,10,14)" rx="2" ry="2" />
+<text  x="872.91" y="2015.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1557" width="0.5" height="15.0" fill="rgb(223,114,15)" rx="2" ry="2" />
-<text  x="103.69" y="1567.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="341" width="0.8" height="15.0" fill="rgb(223,216,34)" rx="2" ry="2" />
+<text  x="119.65" y="351.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1061" width="0.5" height="15.0" fill="rgb(246,50,7)" rx="2" ry="2" />
-<text  x="103.75" y="1071.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1205" width="0.3" height="15.0" fill="rgb(223,92,36)" rx="2" ry="2" />
+<text  x="70.72" y="1215.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1381" width="0.5" height="15.0" fill="rgb(222,220,43)" rx="2" ry="2" />
-<text  x="103.69" y="1391.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="453" width="0.1" height="15.0" fill="rgb(214,229,12)" rx="2" ry="2" />
+<text  x="70.90" y="463.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1413" width="0.5" height="15.0" fill="rgb(237,132,34)" rx="2" ry="2" />
-<text  x="103.69" y="1423.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1989" width="0.8" height="15.0" fill="rgb(252,199,34)" rx="2" ry="2" />
+<text  x="119.56" y="1999.5" ></text>
 </g>
 <g >
-<title>malloc (12 samples, 0.03%)</title><rect x="1185.6" y="2053" width="0.3" height="15.0" fill="rgb(226,139,10)" rx="2" ry="2" />
-<text  x="1188.56" y="2063.5" ></text>
+<title>PyUnicode_FromFormatV (7 samples, 0.02%)</title><rect x="116.2" y="2021" width="0.2" height="15.0" fill="rgb(244,72,3)" rx="2" ry="2" />
+<text  x="119.20" y="2031.5" ></text>
 </g>
 <g >
-<title>code_dealloc (12 samples, 0.03%)</title><rect x="498.2" y="2037" width="0.3" height="15.0" fill="rgb(238,29,34)" rx="2" ry="2" />
-<text  x="501.19" y="2047.5" ></text>
+<title>_dl_addr (5 samples, 0.01%)</title><rect x="1180.7" y="2053" width="0.1" height="15.0" fill="rgb(226,113,27)" rx="2" ry="2" />
+<text  x="1183.66" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1445" width="0.3" height="15.0" fill="rgb(249,127,13)" rx="2" ry="2" />
-<text  x="57.33" y="1455.5" ></text>
+<title>__memset_sse2 (5 samples, 0.01%)</title><rect x="1180.4" y="2053" width="0.2" height="15.0" fill="rgb(213,108,46)" rx="2" ry="2" />
+<text  x="1183.42" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (18 samples, 0.04%)</title><rect x="100.7" y="1301" width="0.5" height="15.0" fill="rgb(231,9,19)" rx="2" ry="2" />
-<text  x="103.72" y="1311.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="917" width="0.1" height="15.0" fill="rgb(220,190,49)" rx="2" ry="2" />
+<text  x="70.90" y="927.5" ></text>
 </g>
 <g >
-<title>[unknown] (23 samples, 0.06%)</title><rect x="100.7" y="2005" width="0.6" height="15.0" fill="rgb(222,168,3)" rx="2" ry="2" />
-<text  x="103.66" y="2015.5" ></text>
+<title>long_dealloc (1,091 samples, 2.78%)</title><rect x="295.5" y="2021" width="32.7" height="15.0" fill="rgb(243,54,44)" rx="2" ry="2" />
+<text  x="298.45" y="2031.5" >lo..</text>
 </g>
 <g >
-<title>_int_free (20 samples, 0.05%)</title><rect x="495.0" y="2037" width="0.6" height="15.0" fill="rgb(243,12,2)" rx="2" ry="2" />
-<text  x="498.04" y="2047.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="293" width="0.8" height="15.0" fill="rgb(218,178,24)" rx="2" ry="2" />
+<text  x="119.65" y="303.5" ></text>
 </g>
 <g >
-<title>_PyObject_GetDictPtr (102 samples, 0.25%)</title><rect x="400.2" y="2037" width="2.9" height="15.0" fill="rgb(250,44,52)" rx="2" ry="2" />
-<text  x="403.22" y="2047.5" ></text>
+<title>torch::jit::tracer::getTracingState (3,183 samples, 8.10%)</title><rect x="980.3" y="2005" width="95.5" height="15.0" fill="rgb(240,115,34)" rx="2" ry="2" />
+<text  x="983.28" y="2015.5" >torch::jit:..</text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="645" width="0.1" height="15.0" fill="rgb(219,44,8)" rx="2" ry="2" />
-<text  x="57.33" y="655.5" ></text>
+<title>[unknown] (34 samples, 0.09%)</title><rect x="116.6" y="2021" width="1.0" height="15.0" fill="rgb(205,90,2)" rx="2" ry="2" />
+<text  x="119.56" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1445" width="0.5" height="15.0" fill="rgb(211,43,27)" rx="2" ry="2" />
-<text  x="103.69" y="1455.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="373" width="0.8" height="15.0" fill="rgb(244,67,36)" rx="2" ry="2" />
+<text  x="119.65" y="383.5" ></text>
 </g>
 <g >
-<title>torch::jit::SharedParserData::match (19 samples, 0.05%)</title><rect x="1188.0" y="2053" width="0.5" height="15.0" fill="rgb(209,89,53)" rx="2" ry="2" />
-<text  x="1191.00" y="2063.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1573" width="0.8" height="15.0" fill="rgb(241,44,12)" rx="2" ry="2" />
+<text  x="119.56" y="1583.5" ></text>
 </g>
 <g >
-<title>PyLong_FromLong (378 samples, 0.92%)</title><rect x="89.3" y="2021" width="10.8" height="15.0" fill="rgb(208,203,33)" rx="2" ry="2" />
-<text  x="92.32" y="2031.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="933" width="0.3" height="15.0" fill="rgb(217,57,2)" rx="2" ry="2" />
+<text  x="70.72" y="943.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1637" width="0.5" height="15.0" fill="rgb(244,87,33)" rx="2" ry="2" />
-<text  x="103.69" y="1647.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="725" width="0.1" height="15.0" fill="rgb(212,27,6)" rx="2" ry="2" />
+<text  x="70.90" y="735.5" ></text>
 </g>
 <g >
-<title>tupletraverse (5 samples, 0.01%)</title><rect x="1188.6" y="2053" width="0.2" height="15.0" fill="rgb(231,124,18)" rx="2" ry="2" />
-<text  x="1191.63" y="2063.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1141" width="0.3" height="15.0" fill="rgb(222,161,48)" rx="2" ry="2" />
+<text  x="70.72" y="1151.5" ></text>
 </g>
 <g >
-<title>PyDict_SetItem (17 samples, 0.04%)</title><rect x="55.6" y="2037" width="0.5" height="15.0" fill="rgb(225,43,23)" rx="2" ry="2" />
-<text  x="58.65" y="2047.5" ></text>
+<title>r_object (8 samples, 0.02%)</title><rect x="328.6" y="2021" width="0.2" height="15.0" fill="rgb(228,184,25)" rx="2" ry="2" />
+<text  x="331.59" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="709" width="0.4" height="15.0" fill="rgb(225,198,4)" rx="2" ry="2" />
-<text  x="103.78" y="719.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1445" width="0.8" height="15.0" fill="rgb(222,49,44)" rx="2" ry="2" />
+<text  x="119.59" y="1455.5" ></text>
 </g>
 <g >
-<title>__tls_get_addr (279 samples, 0.68%)</title><rect x="1004.1" y="1989" width="8.0" height="15.0" fill="rgb(212,112,37)" rx="2" ry="2" />
-<text  x="1007.07" y="1999.5" ></text>
+<title>[ld-2.17.so] (6 samples, 0.02%)</title><rect x="67.7" y="853" width="0.2" height="15.0" fill="rgb(220,70,43)" rx="2" ry="2" />
+<text  x="70.72" y="863.5" ></text>
 </g>
 <g >
-<title>__tls_get_addr (73 samples, 0.18%)</title><rect x="691.4" y="1989" width="2.1" height="15.0" fill="rgb(250,120,5)" rx="2" ry="2" />
-<text  x="694.45" y="1999.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="2021" width="0.3" height="15.0" fill="rgb(237,211,47)" rx="2" ry="2" />
+<text  x="70.72" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="501" width="0.1" height="15.0" fill="rgb(224,103,27)" rx="2" ry="2" />
-<text  x="57.53" y="511.5" ></text>
+<title>_PyDict_LoadGlobal (1,405 samples, 3.57%)</title><rect x="1090.7" y="2053" width="42.2" height="15.0" fill="rgb(239,138,51)" rx="2" ry="2" />
+<text  x="1093.71" y="2063.5" >_Py..</text>
 </g>
 <g >
-<title>torch::PythonArgParser::raw_parse (427 samples, 1.04%)</title><rect x="908.1" y="2005" width="12.2" height="15.0" fill="rgb(222,187,46)" rx="2" ry="2" />
-<text  x="911.08" y="2015.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1829" width="0.3" height="15.0" fill="rgb(240,216,11)" rx="2" ry="2" />
+<text  x="70.72" y="1839.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="505.3" y="2005" width="0.1" height="15.0" fill="rgb(208,152,18)" rx="2" ry="2" />
-<text  x="508.29" y="2015.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="165" width="0.1" height="15.0" fill="rgb(232,206,11)" rx="2" ry="2" />
+<text  x="70.90" y="175.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1717" width="0.5" height="15.0" fill="rgb(212,32,20)" rx="2" ry="2" />
-<text  x="103.69" y="1727.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="645" width="0.8" height="15.0" fill="rgb(206,116,32)" rx="2" ry="2" />
+<text  x="119.62" y="655.5" ></text>
 </g>
 <g >
-<title>torch::PythonArgParser::raw_parse (2,888 samples, 7.01%)</title><rect x="515.0" y="2037" width="82.7" height="15.0" fill="rgb(226,173,33)" rx="2" ry="2" />
-<text  x="518.02" y="2047.5" >torch::Py..</text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="165" width="0.8" height="15.0" fill="rgb(208,192,39)" rx="2" ry="2" />
+<text  x="119.65" y="175.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="693" width="0.4" height="15.0" fill="rgb(235,209,15)" rx="2" ry="2" />
-<text  x="103.78" y="703.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="613" width="0.8" height="15.0" fill="rgb(216,58,11)" rx="2" ry="2" />
+<text  x="119.62" y="623.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1845" width="0.5" height="15.0" fill="rgb(241,108,25)" rx="2" ry="2" />
-<text  x="103.69" y="1855.5" ></text>
+<title>_Py_CheckFunctionResult (317 samples, 0.81%)</title><rect x="445.1" y="2037" width="9.5" height="15.0" fill="rgb(242,17,3)" rx="2" ry="2" />
+<text  x="448.12" y="2047.5" ></text>
 </g>
 <g >
-<title>PyCode_New (4 samples, 0.01%)</title><rect x="55.2" y="2037" width="0.2" height="15.0" fill="rgb(237,223,24)" rx="2" ry="2" />
-<text  x="58.24" y="2047.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1589" width="0.8" height="15.0" fill="rgb(216,168,13)" rx="2" ry="2" />
+<text  x="119.56" y="1599.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1573" width="0.5" height="15.0" fill="rgb(251,53,5)" rx="2" ry="2" />
-<text  x="103.69" y="1583.5" ></text>
+<title>__tls_get_addr@plt (289 samples, 0.74%)</title><rect x="662.7" y="2005" width="8.6" height="15.0" fill="rgb(245,217,33)" rx="2" ry="2" />
+<text  x="665.67" y="2015.5" ></text>
 </g>
 <g >
-<title>lookdict_unicode_nodummy (36 samples, 0.09%)</title><rect x="1184.5" y="2053" width="1.1" height="15.0" fill="rgb(214,55,47)" rx="2" ry="2" />
-<text  x="1187.53" y="2063.5" ></text>
-</g>
-<g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="517" width="0.4" height="15.0" fill="rgb(217,54,42)" rx="2" ry="2" />
-<text  x="103.78" y="527.5" ></text>
-</g>
-<g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1733" width="0.5" height="15.0" fill="rgb(244,211,2)" rx="2" ry="2" />
-<text  x="103.69" y="1743.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="597" width="0.1" height="15.0" fill="rgb(213,128,51)" rx="2" ry="2" />
-<text  x="57.33" y="607.5" ></text>
-</g>
-<g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1829" width="0.5" height="15.0" fill="rgb(219,1,16)" rx="2" ry="2" />
-<text  x="103.69" y="1839.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1829" width="0.3" height="15.0" fill="rgb(226,228,39)" rx="2" ry="2" />
-<text  x="57.33" y="1839.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (7 samples, 0.02%)</title><rect x="54.3" y="805" width="0.2" height="15.0" fill="rgb(208,153,36)" rx="2" ry="2" />
-<text  x="57.33" y="815.5" ></text>
-</g>
-<g >
-<title>std::string::_M_copy (6 samples, 0.01%)</title><rect x="506.3" y="2037" width="0.2" height="15.0" fill="rgb(216,7,32)" rx="2" ry="2" />
-<text  x="509.32" y="2047.5" ></text>
-</g>
-<g >
-<title>[libtorch_cpu.so] (5 samples, 0.01%)</title><rect x="88.9" y="2037" width="0.1" height="15.0" fill="rgb(237,17,48)" rx="2" ry="2" />
-<text  x="91.89" y="2047.5" ></text>
-</g>
-<g >
-<title>__tls_get_addr (298 samples, 0.72%)</title><rect x="760.3" y="1989" width="8.5" height="15.0" fill="rgb(230,153,23)" rx="2" ry="2" />
-<text  x="763.29" y="1999.5" ></text>
-</g>
-<g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="293" width="0.4" height="15.0" fill="rgb(217,21,43)" rx="2" ry="2" />
-<text  x="103.78" y="303.5" ></text>
-</g>
-<g >
-<title>std::string::compare (5 samples, 0.01%)</title><rect x="329.5" y="2021" width="0.2" height="15.0" fill="rgb(227,34,15)" rx="2" ry="2" />
-<text  x="332.52" y="2031.5" ></text>
-</g>
-<g >
-<title>_PyFrame_New_NoTrack (9 samples, 0.02%)</title><rect x="377.4" y="2037" width="0.3" height="15.0" fill="rgb(244,65,53)" rx="2" ry="2" />
-<text  x="380.43" y="2047.5" ></text>
-</g>
-<g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="997" width="0.5" height="15.0" fill="rgb(223,30,42)" rx="2" ry="2" />
-<text  x="103.75" y="1007.5" ></text>
-</g>
-<g >
-<title>c10::impl::OperatorEntry::OperatorEntry (4 samples, 0.01%)</title><rect x="257.8" y="2021" width="0.2" height="15.0" fill="rgb(216,100,48)" rx="2" ry="2" />
-<text  x="260.84" y="2031.5" ></text>
-</g>
-<g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="100.8" y="53" width="0.1" height="15.0" fill="rgb(206,55,7)" rx="2" ry="2" />
-<text  x="103.83" y="63.5" ></text>
-</g>
-<g >
-<title>torch::detail::TorchLibraryInit::~TorchLibraryInit (5 samples, 0.01%)</title><rect x="1096.8" y="2037" width="0.1" height="15.0" fill="rgb(244,59,22)" rx="2" ry="2" />
-<text  x="1099.79" y="2047.5" ></text>
-</g>
-<g >
-<title>_dl_update_slotinfo (1,511 samples, 3.67%)</title><rect x="1017.0" y="1989" width="43.3" height="15.0" fill="rgb(225,133,28)" rx="2" ry="2" />
-<text  x="1019.98" y="1999.5" >_dl_..</text>
-</g>
-<g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="773" width="0.1" height="15.0" fill="rgb(222,190,3)" rx="2" ry="2" />
-<text  x="57.33" y="783.5" ></text>
-</g>
-<g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1109" width="0.5" height="15.0" fill="rgb(231,45,32)" rx="2" ry="2" />
-<text  x="103.75" y="1119.5" ></text>
-</g>
-<g >
-<title>std::basic_stringbuf&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;::~basic_stringbuf (8 samples, 0.02%)</title><rect x="505.9" y="2037" width="0.3" height="15.0" fill="rgb(234,180,36)" rx="2" ry="2" />
-<text  x="508.95" y="2047.5" ></text>
-</g>
-<g >
-<title>[libtorch_cpu.so] (4 samples, 0.01%)</title><rect x="100.8" y="69" width="0.1" height="15.0" fill="rgb(249,117,7)" rx="2" ry="2" />
-<text  x="103.83" y="79.5" ></text>
-</g>
-<g >
-<title>lookdict_unicode_nodummy (13 samples, 0.03%)</title><rect x="503.2" y="2037" width="0.4" height="15.0" fill="rgb(226,186,20)" rx="2" ry="2" />
-<text  x="506.22" y="2047.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1141" width="0.3" height="15.0" fill="rgb(222,200,43)" rx="2" ry="2" />
-<text  x="57.33" y="1151.5" ></text>
-</g>
-<g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1429" width="0.5" height="15.0" fill="rgb(250,211,38)" rx="2" ry="2" />
-<text  x="103.69" y="1439.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1429" width="0.3" height="15.0" fill="rgb(229,83,48)" rx="2" ry="2" />
-<text  x="57.33" y="1439.5" ></text>
-</g>
-<g >
-<title>long_dealloc (1,393 samples, 3.38%)</title><rect x="258.6" y="2021" width="39.9" height="15.0" fill="rgb(206,196,46)" rx="2" ry="2" />
-<text  x="261.62" y="2031.5" >lon..</text>
-</g>
-<g >
-<title>lookdict_split (6 samples, 0.01%)</title><rect x="1184.3" y="2053" width="0.1" height="15.0" fill="rgb(215,126,25)" rx="2" ry="2" />
-<text  x="1187.27" y="2063.5" ></text>
-</g>
-<g >
-<title>[unknown] (10 samples, 0.02%)</title><rect x="100.9" y="69" width="0.3" height="15.0" fill="rgb(228,117,6)" rx="2" ry="2" />
-<text  x="103.95" y="79.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="981" width="0.3" height="15.0" fill="rgb(215,0,47)" rx="2" ry="2" />
-<text  x="57.33" y="991.5" ></text>
-</g>
-<g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="117" width="0.1" height="15.0" fill="rgb(244,89,2)" rx="2" ry="2" />
-<text  x="57.53" y="127.5" ></text>
-</g>
-<g >
-<title>torch::jit::Lexer::next (4 samples, 0.01%)</title><rect x="1097.0" y="2037" width="0.1" height="15.0" fill="rgb(252,121,30)" rx="2" ry="2" />
-<text  x="1100.02" y="2047.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1061" width="0.3" height="15.0" fill="rgb(252,187,38)" rx="2" ry="2" />
-<text  x="57.33" y="1071.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="677" width="0.1" height="15.0" fill="rgb(205,130,7)" rx="2" ry="2" />
-<text  x="57.33" y="687.5" ></text>
-</g>
-<g >
-<title>c10::Warning::set_warning_handler@plt (25 samples, 0.06%)</title><rect x="875.0" y="2005" width="0.7" height="15.0" fill="rgb(210,9,30)" rx="2" ry="2" />
-<text  x="878.00" y="2015.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="437" width="0.1" height="15.0" fill="rgb(250,200,40)" rx="2" ry="2" />
-<text  x="57.33" y="447.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="693" width="0.1" height="15.0" fill="rgb(247,164,30)" rx="2" ry="2" />
-<text  x="57.33" y="703.5" ></text>
-</g>
-<g >
-<title>[unknown] (20 samples, 0.05%)</title><rect x="100.7" y="1957" width="0.5" height="15.0" fill="rgb(222,148,19)" rx="2" ry="2" />
-<text  x="103.66" y="1967.5" ></text>
-</g>
-<g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="853" width="0.5" height="15.0" fill="rgb(213,77,15)" rx="2" ry="2" />
-<text  x="103.75" y="863.5" ></text>
-</g>
-<g >
-<title>_PyMethodDef_RawFastCallKeywords (331 samples, 0.80%)</title><rect x="1155.5" y="2053" width="9.5" height="15.0" fill="rgb(245,168,11)" rx="2" ry="2" />
-<text  x="1158.52" y="2063.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1541" width="0.3" height="15.0" fill="rgb(219,88,30)" rx="2" ry="2" />
-<text  x="57.33" y="1551.5" ></text>
-</g>
-<g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1509" width="0.5" height="15.0" fill="rgb(237,192,28)" rx="2" ry="2" />
-<text  x="103.69" y="1519.5" ></text>
-</g>
-<g >
-<title>std::basic_streambuf&lt;char, std::char_traits&lt;char&gt; &gt;::xsputn (6 samples, 0.01%)</title><rect x="506.0" y="2005" width="0.2" height="15.0" fill="rgb(234,64,2)" rx="2" ry="2" />
-<text  x="509.00" y="2015.5" ></text>
-</g>
-<g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="869" width="0.5" height="15.0" fill="rgb(252,198,21)" rx="2" ry="2" />
-<text  x="103.75" y="879.5" ></text>
-</g>
-<g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1653" width="0.5" height="15.0" fill="rgb(222,218,46)" rx="2" ry="2" />
-<text  x="103.69" y="1663.5" ></text>
-</g>
-<g >
-<title>sh (5 samples, 0.01%)</title><rect x="1189.8" y="2069" width="0.2" height="15.0" fill="rgb(226,58,6)" rx="2" ry="2" />
-<text  x="1192.83" y="2079.5" ></text>
-</g>
-<g >
-<title>at::TORCH_LIBRARY_init_aten (6 samples, 0.01%)</title><rect x="257.4" y="2021" width="0.2" height="15.0" fill="rgb(233,55,17)" rx="2" ry="2" />
-<text  x="260.44" y="2031.5" ></text>
-</g>
-<g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1029" width="0.5" height="15.0" fill="rgb(251,56,19)" rx="2" ry="2" />
-<text  x="103.75" y="1039.5" ></text>
-</g>
-<g >
-<title>python (41,201 samples, 99.99%)</title><rect x="10.0" y="2069" width="1179.8" height="15.0" fill="rgb(237,218,49)" rx="2" ry="2" />
-<text  x="13.00" y="2079.5" >python</text>
-</g>
-<g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1173" width="0.3" height="15.0" fill="rgb(206,204,50)" rx="2" ry="2" />
-<text  x="57.33" y="1183.5" ></text>
-</g>
-<g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="277" width="0.4" height="15.0" fill="rgb(231,32,23)" rx="2" ry="2" />
-<text  x="103.78" y="287.5" ></text>
-</g>
-<g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="773" width="0.1" height="15.0" fill="rgb(217,215,20)" rx="2" ry="2" />
-<text  x="57.53" y="783.5" ></text>
-</g>
-<g >
-<title>strcmp (7 samples, 0.02%)</title><rect x="506.8" y="2037" width="0.2" height="15.0" fill="rgb(215,51,11)" rx="2" ry="2" />
-<text  x="509.78" y="2047.5" ></text>
-</g>
-<g >
-<title>c10::Warning::get_warning_handler@plt (4 samples, 0.01%)</title><rect x="727.0" y="2005" width="0.2" height="15.0" fill="rgb(251,85,1)" rx="2" ry="2" />
-<text  x="730.04" y="2015.5" ></text>
-</g>
-<g >
-<title>torch::Library::_impl (6 samples, 0.01%)</title><rect x="330.1" y="2005" width="0.2" height="15.0" fill="rgb(222,176,12)" rx="2" ry="2" />
-<text  x="333.15" y="2015.5" ></text>
-</g>
-<g >
-<title>_PyStack_AsTuple (203 samples, 0.49%)</title><rect x="430.3" y="2037" width="5.8" height="15.0" fill="rgb(230,189,39)" rx="2" ry="2" />
-<text  x="433.26" y="2047.5" ></text>
-</g>
-<g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="709" width="0.1" height="15.0" fill="rgb(240,219,35)" rx="2" ry="2" />
-<text  x="57.53" y="719.5" ></text>
-</g>
-<g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="373" width="0.1" height="15.0" fill="rgb(249,6,25)" rx="2" ry="2" />
-<text  x="57.53" y="383.5" ></text>
-</g>
-<g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="325" width="0.4" height="15.0" fill="rgb(238,106,48)" rx="2" ry="2" />
-<text  x="103.78" y="335.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1989" width="0.3" height="15.0" fill="rgb(206,185,50)" rx="2" ry="2" />
-<text  x="57.33" y="1999.5" ></text>
-</g>
-<g >
-<title>tupledealloc (7 samples, 0.02%)</title><rect x="1097.1" y="2037" width="0.2" height="15.0" fill="rgb(209,182,22)" rx="2" ry="2" />
-<text  x="1100.13" y="2047.5" ></text>
-</g>
-<g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="661" width="0.4" height="15.0" fill="rgb(248,221,49)" rx="2" ry="2" />
-<text  x="103.78" y="671.5" ></text>
-</g>
-<g >
-<title>[ld-2.17.so] (7 samples, 0.02%)</title><rect x="54.3" y="853" width="0.2" height="15.0" fill="rgb(227,127,6)" rx="2" ry="2" />
-<text  x="57.33" y="863.5" ></text>
-</g>
-<g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="613" width="0.1" height="15.0" fill="rgb(213,211,22)" rx="2" ry="2" />
-<text  x="57.53" y="623.5" ></text>
-</g>
-<g >
-<title>torch::jit::SchemaTypeParser::parseType (12 samples, 0.03%)</title><rect x="330.4" y="2021" width="0.4" height="15.0" fill="rgb(250,153,24)" rx="2" ry="2" />
-<text  x="333.41" y="2031.5" ></text>
-</g>
-<g >
-<title>all (41,207 samples, 100%)</title><rect x="10.0" y="2085" width="1180.0" height="15.0" fill="rgb(225,73,14)" rx="2" ry="2" />
+<title>all (39,312 samples, 100%)</title><rect x="10.0" y="2085" width="1180.0" height="15.0" fill="rgb(226,8,41)" rx="2" ry="2" />
 <text  x="13.00" y="2095.5" ></text>
 </g>
 <g >
-<title>dlopen_doit (63 samples, 0.15%)</title><rect x="500.2" y="2037" width="1.8" height="15.0" fill="rgb(247,158,45)" rx="2" ry="2" />
-<text  x="503.16" y="2047.5" ></text>
+<title>_dl_lookup_symbol_x (44 samples, 0.11%)</title><rect x="462.3" y="1973" width="1.4" height="15.0" fill="rgb(209,119,12)" rx="2" ry="2" />
+<text  x="465.35" y="1983.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="629" width="0.4" height="15.0" fill="rgb(254,174,16)" rx="2" ry="2" />
-<text  x="103.78" y="639.5" ></text>
+<title>type_new (16 samples, 0.04%)</title><rect x="1088.0" y="2037" width="0.5" height="15.0" fill="rgb(215,44,12)" rx="2" ry="2" />
+<text  x="1091.03" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="805" width="0.5" height="15.0" fill="rgb(212,3,18)" rx="2" ry="2" />
-<text  x="103.75" y="815.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="405" width="0.8" height="15.0" fill="rgb(225,49,2)" rx="2" ry="2" />
+<text  x="119.65" y="415.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1669" width="0.5" height="15.0" fill="rgb(220,85,4)" rx="2" ry="2" />
-<text  x="103.69" y="1679.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1861" width="0.3" height="15.0" fill="rgb(234,228,5)" rx="2" ry="2" />
+<text  x="70.72" y="1871.5" ></text>
 </g>
 <g >
-<title>[unknown] (36,493 samples, 88.56%)</title><rect x="55.0" y="2053" width="1045.0" height="15.0" fill="rgb(217,205,35)" rx="2" ry="2" />
-<text  x="57.96" y="2063.5" >[unknown]</text>
+<title>c10::impl::OperatorEntry::registerSchema (5 samples, 0.01%)</title><rect x="294.4" y="2005" width="0.2" height="15.0" fill="rgb(214,220,34)" rx="2" ry="2" />
+<text  x="297.43" y="2015.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="981" width="0.5" height="15.0" fill="rgb(211,32,2)" rx="2" ry="2" />
-<text  x="103.75" y="991.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="389" width="0.1" height="15.0" fill="rgb(249,30,8)" rx="2" ry="2" />
+<text  x="70.90" y="399.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1957" width="0.3" height="15.0" fill="rgb(229,42,7)" rx="2" ry="2" />
-<text  x="57.33" y="1967.5" ></text>
+<title>PyUnicode_FromKindAndData (9 samples, 0.02%)</title><rect x="67.1" y="2053" width="0.3" height="15.0" fill="rgb(235,70,7)" rx="2" ry="2" />
+<text  x="70.12" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="917" width="0.1" height="15.0" fill="rgb(206,89,38)" rx="2" ry="2" />
-<text  x="57.53" y="927.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1525" width="0.8" height="15.0" fill="rgb(220,84,9)" rx="2" ry="2" />
+<text  x="119.59" y="1535.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1909" width="0.5" height="15.0" fill="rgb(231,44,0)" rx="2" ry="2" />
-<text  x="103.69" y="1919.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1397" width="0.8" height="15.0" fill="rgb(223,12,15)" rx="2" ry="2" />
+<text  x="119.59" y="1407.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="485" width="0.4" height="15.0" fill="rgb(228,74,22)" rx="2" ry="2" />
-<text  x="103.78" y="495.5" ></text>
+<title>__tls_get_addr (177 samples, 0.45%)</title><rect x="755.2" y="1989" width="5.4" height="15.0" fill="rgb(228,199,29)" rx="2" ry="2" />
+<text  x="758.24" y="1999.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="229" width="0.1" height="15.0" fill="rgb(207,39,54)" rx="2" ry="2" />
-<text  x="57.53" y="239.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1493" width="0.3" height="15.0" fill="rgb(221,104,31)" rx="2" ry="2" />
+<text  x="70.72" y="1503.5" ></text>
 </g>
 <g >
-<title>__memset_sse2 (8 samples, 0.02%)</title><rect x="1179.5" y="2053" width="0.3" height="15.0" fill="rgb(232,135,30)" rx="2" ry="2" />
-<text  x="1182.55" y="2063.5" ></text>
+<title>dict_dealloc (9 samples, 0.02%)</title><rect x="460.8" y="2037" width="0.3" height="15.0" fill="rgb(247,32,44)" rx="2" ry="2" />
+<text  x="463.78" y="2047.5" ></text>
 </g>
 <g >
-<title>type_new (17 samples, 0.04%)</title><rect x="1097.4" y="2037" width="0.5" height="15.0" fill="rgb(227,69,49)" rx="2" ry="2" />
-<text  x="1100.45" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="709" width="0.1" height="15.0" fill="rgb(220,60,0)" rx="2" ry="2" />
+<text  x="70.90" y="719.5" ></text>
 </g>
 <g >
-<title>dictresize (4 samples, 0.01%)</title><rect x="500.0" y="2037" width="0.1" height="15.0" fill="rgb(216,181,41)" rx="2" ry="2" />
-<text  x="503.02" y="2047.5" ></text>
+<title>[unknown] (34,057 samples, 86.63%)</title><rect x="68.4" y="2053" width="1022.2" height="15.0" fill="rgb(218,81,17)" rx="2" ry="2" />
+<text  x="71.38" y="2063.5" >[unknown]</text>
 </g>
 <g >
-<title>collect (4 samples, 0.01%)</title><rect x="54.5" y="37" width="0.1" height="15.0" fill="rgb(241,61,28)" rx="2" ry="2" />
-<text  x="57.53" y="47.5" ></text>
+<title>c10::Dispatcher::deregisterImpl_ (9 samples, 0.02%)</title><rect x="466.4" y="2021" width="0.3" height="15.0" fill="rgb(238,5,5)" rx="2" ry="2" />
+<text  x="469.40" y="2031.5" ></text>
 </g>
 <g >
-<title>_PyType_Lookup (1,759 samples, 4.27%)</title><rect x="436.2" y="2037" width="50.4" height="15.0" fill="rgb(239,110,42)" rx="2" ry="2" />
-<text  x="439.22" y="2047.5" >_PyTy..</text>
+<title>std::_Sp_counted_ptr&lt;c10::IntType*,  (4 samples, 0.01%)</title><rect x="466.8" y="2037" width="0.1" height="15.0" fill="rgb(244,204,6)" rx="2" ry="2" />
+<text  x="469.76" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1877" width="0.3" height="15.0" fill="rgb(239,60,17)" rx="2" ry="2" />
-<text  x="57.33" y="1887.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="309" width="0.1" height="15.0" fill="rgb(244,130,10)" rx="2" ry="2" />
+<text  x="70.90" y="319.5" ></text>
 </g>
 <g >
-<title>_PyEval_EvalCodeWithName (19 samples, 0.05%)</title><rect x="331.4" y="2037" width="0.6" height="15.0" fill="rgb(232,5,17)" rx="2" ry="2" />
-<text  x="334.41" y="2047.5" ></text>
+<title>[libc-2.17.so] (7 samples, 0.02%)</title><rect x="105.2" y="2037" width="0.2" height="15.0" fill="rgb(210,197,3)" rx="2" ry="2" />
+<text  x="108.18" y="2047.5" ></text>
 </g>
 <g >
-<title>PyType_IsSubtype (5 samples, 0.01%)</title><rect x="87.3" y="2037" width="0.1" height="15.0" fill="rgb(233,51,22)" rx="2" ry="2" />
-<text  x="90.29" y="2047.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="2005" width="0.3" height="15.0" fill="rgb(228,187,14)" rx="2" ry="2" />
+<text  x="70.72" y="2015.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="501" width="0.1" height="15.0" fill="rgb(225,19,28)" rx="2" ry="2" />
-<text  x="57.33" y="511.5" ></text>
+<title>_PyEval_EvalFrameDefault (912 samples, 2.32%)</title><rect x="336.0" y="2037" width="27.4" height="15.0" fill="rgb(234,93,43)" rx="2" ry="2" />
+<text  x="339.04" y="2047.5" >_..</text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1237" width="0.5" height="15.0" fill="rgb(229,189,34)" rx="2" ry="2" />
-<text  x="103.75" y="1247.5" ></text>
+<title>lookdict_unicode_nodummy (9 samples, 0.02%)</title><rect x="464.6" y="2037" width="0.3" height="15.0" fill="rgb(226,132,3)" rx="2" ry="2" />
+<text  x="467.63" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (15 samples, 0.04%)</title><rect x="100.8" y="149" width="0.4" height="15.0" fill="rgb(227,104,16)" rx="2" ry="2" />
-<text  x="103.80" y="159.5" ></text>
+<title>dict_traverse (7 samples, 0.02%)</title><rect x="461.1" y="2037" width="0.3" height="15.0" fill="rgb(227,110,28)" rx="2" ry="2" />
+<text  x="464.14" y="2047.5" ></text>
 </g>
 <g >
-<title>update_get_addr (1,034 samples, 2.51%)</title><rect x="845.4" y="1989" width="29.6" height="15.0" fill="rgb(220,77,40)" rx="2" ry="2" />
-<text  x="848.40" y="1999.5" >up..</text>
+<title>torch::PyWarningHandler::~PyWarningHandler@plt (77 samples, 0.20%)</title><rect x="890.2" y="2005" width="2.3" height="15.0" fill="rgb(230,200,0)" rx="2" ry="2" />
+<text  x="893.17" y="2015.5" ></text>
 </g>
 <g >
-<title>std::_Sp_counted_deleter&lt;c10::OperatorKernel*, std::default_delete&lt;c10::OperatorKernel&gt;, std::allocator&lt;void&gt;,  (4 samples, 0.01%)</title><rect x="505.3" y="2037" width="0.1" height="15.0" fill="rgb(234,29,10)" rx="2" ry="2" />
-<text  x="508.29" y="2047.5" ></text>
+<title>_PyType_Lookup (683 samples, 1.74%)</title><rect x="424.5" y="2037" width="20.5" height="15.0" fill="rgb(253,148,54)" rx="2" ry="2" />
+<text  x="427.49" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="901" width="0.1" height="15.0" fill="rgb(240,75,51)" rx="2" ry="2" />
-<text  x="57.53" y="911.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="277" width="0.1" height="15.0" fill="rgb(241,41,38)" rx="2" ry="2" />
+<text  x="70.90" y="287.5" ></text>
 </g>
 <g >
-<title>_Py_CheckFunctionResult (238 samples, 0.58%)</title><rect x="486.6" y="2037" width="6.8" height="15.0" fill="rgb(229,213,24)" rx="2" ry="2" />
-<text  x="489.62" y="2047.5" ></text>
+<title>dictresize (5 samples, 0.01%)</title><rect x="461.4" y="2037" width="0.1" height="15.0" fill="rgb(251,198,27)" rx="2" ry="2" />
+<text  x="464.38" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="565" width="0.1" height="15.0" fill="rgb(216,5,47)" rx="2" ry="2" />
-<text  x="57.33" y="575.5" ></text>
+<title>PyLong_FromLong (341 samples, 0.87%)</title><rect x="105.6" y="2021" width="10.3" height="15.0" fill="rgb(244,112,35)" rx="2" ry="2" />
+<text  x="108.63" y="2031.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (7 samples, 0.02%)</title><rect x="54.3" y="821" width="0.2" height="15.0" fill="rgb(225,199,50)" rx="2" ry="2" />
-<text  x="57.33" y="831.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1045" width="0.8" height="15.0" fill="rgb(224,202,6)" rx="2" ry="2" />
+<text  x="119.62" y="1055.5" ></text>
 </g>
 <g >
-<title>[unknown] (14 samples, 0.03%)</title><rect x="100.8" y="117" width="0.4" height="15.0" fill="rgb(216,87,47)" rx="2" ry="2" />
-<text  x="103.83" y="127.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1333" width="0.8" height="15.0" fill="rgb(213,89,21)" rx="2" ry="2" />
+<text  x="119.59" y="1343.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="373" width="0.4" height="15.0" fill="rgb(211,171,37)" rx="2" ry="2" />
-<text  x="103.78" y="383.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="981" width="0.8" height="15.0" fill="rgb(246,197,21)" rx="2" ry="2" />
+<text  x="119.62" y="991.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="645" width="0.1" height="15.0" fill="rgb(215,144,31)" rx="2" ry="2" />
-<text  x="57.53" y="655.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1733" width="0.8" height="15.0" fill="rgb(208,157,41)" rx="2" ry="2" />
+<text  x="119.56" y="1743.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="165" width="0.1" height="15.0" fill="rgb(225,89,25)" rx="2" ry="2" />
-<text  x="57.53" y="175.5" ></text>
+<title>_PyEval_EvalFrameDefault (4,129 samples, 10.50%)</title><rect x="158.4" y="2021" width="123.9" height="15.0" fill="rgb(214,222,10)" rx="2" ry="2" />
+<text  x="161.37" y="2031.5" >_PyEval_EvalFra..</text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="101" width="0.1" height="15.0" fill="rgb(212,93,11)" rx="2" ry="2" />
-<text  x="57.53" y="111.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1973" width="0.8" height="15.0" fill="rgb(251,212,52)" rx="2" ry="2" />
+<text  x="119.56" y="1983.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="245" width="0.1" height="15.0" fill="rgb(212,99,38)" rx="2" ry="2" />
-<text  x="57.33" y="255.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1029" width="0.8" height="15.0" fill="rgb(252,9,33)" rx="2" ry="2" />
+<text  x="119.62" y="1039.5" ></text>
 </g>
 <g >
-<title>std::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt;::basic_string (5 samples, 0.01%)</title><rect x="505.8" y="2037" width="0.1" height="15.0" fill="rgb(230,211,34)" rx="2" ry="2" />
-<text  x="508.80" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="133" width="0.1" height="15.0" fill="rgb(206,96,19)" rx="2" ry="2" />
+<text  x="70.90" y="143.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (7 samples, 0.02%)</title><rect x="54.3" y="837" width="0.2" height="15.0" fill="rgb(245,128,13)" rx="2" ry="2" />
-<text  x="57.33" y="847.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1829" width="0.8" height="15.0" fill="rgb(238,131,13)" rx="2" ry="2" />
+<text  x="119.56" y="1839.5" ></text>
 </g>
 <g >
-<title>std::_Function_handler&lt;void  (8 samples, 0.02%)</title><rect x="504.9" y="2037" width="0.2" height="15.0" fill="rgb(242,143,4)" rx="2" ry="2" />
-<text  x="507.86" y="2047.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="901" width="0.1" height="15.0" fill="rgb(234,212,37)" rx="2" ry="2" />
+<text  x="70.90" y="911.5" ></text>
 </g>
 <g >
-<title>c10::Warning::get_warning_handler (1,462 samples, 3.55%)</title><rect x="685.2" y="2005" width="41.8" height="15.0" fill="rgb(214,38,20)" rx="2" ry="2" />
-<text  x="688.18" y="2015.5" >c10..</text>
+<title>r_object (22 samples, 0.06%)</title><rect x="1186.6" y="2053" width="0.6" height="15.0" fill="rgb(220,143,39)" rx="2" ry="2" />
+<text  x="1189.58" y="2063.5" ></text>
 </g>
 <g >
-<title>__tls_get_addr@plt (270 samples, 0.66%)</title><rect x="667.1" y="2005" width="7.8" height="15.0" fill="rgb(238,120,26)" rx="2" ry="2" />
-<text  x="670.14" y="2015.5" ></text>
+<title>_PyTuple_MaybeUntrack (5 samples, 0.01%)</title><rect x="424.3" y="2037" width="0.2" height="15.0" fill="rgb(205,75,1)" rx="2" ry="2" />
+<text  x="427.34" y="2047.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="309" width="0.4" height="15.0" fill="rgb(241,71,8)" rx="2" ry="2" />
-<text  x="103.78" y="319.5" ></text>
+<title>visit_reachable (4 samples, 0.01%)</title><rect x="1189.7" y="2053" width="0.1" height="15.0" fill="rgb(242,71,30)" rx="2" ry="2" />
+<text  x="1192.67" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="757" width="0.1" height="15.0" fill="rgb(208,28,47)" rx="2" ry="2" />
-<text  x="57.33" y="767.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1525" width="0.3" height="15.0" fill="rgb(205,7,29)" rx="2" ry="2" />
+<text  x="70.72" y="1535.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1237" width="0.3" height="15.0" fill="rgb(214,21,20)" rx="2" ry="2" />
-<text  x="57.33" y="1247.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="757" width="0.8" height="15.0" fill="rgb(228,100,4)" rx="2" ry="2" />
+<text  x="119.62" y="767.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1845" width="0.3" height="15.0" fill="rgb(229,77,11)" rx="2" ry="2" />
-<text  x="57.33" y="1855.5" ></text>
+<title>long_richcompare (4 samples, 0.01%)</title><rect x="464.1" y="2037" width="0.2" height="15.0" fill="rgb(231,148,0)" rx="2" ry="2" />
+<text  x="467.15" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="213" width="0.1" height="15.0" fill="rgb(238,150,33)" rx="2" ry="2" />
-<text  x="57.33" y="223.5" ></text>
+<title>__strlen_sse2_pminub (7 samples, 0.02%)</title><rect x="455.7" y="2037" width="0.3" height="15.0" fill="rgb(239,175,46)" rx="2" ry="2" />
+<text  x="458.74" y="2047.5" ></text>
 </g>
 <g >
-<title>torch::PythonArgParser::check_deprecated (85 samples, 0.21%)</title><rect x="512.6" y="2037" width="2.4" height="15.0" fill="rgb(213,29,29)" rx="2" ry="2" />
-<text  x="515.56" y="2047.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="117" width="0.8" height="15.0" fill="rgb(240,143,23)" rx="2" ry="2" />
+<text  x="119.65" y="127.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1029" width="0.3" height="15.0" fill="rgb(217,177,14)" rx="2" ry="2" />
-<text  x="57.33" y="1039.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="757" width="0.1" height="15.0" fill="rgb(205,135,10)" rx="2" ry="2" />
+<text  x="70.90" y="767.5" ></text>
 </g>
 <g >
-<title>_PyFunction_FastCallKeywords (4 samples, 0.01%)</title><rect x="377.7" y="2037" width="0.2" height="15.0" fill="rgb(224,31,4)" rx="2" ry="2" />
-<text  x="380.74" y="2047.5" ></text>
+<title>lookdict_unicode_nodummy (37 samples, 0.09%)</title><rect x="1184.6" y="2053" width="1.1" height="15.0" fill="rgb(224,161,49)" rx="2" ry="2" />
+<text  x="1187.63" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1749" width="0.3" height="15.0" fill="rgb(240,175,14)" rx="2" ry="2" />
-<text  x="57.33" y="1759.5" ></text>
+<title>__tls_get_addr (99 samples, 0.25%)</title><rect x="684.0" y="1989" width="3.0" height="15.0" fill="rgb(251,58,2)" rx="2" ry="2" />
+<text  x="687.05" y="1999.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="933" width="0.3" height="15.0" fill="rgb(222,178,1)" rx="2" ry="2" />
-<text  x="57.33" y="943.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="837" width="0.1" height="15.0" fill="rgb(226,85,48)" rx="2" ry="2" />
+<text  x="70.90" y="847.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1733" width="0.3" height="15.0" fill="rgb(230,80,17)" rx="2" ry="2" />
-<text  x="57.33" y="1743.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1509" width="0.8" height="15.0" fill="rgb(233,38,13)" rx="2" ry="2" />
+<text  x="119.59" y="1519.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1573" width="0.3" height="15.0" fill="rgb(222,126,28)" rx="2" ry="2" />
-<text  x="57.33" y="1583.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1685" width="0.3" height="15.0" fill="rgb(212,38,12)" rx="2" ry="2" />
+<text  x="70.72" y="1695.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="261" width="0.1" height="15.0" fill="rgb(235,52,9)" rx="2" ry="2" />
-<text  x="57.33" y="271.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1173" width="0.8" height="15.0" fill="rgb(234,100,8)" rx="2" ry="2" />
+<text  x="119.62" y="1183.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="821" width="0.5" height="15.0" fill="rgb(211,106,10)" rx="2" ry="2" />
-<text  x="103.75" y="831.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="725" width="0.8" height="15.0" fill="rgb(242,5,51)" rx="2" ry="2" />
+<text  x="119.62" y="735.5" ></text>
 </g>
 <g >
-<title>torch::FunctionSignature::parse (159 samples, 0.39%)</title><rect x="507.3" y="2037" width="4.6" height="15.0" fill="rgb(253,139,41)" rx="2" ry="2" />
-<text  x="510.32" y="2047.5" ></text>
+<title>torch::jit::canonicalSchemaString (6 samples, 0.02%)</title><rect x="1188.5" y="2053" width="0.2" height="15.0" fill="rgb(241,212,48)" rx="2" ry="2" />
+<text  x="1191.53" y="2063.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1685" width="0.3" height="15.0" fill="rgb(216,29,49)" rx="2" ry="2" />
-<text  x="57.33" y="1695.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="309" width="0.8" height="15.0" fill="rgb(247,29,35)" rx="2" ry="2" />
+<text  x="119.65" y="319.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (4 samples, 0.01%)</title><rect x="54.3" y="373" width="0.1" height="15.0" fill="rgb(206,94,31)" rx="2" ry="2" />
-<text  x="57.33" y="383.5" ></text>
+<title>torch::PythonArgParser::raw_parse (3,002 samples, 7.64%)</title><rect x="475.5" y="2037" width="90.1" height="15.0" fill="rgb(232,115,24)" rx="2" ry="2" />
+<text  x="478.52" y="2047.5" >torch::Pyt..</text>
 </g>
 <g >
-<title>_PyStack_AsTuple (164 samples, 0.40%)</title><rect x="1089.8" y="2021" width="4.7" height="15.0" fill="rgb(218,26,46)" rx="2" ry="2" />
-<text  x="1092.80" y="2031.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1893" width="0.8" height="15.0" fill="rgb(227,76,3)" rx="2" ry="2" />
+<text  x="119.56" y="1903.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1509" width="0.3" height="15.0" fill="rgb(248,225,33)" rx="2" ry="2" />
-<text  x="57.33" y="1519.5" ></text>
+<title>[unknown] (5 samples, 0.01%)</title><rect x="467.4" y="2021" width="0.2" height="15.0" fill="rgb(237,126,42)" rx="2" ry="2" />
+<text  x="470.42" y="2031.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (7 samples, 0.02%)</title><rect x="54.3" y="885" width="0.2" height="15.0" fill="rgb(227,143,27)" rx="2" ry="2" />
-<text  x="57.33" y="895.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="437" width="0.1" height="15.0" fill="rgb(228,152,45)" rx="2" ry="2" />
+<text  x="70.90" y="447.5" ></text>
 </g>
 <g >
-<title>unicode_eq.lto_priv.287 (8 samples, 0.02%)</title><rect x="1098.2" y="2037" width="0.2" height="15.0" fill="rgb(221,122,48)" rx="2" ry="2" />
-<text  x="1101.16" y="2047.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="677" width="0.8" height="15.0" fill="rgb(241,79,45)" rx="2" ry="2" />
+<text  x="119.62" y="687.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1925" width="0.5" height="15.0" fill="rgb(250,191,13)" rx="2" ry="2" />
-<text  x="103.69" y="1935.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="405" width="0.1" height="15.0" fill="rgb(238,84,32)" rx="2" ry="2" />
+<text  x="70.90" y="415.5" ></text>
 </g>
 <g >
-<title>PyType_Ready (5 samples, 0.01%)</title><rect x="87.4" y="2037" width="0.2" height="15.0" fill="rgb(205,225,42)" rx="2" ry="2" />
-<text  x="90.43" y="2047.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1701" width="0.8" height="15.0" fill="rgb(229,21,36)" rx="2" ry="2" />
+<text  x="119.56" y="1711.5" ></text>
 </g>
 <g >
-<title>torch::PyWarningHandler::~PyWarningHandler@plt (78 samples, 0.19%)</title><rect x="905.8" y="2005" width="2.3" height="15.0" fill="rgb(211,39,9)" rx="2" ry="2" />
-<text  x="908.85" y="2015.5" ></text>
+<title>python (39,305 samples, 99.98%)</title><rect x="10.0" y="2069" width="1179.8" height="15.0" fill="rgb(240,165,30)" rx="2" ry="2" />
+<text  x="13.00" y="2079.5" >python</text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1205" width="0.5" height="15.0" fill="rgb(211,45,30)" rx="2" ry="2" />
-<text  x="103.75" y="1215.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1621" width="0.8" height="15.0" fill="rgb(250,87,9)" rx="2" ry="2" />
+<text  x="119.56" y="1631.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1605" width="0.5" height="15.0" fill="rgb(246,28,2)" rx="2" ry="2" />
-<text  x="103.69" y="1615.5" ></text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="517" width="0.1" height="15.0" fill="rgb(210,94,47)" rx="2" ry="2" />
+<text  x="70.90" y="527.5" ></text>
 </g>
 <g >
-<title>_PyTuple_MaybeUntrack (5 samples, 0.01%)</title><rect x="436.1" y="2037" width="0.1" height="15.0" fill="rgb(238,109,19)" rx="2" ry="2" />
-<text  x="439.07" y="2047.5" ></text>
+<title>__tls_get_addr_slow (232 samples, 0.59%)</title><rect x="760.6" y="1989" width="6.9" height="15.0" fill="rgb(234,219,46)" rx="2" ry="2" />
+<text  x="763.56" y="1999.5" ></text>
 </g>
 <g >
-<title>__memmove_ssse3_back (7 samples, 0.02%)</title><rect x="1179.3" y="2053" width="0.2" height="15.0" fill="rgb(218,106,32)" rx="2" ry="2" />
-<text  x="1182.35" y="2063.5" ></text>
+<title>_PyMethodDescr_FastCallKeywords (209 samples, 0.53%)</title><rect x="1166.2" y="2053" width="6.3" height="15.0" fill="rgb(225,213,38)" rx="2" ry="2" />
+<text  x="1169.20" y="2063.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="837" width="0.1" height="15.0" fill="rgb(216,31,17)" rx="2" ry="2" />
-<text  x="57.53" y="847.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1957" width="0.8" height="15.0" fill="rgb(216,34,8)" rx="2" ry="2" />
+<text  x="119.56" y="1967.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1397" width="0.3" height="15.0" fill="rgb(230,73,28)" rx="2" ry="2" />
-<text  x="57.33" y="1407.5" ></text>
+<title>torch::jit::(anonymous namespace)::SchemaParser::parseArgument (4 samples, 0.01%)</title><rect x="1188.0" y="2053" width="0.2" height="15.0" fill="rgb(241,102,16)" rx="2" ry="2" />
+<text  x="1191.05" y="2063.5" ></text>
 </g>
 <g >
-<title>_PyMethodDescr_FastCallKeywords (296 samples, 0.72%)</title><rect x="1165.0" y="2053" width="8.5" height="15.0" fill="rgb(230,95,37)" rx="2" ry="2" />
-<text  x="1168.00" y="2063.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1173" width="0.3" height="15.0" fill="rgb(236,127,19)" rx="2" ry="2" />
+<text  x="70.72" y="1183.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1861" width="0.3" height="15.0" fill="rgb(221,139,7)" rx="2" ry="2" />
-<text  x="57.33" y="1871.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="485" width="0.8" height="15.0" fill="rgb(205,114,29)" rx="2" ry="2" />
+<text  x="119.62" y="495.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="757" width="0.1" height="15.0" fill="rgb(222,223,3)" rx="2" ry="2" />
-<text  x="57.53" y="767.5" ></text>
+<title>PyLong_FromLong (248 samples, 0.63%)</title><rect x="72.3" y="2037" width="7.4" height="15.0" fill="rgb(240,139,46)" rx="2" ry="2" />
+<text  x="75.28" y="2047.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1973" width="0.3" height="15.0" fill="rgb(246,33,15)" rx="2" ry="2" />
-<text  x="57.33" y="1983.5" ></text>
+<title>sh (6 samples, 0.02%)</title><rect x="1189.8" y="2069" width="0.2" height="15.0" fill="rgb(236,97,20)" rx="2" ry="2" />
+<text  x="1192.79" y="2079.5" ></text>
 </g>
 <g >
-<title>_PyObject_GetMethod (401 samples, 0.97%)</title><rect x="245.1" y="2021" width="11.5" height="15.0" fill="rgb(228,10,9)" rx="2" ry="2" />
-<text  x="248.13" y="2031.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="437" width="0.8" height="15.0" fill="rgb(209,155,4)" rx="2" ry="2" />
+<text  x="119.62" y="447.5" ></text>
 </g>
 <g >
-<title>torch::jit::parseSchema (7 samples, 0.02%)</title><rect x="329.9" y="2005" width="0.2" height="15.0" fill="rgb(228,168,13)" rx="2" ry="2" />
-<text  x="332.86" y="2015.5" ></text>
+<title>__tls_get_addr (160 samples, 0.41%)</title><rect x="1007.5" y="1989" width="4.8" height="15.0" fill="rgb(240,168,21)" rx="2" ry="2" />
+<text  x="1010.47" y="1999.5" ></text>
 </g>
 <g >
-<title>torch::jit::parseName (4 samples, 0.01%)</title><rect x="330.2" y="1989" width="0.1" height="15.0" fill="rgb(220,68,32)" rx="2" ry="2" />
-<text  x="333.21" y="1999.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="517" width="0.8" height="15.0" fill="rgb(234,123,43)" rx="2" ry="2" />
+<text  x="119.62" y="527.5" ></text>
 </g>
 <g >
-<title>[unknown] (4 samples, 0.01%)</title><rect x="54.5" y="405" width="0.1" height="15.0" fill="rgb(212,124,25)" rx="2" ry="2" />
-<text  x="57.53" y="415.5" ></text>
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="133" width="0.8" height="15.0" fill="rgb(245,181,22)" rx="2" ry="2" />
+<text  x="119.65" y="143.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1557" width="0.3" height="15.0" fill="rgb(214,141,15)" rx="2" ry="2" />
-<text  x="57.33" y="1567.5" ></text>
+<title>[unknown] (28 samples, 0.07%)</title><rect x="116.6" y="1493" width="0.8" height="15.0" fill="rgb(206,84,45)" rx="2" ry="2" />
+<text  x="119.59" y="1503.5" ></text>
 </g>
 <g >
-<title>[ld-2.17.so] (11 samples, 0.03%)</title><rect x="54.3" y="1893" width="0.3" height="15.0" fill="rgb(232,59,0)" rx="2" ry="2" />
-<text  x="57.33" y="1903.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1685" width="0.8" height="15.0" fill="rgb(226,131,38)" rx="2" ry="2" />
+<text  x="119.56" y="1695.5" ></text>
 </g>
 <g >
-<title>torch::autograd::THPVariable_contiguous (17,425 samples, 42.29%)</title><rect x="597.8" y="2037" width="499.0" height="15.0" fill="rgb(216,148,41)" rx="2" ry="2" />
-<text  x="600.78" y="2047.5" >torch::autograd::THPVariable_contiguous</text>
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="597" width="0.1" height="15.0" fill="rgb(230,214,7)" rx="2" ry="2" />
+<text  x="70.90" y="607.5" ></text>
 </g>
 <g >
-<title>_PyEval_EvalFrameDefault (713 samples, 1.73%)</title><rect x="1134.9" y="2053" width="20.4" height="15.0" fill="rgb(254,201,23)" rx="2" ry="2" />
-<text  x="1137.90" y="2063.5" ></text>
+<title>_dl_relocate_object (72 samples, 0.18%)</title><rect x="461.5" y="1989" width="2.2" height="15.0" fill="rgb(224,223,26)" rx="2" ry="2" />
+<text  x="464.53" y="1999.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="901" width="0.5" height="15.0" fill="rgb(251,143,27)" rx="2" ry="2" />
-<text  x="103.75" y="911.5" ></text>
+<title>_PyStack_AsTuple (172 samples, 0.44%)</title><rect x="1078.2" y="2021" width="5.1" height="15.0" fill="rgb(218,98,10)" rx="2" ry="2" />
+<text  x="1081.16" y="2031.5" ></text>
 </g>
 <g >
-<title>[unknown] (16 samples, 0.04%)</title><rect x="100.8" y="245" width="0.4" height="15.0" fill="rgb(229,140,38)" rx="2" ry="2" />
-<text  x="103.78" y="255.5" ></text>
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1861" width="0.8" height="15.0" fill="rgb(231,150,35)" rx="2" ry="2" />
+<text  x="119.56" y="1871.5" ></text>
 </g>
 <g >
-<title>c10::impl::OperatorEntry::computeDispatchTableEntry (7 samples, 0.02%)</title><rect x="258.0" y="2021" width="0.2" height="15.0" fill="rgb(233,69,48)" rx="2" ry="2" />
-<text  x="260.96" y="2031.5" ></text>
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="533" width="0.8" height="15.0" fill="rgb(240,51,10)" rx="2" ry="2" />
+<text  x="119.62" y="543.5" ></text>
 </g>
 <g >
-<title>[unknown] (19 samples, 0.05%)</title><rect x="100.7" y="1493" width="0.5" height="15.0" fill="rgb(246,169,30)" rx="2" ry="2" />
-<text  x="103.69" y="1503.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1381" width="0.3" height="15.0" fill="rgb(249,90,52)" rx="2" ry="2" />
+<text  x="70.72" y="1391.5" ></text>
 </g>
 <g >
-<title>[unknown] (17 samples, 0.04%)</title><rect x="100.7" y="1221" width="0.5" height="15.0" fill="rgb(232,15,21)" rx="2" ry="2" />
-<text  x="103.75" y="1231.5" ></text>
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1029" width="0.3" height="15.0" fill="rgb(241,125,42)" rx="2" ry="2" />
+<text  x="70.72" y="1039.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1733" width="0.3" height="15.0" fill="rgb(247,95,54)" rx="2" ry="2" />
+<text  x="70.72" y="1743.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (6 samples, 0.02%)</title><rect x="67.7" y="837" width="0.2" height="15.0" fill="rgb(252,206,19)" rx="2" ry="2" />
+<text  x="70.72" y="847.5" ></text>
+</g>
+<g >
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="1125" width="0.8" height="15.0" fill="rgb(220,117,22)" rx="2" ry="2" />
+<text  x="119.62" y="1135.5" ></text>
+</g>
+<g >
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="629" width="0.1" height="15.0" fill="rgb(224,31,11)" rx="2" ry="2" />
+<text  x="70.90" y="639.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1813" width="0.8" height="15.0" fill="rgb(215,198,37)" rx="2" ry="2" />
+<text  x="119.56" y="1823.5" ></text>
+</g>
+<g >
+<title>PyObject_Malloc (1,667 samples, 4.24%)</title><rect x="11.1" y="2053" width="50.1" height="15.0" fill="rgb(216,110,31)" rx="2" ry="2" />
+<text  x="14.14" y="2063.5" >PyObj..</text>
+</g>
+<g >
+<title>c10::impl::OperatorEntry::deregisterSchema (5 samples, 0.01%)</title><rect x="1087.3" y="2005" width="0.2" height="15.0" fill="rgb(226,157,6)" rx="2" ry="2" />
+<text  x="1090.31" y="2015.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1637" width="0.8" height="15.0" fill="rgb(251,90,33)" rx="2" ry="2" />
+<text  x="119.56" y="1647.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1637" width="0.3" height="15.0" fill="rgb(216,53,19)" rx="2" ry="2" />
+<text  x="70.72" y="1647.5" ></text>
+</g>
+<g >
+<title>__memmove_ssse3_back (12 samples, 0.03%)</title><rect x="1180.1" y="2053" width="0.3" height="15.0" fill="rgb(245,175,50)" rx="2" ry="2" />
+<text  x="1183.06" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1669" width="0.8" height="15.0" fill="rgb(240,1,1)" rx="2" ry="2" />
+<text  x="119.56" y="1679.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1013" width="0.3" height="15.0" fill="rgb(227,201,4)" rx="2" ry="2" />
+<text  x="70.72" y="1023.5" ></text>
+</g>
+<g >
+<title>at::TORCH_LIBRARY_init_aten (6 samples, 0.02%)</title><rect x="454.7" y="1973" width="0.1" height="15.0" fill="rgb(212,3,21)" rx="2" ry="2" />
+<text  x="457.66" y="1983.5" ></text>
+</g>
+<g >
+<title>[unknown] (7 samples, 0.02%)</title><rect x="467.0" y="2021" width="0.2" height="15.0" fill="rgb(209,1,16)" rx="2" ry="2" />
+<text  x="469.97" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1909" width="0.8" height="15.0" fill="rgb(227,119,36)" rx="2" ry="2" />
+<text  x="119.56" y="1919.5" ></text>
+</g>
+<g >
+<title>_dl_update_slotinfo (1,684 samples, 4.28%)</title><rect x="767.5" y="1989" width="50.6" height="15.0" fill="rgb(212,102,8)" rx="2" ry="2" />
+<text  x="770.52" y="1999.5" >_dl_u..</text>
+</g>
+<g >
+<title>torch::Library::impl&lt;char const*, torch::CppFunction&gt; (4 samples, 0.01%)</title><rect x="117.7" y="1973" width="0.1" height="15.0" fill="rgb(206,113,24)" rx="2" ry="2" />
+<text  x="120.67" y="1983.5" ></text>
+</g>
+<g >
+<title>__memmove_ssse3_back (13 samples, 0.03%)</title><rect x="455.2" y="2037" width="0.4" height="15.0" fill="rgb(249,150,30)" rx="2" ry="2" />
+<text  x="458.20" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (31 samples, 0.08%)</title><rect x="104.3" y="2037" width="0.9" height="15.0" fill="rgb(224,179,18)" rx="2" ry="2" />
+<text  x="107.25" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1781" width="0.8" height="15.0" fill="rgb(214,105,50)" rx="2" ry="2" />
+<text  x="119.56" y="1791.5" ></text>
+</g>
+<g >
+<title>_IO_vsnprintf (5 samples, 0.01%)</title><rect x="335.1" y="2037" width="0.2" height="15.0" fill="rgb(226,59,6)" rx="2" ry="2" />
+<text  x="338.11" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1109" width="0.3" height="15.0" fill="rgb(245,181,46)" rx="2" ry="2" />
+<text  x="70.72" y="1119.5" ></text>
+</g>
+<g >
+<title>[unknown] (25 samples, 0.06%)</title><rect x="116.6" y="245" width="0.8" height="15.0" fill="rgb(249,76,49)" rx="2" ry="2" />
+<text  x="119.65" y="255.5" ></text>
+</g>
+<g >
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1765" width="0.8" height="15.0" fill="rgb(212,144,18)" rx="2" ry="2" />
+<text  x="119.56" y="1775.5" ></text>
+</g>
+<g >
+<title>_dl_init_internal (6 samples, 0.02%)</title><rect x="294.2" y="2021" width="0.2" height="15.0" fill="rgb(205,57,8)" rx="2" ry="2" />
+<text  x="297.19" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="933" width="0.8" height="15.0" fill="rgb(222,204,46)" rx="2" ry="2" />
+<text  x="119.62" y="943.5" ></text>
+</g>
+<g >
+<title>std::string::_M_copy (7 samples, 0.02%)</title><rect x="467.6" y="2037" width="0.2" height="15.0" fill="rgb(205,177,11)" rx="2" ry="2" />
+<text  x="470.57" y="2047.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1269" width="0.3" height="15.0" fill="rgb(219,229,49)" rx="2" ry="2" />
+<text  x="70.72" y="1279.5" ></text>
+</g>
+<g >
+<title>_Py_HashBytes (20 samples, 0.05%)</title><rect x="1179.0" y="2053" width="0.6" height="15.0" fill="rgb(231,23,53)" rx="2" ry="2" />
+<text  x="1181.98" y="2063.5" ></text>
+</g>
+<g >
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="709" width="0.8" height="15.0" fill="rgb(229,36,26)" rx="2" ry="2" />
+<text  x="119.62" y="719.5" ></text>
+</g>
+<g >
+<title>_dl_catch_error (72 samples, 0.18%)</title><rect x="461.5" y="2021" width="2.2" height="15.0" fill="rgb(224,169,47)" rx="2" ry="2" />
+<text  x="464.53" y="2031.5" ></text>
+</g>
+<g >
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="501" width="0.1" height="15.0" fill="rgb(249,100,25)" rx="2" ry="2" />
+<text  x="70.90" y="511.5" ></text>
+</g>
+<g >
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="565" width="0.1" height="15.0" fill="rgb(232,54,8)" rx="2" ry="2" />
+<text  x="70.90" y="575.5" ></text>
+</g>
+<g >
+<title>torch::PyWarningHandler::PyWarningHandler (312 samples, 0.79%)</title><rect x="860.5" y="2005" width="9.4" height="15.0" fill="rgb(223,139,14)" rx="2" ry="2" />
+<text  x="863.54" y="2015.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1781" width="0.3" height="15.0" fill="rgb(238,211,0)" rx="2" ry="2" />
+<text  x="70.72" y="1791.5" ></text>
+</g>
+<g >
+<title>_PyDict_LoadGlobal (1,350 samples, 3.43%)</title><rect x="117.8" y="2021" width="40.6" height="15.0" fill="rgb(233,55,39)" rx="2" ry="2" />
+<text  x="120.85" y="2031.5" >_Py..</text>
+</g>
+<g >
+<title>[unknown] (29 samples, 0.07%)</title><rect x="116.6" y="1941" width="0.8" height="15.0" fill="rgb(233,8,30)" rx="2" ry="2" />
+<text  x="119.56" y="1951.5" ></text>
+</g>
+<g >
+<title>[unknown] (26 samples, 0.07%)</title><rect x="116.6" y="885" width="0.8" height="15.0" fill="rgb(229,5,35)" rx="2" ry="2" />
+<text  x="119.62" y="895.5" ></text>
+</g>
+<g >
+<title>_PyLong_New (214 samples, 0.54%)</title><rect x="363.8" y="2037" width="6.4" height="15.0" fill="rgb(209,18,42)" rx="2" ry="2" />
+<text  x="366.80" y="2047.5" ></text>
+</g>
+<g >
+<title>[unknown] (4 samples, 0.01%)</title><rect x="67.9" y="869" width="0.1" height="15.0" fill="rgb(245,122,14)" rx="2" ry="2" />
+<text  x="70.90" y="879.5" ></text>
+</g>
+<g >
+<title>[ld-2.17.so] (10 samples, 0.03%)</title><rect x="67.7" y="1333" width="0.3" height="15.0" fill="rgb(232,180,35)" rx="2" ry="2" />
+<text  x="70.72" y="1343.5" ></text>
 </g>
 </g>
 </svg>

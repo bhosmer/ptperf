@@ -1,8 +1,9 @@
-PT_REV=$(pushd ../pytorch > /dev/null; git rev-parse HEAD; popd > /dev/null)
+PT_REV=$(git --git-dir=../pytorch/.git rev-parse HEAD)
 
 if [ ! -d $PT_REV ]
 then
   mkdir $PT_REV
+  git --git-dir=../pytorch/.git show -s > $PT_REV/README.md
   echo "added results dir $PT_REV"
 fi
 
@@ -47,3 +48,4 @@ perf script -i $PT_REV/contig.data | ../FlameGraph/stackcollapse-perf.pl > $PT_R
 ../FlameGraph/flamegraph.pl $PT_REV/contig.perf-folded > $PT_REV/contig.svg
 
 rm ./runner.sh
+rm ./perf.data.old
