@@ -22,7 +22,7 @@ def run_func():
 def run_in():
     with torch.no_grad():
         for i in range(iters):
-            x.add(y)
+            x.add_(y)
 
 # out
 def run_out():

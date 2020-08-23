@@ -1,4 +1,5 @@
 PT_REV=$(git --git-dir=../pytorch/.git rev-parse HEAD)
+echo "PT rev $PT_REV"
 
 if [ ! -d $PT_REV ]
 then
