@@ -33,3 +33,20 @@ empty
 
 contig
 9.575862099416554
+
+---
+
+pointwise_functional
+13.933759767562151
+
+pointwise_inplace
+7.0429842080920935
+
+pointwise_outplace
+14.903623694553971
+
+empty
+9.050167789682746
+
+contig
+10.40269579924643

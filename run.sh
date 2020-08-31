@@ -17,6 +17,7 @@ run_test() {
   echo -e "\n$NAME" >> $PT_REV/README.md
   perf record -g ./runner.sh >> $PT_REV/README.md
   mv perf.data $PT_REV/$NAME.data
+  perf report --stdio -i $PT_REV/$NAME.data > $PT_REV/$NAME.report
   perf script -i $PT_REV/$NAME.data | ../FlameGraph/stackcollapse-perf.pl > $PT_REV/$NAME.perf-folded
   ../FlameGraph/flamegraph.pl $PT_REV/$NAME.perf-folded > $PT_REV/$NAME.svg
 }

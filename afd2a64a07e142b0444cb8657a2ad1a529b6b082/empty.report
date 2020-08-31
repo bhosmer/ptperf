@@ -1,0 +1,923 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 48K of event 'cpu-clock:uhpppH'
+# Event count (approx.): 12083500000
+#
+# Overhead  Command  Shared Object                                      Symbol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+# ........  .......  .................................................  ............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+#
+     6.05%  python   libc-2.17.so                                       [.] _int_malloc
+            |
+            ---_int_malloc
+
+     3.65%  python   ld-2.17.so                                         [.] _dl_update_slotinfo
+            |
+            ---_dl_update_slotinfo
+               |          
+               |--0.73%--torch::jit::tracer::getTracingState
+               |          torch::autograd::THPVariable_empty
+               |          0
+               |          torch::PyWarningHandler::~PyWarningHandler
+               |          0xec81485355544155
+               |          
+               |--0.68%--c10::impl::tls_local_dispatch_key_set
+               |          
+                --0.67%--c10::ThreadLocalDebugInfo::get
+
+     3.22%  python   libc-2.17.so                                       [.] _int_free
+            |
+            ---_int_free
+               |          
+                --2.03%--0x564ec0c33ad0
+
+     3.13%  python   python3.7                                          [.] _PyEval_EvalFrameDefault
+            |
+            ---_PyEval_EvalFrameDefault
+               |          
+               |--1.06%--0
+               |          
+                --1.01%--0x7fe614f89c30
+                          |          
+                           --0.54%--0x564ec227d760
+
+     2.67%  python   libtorch_cpu.so                                    [.] c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::(anonymous namespace)::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+            |
+            ---c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::(anonymous namespace)::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+               |          
+                --2.64%--c10::impl::wrap_kernel_functor_unboxed_<c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor (*)(c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat>), at::Tensor, c10::guts::typelist::typelist<c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat> > >, at::Tensor (c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat>)>::call
+
+     2.57%  python   libtorch_python.so                                 [.] torch::FunctionSignature::parse
+            |
+            ---torch::FunctionSignature::parse
+               |          
+                --2.35%--torch::PythonArgParser::raw_parse
+                          0x51
+
+     2.30%  python   libtorch_cpu.so                                    [.] at::native::empty_cpu
+            |
+            ---at::native::empty_cpu
+               |          
+                --2.28%--c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::CPUType::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+
+     2.11%  python   ld-2.17.so                                         [.] update_get_addr
+            |
+            ---update_get_addr
+               |          
+                --0.52%--torch::jit::tracer::getTracingState
+                          torch::autograd::THPVariable_empty
+                          0
+                          torch::PyWarningHandler::~PyWarningHandler
+                          0xec81485355544155
+
+     1.80%  python   libtorch_python.so                                 [.] torch::autograd::THPVariable_empty
+            |
+            ---torch::autograd::THPVariable_empty
+               |          
+                --1.73%--0
+                          torch::PyWarningHandler::~PyWarningHandler
+                          0xec81485355544155
+
+     1.78%  python   libc-2.17.so                                       [.] _int_memalign
+            |
+            ---_int_memalign
+
+     1.66%  python   ld-2.17.so                                         [.] __tls_get_addr
+            |
+            ---__tls_get_addr
+
+     1.62%  python   libc-2.17.so                                       [.] malloc
+            |
+            ---malloc
+
+     1.49%  python   libtorch_python.so                                 [.] torch::tensors::get_default_dispatch_key
+            |
+            ---torch::tensors::get_default_dispatch_key
+               |          
+                --1.24%--torch::PythonArgs::device
+                          torch::autograd::THPVariable_empty
+                          0
+                          torch::PyWarningHandler::~PyWarningHandler
+                          0xec81485355544155
+
+     1.42%  python   libtorch_python.so                                 [.] torch::PythonArgs::intlist
+            |
+            ---torch::PythonArgs::intlist
+               |          
+                --1.35%--torch::autograd::THPVariable_empty
+                          0
+                          torch::PyWarningHandler::~PyWarningHandler
+                          0xec81485355544155
+
+     1.41%  python   libc10.so                                          [.] c10::TensorImpl::TensorImpl
+            |
+            ---c10::TensorImpl::TensorImpl
+               |          
+                --1.36%--c10::TensorImpl::TensorImpl
+                          |          
+                           --1.10%--0x7fe62b15c910
+                                     0
+                                     c10::UndefinedTensorImpl::~UndefinedTensorImpl
+                                     0x229a28058b4808
+
+     1.40%  python   libpthread-2.17.so                                 [.] pthread_mutex_lock
+            |
+            ---pthread_mutex_lock
+               |          
+                --0.99%--0
+
+     1.36%  python   libtorch_python.so                                 [.] torch::autograd::make_variable
+            |
+            ---torch::autograd::make_variable
+               |          
+                --0.94%--torch::autograd::THPVariable_empty
+                          0
+                          torch::PyWarningHandler::~PyWarningHandler
+                          0xec81485355544155
+
+     1.36%  python   libtorch_cpu.so                                    [.] at::empty
+            |
+            ---at::empty
+
+     1.30%  python   libtorch_cpu.so                                    [.] c10::impl::wrap_kernel_functor_unboxed_<c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor (*)(c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat>), at::Tensor, c10::guts::typelist::typelist<c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat> > >, at::Tensor (c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat>)>::call
+            |
+            ---c10::impl::wrap_kernel_functor_unboxed_<c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor (*)(c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat>), at::Tensor, c10::guts::typelist::typelist<c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat> > >, at::Tensor (c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat>)>::call
+
+     1.26%  python   libpthread-2.17.so                                 [.] pthread_cond_signal@@GLIBC_2.3.2
+            |
+            ---pthread_cond_signal@@GLIBC_2.3.2
+               |          
+               |--0.70%--list_append
+               |          0
+               |          
+                --0.56%--0
+
+     1.20%  python   libpthread-2.17.so                                 [.] pthread_mutex_unlock
+            |
+            ---pthread_mutex_unlock
+               |          
+                --0.82%--0
+
+     1.17%  python   libtorch_cpu.so                                    [.] c10::Dispatcher::callWithDispatchKey<at::Tensor, c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat> >
+            |
+            ---c10::Dispatcher::callWithDispatchKey<at::Tensor, c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat> >
+               |          
+                --1.04%--at::empty
+
+     1.15%  python   libtorch_python.so                                 [.] torch::FunctionParameter::check
+            |
+            ---torch::FunctionParameter::check
+               |          
+                --1.06%--torch::FunctionSignature::parse
+                          torch::PythonArgParser::raw_parse
+                          0x51
+
+     1.15%  python   python3.7                                          [.] PyObject_Malloc
+            |
+            ---PyObject_Malloc
+
+     1.14%  python   python3.7                                          [.] subtype_dealloc
+            |
+            ---subtype_dealloc
+               |          
+                --0.63%--0x564ec0b65260
+
+     1.11%  python   libtorch_cpu.so                                    [.] c10::TensorOptions::merge_in
+            |
+            ---c10::TensorOptions::merge_in
+
+     1.09%  python   libtorch_cpu.so                                    [.] at::detail::make_tensor<c10::TensorImpl, c10::intrusive_ptr<c10::StorageImpl, c10::detail::intrusive_target_default_null_type<c10::StorageImpl> >, c10::DispatchKey, caffe2::TypeMeta&>
+            |
+            ---at::detail::make_tensor<c10::TensorImpl, c10::intrusive_ptr<c10::StorageImpl, c10::detail::intrusive_target_default_null_type<c10::StorageImpl> >, c10::DispatchKey, caffe2::TypeMeta&>
+               |          
+                --0.85%--0x7fe62b15c910
+                          |          
+                           --0.83%--0
+                                     c10::UndefinedTensorImpl::~UndefinedTensorImpl
+                                     0x229a28058b4808
+
+     1.07%  python   libc10.so                                          [.] c10::TensorImpl::empty_tensor_restride
+            |
+            ---c10::TensorImpl::empty_tensor_restride
+               |          
+               |--0.52%--at::native::empty_cpu
+               |          c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::CPUType::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+               |          
+                --0.50%--c10::TensorImpl::set_sizes_contiguous
+                          at::native::empty_cpu
+                          c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::CPUType::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+
+     1.02%  python   libc10.so                                          [.] c10::TensorImpl::~TensorImpl
+            |
+            ---c10::TensorImpl::~TensorImpl
+               0
+               c10::UndefinedTensorImpl::~UndefinedTensorImpl
+               0x229a28058b4808
+
+     1.00%  python   libc-2.17.so                                       [.] free
+            |
+            ---free
+               |          
+                --0.99%--0
+
+     0.98%  python   libc-2.17.so                                       [.] malloc_consolidate
+            |
+            ---malloc_consolidate
+
+     0.95%  python   libtorch_python.so                                 [.] THPVariable_clear
+            |
+            ---THPVariable_clear
+               |          
+                --0.82%--0
+                          c10::UndefinedTensorImpl::~UndefinedTensorImpl
+                          0x229a28058b4808
+
+     0.95%  python   python3.7                                          [.] _PyMethodDef_RawFastCallKeywords
+            |
+            ---_PyMethodDef_RawFastCallKeywords
+               |          
+                --0.86%--torch::autograd::THPVariable_empty
+                          0x20726574696d696c
+
+     0.89%  python   libtorch_cpu.so                                    [.] c10::TensorOptions::dtype
+            |
+            ---c10::TensorOptions::dtype
+
+     0.88%  python   python3.7                                          [.] _PyType_Lookup
+            |
+            ---_PyType_Lookup
+               |          
+                --0.76%--0x564ec0b65260
+
+     0.87%  python   libtorch_python.so                                 [.] torch::utils::is_numpy_int
+            |
+            ---torch::utils::is_numpy_int
+               |          
+                --0.64%--torch::PythonArgParser::raw_parse
+                          0x51
+
+     0.84%  python   libtorch_cpu.so                                    [.] at::RecordFunction::~RecordFunction
+            |
+            ---at::RecordFunction::~RecordFunction
+
+     0.84%  python   libc10.so                                          [.] c10::ThreadLocalDebugInfo::get
+            |
+            ---c10::ThreadLocalDebugInfo::get
+
+     0.80%  python   libtorch_cpu.so                                    [.] at::RecordFunction::RecordFunction
+            |
+            ---at::RecordFunction::RecordFunction
+               |          
+                --0.59%--at::empty
+
+     0.78%  python   libc10.so                                          [.] c10::TensorImpl::release_resources
+            |
+            ---c10::TensorImpl::release_resources
+               0
+               |          
+                --0.77%--c10::TensorImpl::~TensorImpl
+                          0x232b08058b4808
+
+     0.78%  python   python3.7                                          [.] _PyObject_GenericGetAttrWithDict
+            |
+            ---_PyObject_GenericGetAttrWithDict
+               |          
+                --0.61%--0x564ec0b68320
+
+     0.72%  python   libtorch_python.so                                 [.] c10::intrusive_ptr<c10::TensorImpl, c10::UndefinedTensorImpl>::reset_
+            |
+            ---c10::intrusive_ptr<c10::TensorImpl, c10::UndefinedTensorImpl>::reset_
+               |          
+                --0.61%--0
+                          |          
+                           --0.54%--c10::UndefinedTensorImpl::~UndefinedTensorImpl
+                                     0x229a28058b4808
+
+     0.67%  python   python3.7                                          [.] _PyDict_LoadGlobal
+            |
+            ---_PyDict_LoadGlobal
+
+     0.65%  python   python3.7                                          [.] lookdict_unicode
+            |
+            ---lookdict_unicode
+
+     0.63%  python   libc10.so                                          [.] c10::alloc_cpu
+            |
+            ---c10::alloc_cpu
+               |          
+                --0.53%--c10::DefaultCPUAllocator::allocate
+                          c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::CPUType::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+
+     0.62%  python   libtorch_python.so                                 [.] torch::PythonArgs::device
+            |
+            ---torch::PythonArgs::device
+
+     0.62%  python   libtorch_python.so                                 [.] c10::typeMetaToScalarType
+            |
+            ---c10::typeMetaToScalarType
+               torch::autograd::THPVariable_empty
+               0
+               torch::PyWarningHandler::~PyWarningHandler
+               0xec81485355544155
+
+     0.61%  python   libtorch_python.so                                 [.] pybind11::detail::get_internals
+            |
+            ---pybind11::detail::get_internals
+               list_append
+               0
+
+     0.60%  python   libc10.so                                          [.] caffe2::TypeMeta::_typeMetaDataInstance<c10::Half>
+            |
+            ---caffe2::TypeMeta::_typeMetaDataInstance<c10::Half>
+
+     0.59%  python   libc10.so                                          [.] caffe2::TypeMeta::_typeMetaDataInstance<int>
+            |
+            ---caffe2::TypeMeta::_typeMetaDataInstance<int>
+
+     0.58%  python   libc10.so                                          [.] caffe2::TypeMeta::_typeMetaDataInstance<long>
+            |
+            ---caffe2::TypeMeta::_typeMetaDataInstance<long>
+
+     0.57%  python   libtorch_cpu.so                                    [.] c10::typeMetaToScalarType
+            |
+            ---c10::typeMetaToScalarType
+
+     0.57%  python   libc10.so                                          [.] caffe2::TypeMeta::_typeMetaDataInstance<float>
+            |
+            ---caffe2::TypeMeta::_typeMetaDataInstance<float>
+
+     0.56%  python   libc-2.17.so                                       [.] __libc_memalign
+            |
+            ---__libc_memalign
+
+     0.56%  python   ld-2.17.so                                         [.] __tls_get_addr_slow
+            |
+            ---__tls_get_addr_slow
+
+     0.54%  python   libtorch_cpu.so                                    [.] c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::CPUType::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+            |
+            ---c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::CPUType::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+
+     0.54%  python   libtorch_cpu.so                                    [.] c10::TensorOptions::computeDispatchKey
+            |
+            ---c10::TensorOptions::computeDispatchKey
+               |          
+                --0.52%--c10::impl::detail::with_scattered_tensor_options_impl_<c10::CompileTimeFunctionPointer<at::Tensor (c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>), &at::(anonymous namespace)::empty_memory_format>, c10::guts::typelist::typelist<c10::ArrayRef<long> >, c10::guts::typelist::typelist<c10::optional<c10::MemoryFormat> > >::wrapper
+                          c10::impl::wrap_kernel_functor_unboxed_<c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor (*)(c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat>), at::Tensor, c10::guts::typelist::typelist<c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat> > >, at::Tensor (c10::ArrayRef<long>, c10::optional<c10::ScalarType>, c10::optional<c10::Layout>, c10::optional<c10::Device>, c10::optional<bool>, c10::optional<c10::MemoryFormat>)>::call
+
+     0.52%  python   python3.7                                          [.] _PyObject_Free
+            |
+            ---_PyObject_Free
+
+     0.51%  python   libc10.so                                          [.] c10::DefaultCPUAllocator::allocate
+            |
+            ---c10::DefaultCPUAllocator::allocate
+
+     0.47%  python   libtorch_python.so                                 [.] c10::TensorOptions::TensorOptions
+     0.43%  python   libtorch_cpu.so                                    [.] getTHDefaultAllocator
+     0.42%  python   libtorch_python.so                                 [.] torch::PythonArgParser::raw_parse
+     0.42%  python   libc10.so                                          [.] c10::memoryProfilingEnabled
+     0.41%  python   libc10.so                                          [.] c10::TensorImpl::compute_contiguous
+     0.41%  python   libtorch_cpu.so                                    [.] c10::typeMetaToScalarType
+     0.40%  python   libtorch_python.so                                 [.] c10::TensorOptions::dtype
+     0.40%  python   python3.7                                          [.] PyErr_Occurred
+     0.40%  python   python3.7                                          [.] PyObject_GC_UnTrack
+     0.38%  python   libc10.so                                          [.] c10::GetCPUAllocator
+     0.38%  python   libtorch_python.so                                 [.] c10::Device::validate
+     0.37%  python   libc-2.17.so                                       [.] __posix_memalign
+     0.37%  python   libc10.so                                          [.] c10::Warning::set_warning_handler
+     0.36%  python   python3.7                                          [.] tupledealloc
+     0.35%  python   libtorch_cpu.so                                    [.] c10::Device::validate
+     0.35%  python   libtorch_cpu.so                                    [.] c10::TensorImpl::set_sizes_contiguous
+     0.35%  python   libtorch_cpu.so                                    [.] at::hasCallbacks
+     0.35%  python   libtorch_cpu.so                                    [.] c10::Dispatcher::singleton
+     0.35%  python   python3.7                                          [.] PyEval_RestoreThread
+     0.34%  python   python3.7                                          [.] long_dealloc
+     0.32%  python   libc10.so                                          [.] caffe2::TypeMeta::_typeMetaDataInstance<unsigned char>
+     0.32%  python   libstdc++.so.6.0.26                                [.] operator new
+     0.31%  python   python3.7                                          [.] _PyObject_Free.cold.382
+     0.31%  python   libc10.so                                          [.] caffe2::TypeMeta::_typeMetaDataInstance<signed char>
+     0.30%  python   libc10.so                                          [.] c10::ProfiledCPUMemoryReporter::New
+     0.30%  python   libc10.so                                          [.] c10::NUMAMove
+     0.30%  python   python3.7                                          [.] PyType_IsSubtype
+     0.29%  python   python3.7                                          [.] _PyObject_GetMethod
+     0.29%  python   libc10.so                                          [.] c10::Warning::get_warning_handler
+     0.27%  python   libc10.so                                          [.] c10::Device::validate
+     0.27%  python   libstdc++.so.6.0.26                                [.] free@plt
+     0.27%  python   libtorch_cpu.so                                    [.] c10::typeMetaToScalarType
+     0.27%  python   libtorch_python.so                                 [.] torch::PyWarningHandler::~PyWarningHandler
+     0.26%  python   libtorch_cpu.so                                    [.] torch::jit::tracer::getTracingState
+     0.25%  python   python3.7                                          [.] PyLong_AsLongLongAndOverflow
+     0.25%  python   libtorch_python.so                                 [.] torch::tensors::get_default_scalar_type
+     0.25%  python   libc10.so                                          [.] c10::impl::ExcludeDispatchKeyGuard::~ExcludeDispatchKeyGuard
+     0.24%  python   libtorch_cpu.so                                    [.] __tls_init
+     0.24%  python   libtorch_cpu.so                                    [.] c10::impl::check_tensor_options_and_extract_memory_format
+     0.24%  python   libc10.so                                          [.] c10::ProfiledCPUMemoryReporter::Delete
+     0.24%  python   libc10.so                                          [.] c10::free_cpu
+     0.23%  python   python3.7                                          [.] PyTuple_New
+     0.22%  python   python3.7                                          [.] PyType_GenericAlloc
+     0.22%  python   libtorch_cpu.so                                    [.] torch::autograd::impl::try_get_grad_accumulator
+     0.22%  python   libtorch_python.so                                 [.] THPVariable_dealloc
+     0.21%  python   python3.7                                          [.] PyDict_GetItem
+     0.21%  python   libstdc++.so.6.0.26                                [.] operator delete
+     0.21%  python   python3.7                                          [.] PyObject_ClearWeakRefs
+     0.20%  python   python3.7                                          [.] rangeiter_next
+     0.20%  python   libpthread-2.17.so                                 [.] __errno_location
+     0.19%  python   libc10.so                                          [.] c10::impl::tls_local_dispatch_key_set
+     0.18%  python   libtorch_cpu.so                                    [.] at::RecordFunction::end
+     0.18%  python   libtorch_cpu.so                                    [.] torch::autograd::impl::get_autograd_meta
+     0.18%  python   libtorch_python.so                                 [.] torch::PythonArgs::scalartype
+     0.17%  python   libtorch_python.so                                 [.] torch::utils::maybe_initialize_cuda
+     0.17%  python   python3.7                                          [.] PyLong_FromLong
+     0.17%  python   libc10.so                                          [.] caffe2::TypeMeta::_typeMetaDataInstance<short>
+     0.17%  python   ld-2.17.so                                         [.] do_lookup_x
+     0.16%  python   libc10.so                                          [.] c10::DefaultCPUAllocator::ReportAndDelete
+     0.16%  python   libtorch_cpu.so                                    [.] caffe2::TypeMeta::_typeMetaDataInstance<float>@plt
+     0.14%  python   libtorch_cpu.so                                    [.] at::native::check_size_nonnegative
+     0.14%  python   python3.7                                          [.] _PyObject_GetDictPtr
+     0.13%  python   libtorch_cpu.so                                    [.] torch::autograd::impl::set_pyobj
+     0.13%  python   libc10.so                                          [.] __tls_get_addr@plt
+     0.12%  python   python3.7                                          [.] _PyStack_AsTuple
+     0.12%  python   libc10.so                                          [.] c10::GetAllocator
+     0.12%  python   python3.7                                          [.] _PyObject_GC_Malloc
+     0.12%  python   libc-2.17.so                                       [.] __memset_sse2
+     0.12%  python   libc10.so                                          [.] 0x000000000001e880
+     0.12%  python   libtorch_cpu.so                                    [.] caffe2::TypeMeta::_typeMetaDataInstance<int>@plt
+     0.11%  python   libc10.so                                          [.] c10::TensorImpl::TensorImpl
+     0.11%  python   libtorch_cpu.so                                    [.] __tls_get_addr@plt
+     0.11%  python   libtorch_cpu.so                                    [.] caffe2::TypeMeta::_typeMetaDataInstance<c10::Half>@plt
+     0.11%  python   libtorch_python.so                                 [.] caffe2::TypeMeta::_typeMetaDataInstance<int>@plt
+     0.11%  python   libtorch_python.so                                 [.] THPVariable_Wrap
+     0.11%  python   python3.7                                          [.] collect
+     0.11%  python   libtorch_python.so                                 [.] torch::PyWarningHandler::PyWarningHandler
+     0.10%  python   libtorch_cpu.so                                    [.] caffe2::TypeMeta::_typeMetaDataInstance<long>@plt
+     0.10%  python   libtorch_python.so                                 [.] torch::autograd::utils::wrap
+     0.10%  python   python3.7                                          [.] PyObject_GetAttr
+     0.10%  python   libc10.so                                          [.] c10::impl::ExcludeDispatchKeyGuard::ExcludeDispatchKeyGuard
+     0.09%  python   libtorch_cpu.so                                    [.] c10::intrusive_ptr<c10::StorageImpl, c10::detail::intrusive_target_default_null_type<c10::StorageImpl> >::reset_
+     0.09%  python   libtorch_python.so                                 [.] pybind11::gil_scoped_release::gil_scoped_release
+     0.09%  python   python3.7                                          [.] PyObject_Free
+     0.09%  python   python3.7                                          [.] module_getattro
+     0.09%  python   libtorch_python.so                                 [.] c10::get_default_dtype@plt
+     0.09%  python   python3.7                                          [.] PyEval_SaveThread
+     0.08%  python   python3.7                                          [.] _PyLong_New
+     0.08%  python   python3.7                                          [.] lookdict_unicode_nodummy
+     0.08%  python   ld-2.17.so                                         [.] _dl_lookup_symbol_x
+     0.08%  python   libtorch_python.so                                 [.] THPVariable_NewWithVar
+     0.08%  python   libtorch_python.so                                 [.] operator delete@plt
+     0.08%  python   python3.7                                          [.] _PyCFunction_FastCallKeywords
+     0.07%  python   libc10.so                                          [.] c10::TensorImpl::autograd_meta
+     0.07%  python   libtorch_python.so                                 [.] at::AutoNonVariableTypeMode::AutoNonVariableTypeMode
+     0.07%  python   python3.7                                          [.] visit_decref
+     0.07%  python   ld-2.17.so                                         [.] _dl_relocate_object
+     0.07%  python   libc10.so                                          [.] c10::GetCurrentNUMANode
+     0.06%  python   libc10.so                                          [.] c10::alloc_cpu@plt
+     0.06%  python   libtorch_python.so                                 [.] torch::PythonArgParser::check_deprecated
+     0.06%  python   python3.7                                          [.] _Py_CheckFunctionResult
+     0.06%  python   libtorch_cpu.so                                    [.] caffe2::TypeMeta::_typeMetaDataInstance<signed char>@plt
+     0.06%  python   libtorch_python.so                                 [.] c10::intrusive_ptr_target::release_resources
+     0.06%  python   libc10.so                                          [.] c10::GetAllocator@plt
+     0.06%  python   libc10.so                                          [.] c10::memoryProfilingEnabled@plt
+     0.06%  python   libc10.so                                          [.] c10::get_default_dtype
+     0.06%  python   libtorch_python.so                                 [.] caffe2::TypeMeta::_typeMetaDataInstance<long>@plt
+     0.05%  python   python3.7                                          [.] r_object
+     0.05%  python   libc10.so                                          [.] c10::DispatchKeySet::has
+     0.05%  python   libc10.so                                          [.] c10::NUMAMove@plt
+     0.05%  python   libstdc++.so.6.0.26                                [.] malloc@plt
+     0.05%  python   libtorch_cpu.so                                    [.] torch::autograd::impl::get_autograd_meta@plt
+     0.05%  python   libtorch_python.so                                 [.] caffe2::TypeMeta::_typeMetaDataInstance<signed char>@plt
+     0.05%  python   libtorch_python.so                                 [.] torch::utils::is_numpy_int@plt
+     0.05%  python   python3.7                                          [.] visit_reachable
+     0.04%  python   libc-2.17.so                                       [.] __memmove_ssse3_back
+     0.04%  python   libc10.so                                          [.] operator delete@plt
+     0.04%  python   libc10.so                                          [.] c10::profiledCPUMemoryReporter
+     0.04%  python   libtorch_cpu.so                                    [.] caffe2::TypeMeta::_typeMetaDataInstance<short>@plt
+     0.04%  python   libtorch_python.so                                 [.] PyType_IsSubtype@plt
+     0.04%  python   python3.7                                          [.] PyDict_SetDefault
+     0.04%  python   python3.7                                          [.] PyObject_GC_Del
+     0.04%  python   libc10.so                                          [.] c10::TensorImpl::set_autograd_meta
+     0.04%  python   libc10.so                                          [.] c10::profiledCPUMemoryReporter@plt
+     0.04%  python   libtorch_python.so                                 [.] c10::impl::ExcludeDispatchKeyGuard::~ExcludeDispatchKeyGuard@plt
+     0.04%  python   libc10.so                                          [.] c10::ProfiledCPUMemoryReporter::New@plt
+     0.04%  python   libtorch_python.so                                 [.] c10::Warning::set_warning_handler@plt
+     0.04%  python   libtorch_python.so                                 [.] caffe2::TypeMeta::_typeMetaDataInstance<float>@plt
+     0.04%  python   libtorch_python.so                                 [.] pybind11::gil_scoped_release::~gil_scoped_release
+     0.03%  python   libc10.so                                          [.] operator delete
+     0.03%  python   libtorch_cpu.so                                    [.] at::getCPUAllocator
+     0.03%  python   libtorch_python.so                                 [.] torch::tensors::get_default_dispatch_key@plt
+     0.03%  python   python3.7                                          [.] _Py_IsFinalizing
+     0.03%  python   libtorch_cpu.so                                    [.] at::RecordFunction::end@plt
+     0.03%  python   libtorch_cpu.so                                    [.] getTHDefaultAllocator@plt
+     0.03%  python   libtorch_cpu.so                                    [.] torch::autograd::impl::pyobj
+     0.03%  python   libtorch_python.so                                 [.] torch::autograd::impl::set_pyobj@plt
+     0.03%  python   python3.7                                          [.] PyThreadState_Swap
+     0.03%  python   libstdc++.so.6.0.26                                [.] std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string
+     0.03%  python   libtorch_cpu.so                                    [.] c10::GetCPUAllocator@plt
+     0.03%  python   python3.7                                          [.] PyDict_SetItem
+     0.03%  python   python3.7                                          [.] code_dealloc
+     0.03%  python   python3.7                                          [.] type_new
+     0.03%  python   libc-2.17.so                                       [.] __strlen_sse2_pminub
+     0.03%  python   libtorch_cpu.so                                    [.] at::hasCallbacks@plt
+     0.03%  python   libtorch_cpu.so                                    [.] c10::TensorImpl::TensorImpl@plt
+     0.03%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::updateDispatchTable_
+     0.03%  python   libtorch_python.so                                 [.] torch::PythonArgParser::raw_parse@plt
+     0.03%  python   python3.7                                          [.] _PyEval_EvalCodeWithName
+     0.03%  python   python3.7                                          [.] dict_traverse
+     0.02%  python   ld-2.17.so                                         [.] check_match.9525
+     0.02%  python   ld-2.17.so                                         [.] strcmp
+     0.02%  python   libtorch_cpu.so                                    [.] at::getCPUAllocator@plt
+     0.02%  python   libtorch_cpu.so                                    [.] c10::Dispatcher::singleton@plt
+     0.02%  python   libtorch_cpu.so                                    [.] caffe2::TypeMeta::_typeMetaDataInstance<unsigned char>@plt
+     0.02%  python   libtorch_cpu.so                                    [.] torch::jit::SharedParserData::match
+     0.02%  python   libtorch_python.so                                 [.] PyObject_GC_UnTrack@plt
+     0.02%  python   libtorch_python.so                                 [.] caffe2::TypeMeta::_typeMetaDataInstance<c10::Half>@plt
+     0.02%  python   python3.7                                          [.] PyCode_New
+     0.02%  python   python3.7                                          [.] PyObject_GenericGetAttr
+     0.02%  python   libc10.so                                          [.] c10::ThreadLocalDebugInfo::get@plt
+     0.02%  python   libc10.so                                          [.] c10::free_cpu@plt
+     0.02%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::computeDispatchTableEntryWithDebug
+     0.02%  python   libstdc++.so.6.0.26                                [.] __dynamic_cast
+     0.02%  python   libtorch_python.so                                 [.] c10::VariableVersion::VersionCounter::~VersionCounter
+     0.02%  python   libtorch_python.so                                 [.] operator new@plt
+     0.02%  python   python3.7                                          [.] _Py_HashBytes
+     0.02%  python   python3.7                                          [.] tupletraverse
+     0.02%  python   libtorch_cpu.so                                    [.] at::RecordFunction::RecordFunction@plt
+     0.02%  python   libtorch_cpu.so                                    [.] torch::jit::canonicalSchemaString
+     0.02%  python   libtorch_python.so                                 [.] at::empty@plt
+     0.02%  python   libtorch_python.so                                 [.] caffe2::TypeMeta::_typeMetaDataInstance<short>@plt
+     0.02%  python   libtorch_python.so                                 [.] std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_release
+     0.02%  python   python3.7                                          [.] PyUnicode_InternInPlace
+     0.02%  python   python3.7                                          [.] _PyFunction_FastCallKeywords
+     0.02%  python   python3.7                                          [.] unicode_eq.lto_priv.287
+     0.02%  python   libc-2.17.so                                       [.] __memcmp_sse4_1
+     0.02%  python   libc-2.17.so                                       [.] isalpha
+     0.02%  python   libc10.so                                          [.] c10::TensorImpl::sizes
+     0.02%  python   libstdc++.so.6.0.26                                [.] std::basic_streambuf<char, std::char_traits<char> >::xsputn
+     0.02%  python   libstdc++.so.6.0.26                                [.] std::string::compare
+     0.02%  python   libtorch_python.so                                 [.] c10::Warning::get_warning_handler@plt
+     0.02%  python   libtorch_python.so                                 [.] torch::FunctionSignature::parse@plt
+     0.02%  python   python3.7                                          [.] PyUnicode_New
+     0.02%  python   python3.7                                          [.] _PyFrame_New_NoTrack
+     0.01%  python   libc10.so                                          [.] c10::ProfiledCPUMemoryReporter::Delete@plt
+     0.01%  python   libtorch_cpu.so                                    [.] torch::jit::parseSchemaOrName
+     0.01%  python   libtorch_python.so                                 [.] THPVariable_Wrap@plt
+     0.01%  python   libtorch_python.so                                 [.] operator delete@plt
+     0.01%  python   libtorch_python.so                                 [.] torch::autograd::impl::pyobj@plt
+     0.01%  python   libtorch_python.so                                 [.] torch::autograd::impl::try_get_grad_accumulator@plt
+     0.01%  python   python3.7                                          [.] _PyDict_GetItem_KnownHash
+     0.01%  python   libc10.so                                          [.] c10::GetCurrentNUMANode@plt
+     0.01%  python   libstdc++.so.6.0.26                                [.] std::string::_M_copy
+     0.01%  python   libtorch_cpu.so                                    [.] c10::detail::infer_schema::(anonymous namespace)::createArgumentVector
+     0.01%  python   libtorch_python.so                                 [.] torch::PyWarningHandler::~PyWarningHandler@plt
+     0.01%  python   libtorch_python.so                                 [.] torch::jit::tracer::getTracingState@plt
+     0.01%  python   libtorch_python.so                                 [.] torch::tensors::get_default_scalar_type@plt
+     0.01%  python   python3.7                                          [.] PyType_Ready
+     0.01%  python   python3.7                                          [.] _PyFunction_FastCallDict
+     0.01%  python   python3.7                                          [.] func_traverse
+     0.01%  python   libc10.so                                          [.] c10::TensorImpl::compute_contiguous@plt
+     0.01%  python   libc10.so                                          [.] operator new@plt
+     0.01%  python   libstdc++.so.6.0.26                                [.] __cxxabiv1::__si_class_type_info::__do_dyncast
+     0.01%  python   libtorch_cpu.so                                    [.] Xbyak::util::Cpu::Cpu
+     0.01%  python   libtorch_cpu.so                                    [.] c10::findSchemaDifferences
+     0.01%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::deregisterKernel_
+     0.01%  python   libtorch_cpu.so                                    [.] torch::Library::_impl
+     0.01%  python   libtorch_cpu.so                                    [.] torch::jit::Lexer::next
+     0.01%  python   libtorch_python.so                                 [.] PyEval_SaveThread@plt
+     0.01%  python   python3.7                                          [.] PyObject_RichCompare
+     0.01%  python   python3.7                                          [.] PyUnicode_FromKindAndData
+     0.01%  python   python3.7                                          [.] dictresize
+     0.01%  python   python3.7                                          [.] type_getattro
+     0.01%  python   python3.7                                          [.] vgetargs1_impl
+     0.01%  python   libc-2.17.so                                       [.] __memcpy_ssse3_back
+     0.01%  python   libc-2.17.so                                       [.] _dl_addr
+     0.01%  python   libstdc++.so.6.0.26                                [.] std::string::_Rep::_M_refcopy
+     0.01%  python   libstdc++.so.6.0.26                                [.] std::string::_Rep::_M_set_length_and_sharable
+     0.01%  python   libtorch_cpu.so                                    [.] c10::Dispatcher::cleanup
+     0.01%  python   libtorch_cpu.so                                    [.] c10::Dispatcher::findOp
+     0.01%  python   libtorch_cpu.so                                    [.] c10::TensorType::get
+     0.01%  python   libtorch_cpu.so                                    [.] c10::detail::infer_schema::make_function_schema
+     0.01%  python   libtorch_cpu.so                                    [.] std::__shared_ptr<torch::jit::Source, (__gnu_cxx::_Lock_policy)2>::__shared_ptr
+     0.01%  python   libtorch_python.so                                 [.] caffe2::TypeMeta::_typeMetaDataInstance<unsigned char>@plt
+     0.01%  python   python3.7                                          [.] PyErr_Restore
+     0.01%  python   python3.7                                          [.] PyMethod_New
+     0.01%  python   python3.7                                          [.] _PyArg_UnpackStack
+     0.01%  python   python3.7                                          [.] _PyTuple_MaybeUntrack
+     0.01%  python   python3.7                                          [.] do_string_format
+     0.01%  python   python3.7                                          [.] lookdict
+     0.01%  python   libc-2.17.so                                       [.] isspace
+     0.01%  python   libc-2.17.so                                       [.] vfprintf
+     0.01%  python   libstdc++.so.6.0.26                                [.] std::ostream::sentry::sentry
+     0.01%  python   libtorch_cpu.so                                    [.] c10::Dispatcher::deregisterImpl_
+     0.01%  python   libtorch_cpu.so                                    [.] c10::InternedStrings::_symbol
+     0.01%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::registerKernel
+     0.01%  python   libtorch_cpu.so                                    [.] torch::jit::(anonymous namespace)::OperatorRegistry::~OperatorRegistry
+     0.01%  python   libtorch_python.so                                 [.] PyEval_RestoreThread@plt
+     0.01%  python   libtorch_python.so                                 [.] pybind11::cpp_function::initialize_generic
+     0.01%  python   libtorch_python.so                                 [.] std::_Hashtable<std::string, std::string, std::allocator<std::string>, std::__detail::_Identity, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_Hashtable<std::string const*>
+     0.01%  python   python3.7                                          [.] PyBytes_FromStringAndSize
+     0.01%  python   python3.7                                          [.] PyFunction_NewWithQualName
+     0.01%  python   python3.7                                          [.] PyObject_SetAttr
+     0.01%  python   python3.7                                          [.] PyParser_AddToken
+     0.01%  python   python3.7                                          [.] PyUnicode_DecodeUTF8Stateful
+     0.01%  python   python3.7                                          [.] PyUnicode_FromFormatV
+     0.01%  python   python3.7                                          [.] _PyDict_Next
+     0.01%  python   python3.7                                          [.] _PyObjectDict_SetItem
+     0.01%  python   python3.7                                          [.] _PyObject_FastCallDict
+     0.01%  python   python3.7                                          [.] _PyObject_FastCallKeywords
+     0.01%  python   python3.7                                          [.] _PyObject_LookupSpecial
+     0.01%  python   python3.7                                          [.] _PyUnicodeWriter_PrepareInternal
+     0.01%  python   python3.7                                          [.] dict_merge
+     0.01%  python   python3.7                                          [.] lookdict_split
+     0.01%  python   python3.7                                          [.] r_long
+     0.00%  python   _multiarray_umath.cpython-37m-x86_64-linux-gnu.so  [.] BigInt_Multiply
+     0.00%  python   ld-2.17.so                                         [.] _dl_name_match_p
+     0.00%  python   libc-2.17.so                                       [.] _IO_default_xsputn
+     0.00%  python   libc-2.17.so                                       [.] _IO_vsnprintf
+     0.00%  python   libc-2.17.so                                       [.] __mbsrtowcs_l
+     0.00%  python   libc-2.17.so                                       [.] __strchr_sse42
+     0.00%  python   libc-2.17.so                                       [.] __strchrnul
+     0.00%  python   libc-2.17.so                                       [.] __strcmp_sse42
+     0.00%  python   libc-2.17.so                                       [.] __strlen_sse2
+     0.00%  python   libc10.so                                          [.] posix_memalign@plt
+     0.00%  python   libcrypto.so.1.1                                   [.] getrn
+     0.00%  python   libstdc++.so.6.0.26                                [.] __cxxabiv1::__vmi_class_type_info::__do_dyncast
+     0.00%  python   libstdc++.so.6.0.26                                [.] d_demangle_callback.constprop.0
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::_Hash_bytes
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::__int_to_char<char, unsigned long>
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::__ostream_insert<char, std::char_traits<char> >
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::ios_base::_M_dispose_callbacks
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::locale::operator=
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_Rep::_M_grab
+     0.00%  python   libtorch_cpu.so                                    [.] c10::DispatchKeyExtractor::setOperatorHasFallthroughForKey
+     0.00%  python   libtorch_cpu.so                                    [.] c10::Dispatcher::registerImpl
+     0.00%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::deregisterSchema
+     0.00%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::registerSchema
+     0.00%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::schema
+     0.00%  python   libtorch_cpu.so                                    [.] std::_Rb_tree<std::string, std::pair<std::string const, caffe2::OpSchema>, std::_Select1st<std::pair<std::string const, caffe2::OpSchema> >, std::less<std::string>, std::allocator<std::pair<std::string const, caffe2::OpSchema> > >::_M_erase
+     0.00%  python   libtorch_cpu.so                                    [.] std::__detail::_Map_base<std::string, std::pair<std::string const, std::string>, std::allocator<std::pair<std::string const, std::string> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true>, true>::operator[]
+     0.00%  python   libtorch_cpu.so                                    [.] std::string::_Rep::_M_dispose
+     0.00%  python   libtorch_cpu.so                                    [.] std::vector<c10::Argument, std::allocator<c10::Argument> >::_M_realloc_insert<c10::Argument>
+     0.00%  python   libtorch_cpu.so                                    [.] std::vector<c10::either<c10::OperatorName, c10::FunctionSchema>, std::allocator<c10::either<c10::OperatorName, c10::FunctionSchema> > >::_M_realloc_insert<c10::either<c10::OperatorName, c10::FunctionSchema> >
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::(anonymous namespace)::OperatorRegistry::registerPendingOperators
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::(anonymous namespace)::SchemaParser::parseArgument
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::Lexer::lex
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::SchemaTypeParser::parseBaseType
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::SchemaTypeParser::parseType
+     0.00%  python   libtorch_python.so                                 [.] std::_Hashtable<std::string, std::pair<std::string const, c10::Symbol>, std::allocator<std::pair<std::string const, c10::Symbol> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_find_before_node
+     0.00%  python   libtorch_python.so                                 [.] std::__shared_ptr<c10::OperatorKernel, (__gnu_cxx::_Lock_policy)2>::__shared_ptr<c10::OperatorKernel, std::default_delete<c10::OperatorKernel>, void>
+     0.00%  python   libtorch_python.so                                 [.] std::string::_S_construct<char*>
+     0.00%  python   python3.7                                          [.] PyCode_Optimize
+     0.00%  python   python3.7                                          [.] PyErr_Format
+     0.00%  python   python3.7                                          [.] PyErr_SetObject
+     0.00%  python   python3.7                                          [.] PyMem_Free
+     0.00%  python   python3.7                                          [.] PyNumber_Add
+     0.00%  python   python3.7                                          [.] PyObject_GetIter
+     0.00%  python   python3.7                                          [.] PySlice_New
+     0.00%  python   python3.7                                          [.] PyUnicode_RichCompare
+     0.00%  python   python3.7                                          [.] _PyDict_DelItem_KnownHash
+     0.00%  python   python3.7                                          [.] _PyDict_MaybeUntrack
+     0.00%  python   python3.7                                          [.] _PyObject_FastCallKeywords.cold.1892
+     0.00%  python   python3.7                                          [.] _PyObject_GenericSetAttrWithDict
+     0.00%  python   python3.7                                          [.] _PyUnicode_FromId
+     0.00%  python   python3.7                                          [.] builtin_exec
+     0.00%  python   python3.7                                          [.] code_dealloc.cold.2311
+     0.00%  python   python3.7                                          [.] descr_traverse
+     0.00%  python   python3.7                                          [.] dict_dealloc
+     0.00%  python   python3.7                                          [.] float_dealloc
+     0.00%  python   python3.7                                          [.] frame_dealloc
+     0.00%  python   python3.7                                          [.] func_dealloc
+     0.00%  python   python3.7                                          [.] intern_string_constants
+     0.00%  python   python3.7                                          [.] intern_string_constants.cold.2075
+     0.00%  python   python3.7                                          [.] listiter_next
+     0.00%  python   python3.7                                          [.] long_richcompare
+     0.00%  python   python3.7                                          [.] os_stat
+     0.00%  python   python3.7                                          [.] pymalloc_alloc.isra.1
+     0.00%  python   python3.7                                          [.] set_add_entry
+     0.00%  python   python3.7                                          [.] subtype_traverse
+     0.00%  python   python3.7                                          [.] type_traverse
+     0.00%  python   python3.7                                          [.] vgetargskeywords
+     0.00%  python   python3.7                                          [.] vgetargskeywordsfast_impl
+     0.00%  python   _multiarray_umath.cpython-37m-x86_64-linux-gnu.so  [.] Dragon4
+     0.00%  python   _multiarray_umath.cpython-37m-x86_64-linux-gnu.so  [.] PyUFunc_e_e_As_f_f
+     0.00%  python   _multiarray_umath.cpython-37m-x86_64-linux-gnu.so  [.] convert_pyobject_to_datetime_metadata
+     0.00%  python   ld-2.17.so                                         [.] _dl_map_object
+     0.00%  python   ld-2.17.so                                         [.] dl_open_worker
+     0.00%  python   ld-2.17.so                                         [.] memset
+     0.00%  python   libc-2.17.so                                       [.] __fxstat64
+     0.00%  python   libc-2.17.so                                       [.] __memcpy_sse2
+     0.00%  python   libc-2.17.so                                       [.] __mpn_construct_double
+     0.00%  python   libc-2.17.so                                       [.] __strncpy_sse2_unaligned
+     0.00%  python   libc-2.17.so                                       [.] __tzfile_compute
+     0.00%  python   libc-2.17.so                                       [.] __wcsrtombs
+     0.00%  python   libc-2.17.so                                       [.] _itoa_word
+     0.00%  python   libc-2.17.so                                       [.] init_cacheinfo
+     0.00%  python   libc-2.17.so                                       [.] memchr
+     0.00%  python   libc-2.17.so                                       [.] memrchr
+     0.00%  python   libc-2.17.so                                       [.] realloc
+     0.00%  python   libc10.so                                          [.] c10::TensorImpl::TensorImpl@plt
+     0.00%  python   libcrypto.so.1.1                                   [.] OPENSSL_LH_free
+     0.00%  python   libcrypto.so.1.1                                   [.] openssl_lh_strcasehash
+     0.00%  python   libmkl_core.so                                     [.] mkl__blas_clean_jit_hashtable
+     0.00%  python   libmkl_rt.so                                       [.] call_gmon_start
+     0.00%  python   libpthread-2.17.so                                 [.] __libc_read
+     0.00%  python   libpthread-2.17.so                                 [.] sem_post@@GLIBC_2.2.5
+     0.00%  python   libstdc++.so.6.0.26                                [.] d_append_buffer
+     0.00%  python   libstdc++.so.6.0.26                                [.] d_append_char
+     0.00%  python   libstdc++.so.6.0.26                                [.] d_parmlist
+     0.00%  python   libstdc++.so.6.0.26                                [.] d_type
+     0.00%  python   libstdc++.so.6.0.26                                [.] operator delete@plt
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::__detail::_List_node_base::_M_hook
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::__detail::_Prime_rehash_policy::_M_next_bkt
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::__ostream_write<char, std::char_traits<char> >
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::basic_ios<char, std::char_traits<char> >::_M_cache_locale
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::basic_ios<char, std::char_traits<char> >::init@plt
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::locale::_S_initialize
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::locale::id::_M_id
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::locale::id::_M_id@plt
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::locale::locale
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::ostream::_M_insert<unsigned long>
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_M_check
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_M_copy@plt
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_M_disjunct
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_M_replace_safe
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_Rep::_M_dispose
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_Rep::_M_is_leaked
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_Rep::_M_is_leaked@plt
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_Rep::_M_is_shared
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_S_construct<char const*>@plt
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::_S_copy_chars
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::append
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::find
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::string::push_back
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::type_info::operator==
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::use_facet<std::ctype<char> >
+     0.00%  python   libstdc++.so.6.0.26                                [.] std::use_facet<std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > >
+     0.00%  python   libtorch_cpu.so                                    [.] Xbyak::Mmx::Mmx
+     0.00%  python   libtorch_cpu.so                                    [.] Xbyak::Operand::Operand
+     0.00%  python   libtorch_cpu.so                                    [.] Xbyak::Xmm::Xmm
+     0.00%  python   libtorch_cpu.so                                    [.] _GLOBAL__sub_I_int8_sigmoid_op.cc
+     0.00%  python   libtorch_cpu.so                                    [.] __static_initialization_and_destruction_0
+     0.00%  python   libtorch_cpu.so                                    [.] __static_initialization_and_destruction_0
+     0.00%  python   libtorch_cpu.so                                    [.] __static_initialization_and_destruction_0
+     0.00%  python   libtorch_cpu.so                                    [.] at::is_custom_op
+     0.00%  python   libtorch_cpu.so                                    [.] c10::AliasInfo::AliasInfo
+     0.00%  python   libtorch_cpu.so                                    [.] c10::ClassType::addMethod
+     0.00%  python   libtorch_cpu.so                                    [.] c10::DispatchKeyExtractor::makeBitsetForDispatchArgs
+     0.00%  python   libtorch_cpu.so                                    [.] c10::Dispatcher::~Dispatcher
+     0.00%  python   libtorch_cpu.so                                    [.] c10::FunctionSchema::~FunctionSchema
+     0.00%  python   libtorch_cpu.so                                    [.] c10::KernelFunction::makeFromUnboxedRuntimeFunction<false, at::Tensor (at::Tensor const&, long, bool)>
+     0.00%  python   libtorch_cpu.so                                    [.] c10::KernelFunction::makeFromUnboxedRuntimeFunction<false, at::Tensor (at::Tensor, c10::Scalar)>
+     0.00%  python   libtorch_cpu.so                                    [.] c10::KernelFunction::setManuallyBoxedKernel_
+     0.00%  python   libtorch_cpu.so                                    [.] c10::ObservedOperators::isObserved
+     0.00%  python   libtorch_cpu.so                                    [.] c10::OptionalType::create
+     0.00%  python   libtorch_cpu.so                                    [.] c10::Registerer<std::string, std::unique_ptr<caffe2::GradientMakerBase, std::default_delete<caffe2::GradientMakerBase> >, caffe2::OperatorDef const&, std::vector<caffe2::GradientWrapper, std::allocator<caffe2::GradientWrapper> > const&>::Registerer
+     0.00%  python   libtorch_cpu.so                                    [.] c10::TensorImpl::autograd_meta@plt
+     0.00%  python   libtorch_cpu.so                                    [.] c10::detail::getTypePtr_<c10::ArrayRef<long> >::call
+     0.00%  python   libtorch_cpu.so                                    [.] c10::detail::inferFunctionSchemaFromFunctor<c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<std::tuple<at::Tensor, at::Tensor> (*)(at::Tensor const&, bool, bool), std::tuple<at::Tensor, at::Tensor>, c10::guts::typelist::typelist<at::Tensor const&, bool, bool> > >
+     0.00%  python   libtorch_cpu.so                                    [.] c10::either<torch::jit::Operator::C10Operator, torch::jit::Operator::JitOnlyOperator>::either
+     0.00%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::computeDispatchTableEntry
+     0.00%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::computeDispatchTableEntry@plt
+     0.00%  python   libtorch_cpu.so                                    [.] c10::impl::OperatorEntry::updateFallback
+     0.00%  python   libtorch_cpu.so                                    [.] c10::intrusive_ptr<c10::detail::ListImpl, c10::detail::intrusive_target_default_null_type<c10::detail::ListImpl> >::make<std::vector<c10::IValue, std::allocator<c10::IValue> >, std::shared_ptr<c10::Type> >
+     0.00%  python   libtorch_cpu.so                                    [.] google::protobuf::internal::InlineGreedyStringParser
+     0.00%  python   libtorch_cpu.so                                    [.] operator delete@plt
+     0.00%  python   libtorch_cpu.so                                    [.] operator new@plt
+     0.00%  python   libtorch_cpu.so                                    [.] std::_Function_handler<void (), c10::Dispatcher::registerName(c10::OperatorName)::{lambda()#1}>::_M_invoke
+     0.00%  python   libtorch_cpu.so                                    [.] std::_Hashtable<onnx_torch::Symbol, onnx_torch::Symbol, std::allocator<onnx_torch::Symbol>, std::__detail::_Identity, std::equal_to<onnx_torch::Symbol>, std::hash<onnx_torch::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_Hashtable<onnx_torch::Symbol const*>
+     0.00%  python   libtorch_cpu.so                                    [.] std::_Hashtable<std::string, std::pair<std::string const, std::function<std::unique_ptr<caffe2::GradientMakerBase, std::default_delete<caffe2::GradientMakerBase> > (caffe2::OperatorDef const&, std::vector<caffe2::GradientWrapper, std::allocator<caffe2::GradientWrapper> > const&)> >, std::allocator<std::pair<std::string const, std::function<std::unique_ptr<caffe2::GradientMakerBase, std::default_delete<caffe2::GradientMakerBase> > (caffe2::OperatorDef const&, std::vector<caffe2::GradientWrapper, std::allocator<caffe2::GradientWrapper> > const&)> > >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_rehash
+     0.00%  python   libtorch_cpu.so                                    [.] std::_Hashtable<std::string, std::pair<std::string const, std::shared_ptr<torch::jit::Operator> >, std::allocator<std::pair<std::string const, std::shared_ptr<torch::jit::Operator> > >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_find_before_node
+     0.00%  python   libtorch_cpu.so                                    [.] std::__detail::_Hashtable_alloc<std::allocator<std::__detail::_Hash_node<std::pair<std::string const, c10::Symbol>, true> > >::_M_deallocate_node
+     0.00%  python   libtorch_cpu.so                                    [.] std::__detail::_Hashtable_alloc<std::allocator<std::__detail::_Hash_node<std::pair<std::string const, int>, true> > >::_M_deallocate_node
+     0.00%  python   libtorch_cpu.so                                    [.] std::__detail::_Map_base<std::string, std::pair<std::string const, c10::RegistryPriority>, std::allocator<std::pair<std::string const, c10::RegistryPriority> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true>, true>::operator[]
+     0.00%  python   libtorch_cpu.so                                    [.] std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string@plt
+     0.00%  python   libtorch_cpu.so                                    [.] std::string::_Rep::_M_dispose
+     0.00%  python   libtorch_cpu.so                                    [.] std::string::_Rep::_M_dispose
+     0.00%  python   libtorch_cpu.so                                    [.] std::string::_Rep::_M_dispose
+     0.00%  python   libtorch_cpu.so                                    [.] std::vector<c10::RegistrationHandleRAII, std::allocator<c10::RegistrationHandleRAII> >::_M_realloc_insert<c10::RegistrationHandleRAII>
+     0.00%  python   libtorch_cpu.so                                    [.] std::vector<std::shared_ptr<torch::jit::Operator>, std::allocator<std::shared_ptr<torch::jit::Operator> > >::_M_realloc_insert<std::shared_ptr<torch::jit::Operator> const&>
+     0.00%  python   libtorch_cpu.so                                    [.] std::vector<torch::jit::Token, std::allocator<torch::jit::Token> >::_M_realloc_insert<torch::jit::Token>
+     0.00%  python   libtorch_cpu.so                                    [.] torch::Library::_def
+     0.00%  python   libtorch_cpu.so                                    [.] torch::Library::_def@plt
+     0.00%  python   libtorch_cpu.so                                    [.] torch::Library::impl<c10::CompileTimeFunctionPointer<at::Tensor (at::Tensor const&, at::Tensor const&, double), &torch::TraceType::(anonymous namespace)::_masked_scale> >
+     0.00%  python   libtorch_cpu.so                                    [.] torch::Library::impl_UNBOXED<at::Tensor (c10::ArrayRef<at::Tensor>, at::Dimname)>
+     0.00%  python   libtorch_cpu.so                                    [.] torch::Library::impl_UNBOXED<at::Tensor& (at::Tensor&, at::Tensor const&, at::Tensor const&, at::Tensor const&, bool, bool)>@plt
+     0.00%  python   libtorch_cpu.so                                    [.] torch::Library::impl_UNBOXED<at::Tensor& (at::Tensor&, at::Tensor const&, long, c10::optional<c10::ScalarType>)>
+     0.00%  python   libtorch_cpu.so                                    [.] torch::detail::TorchLibraryInit::~TorchLibraryInit
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::(anonymous namespace)::SchemaParser::parseDeclaration()::{lambda()#1}::operator()
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::Lexer::lexRaw
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::SchemaTypeParser::parseAliasAnnotation
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::parseName
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::parseSchema
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::sharedParserData
+     0.00%  python   libtorch_cpu.so                                    [.] torch::jit::sharedParserData@plt
+     0.00%  python   libtorch_cpu.so                                    [.] 0x0000000000645490
+     0.00%  python   libtorch_python.so                                 [.] memset@plt
+     0.00%  python   libtorch_python.so                                 [.] pybind11::cpp_function::initialize_generic(pybind11::detail::function_record*, char const*, std::type_info const* const*, unsigned long)::{lambda(void*)#1}::_FUN
+     0.00%  python   libtorch_python.so                                 [.] std::_Hashtable<c10::Symbol, c10::Symbol, std::allocator<c10::Symbol>, std::__detail::_Identity, std::equal_to<c10::Symbol>, std::hash<c10::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::clear
+     0.00%  python   libtorch_python.so                                 [.] std::_Hashtable<std::string, std::pair<std::string const, torch::ParameterType>, std::allocator<std::pair<std::string const, torch::ParameterType> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_find_before_node
+     0.00%  python   libtorch_python.so                                 [.] std::_Hashtable<std::string, std::string, std::allocator<std::string>, std::__detail::_Identity, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::count
+     0.00%  python   libtorch_python.so                                 [.] std::_Hashtable<std::type_index, std::pair<std::type_index const, THPPointer<_object> >, std::allocator<std::pair<std::type_index const, THPPointer<_object> > >, std::__detail::_Select1st, std::equal_to<std::type_index>, std::hash<std::type_index>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::_M_insert_unique_node
+     0.00%  python   libtorch_python.so                                 [.] std::_Hashtable<std::type_index, std::pair<std::type_index const, pybind11::detail::type_info*>, std::allocator<std::pair<std::type_index const, pybind11::detail::type_info*> >, std::__detail::_Select1st, std::equal_to<std::type_index>, std::hash<std::type_index>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true> >::find
+     0.00%  python   libtorch_python.so                                 [.] std::_Sp_counted_base<(__gnu_cxx::_Lock_policy)2>::_M_weak_release
+     0.00%  python   libtorch_python.so                                 [.] std::_Sp_counted_deleter<c10::OperatorKernel*, std::default_delete<c10::OperatorKernel>, std::allocator<void>, (__gnu_cxx::_Lock_policy)2>::_M_dispose
+     0.00%  python   libtorch_python.so                                 [.] std::__detail::_Prime_rehash_policy::_M_need_rehash@plt
+     0.00%  python   libtorch_python.so                                 [.] std::__shared_count<(__gnu_cxx::_Lock_policy)2>::__shared_count<c10::OperatorKernel, std::default_delete<c10::OperatorKernel> >
+     0.00%  python   libtorch_python.so                                 [.] std::__shared_ptr<c10::Type, (__gnu_cxx::_Lock_policy)2>::__shared_ptr
+     0.00%  python   libtorch_python.so                                 [.] std::string::_Rep::_M_dispose
+     0.00%  python   python3.7                                          [.] PyArg_UnpackTuple
+     0.00%  python   python3.7                                          [.] PyCFunction_NewEx
+     0.00%  python   python3.7                                          [.] PyDict_New
+     0.00%  python   python3.7                                          [.] PyErr_Clear
+     0.00%  python   python3.7                                          [.] PyEval_EvalCode
+     0.00%  python   python3.7                                          [.] PyEval_EvalFrameEx
+     0.00%  python   python3.7                                          [.] PyEval_GetGlobals
+     0.00%  python   python3.7                                          [.] PyInit_posix
+     0.00%  python   python3.7                                          [.] PyList_New
+     0.00%  python   python3.7                                          [.] PyLong_FromString
+     0.00%  python   python3.7                                          [.] PyLong_FromUnsignedLongLong
+     0.00%  python   python3.7                                          [.] PyMember_GetOne
+     0.00%  python   python3.7                                          [.] PyMemoryView_FromObject
+     0.00%  python   python3.7                                          [.] PyModule_AddFunctions
+     0.00%  python   python3.7                                          [.] PyObject_Call
+     0.00%  python   python3.7                                          [.] PyObject_CallFunction
+     0.00%  python   python3.7                                          [.] PyObject_IsTrue
+     0.00%  python   python3.7                                          [.] PyObject_Realloc
+     0.00%  python   python3.7                                          [.] PySequence_Contains
+     0.00%  python   python3.7                                          [.] PySlice_Unpack
+     0.00%  python   python3.7                                          [.] PyThread_acquire_lock
+     0.00%  python   python3.7                                          [.] PyTraceBack_Here
+     0.00%  python   python3.7                                          [.] PyTuple_ClearFreeList
+     0.00%  python   python3.7                                          [.] PyTuple_Pack
+     0.00%  python   python3.7                                          [.] PyTuple_Size
+     0.00%  python   python3.7                                          [.] PyType_ClearCache
+     0.00%  python   python3.7                                          [.] PyType_GenericNew
+     0.00%  python   python3.7                                          [.] PyUnicode_Append
+     0.00%  python   python3.7                                          [.] PyUnicode_Compare
+     0.00%  python   python3.7                                          [.] PyUnicode_FromString
+     0.00%  python   python3.7                                          [.] PyUnicode_RPartition
+     0.00%  python   python3.7                                          [.] _PyDictKeys_DecRef
+     0.00%  python   python3.7                                          [.] _PyDict_KeysSize
+     0.00%  python   python3.7                                          [.] _PyErr_ChainExceptions
+     0.00%  python   python3.7                                          [.] _PyLong_FromByteArray
+     0.00%  python   python3.7                                          [.] _PyMem_RawFree
+     0.00%  python   python3.7                                          [.] _PyMethodDef_RawFastCallDict
+     0.00%  python   python3.7                                          [.] _PyModule_ClearDict
+     0.00%  python   python3.7                                          [.] _PyObject_FastCall_Prepend
+     0.00%  python   python3.7                                          [.] _PyObject_GC_New
+     0.00%  python   python3.7                                          [.] _PySlice_GetLongIndices
+     0.00%  python   python3.7                                          [.] _PyType_LookupId
+     0.00%  python   python3.7                                          [.] _PyUnicodeWriter_Finish
+     0.00%  python   python3.7                                          [.] _PyUnicodeWriter_WriteStr
+     0.00%  python   python3.7                                          [.] _PyUnicode_EqualToASCIIString
+     0.00%  python   python3.7                                          [.] _PyUnicode_XStrip
+     0.00%  python   python3.7                                          [.] _PyWeakref_ClearRef
+     0.00%  python   python3.7                                          [.] _Py_DecodeLocaleEx
+     0.00%  python   python3.7                                          [.] _io_FileIO___init__
+     0.00%  python   python3.7                                          [.] astfold_expr
+     0.00%  python   python3.7                                          [.] binary_op1
+     0.00%  python   python3.7                                          [.] builtin___build_class__
+     0.00%  python   python3.7                                          [.] builtin_isinstance
+     0.00%  python   python3.7                                          [.] do_mkvalue
+     0.00%  python   python3.7                                          [.] enum_dealloc
+     0.00%  python   python3.7                                          [.] float_richcompare
+     0.00%  python   python3.7                                          [.] getset_get
+     0.00%  python   python3.7                                          [.] iobase_enter
+     0.00%  python   python3.7                                          [.] list_dealloc
+     0.00%  python   python3.7                                          [.] list_extend
+     0.00%  python   python3.7                                          [.] lock_PyThread_acquire_lock
+     0.00%  python   python3.7                                          [.] long_add
+     0.00%  python   python3.7                                          [.] memory_dealloc
+     0.00%  python   python3.7                                          [.] memory_subscript
+     0.00%  python   python3.7                                          [.] merge_at
+     0.00%  python   python3.7                                          [.] meth_dealloc
+     0.00%  python   python3.7                                          [.] method_call
+     0.00%  python   python3.7                                          [.] method_dealloc
+     0.00%  python   python3.7                                          [.] object_vacall.cold.1245
+     0.00%  python   python3.7                                          [.] odictiter_iternext
+     0.00%  python   python3.7                                          [.] path_converter
+     0.00%  python   python3.7                                          [.] set_traverse
+     0.00%  python   python3.7                                          [.] solid_base
+     0.00%  python   python3.7                                          [.] structseq_dealloc
+     0.00%  python   python3.7                                          [.] super_getattro
+     0.00%  python   python3.7                                          [.] tupleiter_next
+     0.00%  python   python3.7                                          [.] type_call
+     0.00%  python   python3.7                                          [.] type_module
+     0.00%  python   python3.7                                          [.] type_setattro
+     0.00%  python   python3.7                                          [.] unicode_concatenate
+     0.00%  python   python3.7                                          [.] vgetargskeywords.cold.2503
+     0.00%  python   python3.7                                          [.] weakref___init__
+     0.00%  python   python3.7                                          [.] wrapperdescr_get
+     0.00%  sh       ld-2.17.so                                         [.] _dl_relocate_object
+     0.00%  sh       libc-2.17.so                                       [.] __sysconf
+     0.00%  sh       libc-2.17.so                                       [.] exit
+     0.00%  sh       libc-2.17.so                                       [.] intel_check_word
+     0.00%  sh       libc-2.17.so                                       [.] msort_with_tmp.part.0
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

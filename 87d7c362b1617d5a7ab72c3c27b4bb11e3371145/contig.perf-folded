@@ -1,0 +1,675 @@
+python;PyCode_New 3
+python;PyDict_SetDefault 17
+python;PyDict_SetItem 1
+python;PyErr_Occurred 3
+python;PyErr_Restore 1
+python;PyList_Append 2
+python;PyMem_Free 2
+python;PyMem_Realloc.cold.597 1
+python;PyObject_IsInstance 1
+python;PyObject_Malloc 2013
+python;PyObject_Realloc 1
+python;PyParser_AddToken 2
+python;PyTuple_New 5
+python;PyType_IsSubtype 173
+python;PyUnicode_DecodeUTF8Stateful 7
+python;PyUnicode_FindChar 1
+python;PyUnicode_FromKindAndData 11
+python;PyUnicode_FromWideChar 1
+python;PyUnicode_New 5
+python;PyUnicode_RichCompare 1
+python;[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[unknown];[unknown];[unknown];_dl_fixup;[unknown];[unknown];[unknown];[unknown];[unknown];collect 3
+python;[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];collect 4
+python;[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];collect 3
+python;[ld-2.17.so];[ld-2.17.so];pymalloc_alloc.isra.1 1
+python;[ld-2.17.so];dictresize 4
+python;[ld-2.17.so];lookdict_unicode 5
+python;[ld-2.17.so];symtable_add_def 1
+python;[libc-2.17.so];[unknown];std::vector<unsigned long, std::allocator<unsigned long> >::_M_realloc_insert<unsigned long> 1
+python;[libc-2.17.so];_IO_setb 1
+python;[libc-2.17.so];_IO_vsnprintf;vfprintf 2
+python;[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_cpu.so];std::unordered_map<std::type_index, THPPointer<_object>, std::hash<std::type_index>, std::equal_to<std::type_index>, std::allocator<std::pair<std::type_index const, THPPointer<_object> > > >::~unordered_map 1
+python;[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_cpu.so];[libtorch_python.so];[libtorch_python.so];[libtorch_cpu.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_cpu.so];[libtorch_cpu.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_cpu.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_cpu.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_cpu.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[libtorch_python.so];[unknown];[unknown];__memset_sse2 1
+python;[libtorch_python.so];[unknown];_PyEval_EvalFrameDefault 1
+python;[unknown];BigInt_DivideWithRemainder_MaxQuotient9 1
+python;[unknown];Dragon4 2
+python;[unknown];OPENSSL_LH_free 1
+python;[unknown];OPENSSL_LH_insert 1
+python;[unknown];PyArg_UnpackTuple 2
+python;[unknown];PyArray_UpdateFlags 1
+python;[unknown];PyBuffer_FillInfo 1
+python;[unknown];PyCode_New 2
+python;[unknown];PyDict_GetItem 4
+python;[unknown];PyDict_SetItem 9
+python;[unknown];PyErr_CheckSignals 1
+python;[unknown];PyErr_Occurred 93
+python;[unknown];PyErr_SetObject 3
+python;[unknown];PyFunction_NewWithQualName 1
+python;[unknown];PyGrammar_AddAccelerators 1
+python;[unknown];PyImport_GetModuleDict 1
+python;[unknown];PyLong_AsSsize_t 1
+python;[unknown];PyLong_FromLong 306
+python;[unknown];PyMapping_Check 1
+python;[unknown];PyMember_GetOne 1
+python;[unknown];PyMethod_New 1
+python;[unknown];PyNumber_Add 1
+python;[unknown];PyNumber_InPlaceAdd 1
+python;[unknown];PyNumber_Index 1
+python;[unknown];PyNumber_Long 1
+python;[unknown];PyObject_CallFinalizer 1
+python;[unknown];PyObject_Free 1
+python;[unknown];PyObject_GC_UnTrack 3
+python;[unknown];PyObject_GetAttr 1
+python;[unknown];PyObject_IsTrue 1
+python;[unknown];PyObject_Malloc 502
+python;[unknown];PyObject_RichCompare 2
+python;[unknown];PySequence_Tuple 1
+python;[unknown];PySlice_Unpack 1
+python;[unknown];PyTuple_ClearFreeList 2
+python;[unknown];PyTuple_New 556
+python;[unknown];PyType_IsSubtype 10
+python;[unknown];PyType_Ready 10
+python;[unknown];PyUnicode_Append 1
+python;[unknown];PyUnicode_AsASCIIString 1
+python;[unknown];PyUnicode_AsUTF8AndSize 1
+python;[unknown];PyUnicode_DecodeUTF8Stateful 1
+python;[unknown];PyUnicode_FromFormatV 2
+python;[unknown];PyUnicode_FromKindAndData 2
+python;[unknown];PyUnicode_FromString 1
+python;[unknown];PyUnicode_InternInPlace 5
+python;[unknown];PyUnicode_Join 1
+python;[unknown];THPModule_addDocStr;THPModule_addDocStr 1
+python;[unknown];TORCH_LIBRARY_init_quantized;torch::(anonymous namespace)::debugString;__strlen_sse2_pminub 1
+python;[unknown];TORCH_LIBRARY_init_quantized;torch::jit::parseSchema;torch::jit::parseSchemaOrName;std::__shared_ptr<torch::jit::Source,  1
+python;[unknown];[ld-2.17.so];PyFrame_BlockPop 1
+python;[unknown];[ld-2.17.so];PyObject_GetAttr 1
+python;[unknown];[ld-2.17.so];PyUnicode_InternInPlace 2
+python;[unknown];[ld-2.17.so];_PyCFunction_FastCallKeywords 1
+python;[unknown];[ld-2.17.so];_PyDict_LoadGlobal 2
+python;[unknown];[ld-2.17.so];_PyEval_EvalFrameDefault 19
+python;[unknown];[ld-2.17.so];_PyFunction_FastCallKeywords 2
+python;[unknown];[ld-2.17.so];_PyObject_Free.cold.382 1
+python;[unknown];[ld-2.17.so];_PyObject_GetMethod 1
+python;[unknown];[ld-2.17.so];_PyType_LookupId 1
+python;[unknown];[ld-2.17.so];_dl_map_object 1
+python;[unknown];[ld-2.17.so];list_iter 1
+python;[unknown];[ld-2.17.so];listiter_next 1
+python;[unknown];[ld-2.17.so];unicode_hash 1
+python;[unknown];[libc-2.17.so];[unknown];_int_free 1
+python;[unknown];[libc-2.17.so];_IO_str_init_static_internal 1
+python;[unknown];[libc-2.17.so];_IO_vsnprintf;vfprintf 1
+python;[unknown];[libc-2.17.so];std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;[unknown];[libc-2.17.so];std::string::_Rep::_S_create 1
+python;[unknown];[libtorch_cpu.so];c10::InternedStrings::InternedStrings 1
+python;[unknown];[libtorch_cpu.so];torch::schema;torch::jit::parseSchema;operator delete 1
+python;[unknown];[libtorch_python.so];PyTuple_Size 1
+python;[unknown];[unknown];PyCode_New 5
+python;[unknown];[unknown];PyDict_SetDefault 3
+python;[unknown];[unknown];PyImport_GetModuleDict 1
+python;[unknown];[unknown];PyLong_FromLong 350
+python;[unknown];[unknown];PyNumber_Add 1
+python;[unknown];[unknown];PyNumber_Negative 1
+python;[unknown];[unknown];PyObject_Hash 1
+python;[unknown];[unknown];PyObject_SetAttr 1
+python;[unknown];[unknown];PySlice_New 1
+python;[unknown];[unknown];PyTuple_New 1
+python;[unknown];[unknown];PyUnicode_FromFormatV 3
+python;[unknown];[unknown];PyUnicode_InternInPlace 4
+python;[unknown];[unknown];Xbyak::util::Cpu::Cpu 4
+python;[unknown];[unknown];[ld-2.17.so];_PyEval_EvalFrameDefault 1
+python;[unknown];[unknown];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[unknown];ska::detailv3::sherwood_v3_table<std::pair<c10::DispatchKey, std::list<c10::impl::AnnotatedKernel, std::allocator<c10::impl::AnnotatedKernel> > >, c10::DispatchKey, std::hash<c10::DispatchKey>, ska::detailv3::KeyOrValueHasher<c10::DispatchKey, std::pair<c10::DispatchKey, std::list<c10::impl::AnnotatedKernel, std::allocator<c10::impl::AnnotatedKernel> > >, std::hash<c10::DispatchKey> >, std::equal_to<c10::DispatchKey>, ska::detailv3::KeyOrValueEquality<c10::DispatchKey, std::pair<c10::DispatchKey, std::list<c10::impl::AnnotatedKernel, std::allocator<c10::impl::AnnotatedKernel> > >, std::equal_to<c10::DispatchKey> >, std::allocator<std::pair<c10::DispatchKey, std::list<c10::impl::AnnotatedKernel, std::allocator<c10::impl::AnnotatedKernel> > > >, std::allocator<ska::detailv3::sherwood_v3_entry<std::pair<c10::DispatchKey, std::list<c10::impl::AnnotatedKernel, std::allocator<c10::impl::AnnotatedKernel> > > > > >::emplace_new_key<c10::DispatchKey const&, ska::flat_hash_map<c10::DispatchKey, std::list<c10::impl::AnnotatedKernel, std::allocator<c10::impl::AnnotatedKernel> >, std::hash<c10::DispatchKey>, std::equal_to<c10::DispatchKey>, std::allocator<std::pair<c10::DispatchKey, std::list<c10::impl::AnnotatedKernel, std::allocator<c10::impl::AnnotatedKernel> > > > >::convertible_to_value> 1
+python;[unknown];[unknown];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[libc-2.17.so];[unknown];google::protobuf::SimpleDescriptorDatabase::DescriptorIndex<std::pair<void const*, int> >::AddSymbol 1
+python;[unknown];[unknown];[unknown];[ld-2.17.so];_PyEval_EvalFrameDefault 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];c10::Dispatcher::cleanup 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[unknown];[unknown];[unknown];collect 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];[unknown];[libtorch_cpu.so];operator delete@plt 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];c10::Dispatcher::setManuallyBoxedKernelFor_;c10::impl::OperatorEntry::setManuallyBoxedKernel_ 2
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];c10::Dispatcher::addRegistrationListener 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];c10::Dispatcher::findOp@plt 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];c10::Dispatcher::findOrRegisterName_ 2
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];c10::impl::OperatorEntry::OperatorEntry 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];c10::impl::OperatorEntry::updateDispatchTableFull_ 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];c10::impl::OperatorEntry::updateDispatchTable_ 2
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[libtorch_cpu.so];[unknown];std::_Hash_bytes 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[ld-2.17.so];tupledealloc 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];__new_exitfn 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];c10::impl::OperatorEntry::schema 3
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];collect 6
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];std::_Hashtable<std::string, std::pair<std::string const, std::shared_ptr<torch::jit::Operator> >, std::allocator<std::pair<std::string const, std::shared_ptr<torch::jit::Operator> > >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_rehash 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];std::_Hashtable<std::string, std::pair<std::string const, std::string>, std::allocator<std::pair<std::string const, std::string> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_insert_unique_node 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];torch::jit::(anonymous namespace)::OperatorRegistry::registerPendingOperators 3
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];torch::jit::canonicalSchemaString 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];std::_Hashtable<std::string, std::pair<std::string const, std::function<std::unique_ptr<caffe2::OperatorBase, std::default_delete<caffe2::OperatorBase> >  1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];std::_Hashtable<std::string, std::pair<std::string const, c10::RegistryPriority>, std::allocator<std::pair<std::string const, c10::RegistryPriority> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_rehash 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];free 1
+python;[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];[unknown];_PyEval_EvalFrameDefault 1
+python;[unknown];[unknown];[unknown];[unknown];_PyEval_EvalFrameDefault 1
+python;[unknown];[unknown];[unknown];[unknown];std::_Hashtable<c10::Symbol, c10::Symbol, std::allocator<c10::Symbol>, std::__detail::_Identity, std::equal_to<c10::Symbol>, std::hash<c10::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_Hashtable 2
+python;[unknown];[unknown];[unknown];c10::Argument::~Argument 1
+python;[unknown];[unknown];[unknown];pybind11::cpp_function::initialize_generic 1
+python;[unknown];[unknown];[unknown];std::operator<< <std::char_traits<char> > 1
+python;[unknown];[unknown];[unknown];std::vector<c10::Argument, std::allocator<c10::Argument> >::emplace_back<c10::Argument> 1
+python;[unknown];[unknown];[unknown];torch::jit::(anonymous namespace)::OperatorRegistry::registerPendingOperators 1
+python;[unknown];[unknown];_GLOBAL__sub_I_fbgemm_utils.cpp;register_conv_params<2> 1
+python;[unknown];[unknown];_PyCFunction_FastCallKeywords 2
+python;[unknown];[unknown];_PyDict_LoadGlobal 1095
+python;[unknown];[unknown];_PyEval_EvalFrameDefault 3869
+python;[unknown];[unknown];_PyFunction_FastCallDict 1
+python;[unknown];[unknown];_PyFunction_FastCallKeywords 1
+python;[unknown];[unknown];_PyObject_Free 2
+python;[unknown];[unknown];_PyObject_GetMethod 353
+python;[unknown];[unknown];_PyObject_LookupAttr 1
+python;[unknown];[unknown];_PyUnicodeWriter_Finish 1
+python;[unknown];[unknown];_Py_CheckFunctionResult 1
+python;[unknown];[unknown];__cxa_demangle;d_demangle_callback.constprop.0 1
+python;[unknown];[unknown];__dynamic_cast 6
+python;[unknown];[unknown];__dynamic_cast@plt 2
+python;[unknown];[unknown];__memmove_ssse3_back 3
+python;[unknown];[unknown];__static_initialization_and_destruction_0 1
+python;[unknown];[unknown];__strlen_sse2_pminub 1
+python;[unknown];[unknown];_dl_init_internal;_GLOBAL__sub_I_jit_avx2_f32_copy_at_kern_autogen.cpp;__static_initialization_and_destruction_0;Xbyak::Reg64::Reg64;Xbyak::Reg32e::Reg32e;Xbyak::Reg::Reg 1
+python;[unknown];[unknown];_dl_init_internal;_GLOBAL__sub_I_jit_avx2_u8_copy_at_kern_autogen.cpp;Xbyak::util::Cpu::Cpu 1
+python;[unknown];[unknown];_dl_init_internal;_GLOBAL__sub_I_jit_avx512_core_u8_copy_bn_kern_autogen.cpp;__static_initialization_and_destruction_0;Xbyak::Reg16::Reg16;Xbyak::Reg::Reg;Xbyak::Operand::Operand 1
+python;[unknown];[unknown];_dl_init_internal;_GLOBAL__sub_I_jit_avx_f32_copy_at_kern_autogen.cpp;__static_initialization_and_destruction_0;Xbyak::Reg16::Reg16 1
+python;[unknown];[unknown];_dl_init_internal;_GLOBAL__sub_I_jit_avx_kernel_b0_r_gemm_s8u8s32_kern_autogen.cpp;Xbyak::util::Cpu::Cpu 1
+python;[unknown];[unknown];_dl_init_internal;_GLOBAL__sub_I_jit_avx_u8_copy_sum_at_kern_autogen.cpp;Xbyak::util::Cpu::Cpu 1
+python;[unknown];[unknown];_int_free 1
+python;[unknown];[unknown];at::native::(anonymous namespace)::TORCH_LIBRARY_FRAGMENT_init_quantized_k;std::string::find 1
+python;[unknown];[unknown];c10::AliasInfo::~AliasInfo 1
+python;[unknown];[unknown];c10::Dispatcher::registerDef;c10::impl::OperatorEntry::registerSchema 2
+python;[unknown];[unknown];c10::Dispatcher::registerDef;c10::impl::OperatorEntry::registerSchema;c10::DispatchKeyExtractor::makeBitsetForDispatchArgs 1
+python;[unknown];[unknown];c10::Dispatcher::registerDef;c10::impl::OperatorEntry::registerSchema;c10::findSchemaDifferences 1
+python;[unknown];[unknown];c10::Registerer<std::string, std::unique_ptr<caffe2::GradientMakerBase, std::default_delete<caffe2::GradientMakerBase> >, caffe2::OperatorDef const&, std::vector<caffe2::GradientWrapper, std::allocator<caffe2::GradientWrapper> > const&>::Registerer 1
+python;[unknown];[unknown];c10::impl::OperatorEntry::OperatorEntry 1
+python;[unknown];[unknown];c10::impl::OperatorEntry::OperatorEntry;std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 2
+python;[unknown];[unknown];c10::impl::OperatorEntry::computeDispatchTableEntry;c10::impl::OperatorEntry::computeDispatchTableEntryWithDebug 8
+python;[unknown];[unknown];c10::impl::OperatorEntry::computeDispatchTableEntry@plt 1
+python;[unknown];[unknown];c10::impl::OperatorEntry::computeDispatchTableEntryWithDebug 1
+python;[unknown];[unknown];c10::impl::OperatorEntry::updateDispatchTableFull_@plt 1
+python;[unknown];[unknown];c10::impl::OperatorEntry::updateDispatchTable_ 12
+python;[unknown];[unknown];c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor  1
+python;[unknown];[unknown];c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor&  1
+python;[unknown];[unknown];c10::optional<c10::IValue>::optional 1
+python;[unknown];[unknown];caffe2::OpSchema::Output 1
+python;[unknown];[unknown];data_stack_grow 1
+python;[unknown];[unknown];frame_dummy 1
+python;[unknown];[unknown];free 3
+python;[unknown];[unknown];listiter_dealloc 1
+python;[unknown];[unknown];long_dealloc 1253
+python;[unknown];[unknown];malloc 1
+python;[unknown];[unknown];method_dealloc 1
+python;[unknown];[unknown];method_get 1
+python;[unknown];[unknown];mkl_dnn_avx2_Xbyak_F32::Operand::Operand 1
+python;[unknown];[unknown];operator delete 1
+python;[unknown];[unknown];operator delete@plt 1
+python;[unknown];[unknown];operator new 2
+python;[unknown];[unknown];pthread_mutex_lock 1
+python;[unknown];[unknown];pthread_mutex_unlock 2
+python;[unknown];[unknown];pybind11::cpp_function::initialize_generic 1
+python;[unknown];[unknown];pymalloc_alloc.isra.1 5
+python;[unknown];[unknown];r_object 7
+python;[unknown];[unknown];rangeiter_next 151
+python;[unknown];[unknown];register_linear_params;c10::ClassType::operator== 1
+python;[unknown];[unknown];slot_tp_getattr_hook 1
+python;[unknown];[unknown];std::_Hash_bytes 3
+python;[unknown];[unknown];std::_Hashtable<c10::Symbol, c10::Symbol, std::allocator<c10::Symbol>, std::__detail::_Identity, std::equal_to<c10::Symbol>, std::hash<c10::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_Hashtable 3
+python;[unknown];[unknown];std::_Hashtable<c10::Symbol, c10::Symbol, std::allocator<c10::Symbol>, std::__detail::_Identity, std::equal_to<c10::Symbol>, std::hash<c10::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_M_assign<std::_Hashtable<c10::Symbol, c10::Symbol, std::allocator<c10::Symbol>, std::__detail::_Identity, std::equal_to<c10::Symbol>, std::hash<c10::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_M_assign 1
+python;[unknown];[unknown];std::_Hashtable<std::string, std::pair<std::string const, c10::Symbol>, std::allocator<std::pair<std::string const, c10::Symbol> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_find_before_node 1
+python;[unknown];[unknown];std::_Hashtable<std::string, std::pair<std::string const, c10::Symbol>, std::allocator<std::pair<std::string const, c10::Symbol> >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_rehash 1
+python;[unknown];[unknown];std::_Hashtable<std::string, std::pair<std::string const, std::function<std::unique_ptr<caffe2::OperatorBase, std::default_delete<caffe2::OperatorBase> >  1
+python;[unknown];[unknown];std::_Hashtable<std::string, std::pair<std::string const, std::shared_ptr<torch::jit::Operator> >, std::allocator<std::pair<std::string const, std::shared_ptr<torch::jit::Operator> > >, std::__detail::_Select1st, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, false, true> >::_M_rehash 1
+python;[unknown];[unknown];std::_Hashtable<std::string, std::string, std::allocator<std::string>, std::__detail::_Identity, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_Hashtable<std::string const*> 2
+python;[unknown];[unknown];std::_Hashtable<std::string, std::string, std::allocator<std::string>, std::__detail::_Identity, std::equal_to<std::string>, std::hash<std::string>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_M_find_before_node 1
+python;[unknown];[unknown];std::__detail::_Prime_rehash_policy::_M_next_bkt 1
+python;[unknown];[unknown];std::__ostream_insert<char, std::char_traits<char> > 1
+python;[unknown];[unknown];std::basic_ios<char, std::char_traits<char> >::_M_cache_locale 2
+python;[unknown];[unknown];std::basic_ios<char, std::char_traits<char> >::widen 1
+python;[unknown];[unknown];std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;[unknown];[unknown];std::has_facet<std::num_get<char, std::istreambuf_iterator<char, std::char_traits<char> > > > 1
+python;[unknown];[unknown];std::has_facet<std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > > 3
+python;[unknown];[unknown];std::has_facet<std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > > >@plt 1
+python;[unknown];[unknown];std::ios_base::_M_init 1
+python;[unknown];[unknown];std::locale::id::_M_id 2
+python;[unknown];[unknown];std::locale::id::_M_id@plt 1
+python;[unknown];[unknown];std::locale::locale 1
+python;[unknown];[unknown];std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::do_put 1
+python;[unknown];[unknown];std::ostream::_M_insert<unsigned long> 1
+python;[unknown];[unknown];std::ostream::_M_insert<unsigned long>;std::__int_to_char<char, unsigned long> 3
+python;[unknown];[unknown];std::ostream::_M_insert<unsigned long>;std::num_put<char, std::ostreambuf_iterator<char, std::char_traits<char> > >::_M_insert_int<unsigned long> 1
+python;[unknown];[unknown];std::ostream::sentry::sentry 1
+python;[unknown];[unknown];std::ostream::sentry::~sentry 1
+python;[unknown];[unknown];std::ostream::sentry::~sentry@plt 1
+python;[unknown];[unknown];std::string::_M_check 1
+python;[unknown];[unknown];std::string::_M_check@plt 1
+python;[unknown];[unknown];std::string::_Rep::_M_clone 2
+python;[unknown];[unknown];std::string::_Rep::_M_grab 1
+python;[unknown];[unknown];std::string::_Rep::_M_is_leaked 2
+python;[unknown];[unknown];std::string::_Rep::_M_refcopy 3
+python;[unknown];[unknown];std::string::compare 4
+python;[unknown];[unknown];std::string::reserve 1
+python;[unknown];[unknown];std::string::swap 1
+python;[unknown];[unknown];std::use_facet<std::ctype<char> > 1
+python;[unknown];[unknown];std::vector<c10::Argument, std::allocator<c10::Argument> >::_M_realloc_insert<c10::Argument> 3
+python;[unknown];[unknown];torch::Library::def<char const ;__strlen_sse2_pminub 1
+python;[unknown];[unknown];torch::Library::def<char const ;std::__ostream_insert<char, std::char_traits<char> > 1
+python;[unknown];[unknown];torch::Library::def<char const ;std::ios_base::ios_base 1
+python;[unknown];[unknown];torch::Library::def<char const ;torch::jit::parseSchema 1
+python;[unknown];[unknown];torch::Library::def<char const ;torch::jit::parseSchema;operator new 1
+python;[unknown];[unknown];torch::Library::def<char const ;torch::jit::parseSchema;std::_Sp_counted_base< 1
+python;[unknown];[unknown];torch::Library::def<char const ;torch::jit::parseSchema;std::string::_Rep::_M_dispose 1
+python;[unknown];[unknown];torch::Library::def<char const ;torch::jit::parseSchema;torch::jit::Lexer::lex 1
+python;[unknown];[unknown];torch::Library::def<char const ;torch::jit::parseSchema;torch::jit::parseSchemaOrName;torch::jit::Lexer::lexRaw 1
+python;[unknown];[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<at::Tensor ;torch::Library::_impl;c10::Dispatcher::registerImpl;c10::impl::OperatorEntry::registerKernel 1
+python;[unknown];[unknown];torch::Library::impl<char const*, torch::CppFunction>;_int_free 1
+python;[unknown];[unknown];torch::Library::impl<char const*, torch::CppFunction>;c10::Dispatcher::singleton 1
+python;[unknown];[unknown];torch::Library::impl<char const*, torch::CppFunction>;std::__ostream_insert<char, std::char_traits<char> > 1
+python;[unknown];[unknown];torch::Library::impl<char const*, torch::CppFunction>;torch::Library::_impl;c10::Dispatcher::registerImpl;c10::impl::OperatorEntry::registerKernel 2
+python;[unknown];[unknown];torch::Library::impl<char const*, torch::CppFunction>;torch::Library::_impl;c10::either<c10::OperatorName, c10::FunctionSchema>::_destruct 1
+python;[unknown];[unknown];torch::jit::(anonymous namespace)::Registerer::op;torch::jit::parseSchema;std::_Sp_counted_base< 1
+python;[unknown];[unknown];torch::jit::(anonymous namespace)::Registerer::op;torch::jit::parseSchema;torch::jit::Lexer::next 1
+python;[unknown];[unknown];torch::jit::(anonymous namespace)::Registerer::op;torch::jit::parseSchema;torch::jit::parseSchemaOrName 1
+python;[unknown];[unknown];torch::jit::Lexer::lex 1
+python;[unknown];[unknown];torch::jit::Lexer::lex;std::__shared_ptr<torch::jit::Source,  1
+python;[unknown];[unknown];torch::jit::SchemaTypeParser::parseAliasAnnotation@plt 1
+python;[unknown];[unknown];torch::jit::SchemaTypeParser::parseType 4
+python;[unknown];[unknown];torch::jit::SchemaTypeParser::parseType;std::_Sp_counted_base< 1
+python;[unknown];[unknown];torch::jit::SchemaTypeParser::parseType;torch::jit::SchemaTypeParser::parseBaseType 1
+python;[unknown];[unknown];torch::jit::initJITBindings;torch::jit::initJitScriptBindings 1
+python;[unknown];[unknown];tupleiter_next 1
+python;[unknown];[unknown];unicode_concatenate 2
+python;[unknown];[unknown];unsafe_latin_compare 1
+python;[unknown];_IO_vsnprintf;__strchrnul 1
+python;[unknown];_IO_vsnprintf;vfprintf 1
+python;[unknown];_PyArg_UnpackStack 1
+python;[unknown];_PyDict_GetItemId 1
+python;[unknown];_PyDict_GetItem_KnownHash 9
+python;[unknown];_PyDict_LoadGlobal 1
+python;[unknown];_PyDict_MaybeUntrack 1
+python;[unknown];_PyDict_Next 1
+python;[unknown];_PyEval_EvalCodeWithName 15
+python;[unknown];_PyEval_EvalFrameDefault 1066
+python;[unknown];_PyFrame_New_NoTrack 5
+python;[unknown];_PyFunction_FastCallDict 1
+python;[unknown];_PyFunction_FastCallKeywords 10
+python;[unknown];_PyIOBase_finalize 1
+python;[unknown];_PyIO_find_line_ending 1
+python;[unknown];_PyLong_New 351
+python;[unknown];_PyMethodDef_RawFastCallKeywords 83
+python;[unknown];_PyMethodDescr_FastCallKeywords 369
+python;[unknown];_PyModule_ClearDict 1
+python;[unknown];_PyObjectDict_SetItem 2
+python;[unknown];_PyObject_FastCallDict 2
+python;[unknown];_PyObject_FastCallKeywords 4
+python;[unknown];_PyObject_Free 2
+python;[unknown];_PyObject_GC_New 1
+python;[unknown];_PyObject_GenericGetAttrWithDict 7
+python;[unknown];_PyObject_GenericSetAttrWithDict 1
+python;[unknown];_PyObject_GetAttrId 1
+python;[unknown];_PyObject_GetDictPtr 73
+python;[unknown];_PyObject_GetMethod 927
+python;[unknown];_PyObject_LookupAttrId 1
+python;[unknown];_PyStack_AsTuple 190
+python;[unknown];_PyTuple_MaybeUntrack 2
+python;[unknown];_PyType_Lookup 1632
+python;[unknown];_PyType_LookupId 2
+python;[unknown];_PyUnicodeWriter_Init 1
+python;[unknown];_PyUnicode_FromId 1
+python;[unknown];_PyUnicode_IsTitlecase 1
+python;[unknown];_Py_CheckFunctionResult 293
+python;[unknown];_Py_normalize_encoding 2
+python;[unknown];_Py_set_inheritable 1
+python;[unknown];__cxxabiv1::__vmi_class_type_info::__do_dyncast 1
+python;[unknown];__fxstat64 1
+python;[unknown];__gconv_transform_internal_utf8 1
+python;[unknown];__getdents64 1
+python;[unknown];__libc_calloc 1
+python;[unknown];__memcmp_sse4_1 2
+python;[unknown];__memcpy_sse2 1
+python;[unknown];__memcpy_ssse3_back 4
+python;[unknown];__memmove_ssse3_back 9
+python;[unknown];__memset_sse2 1
+python;[unknown];__strchr_sse42 2
+python;[unknown];__strcmp_sse42 2
+python;[unknown];__strlen_sse2_pminub 2
+python;[unknown];__vsnprintf_chk;vfprintf 1
+python;[unknown];_dl_map_object_from_fd;_PyEval_EvalFrameDefault 1
+python;[unknown];_dl_name_match_p 4
+python;[unknown];_imp__fix_co_filename;_PyArg_ParseStack 1
+python;[unknown];_imp_acquire_lock;_imp_acquire_lock 2
+python;[unknown];_imp_release_lock;_PyImport_ReleaseLock 1
+python;[unknown];_imp_release_lock;_PyMethodDef_RawFastCallKeywords 1
+python;[unknown];_int_free 30
+python;[unknown];_int_malloc 41
+python;[unknown];_int_malloc;_IO_vsnprintf;vfprintf 1
+python;[unknown];_io_FileIO___init__ 1
+python;[unknown];_sre_SRE_Pattern_match;_PyArg_ParseStackAndKeywords_SizeT 1
+python;[unknown];_sre_unicode_iscased;_PyUnicode_ToLowercase 1
+python;[unknown];assign_version_tag 1
+python;[unknown];at::RecordFunction::~RecordFunction;[unknown];at::RecordFunction::end 1
+python;[unknown];at::TORCH_LIBRARY_IMPL_init_aten_CPU;c10::detail::infer_schema::make_function_schema 1
+python;[unknown];at::TORCH_LIBRARY_init_aten;std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;[unknown];builtin_any;PyObject_GetIter 1
+python;[unknown];builtin_exec;_PyMethodDef_RawFastCallDict 1
+python;[unknown];builtin_getattr;_PyMethodDef_RawFastCallKeywords 1
+python;[unknown];builtin_isinstance;_PyArg_UnpackStack 1
+python;[unknown];bytearray_translate;bytearray_translate_impl 1
+python;[unknown];bytes_richcompare 2
+python;[unknown];c10::Dispatcher::findOp 8
+python;[unknown];c10::FunctionSchema::~FunctionSchema 2
+python;[unknown];c10::IntType::operator==;[unknown];c10::SingleElementType< 1
+python;[unknown];c10::InternedStrings::~InternedStrings 1
+python;[unknown];c10::KernelFunction::makeFromUnboxedOnlyRuntimeFunction<at::Tensor&  1
+python;[unknown];c10::Registerer<std::string, std::unique_ptr<caffe2::OperatorBase, std::default_delete<caffe2::OperatorBase> >, caffe2::OperatorDef const&, caffe2::Workspace*>::DefaultCreator<caffe2::AdadeltaOp<caffe2::CPUContext> >;std::string::_Rep::_M_dispose 1
+python;[unknown];c10::Registerer<std::string, std::unique_ptr<caffe2::OperatorBase, std::default_delete<caffe2::OperatorBase> >, caffe2::OperatorDef const&, caffe2::Workspace*>::DefaultCreator<caffe2::BinaryElementwiseWithArgsOp<caffe2::TensorTypes<bool>, caffe2::CPUContext, caffe2::BinaryFunctorWithDefaultCtor<caffe2::OrFunctor<caffe2::CPUContext> >, caffe2::SameTypeAsInput> >;std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;[unknown];c10::Registerer<std::string, std::unique_ptr<caffe2::OperatorBase, std::default_delete<caffe2::OperatorBase> >, caffe2::OperatorDef const&, caffe2::Workspace*>::DefaultCreator<caffe2::RowWiseSparseAdagradFusedWithSparseLengthsWeightedSumGradientApproxOp<float, float, int, caffe2::rowwise_adagrad_update_inlined> >;std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;[unknown];c10::SingleElementType<;[unknown];c10::SingleElementType< 1
+python;[unknown];c10::TupleType::operator==;[unknown];std::__shared_ptr<c10::Type,  1
+python;[unknown];c10::TupleType::operator==;[unknown];std::ios_base::_M_call_callbacks 1
+python;[unknown];c10::Warning::get_warning_handler@plt 1
+python;[unknown];c10::demangle_type<caffe2::GetZeroGradientOpGradient> 1
+python;[unknown];c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor ;at::CPUType::mul_Tensor;[unknown];std::__shared_ptr<c10::OperatorKernel,  1
+python;[unknown];c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor ;at::TypeDefault::isposinf;[unknown];std::__shared_count< 1
+python;[unknown];caffe2::_c10_ops::schema_PiecewiseLinearTransform;caffe2::detail::make_function_schema_for_c10;std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;[unknown];check_match.9525 8
+python;[unknown];code_dealloc 14
+python;[unknown];code_dealloc.cold.2311 2
+python;[unknown];collect 22
+python;[unknown];d_append_string 1
+python;[unknown];d_count_templates_scopes 1
+python;[unknown];d_print_comp_inner 1
+python;[unknown];dict_dealloc 6
+python;[unknown];dict_get 1
+python;[unknown];dict_merge 2
+python;[unknown];dict_subscript 1
+python;[unknown];dict_traverse 17
+python;[unknown];dictresize 4
+python;[unknown];dlopen_doit;_dl_catch_error;dl_open_worker;_dl_map_object_deps 1
+python;[unknown];dlopen_doit;_dl_catch_error;dl_open_worker;_dl_relocate_object 27
+python;[unknown];dlopen_doit;_dl_catch_error;dl_open_worker;_dl_relocate_object;_dl_lookup_symbol_x 40
+python;[unknown];dlopen_doit;_dl_catch_error;dl_open_worker;_dl_relocate_object;do_lookup_x 1
+python;[unknown];frame_dealloc 1
+python;[unknown];free 2
+python;[unknown];func_traverse 2
+python;[unknown];gc_traverse 1
+python;[unknown];get_available_features 1
+python;[unknown];get_view_from_index 1
+python;[unknown];getrn 2
+python;[unknown];google::protobuf::FieldOptions::~FieldOptions;[unknown];google::protobuf::FieldOptions::_InternalParse 1
+python;[unknown];insertdict 1
+python;[unknown];int_from_bytes;_PyMethodDef_RawFastCallKeywords 1
+python;[unknown];intern_string_constants 1
+python;[unknown];intern_string_constants.cold.2075 1
+python;[unknown];iobase_enter;PyObject_IsTrue 1
+python;[unknown];iobase_enter;_PyMethodDef_RawFastCallDict 1
+python;[unknown];list_subscript 1
+python;[unknown];long_and 1
+python;[unknown];long_dealloc 2
+python;[unknown];long_richcompare 1
+python;[unknown];lookdict 1
+python;[unknown];lookdict_split 5
+python;[unknown];lookdict_unicode 16
+python;[unknown];lookdict_unicode_nodummy 21
+python;[unknown];malloc;caffe2::_c10_ops::schema_BatchBucketOneHot;caffe2::detail::make_function_schema_for_c10;std::string::_Rep::_M_grab 1
+python;[unknown];malloc;torch::jit::Lexer::lex;torch::jit::Lexer::lexRaw 2
+python;[unknown];malloc_consolidate 17
+python;[unknown];memchr 2
+python;[unknown];memcpy@plt 1
+python;[unknown];method_dealloc 1
+python;[unknown];new_threadstate 1
+python;[unknown];object_vacall 1
+python;[unknown];operator new 1
+python;[unknown];operator new@plt 1
+python;[unknown];os_fspath;vgetargskeywordsfast_impl 1
+python;[unknown];os_stat;os_stat 1
+python;[unknown];pthread_mutex_lock 2
+python;[unknown];r_string 1
+python;[unknown];reversed_new 1
+python;[unknown];set_update_internal 1
+python;[unknown];skipitem 1
+python;[unknown];slot_sq_length 1
+python;[unknown];slot_tp_init 1
+python;[unknown];std::_Function_base::_Base_manager<caffe2::{lambda 1
+python;[unknown];std::_Function_handler<void ;c10::Dispatcher::deregisterImpl_ 5
+python;[unknown];std::_Function_handler<void ;c10::Dispatcher::deregisterImpl_;c10::impl::OperatorEntry::deregisterKernel_ 5
+python;[unknown];std::_Function_handler<void ;c10::Dispatcher::deregisterImpl_;free 1
+python;[unknown];std::_Function_handler<void ;c10::Dispatcher::deregisterImpl_;std::__detail::_List_node_base::_M_unhook 1
+python;[unknown];std::_Function_handler<void ;pthread_mutex_lock 1
+python;[unknown];std::_Hashtable<c10::Symbol, c10::Symbol, std::allocator<c10::Symbol>, std::__detail::_Identity, std::equal_to<c10::Symbol>, std::hash<c10::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::~_Hashtable;std::_Sp_counted_base< 1
+python;[unknown];std::_Hashtable<c10::Symbol, c10::Symbol, std::allocator<c10::Symbol>, std::__detail::_Identity, std::equal_to<c10::Symbol>, std::hash<c10::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::~_Hashtable;torch::jit::SchemaTypeParser::parseType;std::_Hashtable<c10::Symbol, c10::Symbol, std::allocator<c10::Symbol>, std::__detail::_Identity, std::equal_to<c10::Symbol>, std::hash<c10::Symbol>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true> >::_M_insert<c10::Symbol const&, std::__detail::_AllocNode<std::allocator<std::__detail::_Hash_node<c10::Symbol, true> > > > 1
+python;[unknown];std::_Rb_tree<std::string, std::pair<std::string const, caffe2::OpSchema>, std::_Select1st<std::pair<std::string const, caffe2::OpSchema> >, std::less<std::string>, std::allocator<std::pair<std::string const, caffe2::OpSchema> > >::_M_erase 1
+python;[unknown];std::_Sp_counted_base< 5
+python;[unknown];std::_Sp_counted_deleter<c10::OperatorKernel*, std::default_delete<c10::OperatorKernel>, std::allocator<void>, ;[unknown];[unknown];c10::detail::inferFunctionSchemaFromFunctor<c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor&  1
+python;[unknown];std::_Sp_counted_deleter<c10::OperatorKernel*, std::default_delete<c10::OperatorKernel>, std::allocator<void>, ;[unknown];[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<at::Tensor ;c10::detail::inferFunctionSchemaFromFunctor<c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<at::Tensor ;__gnu_cxx::__to_xstring<std::string, char> 1
+python;[unknown];std::_Sp_counted_deleter<c10::OperatorKernel*, std::default_delete<c10::OperatorKernel>, std::allocator<void>, ;[unknown];[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<at::Tensor ;torch::Library::_impl;c10::Dispatcher::registerImpl;c10::impl::OperatorEntry::registerKernel 1
+python;[unknown];std::_Sp_counted_deleter<c10::OperatorKernel*, std::default_delete<c10::OperatorKernel>, std::allocator<void>, ;[unknown];[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<at::Tensor ;torch::Library::_impl;pthread_mutex_lock 1
+python;[unknown];std::_Sp_counted_deleter<c10::OperatorKernel*, std::default_delete<c10::OperatorKernel>, std::allocator<void>, ;[unknown];[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<at::Tensor ;torch::Library::_impl;torch::jit::parseName;std::_Sp_counted_base< 1
+python;[unknown];std::_Sp_counted_deleter<c10::OperatorKernel*, std::default_delete<c10::OperatorKernel>, std::allocator<void>, ;[unknown];[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<at::Tensor& ;std::locale::_S_initialize 1
+python;[unknown];std::_Sp_counted_deleter<c10::OperatorKernel*, std::default_delete<c10::OperatorKernel>, std::allocator<void>, ;[unknown];[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<bool ;torch::Library::_impl;c10::either<c10::OperatorName, c10::FunctionSchema>::_destruct 1
+python;[unknown];std::_Sp_counted_ptr<c10::ClassType*, ;[unknown];std::__ostream_insert<char, std::char_traits<char> > 1
+python;[unknown];std::_Sp_counted_ptr<c10::IntType*, ;[unknown];torch::jit::canonicalSchemaString 1
+python;[unknown];std::_Sp_counted_ptr<c10::ListType*, ;[unknown];std::_Sp_counted_base< 1
+python;[unknown];std::_Sp_counted_ptr<c10::NumberType*, ;[unknown];torch::jit::canonicalSchemaString 1
+python;[unknown];std::_Sp_counted_ptr<c10::TensorType*, ;[unknown];c10::findSchemaDifferences 1
+python;[unknown];std::_Sp_counted_ptr<c10::TensorType*, ;[unknown];c10::findSchemaDifferences;std::_Sp_counted_base< 1
+python;[unknown];std::_Sp_counted_ptr<c10::TensorType*, ;[unknown];std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;[unknown];std::_Sp_counted_ptr<c10::TensorType*, ;[unknown];std::operator<< <std::char_traits<char> > 1
+python;[unknown];std::_Sp_counted_ptr<c10::TensorType*, ;[unknown];torch::jit::canonicalSchemaString 4
+python;[unknown];std::_Sp_counted_ptr_inplace<torch::jit::Operator, std::allocator<torch::jit::Operator>, ;[unknown];[unknown];[unknown];c10::Type::annotation_str 1
+python;[unknown];std::_Sp_counted_ptr_inplace<torch::jit::Operator, std::allocator<torch::jit::Operator>, ;[unknown];torch::jit::(anonymous namespace)::OperatorRegistry::~OperatorRegistry 4
+python;[unknown];std::__detail::_Hashtable_alloc<std::allocator<std::__detail::_Hash_node<std::pair<_typeobject* const, std::vector<pybind11::detail::type_info*, std::allocator<pybind11::detail::type_info*> > >, false> > >::_M_allocate_buckets 1
+python;[unknown];std::__ostream_insert<char, std::char_traits<char> > 1
+python;[unknown];std::__ostream_insert<char, std::char_traits<char> >;std::__ostream_insert<char, std::char_traits<char> > 1
+python;[unknown];std::__shared_ptr<c10::Type,  1
+python;[unknown];std::basic_istream<wchar_t, std::char_traits<wchar_t> >::_M_extract<unsigned long>;[unknown];at::TORCH_LIBRARY_init_aten 1
+python;[unknown];std::basic_istream<wchar_t, std::char_traits<wchar_t> >::_M_extract<unsigned long>;[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<at::Tensor ;operator new 1
+python;[unknown];std::basic_istream<wchar_t, std::char_traits<wchar_t> >::_M_extract<unsigned long>;[unknown];torch::Library::impl<char const*, torch::CppFunction>;torch::Library::_impl;c10::either<c10::OperatorName, c10::FunctionSchema>::_destruct 1
+python;[unknown];std::basic_istream<wchar_t, std::char_traits<wchar_t> >::_M_extract<unsigned long>;[unknown];torch::Library::impl<char const*, torch::CppFunction>;torch::Library::_impl;pthread_mutex_lock 1
+python;[unknown];std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;[unknown];std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string@plt 1
+python;[unknown];std::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >::~basic_stringbuf;[unknown];std::basic_streambuf<char, std::char_traits<char> >::xsputn 3
+python;[unknown];std::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >::~basic_stringbuf;[unknown];std::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >::overflow 1
+python;[unknown];std::string::_M_copy 3
+python;[unknown];std::string::_M_mutate 1
+python;[unknown];std::string::_Rep::_M_dispose 1
+python;[unknown];std::string::_Rep::_S_create 3
+python;[unknown];std::string::_Rep::_S_create;c10::TensorType::sizes 1
+python;[unknown];std::string::_S_construct<char const*> 2
+python;[unknown];std::string::_S_construct<char*> 2
+python;[unknown];std::type_info::operator== 2
+python;[unknown];std::vector<std::unique_ptr<torch::jit::Function, std::default_delete<torch::jit::Function> >, std::allocator<std::unique_ptr<torch::jit::Function, std::default_delete<torch::jit::Function> > > >::~vector 1
+python;[unknown];std::vector<unsigned long, std::allocator<unsigned long> >::_M_realloc_insert<unsigned long> 1
+python;[unknown];strcmp 7
+python;[unknown];super_init 1
+python;[unknown];torch::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Tracer 1
+python;[unknown];torch::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Tracer;torch::Library::_impl;c10::Dispatcher::registerImpl;c10::impl::OperatorEntry::registerKernel;c10::findSchemaDifferences 1
+python;[unknown];torch::CppFunction::makeUnboxedOnly<std::tuple<at::Tensor&, at::Tensor&>  1
+python;[unknown];torch::FunctionSignature::parse 166
+python;[unknown];torch::FunctionSignature::parse@plt 1
+python;[unknown];torch::Library::impl<char const*, c10::CompileTimeFunctionPointer<std::tuple<at::Tensor, at::Tensor> ;c10::detail::inferFunctionSchemaFromFunctor<c10::impl::detail::WrapFunctionIntoRuntimeFunctor_<std::tuple<at::Tensor, at::Tensor> ;c10::IntType::get 1
+python;[unknown];torch::Library::impl<char const*, torch::CppFunction>;torch::Library::_impl;torch::jit::parseName;std::string::_Rep::_M_dispose 1
+python;[unknown];torch::PyWarningHandler::~PyWarningHandler;[unknown];PyImport_ImportModule 1
+python;[unknown];torch::PythonArgParser::check_deprecated 102
+python;[unknown];torch::PythonArgParser::raw_parse 631
+python;[unknown];torch::PythonArgParser::raw_parse;torch::FunctionSignature::parse 2039
+python;[unknown];torch::TraceType::(anonymous namespace)::mkldnn_max_pool2d;[unknown];torch::TraceType::(anonymous namespace)::mm_out_out;[unknown];malloc_consolidate 1
+python;[unknown];torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd;c10::FunctionSchema::~FunctionSchema 1
+python;[unknown];torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd;std::__shared_ptr<c10::OperatorKernel,  1
+python;[unknown];torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd;std::ios_base::_M_call_callbacks 1
+python;[unknown];torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd;torch::Library::_impl;c10::Dispatcher::registerImpl;c10::impl::OperatorEntry::registerKernel 3
+python;[unknown];torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd;torch::Library::_impl;c10::impl::OperatorEntry::registerKernel 1
+python;[unknown];torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd;torch::Library::_impl;torch::jit::parseName;std::_Sp_counted_base< 1
+python;[unknown];torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd;torch::Library::_impl;torch::jit::parseName;std::string::_Rep::_M_refcopy 1
+python;[unknown];torch::autograd::(anonymous namespace)::TORCH_LIBRARY_IMPL_init_aten_Autograd;torch::Library::impl_UNBOXED<char const*, at::Tensor&  1
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords 1934
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;__tls_get_addr 1243
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;__tls_get_addr@plt 213
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::TensorImpl::is_contiguous 115
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::get_warning_handler 401
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::get_warning_handler;__tls_get_addr 139
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::get_warning_handler;__tls_get_addr_slow 112
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::get_warning_handler;_dl_update_slotinfo 785
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::get_warning_handler;update_get_addr 378
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::get_warning_handler@plt 11
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::set_warning_handler 1179
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::set_warning_handler;__tls_get_addr 275
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::set_warning_handler;__tls_get_addr_slow 156
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::set_warning_handler;_dl_update_slotinfo 1484
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;c10::Warning::set_warning_handler;update_get_addr 819
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::PyWarningHandler::PyWarningHandler 317
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::PyWarningHandler::PyWarningHandler@plt 86
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::PyWarningHandler::~PyWarningHandler 1438
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::PyWarningHandler::~PyWarningHandler@plt 75
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::PythonArgParser::raw_parse 387
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::PythonArgParser::raw_parse@plt 91
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::PythonArgs::memoryformat 168
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::autograd::THPVariable_contiguous 1895
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::jit::tracer::getTracingState 475
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::jit::tracer::getTracingState;__tls_get_addr 271
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::jit::tracer::getTracingState;__tls_get_addr_slow 219
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::jit::tracer::getTracingState;_dl_update_slotinfo 1545
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::jit::tracer::getTracingState;update_get_addr 990
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyMethodDef_RawFastCallKeywords;torch::jit::tracer::getTracingState@plt 84
+python;[unknown];torch::autograd::THPVariable_contiguous;_PyStack_AsTuple 165
+python;[unknown];torch::autograd::THPVariable_contiguous;torch::autograd::THPVariable_contiguous 65
+python;[unknown];torch::detail::TorchLibraryInit::~TorchLibraryInit 1
+python;[unknown];torch::detail::TorchLibraryInit::~TorchLibraryInit;c10::Dispatcher::deregisterDef_;c10::impl::OperatorEntry::deregisterSchema 3
+python;[unknown];torch::detail::TorchLibraryInit::~TorchLibraryInit;c10::Dispatcher::deregisterDef_;std::string::_Rep::_M_dispose 1
+python;[unknown];torch::jit::(anonymous namespace)::SchemaParser::parseArgument 1
+python;[unknown];torch::jit::Lexer::lex;torch::jit::Lexer::lexRaw 1
+python;[unknown];torch::jit::Lexer::lex;torch::jit::SharedParserData::match 1
+python;[unknown];torch::jit::Lexer::next 2
+python;[unknown];torch::jit::RegisterOperators::RegisterOperators;torch::jit::Operator::schema;c10::either<c10::OperatorName, c10::FunctionSchema>::_destruct 1
+python;[unknown];torch::jit::RegisterOperators::RegisterOperators;torch::jit::Operator::schema;torch::jit::parseSchema;operator new 1
+python;[unknown];torch::jit::SharedParserData::match;std::string::_Rep::_M_is_leaked 1
+python;[unknown];tupledealloc 1
+python;[unknown];tupleiter_next 1
+python;[unknown];type_getattro 1
+python;[unknown];type_new 17
+python;[unknown];type_setattro 1
+python;[unknown];type_traverse 2
+python;[unknown];typeinfo name for caffe2::FloatToFusedNBitRowwiseQuantizedOp<2, c10::Half, &caffe2::internal::convertfp16fp32, true>;d_type 1
+python;[unknown];typeinfo name for caffe2::QTensorDeserializer<caffe2::CPUContext>;d_name 1
+python;[unknown];ufunc_generic_call 1
+python;[unknown];unicode_dealloc 1
+python;[unknown];unicode_endswith 1
+python;[unknown];unicode_eq.lto_priv.287 8
+python;[unknown];unicode_rpartition;PyUnicode_RPartition 1
+python;[unknown];unicode_strip 1
+python;[unknown];unicode_subscript 1
+python;[unknown];vgetargs1_impl 8
+python;[unknown];vgetargskeywords 3
+python;[unknown];vgetargskeywords.cold.2503 1
+python;[unknown];vgetargskeywordsfast_impl 2
+python;[unknown];visit_decref 19
+python;[unknown];visit_reachable 21
+python;[unknown];wrap_binaryfunc 1
+python;_IO_file_xsgetn 1
+python;_PyDict_LoadGlobal 1364
+python;_PyDict_NewPresized 1
+python;_PyEval_EvalFrameDefault 753
+python;_PyFunction_FastCallKeywords 1
+python;_PyLong_FromByteArray 1
+python;_PyMem_RawFree 1
+python;_PyMethodDef_RawFastCallKeywords 388
+python;_PyMethodDescr_FastCallKeywords 204
+python;_PyObjectDict_SetItem 2
+python;_PyObject_Call_Prepend 1
+python;_PyObject_FastCallDict 1
+python;_PyObject_FastCallKeywords 2
+python;_PyObject_Free.cold.382 1
+python;_PyObject_GC_Malloc 1
+python;_PyObject_GC_NewVar 1
+python;_PyObject_GenericGetAttrWithDict 1
+python;_PyObject_GenericSetAttrWithDict 2
+python;_PyObject_Malloc 1
+python;_PyObject_RealIsSubclass 233
+python;_PyType_Lookup 3
+python;_PyUnicodeWriter_PrepareInternal 3
+python;_PyUnicodeWriter_WriteASCIIString 2
+python;_Py_CheckFunctionResult 1
+python;_Py_HashBytes 12
+python;__GI_____strtod_l_internal 1
+python;__cxxabiv1::__si_class_type_info::__do_dyncast 3
+python;__dynamic_cast 3
+python;__memcmp_sse4_1 4
+python;__memmove_ssse3_back 11
+python;__memset_sse2 1
+python;__strlen_sse2 2
+python;__strlen_sse2_pminub 1
+python;_dl_addr 5
+python;_dl_map_object_deps;_dl_map_object_deps;_dl_map_object_from_fd;add_name_to_object.isra.2;open_path;open_path;open_path;open_path;open_path;open_path;open_path;open_verify;open_verify;open_verify;[ld-2.17.so];[ld-2.17.so];do_lookup_x;_dl_relocate_object;_dl_relocate_object;_dl_relocate_object;_dl_relocate_object;_dl_relocate_object;_dl_important_hwcaps;_dl_relocate_object;_dl_reloc_bad_type;_dl_relocate_object;_dl_relocate_object;_dl_reloc_bad_type;_dl_new_object;_dl_try_allocate_static_tls;_dl_map_object_deps;_dl_new_object;_dl_new_object;_dl_new_object;_dl_new_object;_dl_new_object;_dl_setup_hash;_dl_map_object_from_fd;_dl_map_object_from_fd;_dl_map_object_from_fd;_dl_map_object_from_fd;open_path;_dl_map_object_from_fd;_dl_map_object_from_fd;open_verify;dl_main;open_verify;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;dl_main;[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];[ld-2.17.so];_dl_relocate_object;getcwd;[ld-2.17.so];_dl_important_hwcaps;_dl_important_hwcaps;_dl_init_internal;_dl_catch_error;_dl_important_hwcaps;_dl_important_hwcaps;_dl_important_hwcaps;_dl_important_hwcaps;_dl_signal_error;_dl_call_pltexit;_dl_relocate_object;_dl_important_hwcaps;_dl_map_object_deps;_dl_important_hwcaps;_dl_map_object_deps;_dl_map_object_deps;_dl_profile_fixup;_dl_profile_fixup;_dl_relocate_object;_dl_map_object_deps;_dl_map_object_deps;_dl_profile_fixup;_dl_map_object_deps;do_lookup_x;_dl_nothread_init_static_tls;_dl_map_object_deps;do_lookup_x;_dl_map_object_deps;do_lookup_x;_dl_map_object_from_fd;_dl_map_object_from_fd;do_lookup_x;add_name_to_object.isra.2;do_lookup_x;open_path;open_path;do_lookup_x;open_path;check_match.9525;_dl_new_object;open_path;open_path;open_path;_dl_rtld_di_serinfo;open_path;_dl_rtld_di_serinfo;open_path;open_path;_dl_rtld_di_serinfo;open_path;[ld-2.17.so];_dl_map_object_from_fd;open_verify;collect 1
+python;_dl_sysdep_start;dl_main;_dl_relocate_object 1
+python;_int_malloc 3
+python;at::is_custom_op 1
+python;c10::optional_base<std::string>::~optional_base 1
+python;collect 31
+python;d_growable_string_callback_adapter 1
+python;dict_traverse 1
+python;dictiter_iternextkey 1
+python;do_lookup_x 72
+python;func_dealloc 1
+python;isalpha 3
+python;isalpha@plt 2
+python;isspace 2
+python;list_dealloc 1
+python;list_traverse 1
+python;long_pow 1
+python;lookdict_split 7
+python;lookdict_unicode_nodummy 41
+python;malloc 14
+python;marshal_loads 1
+python;mbuf_traverse 1
+python;member_get 1
+python;mmap64 1
+python;os_stat 2
+python;pthread_rwlock_unlock 1
+python;pybind11::cpp_function::initialize_generic 1
+python;r_long 12
+python;r_object 30
+python;sem_trywait@@GLIBC_2.2.5 1
+python;set_traverse 1
+python;std::_Hash_bytes 2
+python;std::_Sp_counted_base< 1
+python;std::_Sp_counted_ptr<c10::IntType*, ;[unknown];c10::findSchemaDifferences 2
+python;std::_Sp_counted_ptr<c10::OptionalType*, ;[unknown];c10::findSchemaDifferences 2
+python;std::__detail::_Map_base<std::string, std::pair<std::string const, std::function<std::unique_ptr<caffe2::GradientMakerBase, std::default_delete<caffe2::GradientMakerBase> >  1
+python;std::__ostream_write<char, std::char_traits<char> > 1
+python;std::__shared_ptr<c10::Type,  1
+python;std::basic_ios<char, std::char_traits<char> >::_M_cache_locale@plt 1
+python;std::basic_streambuf<char, std::char_traits<char> >::xsputn 2
+python;std::basic_string<char, std::char_traits<char>, std::allocator<char> >::basic_string 1
+python;std::basic_string<char, std::char_traits<char>, std::allocator<char> >::~basic_string 2
+python;std::basic_stringbuf<char, std::char_traits<char>, std::allocator<char> >::basic_stringbuf 1
+python;std::local_Rb_tree_decrement 1
+python;std::string::_Rep::_M_grab 1
+python;std::string::_Rep::_M_grab;[unknown];memset@plt 1
+python;std::string::_Rep::_S_create;torch::jit::Lexer::lex;std::__shared_ptr<torch::jit::Source,  1
+python;std::string::append 1
+python;std::string::compare 1
+python;std::string::push_back 2
+python;std::vector<int, std::allocator<int> >::_M_realloc_insert<int>;torch::jit::Lexer::lex;std::__shared_ptr<torch::jit::Source,  1
+python;subtype_traverse 1
+python;torch::jit::(anonymous namespace)::SchemaParser::parseArgument 1
+python;torch::jit::Lexer::expect 1
+python;torch::jit::SchemaTypeParser::parseType 2
+python;torch::jit::SharedParserData::match 15
+python;torch::jit::canonicalSchemaString 2
+python;torch::jit::strtod_c 1
+python;tupledealloc 1
+python;tupletraverse 8
+python;type_dealloc 3
+python;type_getattro 1
+python;type_mro 1
+python;type_new 3
+python;type_traverse 1
+python;unicode_dealloc 4
+python;unicode_isalnum 1
+python;unsafe_latin_compare 1
+python;va_build_value 1
+python;vgetargs1_impl 3
+python;vgetargskeywords 1
+python;vgetargskeywordsfast_impl 1
+python;visit_decref 10
+python;visit_reachable 6
+sh;_dl_sysdep_start;dl_main;_dl_relocate_object 1
+sh;do_lookup_x 1
